@@ -1,5 +1,4 @@
-import Image from "next/image"
-import { ArrowRight, Calendar, FileText, MapPin, Users } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 export default function Home() {
   return (

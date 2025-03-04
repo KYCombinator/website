@@ -38,7 +38,7 @@ export default function Home() {
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto space-y-8">
             <h2 className="text-5xl md:text-7xl font-bold text-purple-700">KYCombinator</h2>
-            <div className="bg-white p-6 rounded-lg shadow-md mb-6 border-l-4 border-purple-700">
+            <div className="bg-white p-6 rounded-lg mb-6">
               <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Community Driven Accountability</h3>
               <p className="text-gray-600 text-lg md:text-xl">
                 Join a network of like-minded individuals committed to personal growth and mutual support.
@@ -76,115 +76,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Is KYCombinator for you? */}
-      <section id="is-for-you" className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-purple-700">Is KYCombinator for you?</h2>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-gray-50 rounded-lg overflow-hidden shadow-md transition hover:shadow-lg">
-              <Image
-                src="/placeholder.svg?height=300&width=400"
-                alt="Beginners welcome"
-                width={400}
-                height={300}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2 text-gray-800">New to fitness?</h3>
-                <p className="text-gray-600">
-                  Our community welcomes beginners with open arms. Start your journey with supportive guidance.
-                </p>
-                <a href="#" className="mt-4 inline-block text-purple-700 font-medium hover:underline">
-                  Learn more →
-                </a>
-              </div>
-            </div>
-
-            <div className="bg-gray-50 rounded-lg overflow-hidden shadow-md transition hover:shadow-lg">
-              <Image
-                src="/placeholder.svg?height=300&width=400"
-                alt="Experienced athletes"
-                width={400}
-                height={300}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2 text-gray-800">Experienced athlete?</h3>
-                <p className="text-gray-600">
-                  Push your limits with advanced programs and connect with others at your level.
-                </p>
-                <a href="#" className="mt-4 inline-block text-purple-700 font-medium hover:underline">
-                  Learn more →
-                </a>
-              </div>
-            </div>
-
-            <div className="bg-gray-50 rounded-lg overflow-hidden shadow-md transition hover:shadow-lg">
-              <Image
-                src="/placeholder.svg?height=300&width=400"
-                alt="Community focused"
-                width={400}
-                height={300}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2 text-gray-800">Looking for community?</h3>
-                <p className="text-gray-600">
-                  Find your tribe of accountability partners who share your values and goals.
-                </p>
-                <a href="#" className="mt-4 inline-block text-purple-700 font-medium hover:underline">
-                  Learn more →
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-purple-700">About</h2>
-
-          <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="md:w-1/2">
-              <h3 className="text-2xl font-bold mb-4 text-gray-800">Our Mission</h3>
-              <p className="text-gray-600 mb-4">
-                KYCombinator was founded on the principle that accountability through community creates lasting change.
-                We believe that when people come together with shared goals, they can achieve more than they ever could
-                alone.
-              </p>
-              <p className="text-gray-600 mb-4">
-                Our platform connects individuals seeking personal growth with communities that provide support,
-                challenge, and accountability.
-              </p>
-              <div className="flex items-center space-x-4 mt-6">
-                <div className="flex items-center">
-                  <Users className="h-5 w-5 text-purple-700 mr-2" />
-                  <span className="font-medium">5,000+ Members</span>
-                </div>
-                <div className="flex items-center">
-                  <MapPin className="h-5 w-5 text-purple-700 mr-2" />
-                  <span className="font-medium">200+ Locations</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Quote Section 2 */}
-      <section className="bg-purple-700 text-white py-12">
-        <div className="container mx-auto px-4 text-center">
-          <blockquote className="text-2xl md:text-3xl italic font-light">
-            &quot;Joining KYCombinator changed my life. The accountability and support from my community helped me achieve
-            goals I never thought possible.&quot;
-          </blockquote>
-          <p className="mt-4 font-semibold">— Sarah K., Member since 2022</p>
-        </div>
-      </section>
-
       {/* FAQs Section */}
       <section id="faqs" className="py-16 bg-white">
         <div className="container mx-auto px-4">
@@ -194,32 +85,28 @@ export default function Home() {
             <div className="bg-gray-50 p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-bold mb-3 text-gray-800">How does KYCombinator work?</h3>
               <p className="text-gray-600">
-                We connect you with a community of like-minded individuals who share your goals. Through regular
-                check-ins, group activities, and shared metrics, you&apos;ll stay accountable to your commitments.
+                we&apos;re a self-organizing community.
               </p>
             </div>
 
             <div className="bg-gray-50 p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-bold mb-3 text-gray-800">Do I need to be experienced?</h3>
               <p className="text-gray-600">
-                Not at all! We welcome members at all levels. Our communities are designed to support everyone from
-                beginners to advanced practitioners.
+                come with a willingness to learn and grow.
               </p>
             </div>
 
             <div className="bg-gray-50 p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-bold mb-3 text-gray-800">How much does it cost?</h3>
               <p className="text-gray-600">
-                We offer various membership tiers starting at $29/month. Each tier provides different levels of access
-                to communities, resources, and coaching.
+                just time and effort.
               </p>
             </div>
 
             <div className="bg-gray-50 p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-bold mb-3 text-gray-800">Can I create my own community?</h3>
               <p className="text-gray-600">
-                After being an active member for 3 months, you can apply to become a community leader and create your
-                own accountability group.
+                yes
               </p>
             </div>
           </div>
@@ -228,128 +115,6 @@ export default function Home() {
             <button className="bg-purple-700 text-white px-6 py-3 rounded-md hover:bg-purple-800 transition">
               View All FAQs
             </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Events Section */}
-      <section id="events" className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-purple-700">Events</h2>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-lg overflow-hidden shadow-md transition hover:shadow-lg">
-              <div className="p-6">
-                <div className="flex items-center mb-4">
-                  <Calendar className="h-5 w-5 text-purple-700 mr-2" />
-                  <span className="text-gray-500">June 15, 2024</span>
-                </div>
-                <h3 className="text-xl font-bold mb-2 text-gray-800">Community Challenge Kickoff</h3>
-                <p className="text-gray-600 mb-4">
-                  Join us for the launch of our summer fitness challenge. Set goals, meet your accountability partners,
-                  and prepare for transformation.
-                </p>
-                <div className="flex justify-between items-center mt-4">
-                  <span className="text-sm text-gray-500">Virtual & In-Person</span>
-                  <button className="text-purple-700 font-medium hover:underline">Register →</button>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg overflow-hidden shadow-md transition hover:shadow-lg">
-              <div className="p-6">
-                <div className="flex items-center mb-4">
-                  <Calendar className="h-5 w-5 text-purple-700 mr-2" />
-                  <span className="text-gray-500">July 8, 2024</span>
-                </div>
-                <h3 className="text-xl font-bold mb-2 text-gray-800">Leadership Workshop</h3>
-                <p className="text-gray-600 mb-4">
-                  Learn how to effectively lead an accountability group and help others achieve their goals through
-                  community support.
-                </p>
-                <div className="flex justify-between items-center mt-4">
-                  <span className="text-sm text-gray-500">Virtual Only</span>
-                  <button className="text-purple-700 font-medium hover:underline">Register →</button>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg overflow-hidden shadow-md transition hover:shadow-lg">
-              <div className="p-6">
-                <div className="flex items-center mb-4">
-                  <Calendar className="h-5 w-5 text-purple-700 mr-2" />
-                  <span className="text-gray-500">August 22, 2024</span>
-                </div>
-                <h3 className="text-xl font-bold mb-2 text-gray-800">Annual KYCombinator Summit</h3>
-                <p className="text-gray-600 mb-4">
-                  Our flagship event bringing together community leaders and members from around the world for learning,
-                  networking, and celebration.
-                </p>
-                <div className="flex justify-between items-center mt-4">
-                  <span className="text-sm text-gray-500">San Francisco, CA</span>
-                  <button className="text-purple-700 font-medium hover:underline">Register →</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center mt-10">
-            <button className="bg-purple-700 text-white px-6 py-3 rounded-md hover:bg-purple-800 transition">
-              View All Events
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Resources Section */}
-      <section id="resources" className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-purple-700">Resources</h2>
-
-          <div className="grid md:grid-cols-4 gap-6">
-            <div className="bg-gray-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-              <FileText className="h-10 w-10 text-purple-700 mb-4" />
-              <h3 className="text-lg font-bold mb-2 text-gray-800">Getting Started Guide</h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Everything you need to know to begin your KYCombinator journey.
-              </p>
-              <a href="#" className="mt-auto text-purple-700 font-medium hover:underline">
-                Download PDF
-              </a>
-            </div>
-
-            <div className="bg-gray-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-              <FileText className="h-10 w-10 text-purple-700 mb-4" />
-              <h3 className="text-lg font-bold mb-2 text-gray-800">Community Leader Handbook</h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Learn how to effectively lead and grow your accountability community.
-              </p>
-              <a href="#" className="mt-auto text-purple-700 font-medium hover:underline">
-                Download PDF
-              </a>
-            </div>
-
-            <div className="bg-gray-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-              <FileText className="h-10 w-10 text-purple-700 mb-4" />
-              <h3 className="text-lg font-bold mb-2 text-gray-800">Goal Setting Workbook</h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Templates and exercises to help you set meaningful, achievable goals.
-              </p>
-              <a href="#" className="mt-auto text-purple-700 font-medium hover:underline">
-                Download PDF
-              </a>
-            </div>
-
-            <div className="bg-gray-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-              <FileText className="h-10 w-10 text-purple-700 mb-4" />
-              <h3 className="text-lg font-bold mb-2 text-gray-800">Accountability Tracker</h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Tools to measure your progress and stay committed to your goals.
-              </p>
-              <a href="#" className="mt-auto text-purple-700 font-medium hover:underline">
-                Download PDF
-              </a>
-            </div>
           </div>
         </div>
       </section>

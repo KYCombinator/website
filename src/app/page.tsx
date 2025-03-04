@@ -70,8 +70,7 @@ export default function Home() {
       <section className="bg-purple-700 text-white py-12">
         <div className="container mx-auto px-4 text-center">
           <blockquote className="text-2xl md:text-3xl italic font-light">
-            "The strength of our community comes from the commitment of each individual to support and challenge one
-            another."
+            &quot;The strength of our community comes from the commitment of each individual to support and challenge one another.&quot;
           </blockquote>
           <p className="mt-4 font-semibold">— KYCombinator Founder</p>
         </div>
@@ -179,8 +178,8 @@ export default function Home() {
       <section className="bg-purple-700 text-white py-12">
         <div className="container mx-auto px-4 text-center">
           <blockquote className="text-2xl md:text-3xl italic font-light">
-            "Joining KYCombinator changed my life. The accountability and support from my community helped me achieve
-            goals I never thought possible."
+            &quot;Joining KYCombinator changed my life. The accountability and support from my community helped me achieve
+            goals I never thought possible.&quot;
           </blockquote>
           <p className="mt-4 font-semibold">— Sarah K., Member since 2022</p>
         </div>
@@ -196,7 +195,7 @@ export default function Home() {
               <h3 className="text-xl font-bold mb-3 text-gray-800">How does KYCombinator work?</h3>
               <p className="text-gray-600">
                 We connect you with a community of like-minded individuals who share your goals. Through regular
-                check-ins, group activities, and shared metrics, you'll stay accountable to your commitments.
+                check-ins, group activities, and shared metrics, you&apos;ll stay accountable to your commitments.
               </p>
             </div>
 

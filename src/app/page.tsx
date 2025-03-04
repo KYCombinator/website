@@ -150,15 +150,6 @@ export default function Home() {
 
           <div className="flex flex-col md:flex-row items-center gap-8">
             <div className="md:w-1/2">
-              <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/asset2.jpg-N0osbuGEElPLDpLnh6A12WW8fMtg3Q.jpeg"
-                alt="KYCombinator community"
-                width={600}
-                height={400}
-                className="rounded-lg shadow-lg"
-              />
-            </div>
-            <div className="md:w-1/2">
               <h3 className="text-2xl font-bold mb-4 text-gray-800">Our Mission</h3>
               <p className="text-gray-600 mb-4">
                 KYCombinator was founded on the principle that accountability through community creates lasting change.

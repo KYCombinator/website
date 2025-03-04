@@ -1,13 +1,13 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Cabin } from "next/font/google"
 import "./globals.css"
 
-const inter = Inter({ subsets: ["latin"] })
+const cabin = Cabin({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "KYCombinator - Community Driven Accountability",
-  description: "Join a network of like-minded individuals committed to personal growth and mutual support.",
+  description: "High Agency Violent Execution Stallions",
 }
 
 export default function RootLayout({
@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={cabin.className}>
         {children}
       </body>
     </html>

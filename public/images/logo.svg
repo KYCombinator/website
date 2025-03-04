@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="300" viewBox="0 0 1200 300" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g>
+        <!-- KY Square -->
+        <rect x="67" y="67" width="166" height="166" rx="32" fill="#7C3AED"/>
+        <path d="M120 120 L160 120 L160 180 L120 180 M160 120 L200 180 M160 150 L200 120" stroke="white" stroke-width="12" fill="none"/>
+        
+        <!-- Combinator Text -->
+        <text x="300" y="180" font-family="Arial, sans-serif" font-size="140" font-weight="400" fill="#7C3AED">Combinator</text>
+    </g>
+</svg> 

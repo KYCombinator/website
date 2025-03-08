@@ -1,4 +1,5 @@
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Calendar, Slack, Mail } from "lucide-react"
+import Link from "next/link"
 
 export default function Home() {
   return (
@@ -43,14 +44,32 @@ export default function Home() {
                 Join a network of like-minded individuals committed to personal growth and mutual support.
               </p>
             </div>
-            <button className="bg-purple-700 text-white px-8 py-4 rounded-md hover:bg-purple-800 transition flex items-center mx-auto text-lg">
-              <span>Call to Action</span>
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </button>
+            <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+              <Link 
+                href="https://magic.beehiiv.com/v1/04d3dfce-b968-4cc1-8ae5-46d51d19c2b6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-purple-700 text-white px-8 py-4 rounded-md hover:bg-purple-800 transition flex items-center text-lg"
+              >
+                <Mail className="w-5 h-5 mr-2" />
+                <span>Subscribe to Newsletter</span>
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+              <Link 
+                href="https://join.slack.com/t/kycombinator/shared_invite/zt-2tneu9hc6-Dx1ttf~_75rQHOb8NHXXkQ"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#4A154B] text-white px-8 py-4 rounded-md hover:bg-[#611f64] transition flex items-center text-lg"
+              >
+                <Slack className="w-5 h-5 mr-2" />
+                <span>Join Slack Community</span>
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </div>
           </div>
 
           <div className="absolute bottom-10 left-0 right-0 flex justify-center">
-            <a href="#is-for-you" className="text-purple-700 animate-bounce">
+            <Link href="#is-for-you" className="text-purple-700 animate-bounce">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-8 w-8"
@@ -60,7 +79,7 @@ export default function Home() {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -72,6 +91,41 @@ export default function Home() {
             &quot;The strength of our community comes from the commitment of each individual to support and challenge one another.&quot;
           </blockquote>
           <p className="mt-4 font-semibold">— KYCombinator Founder</p>
+        </div>
+      </section>
+
+      {/* Events Section */}
+      <section id="events" className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-purple-700 mb-4">Upcoming Events</h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Join us for exciting events, workshops, and meetups. Connect with fellow entrepreneurs and creators.
+            </p>
+          </div>
+
+          <div className="flex justify-center mb-8">
+            <a 
+              href="https://lu.ma/kycombinator"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-purple-700 text-white px-6 py-3 rounded-md hover:bg-purple-800 transition flex items-center gap-2"
+            >
+              <Calendar className="w-5 h-5" />
+              <span>View All Events</span>
+            </a>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-lg p-6 max-w-3xl mx-auto">
+            <iframe
+              src="https://lu.ma/embed/calendar/cal-kycombinator/upcoming"
+              width="100%"
+              height="600"
+              frameBorder="0"
+              style={{ borderRadius: '8px' }}
+              title="KYCombinator Events Calendar"
+            ></iframe>
+          </div>
         </div>
       </section>
 

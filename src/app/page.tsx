@@ -14,9 +14,12 @@ export default function Home() {
           <div className="max-w-3xl mx-auto space-y-8">
             <h2 className="text-5xl md:text-7xl font-bold text-purple-700">KYCombinator</h2>
             <div className="bg-white p-6 rounded-lg mb-6">
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Community Driven Accountability</h3>
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Building Kentucky</h3>
+              <p className="text-gray-600 text-lg md:text-xl mb-4">
+                We&apos;re creating the highest density of ambitious, high-velocity founders and builders in Kentucky.
+              </p>
               <p className="text-gray-600 text-lg md:text-xl">
-                Join a network of like-minded individuals committed to personal growth and mutual support.
+                Join a community of action-takers who move fast, build things, and support each other&apos;s growth.
               </p>
             </div>
             <div className="flex flex-col md:flex-row gap-4 justify-center items-center">

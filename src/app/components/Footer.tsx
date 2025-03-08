@@ -59,6 +59,11 @@ export default function Footer() {
                   Support
                 </Link>
               </li>
+              <li>
+                <Link href="/assets" className="text-gray-400 hover:text-white transition">
+                  Assets
+                </Link>
+              </li>
             </ul>
           </div>
 

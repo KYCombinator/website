@@ -46,6 +46,11 @@ export default function AssetsPage() {
       
       <main className="container mx-auto px-4 py-16">
         <h1 className="text-4xl font-bold text-purple-700 mb-8">Brand Assets</h1>
+        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-8">
+          <p className="text-sm text-yellow-800">
+            These brand assets are provided for use in accordance with our brand guidelines. By downloading and using these assets, you agree to use them only for purposes related to KYCombinator and not to modify or alter them in any way. For questions about usage, please contact our team.
+          </p>
+        </div>
         
         <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
           {assets.map((asset) => (

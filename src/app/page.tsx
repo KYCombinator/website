@@ -1,4 +1,4 @@
-import { ArrowRight, Calendar, Slack, Mail } from "lucide-react"
+import { ArrowRight, Calendar, Slack } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import Header from "./components/Header"

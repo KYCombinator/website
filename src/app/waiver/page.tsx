@@ -49,7 +49,7 @@ export default function WaiverPage() {
           <div className="bg-blue-50 rounded-lg p-6 flex gap-4">
             <AlertTriangle className="h-6 w-6 text-blue-600 flex-shrink-0" />
             <p className="text-blue-800">
-              By completing and submitting this Google Form, I acknowledge that my electronic submission constitutes my agreement to this waiver and serves as my legal signature.
+              This waiver was last updated on March 1st, 2025 at 12:00 PM EST.
             </p>
           </div>
         </div>

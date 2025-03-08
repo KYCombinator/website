@@ -45,18 +45,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#resources" className="text-gray-400 hover:text-white transition">
-                  Resources
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-400 hover:text-white transition">
+                <Link href="https://kycombinator.beehiiv.com/" className="text-gray-400 hover:text-white transition">
                   Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-400 hover:text-white transition">
-                  Support
                 </Link>
               </li>
               <li>
@@ -87,9 +77,6 @@ export default function Footer() {
             </Link>
             <Link href="/terms" className="text-gray-400 hover:text-white transition">
               Terms of Service
-            </Link>
-            <Link href="contact" className="text-gray-400 hover:text-white transition">
-              Contact Us
             </Link>
             <Link href="/waiver" className="text-gray-400 hover:text-white transition">
               Waiver

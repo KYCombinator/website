@@ -92,7 +92,7 @@ export default function Home() {
             <div className="bg-purple-50 p-6 rounded-lg mb-8">
               <h3 className="text-xl font-bold text-purple-700 mb-3">HAVES (High-Agency Violent Execution Stallions)</h3>
               <p className="text-gray-600">
-                We are the doers, the builders, the ones who execute with relentless intensity. HAVES don&apos;t wait for permission - they take action, move fast, and create impact. If you're ready to build at high velocity and push the boundaries of what's possible in Kentucky, you're one of us.
+                We are the doers, the builders, the ones who execute with relentless intensity. HAVES don&apos;t wait for permission - they take action, move fast, and create impact. If you&apos;re ready to build at high velocity and push the boundaries of what&apos;s possible in Kentucky, you&apos;re one of us.
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-6 mt-12">

@@ -11,10 +11,12 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center bg-white">
         <div className="container mx-auto px-4 text-center">
-          <div className="max-w-3xl mx-auto space-y-8">
-            <h2 className="text-5xl md:text-7xl font-bold text-purple-700">KYCombinator</h2>
+          <div className="max-w-3xl mx-auto">
+            <div className="bg-white p-6 rounded-lg">
+              <h2 className="text-5xl md:text-7xl font-bold text-purple-700">KYCombinator</h2>
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-800">Building Kentucky</h3>
+            </div>
             <div className="bg-white p-6 rounded-lg mb-6">
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Building Kentucky</h3>
               <p className="text-gray-600 text-lg md:text-xl mb-4">
                 We&apos;re creating the highest density of ambitious, high-velocity founders and builders in Kentucky.
               </p>
@@ -83,7 +85,7 @@ export default function Home() {
           </div>
 
           <div className="flex justify-center mb-8">
-            <a 
+            <Link
               href="https://lu.ma/kycombinator"
               target="_blank"
               rel="noopener noreferrer"
@@ -91,17 +93,17 @@ export default function Home() {
             >
               <Calendar className="w-5 h-5" />
               <span>View All Events</span>
-            </a>
+            </Link>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg p-6 max-w-3xl mx-auto">
+          <div className="bg-black rounded-lg shadow-lg p-6 max-w-3xl mx-auto">
             <iframe
-              src="https://lu.ma/embed/calendar/cal-kycombinator/upcoming"
+              src="https://lu.ma/embed/calendar/cal-gyukdJFBvrxa0BO/events"
               width="100%"
-              height="600"
-              frameBorder="0"
-              style={{ borderRadius: '8px' }}
-              title="KYCombinator Events Calendar"
+              height="100%"
+              className="min-h-[450px] w-full"
+              allowFullScreen={true}
+              aria-hidden="false"
             ></iframe>
           </div>
         </div>

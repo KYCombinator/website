@@ -22,22 +22,21 @@ export default function Header() {
             <Link href="#about" className="text-gray-700 hover:text-purple-700 font-medium">
               About
             </Link>
-            <Link href="#is-for-you" className="text-gray-700 hover:text-purple-700 font-medium">
-              Is It For You?
-            </Link>
             <Link href="#faqs" className="text-gray-700 hover:text-purple-700 font-medium">
               FAQs
             </Link>
             <Link href="#events" className="text-gray-700 hover:text-purple-700 font-medium">
               Events
             </Link>
-            <Link href="#resources" className="text-gray-700 hover:text-purple-700 font-medium">
-              Resources
-            </Link>
           </nav>
-          <button className="bg-purple-700 text-white px-4 py-2 rounded-md hover:bg-purple-800 transition">
+          <Link 
+            href="https://join.slack.com/t/kycombinator/shared_invite/zt-2tneu9hc6-Dx1ttf~_75rQHOb8NHXXkQ"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-purple-700 text-white px-4 py-2 rounded-md hover:bg-purple-800 transition"
+          >
             Join Now
-          </button>
+          </Link>
         </div>
       </div>
     </header>

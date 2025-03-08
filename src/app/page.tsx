@@ -1,37 +1,12 @@
 import { ArrowRight, Calendar, Slack, Mail } from "lucide-react"
 import Link from "next/link"
+import Header from "./components/Header"
+import Footer from "./components/Footer"
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center">
-            <h1 className="text-2xl font-bold text-purple-700">KYCombinator</h1>
-          </div>
-          <nav className="hidden md:flex space-x-8">
-            <a href="#about" className="text-gray-700 hover:text-purple-700 font-medium">
-              About
-            </a>
-            <a href="#is-for-you" className="text-gray-700 hover:text-purple-700 font-medium">
-              Is It For You?
-            </a>
-            <a href="#faqs" className="text-gray-700 hover:text-purple-700 font-medium">
-              FAQs
-            </a>
-            <a href="#events" className="text-gray-700 hover:text-purple-700 font-medium">
-              Events
-            </a>
-            <a href="#resources" className="text-gray-700 hover:text-purple-700 font-medium">
-              Resources
-            </a>
-          </nav>
-          <button className="bg-purple-700 text-white px-4 py-2 rounded-md hover:bg-purple-800 transition">
-            Join Now
-          </button>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center bg-white">
@@ -172,99 +147,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-xl font-bold mb-4 text-purple-400">KYCombinator</h3>
-              <p className="text-gray-400">Building stronger communities through accountability and mutual support.</p>
-            </div>
-
-            <div>
-              <h4 className="font-bold mb-4 uppercase text-sm tracking-wider">Quick Links</h4>
-              <ul className="space-y-2">
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a href="#about" className="text-gray-400 hover:text-white transition">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#is-for-you" className="text-gray-400 hover:text-white transition">
-                    Is It For You?
-                  </a>
-                </li>
-                <li>
-                  <a href="#faqs" className="text-gray-400 hover:text-white transition">
-                    FAQs
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold mb-4 uppercase text-sm tracking-wider">Resources</h4>
-              <ul className="space-y-2">
-                <li>
-                  <a href="#events" className="text-gray-400 hover:text-white transition">
-                    Events
-                  </a>
-                </li>
-                <li>
-                  <a href="#resources" className="text-gray-400 hover:text-white transition">
-                    Resources
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition">
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition">
-                    Support
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold mb-4 uppercase text-sm tracking-wider">Connect</h4>
-              <p className="text-gray-400 mb-4">Join our newsletter to stay updated on events and resources.</p>
-              <div className="flex">
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="flex-1 p-2 bg-gray-800 border border-gray-700 rounded-l-md focus:outline-none focus:ring-2 focus:ring-purple-700 text-white"
-                />
-                <button className="bg-purple-700 text-white p-2 rounded-r-md hover:bg-purple-600 transition">
-                  Subscribe
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">© 2024 KYCombinator. All rights reserved.</p>
-            <div className="flex space-x-4 mt-4 md:mt-0">
-              <a href="#" className="text-gray-400 hover:text-white transition">
-                Privacy Policy
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition">
-                Terms of Service
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition">
-                Contact Us
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

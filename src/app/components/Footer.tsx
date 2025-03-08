@@ -70,30 +70,31 @@ export default function Footer() {
           <div>
             <h4 className="font-bold mb-4 uppercase text-sm tracking-wider">Connect</h4>
             <p className="text-gray-400 mb-4">Join our newsletter to stay updated on events and resources.</p>
-            <div className="flex">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="flex-1 p-2 bg-gray-800 border border-gray-700 rounded-l-md focus:outline-none focus:ring-2 focus:ring-purple-700 text-white"
-              />
-              <button className="bg-purple-700 text-white p-2 rounded-r-md hover:bg-purple-600 transition">
-                Subscribe
-              </button>
-            </div>
+            <iframe 
+              src="https://embeds.beehiiv.com/618e6261-6b72-4d51-95d9-821977f9f63e?slim=true" 
+              data-test-id="beehiiv-embed" 
+              height="52" 
+              style={{ margin: 0, borderRadius: 0, backgroundColor: 'transparent' }}
+            />
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">© 2025 KYCombinator. All rights reserved.</p>
           <div className="flex space-x-4 mt-4 md:mt-0">
-            <Link href="#" className="text-gray-400 hover:text-white transition">
+            <Link href="/privacy" className="text-gray-400 hover:text-white transition">
               Privacy Policy
             </Link>
-            <Link href="#" className="text-gray-400 hover:text-white transition">
+            <Link href="/terms" className="text-gray-400 hover:text-white transition">
               Terms of Service
             </Link>
-            <Link href="#" className="text-gray-400 hover:text-white transition">
+            <Link href="contact" className="text-gray-400 hover:text-white transition">
               Contact Us
+            </Link>
+            <Link href="/waiver" className="text-gray-400 hover:text-white transition">
+              Waiver
+            </Link>
+            <Link href="/rules" className="text-gray-400 hover:text-white transition">
             </Link>
           </div>
         </div>

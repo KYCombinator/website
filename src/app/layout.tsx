@@ -6,8 +6,8 @@ import "./globals.css"
 const cabin = Cabin({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "KYCombinator - Community Driven Accountability",
-  description: "High Agency Violent Execution Stallions",
+  title: "KYCombinator - Building the Kentucky of Tomorrow",
+  description: "We're creating the highest density of ambitious, high-velocity founders and builders in Kentucky.",
 }
 
 export default function RootLayout({

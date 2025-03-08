@@ -1,5 +1,6 @@
 import { ArrowRight, Calendar, Slack, Mail } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 
@@ -13,7 +14,14 @@ export default function Home() {
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto">
             <div className="bg-white p-6 rounded-lg">
-              <h2 className="text-5xl md:text-7xl font-bold text-purple-700">KYCombinator</h2>
+              <Image
+                src="/assets/Purple.png"
+                alt="KYCombinator"
+                width={480}
+                height={164}
+                className="w-full h-auto"
+                priority
+              />
               <h3 className="text-2xl md:text-3xl font-bold text-gray-800">Building Kentucky</h3>
             </div>
             <div className="bg-white p-6 rounded-lg mb-6">
@@ -24,17 +32,13 @@ export default function Home() {
                 Join a community of action-takers who move fast, build things, and support each other&apos;s growth.
               </p>
             </div>
-            <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-              <Link 
-                href="https://magic.beehiiv.com/v1/04d3dfce-b968-4cc1-8ae5-46d51d19c2b6"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-purple-700 text-white px-8 py-4 rounded-md hover:bg-purple-800 transition flex items-center text-lg"
-              >
-                <Mail className="w-5 h-5 mr-2" />
-                <span>Subscribe to Newsletter</span>
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
+            <div className="flex flex-col gap-4 justify-center items-center">
+              <iframe 
+                src="https://embeds.beehiiv.com/618e6261-6b72-4d51-95d9-821977f9f63e?slim=true" 
+                data-test-id="beehiiv-embed" 
+                height="52" 
+                style={{ margin: 0, borderRadius: 0, backgroundColor: 'transparent' }}
+              />
               <Link 
                 href="https://join.slack.com/t/kycombinator/shared_invite/zt-2tneu9hc6-Dx1ttf~_75rQHOb8NHXXkQ"
                 target="_blank"

@@ -1,6 +1,49 @@
 export default function NYTimesAIGeography() {
   return (
     <div className="space-y-8">
+      <section className="bg-gray-50 p-6 rounded-lg">
+        <h2 className="text-lg font-semibold mb-4">Sources & References</h2>
+        <ul className="space-y-2">
+          <li>
+            <a 
+              href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4874104"
+              className="text-blue-600 hover:underline flex items-center gap-2"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              SSRN Research Paper
+              <a 
+                href="/reports/ssrn-4874104.pdf" 
+                download
+                className="text-sm text-purple-600 hover:text-purple-800"
+              >
+                (Download PDF)
+              </a>
+            </a>
+          </li>
+          <li>
+            <a 
+              href="https://threadreaderapp.com/thread/1871946968148439260.html?utm_source=tldrnewsletter#google_vignette"
+              className="text-blue-600 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Thread Reader Summary
+            </a>
+          </li>
+          <li>
+            <a 
+              href="https://www.nytimes.com/2024/12/26/technology/ai-economy-workers.html"
+              className="text-blue-600 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Original NYTimes Article
+            </a>
+          </li>
+        </ul>
+      </section>
+
       <section>
         <h2 className="text-2xl font-bold mb-4">Overview</h2>
         <p className="mb-4">

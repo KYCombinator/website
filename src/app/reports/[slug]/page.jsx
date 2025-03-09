@@ -36,7 +36,7 @@ export default function ReportPage({ params }) {
   const ReportComponent = report.componentKey ? reportComponents[report.componentKey] : null
 
   return (
-    <main className="container max-w-4xl py-12 px-4 sm:px-6 lg:px-8">
+    <main className="container py-12 px-4 sm:px-6 lg:px-8">
       <div className="mb-8">
         <div className="flex items-center gap-4 mb-4">
           <div className="flex gap-2">

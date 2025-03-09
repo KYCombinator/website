@@ -39,7 +39,7 @@ export const reports: Report[] = [
         status: "Published",
         date: "December 28, 2024",
         badges: ["research"],
-        file: "/reports/NYTimes_AI_Geography_20241228.pdf",
+        file: "/reports/NYTimes AI reshaping America.pdf",
         componentKey: "nytimes-ai-geography"
     },
     {

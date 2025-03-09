@@ -11,7 +11,7 @@ export function generateStaticParams() {
   }))
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
+export function generateMetadata({ params }) {
   const report = reports.find((r) => r.slug === params.slug)
   
   if (!report) {
@@ -26,13 +26,7 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   }
 }
 
-interface PageProps {
-  params: {
-    slug: string
-  }
-}
-
-export default function ReportPage({ params }: PageProps) {
+export default function ReportPage({ params }) {
   const report = reports.find((r) => r.slug === params.slug)
 
   if (!report) {

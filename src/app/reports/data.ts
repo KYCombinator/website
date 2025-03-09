@@ -17,6 +17,10 @@ export const badges: Record<string, BadgeType> = {
   survey: {
     label: "Survey",
     color: "bg-purple-100 text-purple-800"
+  },
+  KYCombinator: {
+    label: "KYCombinator",
+    color: "bg-purple-700 text-white"
   }
 }
 
@@ -32,6 +36,14 @@ export interface Report {
 }
 
 export const reports: Report[] = [
+    {
+        slug: "kycombinator-demographics-2024",
+        title: "KYCombinator Community Demographics Report",
+        description: "Analysis of Kentucky's tech workforce demographics, education levels, and geographic distribution",
+        status: "Published",
+        date: "March 2024",
+        badges: ["research", "KYCombinator"]
+    },
     {
         slug: "nytimes-ai-geography",
         title: "How A.I. Could Reshape America's Economic Geography",

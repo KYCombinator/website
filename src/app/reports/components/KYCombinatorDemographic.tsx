@@ -42,26 +42,38 @@ export default function KYCombinatorDemographic() {
         <div className="space-y-4">
           <div className="bg-gray-50 p-6 rounded-lg">
             <h3 className="text-lg font-semibold mb-2">Interactive Population Growth Comparison</h3>
-            <a 
-              href="https://kycombinator-public.s3.us-east-1.amazonaws.com/population_relative_animation.html"
-              className="text-blue-600 hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View Population Growth Animation
-            </a>
+            <iframe
+              src="https://kycombinator-public.s3.us-east-1.amazonaws.com/population_relative_animation.html"
+              className="w-full h-[500px] border-0 rounded"
+              title="Population Growth Animation"
+            />
+          </div>
+
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <h3 className="text-lg font-semibold mb-2">Population Growth Projections</h3>
+            <iframe
+              src="https://kycombinator-public.s3.us-east-1.amazonaws.com/population_projections.html"
+              className="w-full h-[500px] border-0 rounded"
+              title="Population Projections"
+            />
           </div>
           
           <div className="bg-gray-50 p-6 rounded-lg">
             <h3 className="text-lg font-semibold mb-2">Median Income Trends</h3>
-            <a 
-              href="https://kycombinator-public.s3.us-east-1.amazonaws.com/median_income_relative_animation.html"
-              className="text-blue-600 hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View Median Income Animation
-            </a>
+            <iframe
+              src="https://kycombinator-public.s3.us-east-1.amazonaws.com/median_income_relative_animation.html" 
+              className="w-full h-[500px] border-0 rounded"
+              title="Median Income Animation"
+            />
+          </div>
+
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <h3 className="text-lg font-semibold mb-2">Total Income Comparison</h3>
+            <iframe
+              src="https://kycombinator-public.s3.us-east-1.amazonaws.com/total_income_relative_animation_no_ny.html"
+              className="w-full h-[500px] border-0 rounded"
+              title="Total Income Animation"
+            />
           </div>
         </div>
       </section>

@@ -1,3 +1,5 @@
+import { ReportComponentKey } from './components'
+
 export type BadgeType = {
   label: string
   color: string
@@ -26,7 +28,7 @@ export interface Report {
   date: string
   badges: (keyof typeof badges)[]
   file?: string
-  component?: React.ComponentType
+  componentKey?: ReportComponentKey
 }
 
 export const reports: Report[] = [
@@ -37,8 +39,9 @@ export const reports: Report[] = [
         status: "Published",
         date: "December 28, 2024",
         badges: ["research"],
-        file: "/reports/NYTimes_AI_Geography_20241228.pdf"
-        },
+        file: "/reports/NYTimes_AI_Geography_20241228.pdf",
+        componentKey: "nytimes-ai-geography"
+    },
     {
     slug: "endeavor-midwest-10-year",
     title: "Unparalleled Endeavor Midwest 10 Year Report",
@@ -65,5 +68,5 @@ export const reports: Report[] = [
     date: "September 2019", 
     badges: ["research"],
     file: "/reports/Endeavor_20190927.pdf"
-  },
+  }
 ]

@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card"
 import { notFound } from "next/navigation"
 import { reports, badges } from "../data"
 import { Download } from "lucide-react"
+import { reportComponents } from "../components"
 
 export function generateStaticParams() {
   return reports.map((report) => ({
@@ -25,12 +26,14 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   }
 }
 
-export default function ReportPage({ params }: { params: { slug: string } }) {
+export default async function ReportPage({ params }: { params: { slug: string } }) {
   const report = reports.find((r) => r.slug === params.slug)
 
   if (!report) {
     notFound()
   }
+
+  const ReportComponent = report.componentKey ? reportComponents[report.componentKey] : null
 
   return (
     <main className="container max-w-4xl py-12 px-4 sm:px-6 lg:px-8">
@@ -78,7 +81,13 @@ export default function ReportPage({ params }: { params: { slug: string } }) {
             </div>
           )}
           <div className="prose dark:prose-invert max-w-none">
-            {/* Report content will go here */}
+            {ReportComponent ? (
+              <ReportComponent />
+            ) : (
+              <div className="text-center text-muted-foreground">
+                <p>Static content for this report will be added soon.</p>
+              </div>
+            )}
           </div>
         </>
       )}

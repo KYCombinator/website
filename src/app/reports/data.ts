@@ -21,6 +21,10 @@ export const badges: Record<string, BadgeType> = {
   KYCombinator: {
     label: "KYCombinator",
     color: "bg-purple-700 text-white"
+  },
+  newspaper: {
+    label: "Newspaper",
+    color: "bg-gray-100 text-gray-800"
   }
 }
 
@@ -51,7 +55,7 @@ export const reports: Report[] = [
         description: "Analysis of how AI adoption could benefit midsize cities in the Midwest, Mid-Atlantic and South regions",
         status: "Published",
         date: "December 28, 2024",
-        badges: ["research"],
+        badges: ["research", "newspaper"],
         file: "/reports/NYTimes AI reshaping America.pdf",
         componentKey: "nytimes-ai-geography"
     },
@@ -61,7 +65,7 @@ export const reports: Report[] = [
     description: "A decade of impact and growth in the Midwest entrepreneurial ecosystem",
     status: "Published",
     date: "November 2024",
-    badges: ["research", "event"], 
+    badges: ["research"], 
     file: "/reports/Endeavor_10_Year_Impact_Report_20241112.pdf"
     },
   {
@@ -70,7 +74,7 @@ export const reports: Report[] = [
     description: "Strategic assessment and recommendations for Louisville's startup ecosystem",
     status: "Published", 
     date: "March 2019",
-    badges: ["research", "survey"],
+    badges: ["research"],
     file: "/reports/techstars_20190301.pdf"
   },
   {

@@ -42,7 +42,8 @@ export const reports: Report[] = [
         description: "Analysis of Kentucky's tech workforce demographics, education levels, and geographic distribution",
         status: "Published",
         date: "March 2024",
-        badges: ["research", "KYCombinator"]
+        badges: ["research", "KYCombinator"],
+        componentKey: "kycombinator-demographic"
     },
     {
         slug: "nytimes-ai-geography",

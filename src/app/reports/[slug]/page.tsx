@@ -26,7 +26,13 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   }
 }
 
-export default async function ReportPage({ params }: { params: { slug: string } }) {
+interface PageProps {
+  params: {
+    slug: string
+  }
+}
+
+export default function ReportPage({ params }: PageProps) {
   const report = reports.find((r) => r.slug === params.slug)
 
   if (!report) {
@@ -93,4 +99,4 @@ export default async function ReportPage({ params }: { params: { slug: string } 
       )}
     </main>
   )
-} 
+}

@@ -26,9 +26,19 @@ export interface Report {
   date: string
   badges: (keyof typeof badges)[]
   file?: string
+  component?: React.ComponentType
 }
 
 export const reports: Report[] = [
+    {
+        slug: "nytimes-ai-geography",
+        title: "How A.I. Could Reshape America's Economic Geography",
+        description: "Analysis of how AI adoption could benefit midsize cities in the Midwest, Mid-Atlantic and South regions",
+        status: "Published",
+        date: "December 28, 2024",
+        badges: ["research"],
+        file: "/reports/NYTimes_AI_Geography_20241228.pdf"
+        },
     {
     slug: "endeavor-midwest-10-year",
     title: "Unparalleled Endeavor Midwest 10 Year Report",

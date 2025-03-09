@@ -30,14 +30,14 @@ export interface Report {
 
 export const reports: Report[] = [
     {
-        slug: "endeavor-midwest-10-year",
-        title: "Unparalleled Endeavor Midwest 10 Year Report",
-        description: "A decade of impact and growth in the Midwest entrepreneurial ecosystem",
-        status: "Published",
-        date: "November 2024",
-        badges: ["research", "event"], 
-        file: "/reports/Endeavor_10_Year_Impact_Report_20241112.pdf"
-      },
+    slug: "endeavor-midwest-10-year",
+    title: "Unparalleled Endeavor Midwest 10 Year Report",
+    description: "A decade of impact and growth in the Midwest entrepreneurial ecosystem",
+    status: "Published",
+    date: "November 2024",
+    badges: ["research", "event"], 
+    file: "/reports/Endeavor_10_Year_Impact_Report_20241112.pdf"
+    },
   {
     slug: "techstars-roadmap-2019",
     title: "Techstars Roadmap & Assessment Report",

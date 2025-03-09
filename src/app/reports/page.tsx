@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function ReportsPage() {
   return (
-    <main className="container max-w-6xl py-12 px-4 sm:px-6 lg:px-8">
+    <main className="py-12 px-4 sm:px-6 lg:px-8">
       <div className="mb-12">
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl mb-4">
           Reports & Analytics
@@ -19,8 +19,11 @@ export default function ReportsPage() {
         <p className="text-xl text-muted-foreground">
           Data-driven insights into Kentucky&apos;s tech community
         </p>
+        <p className="mt-4 text-sm italic text-muted-foreground bg-gray-50 border border-gray-200 rounded-lg p-4">
+          All information provided is for educational and research purposes only. Reports may contain copyrighted material used under fair use for educational purposes.
+        </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
         {reports.map((report) => (
           report.status === "Coming Soon" ? (
             <Card 

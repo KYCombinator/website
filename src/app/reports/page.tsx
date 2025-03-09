@@ -1,13 +1,7 @@
-import { Metadata } from "next"
 import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
 import Link from "next/link"
 import { reports, badges } from "./data"
-
-export const metadata: Metadata = {
-  title: "Reports | KYCombinator",
-  description: "Explore data and insights from KYCombinator",
-}
 
 export default function ReportsPage() {
   return (

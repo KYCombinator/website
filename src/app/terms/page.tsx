@@ -1,10 +1,6 @@
-import Header from "../components/Header"
-import Footer from "../components/Footer"
-
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-white">
-      <Header />
       
       <main className="container mx-auto px-4 py-16 max-w-4xl">
         <h1 className="text-4xl font-bold text-purple-700 mb-8">Terms of Service</h1>
@@ -48,8 +44,6 @@ export default function TermsPage() {
           </section>
         </div>
       </main>
-
-      <Footer />
     </div>
   )
 } 

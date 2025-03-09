@@ -1,14 +1,10 @@
 import { Calendar, Slack } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import Header from "./components/Header"
-import Footer from "./components/Footer"
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
-      <Header />
-
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center bg-white">
         <div className="container mx-auto px-4 text-center">
@@ -237,8 +233,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }

@@ -2,6 +2,8 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Cabin } from "next/font/google"
 import "./globals.css"
+import Header from "./components/Header"
+import Footer from "./components/Footer"
 
 const cabin = Cabin({ subsets: ["latin"] })
 
@@ -21,9 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cabin.className}>
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   )
 }
-

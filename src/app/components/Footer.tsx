@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 
 export default function Footer() {
   return (
@@ -6,8 +7,8 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4 text-purple-400">KYCombinator</h3>
-            <p className="text-gray-400">Building stronger communities through accountability and mutual support.</p>
+            <Image src="/assets/Purple.png" alt="KYCombinator Logo" width={200} height={44} />
+            <p className="text-gray-400 mx-2">Building Kentucky&apos;s next generation of tech innovators.</p>
           </div>
 
           <div>
@@ -52,6 +53,11 @@ export default function Footer() {
               <li>
                 <Link href="/assets" className="text-gray-400 hover:text-white transition">
                   Assets
+                </Link>
+              </li>
+              <li>
+                <Link href="/reports" className="text-gray-400 hover:text-white transition">
+                  Reports
                 </Link>
               </li>
             </ul>

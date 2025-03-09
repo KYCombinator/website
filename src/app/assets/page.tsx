@@ -1,7 +1,5 @@
 import { Download } from "lucide-react"
 import Image from "next/image"
-import Header from "../components/Header"
-import Footer from "../components/Footer"
 
 const assets = [
   {
@@ -42,7 +40,6 @@ const assets = [
 export default function AssetsPage() {
   return (
     <div className="min-h-screen bg-white">
-      <Header />
       
       <main className="container mx-auto px-4 py-16">
         <h1 className="text-4xl font-bold text-purple-700 mb-8">Brand Assets</h1>
@@ -85,8 +82,6 @@ export default function AssetsPage() {
           ))}
         </div>
       </main>
-
-      <Footer />
     </div>
   )
 } 

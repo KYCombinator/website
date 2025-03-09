@@ -28,6 +28,9 @@ export default function Header() {
             <Link href="#events" className="text-gray-700 hover:text-purple-700 font-medium">
               Events
             </Link>
+            <Link href="/reports" className="text-gray-700 hover:text-purple-700 font-medium">
+              Reports
+            </Link>
           </nav>
           <Link 
             href="https://join.slack.com/t/kycombinator/shared_invite/zt-2tneu9hc6-Dx1ttf~_75rQHOb8NHXXkQ"

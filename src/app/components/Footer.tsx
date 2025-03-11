@@ -46,6 +46,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/velocity" className="text-gray-400 hover:text-white transition">
+                  Velocity Pitch
+                </Link>
+              </li>
+              <li>
                 <Link href="https://www.hackkentucky.com" className="text-gray-400 hover:text-white transition">
                   HackKentucky
                 </Link>

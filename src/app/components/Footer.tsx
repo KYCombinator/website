@@ -20,7 +20,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#about" className="text-gray-400 hover:text-white transition">
+                <Link href="/#about" className="text-gray-400 hover:text-white transition">
                   About
                 </Link>
               </li>
@@ -30,7 +30,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#faqs" className="text-gray-400 hover:text-white transition">
+                <Link href="/#faqs" className="text-gray-400 hover:text-white transition">
                   FAQs
                 </Link>
               </li>
@@ -41,7 +41,7 @@ export default function Footer() {
             <h4 className="font-bold mb-4 uppercase text-sm tracking-wider">Resources</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="#events" className="text-gray-400 hover:text-white transition">
+                <Link href="/#events" className="text-gray-400 hover:text-white transition">
                   Events
                 </Link>
               </li>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { Auth } from '@/components/Auth'
 import { useAuth } from '@/hooks/useAuth'
 
@@ -16,4 +16,4 @@ export default function AuthPage() {
   }, [user, router])
 
   return <Auth />
-} 
+}

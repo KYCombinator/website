@@ -28,6 +28,9 @@ export default function Header() {
             <Link href="#events" className="text-gray-700 hover:text-purple-700 font-medium">
               Events
             </Link>
+            <Link href="https://www.hackkentucky.com" className="text-gray-700 hover:text-purple-700 font-medium">
+              HackKentucky
+            </Link>
             <Link href="/reports" className="text-gray-700 hover:text-purple-700 font-medium">
               Reports
             </Link>

@@ -60,7 +60,7 @@ export default function Header() {
                 href="https://join.slack.com/t/kycombinator/shared_invite/zt-2tneu9hc6-Dx1ttf~_75rQHOb8NHXXkQ"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-purple-700 text-white px-7 py-1.5 rounded text-base font-medium hover:bg-purple-800 transition"
+                className="bg-[#6B46C1] text-white px-7 py-1.5 rounded text-base font-medium hover:bg-[#5B3AA8] transition"
               >
                 Join Now
               </Link>
@@ -91,7 +91,7 @@ export default function Header() {
                 href="https://join.slack.com/t/kycombinator/shared_invite/zt-2tneu9hc6-Dx1ttf~_75rQHOb8NHXXkQ"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block mx-3 mt-3 bg-purple-700 text-white py-2 rounded text-base font-medium text-center hover:bg-purple-800 transition"
+                className="block mx-3 mt-3 bg-[#6B46C1] text-white py-2 rounded text-base font-medium text-center hover:bg-[#5B3AA8] transition"
               >
                 Join Now
               </Link>

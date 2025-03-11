@@ -29,7 +29,7 @@ export default function Home() {
               </p>
               <Link
                 href="/velocity"
-                className="inline-flex items-center gap-2 bg-purple-700 text-white px-8 py-3 rounded-md font-semibold hover:bg-purple-800 transition"
+                className="inline-flex items-center gap-2 bg-[#6B46C1] text-white px-8 py-3 rounded-md font-semibold hover:bg-[#5B3AA8] transition"
               >
                 Join the Velocity Pitch Competition
                 <ArrowRight className="w-5 h-5" />
@@ -79,7 +79,7 @@ export default function Home() {
           </div>
 
           <div className="absolute bottom-10 left-0 right-0 flex justify-center">
-            <Link href="#is-for-you" className="text-purple-700 animate-bounce">
+            <Link href="#is-for-you" className="text-[#6B46C1] animate-bounce">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-8 w-8"
@@ -95,7 +95,7 @@ export default function Home() {
       </section>
 
       {/* Quote Section 1 */}
-      <section className="bg-purple-700 text-white py-12">
+      <section className="bg-[#6B46C1] text-white py-12">
         <div className="container mx-auto px-4 text-center">
           <blockquote className="text-2xl md:text-3xl italic font-light">
             We are the doers, the builders, the ones who execute with relentless intensity.
@@ -108,7 +108,7 @@ export default function Home() {
       <section id="about" className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-purple-700 mb-6">About</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#6B46C1] mb-6">About</h2>
             <p className="text-gray-600 text-lg mb-8">
               KYCombinator is flat. There is no hierarchy. Anyone can drive an event.
             </p>
@@ -116,14 +116,14 @@ export default function Home() {
               Our Mission: Build density of high-agency high-velocity founders & builders in Kentucky. 
             </p>
             <div className="bg-purple-50 p-6 rounded-lg mb-8">
-              <h3 className="text-xl font-bold text-purple-700 mb-3">HAVES (High-Agency Violent Execution Stallions)</h3>
+              <h3 className="text-xl font-bold text-[#6B46C1] mb-3">HAVES (High-Agency Violent Execution Stallions)</h3>
               <p className="text-gray-600">
                 We are the doers, the builders, the ones who execute with relentless intensity. HAVES don&apos;t wait for permission - they take action, move fast, and create impact. If you&apos;re ready to build at high velocity and push the boundaries of what&apos;s possible in Kentucky, you&apos;re one of us.
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-6 mt-12">
               <div className="bg-purple-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-purple-700 mb-3">How We Do It</h3>
+                <h3 className="text-xl font-bold text-[#6B46C1] mb-3">How We Do It</h3>
                 <ul className="text-left text-gray-600 space-y-3">
                   <li>• Show up that way ourselves</li>
                   <li>• Reward the right behaviors through awards, hackathons, founder velocity competitions</li>
@@ -132,7 +132,7 @@ export default function Home() {
                 </ul>
               </div>
               <div className="bg-purple-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-purple-700 mb-3">What You Get</h3>
+                <h3 className="text-xl font-bold text-[#6B46C1] mb-3">What You Get</h3>
                 <ul className="text-left text-gray-600 space-y-3">
                   <li>• A community of high-agency builders and founders</li>
                   <li>• Regular events, hackathons, and competitions</li>
@@ -146,7 +146,7 @@ export default function Home() {
       </section>
 
       {/* Quote Section 1 */}
-      <section className="bg-purple-700 text-white py-12">
+      <section className="bg-[#6B46C1] text-white py-12">
         <div className="container mx-auto px-4 text-center max-w-3xl">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">What we do different at KYCombinator</h2>
           <div className="gap-2 text-left p-6 rounded-lg">
@@ -167,7 +167,7 @@ export default function Home() {
       <section id="events" className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-purple-700 mb-4">Upcoming Events</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#6B46C1] mb-4">Upcoming Events</h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
               Events are open to all. We encourage you to show up. Vote with your feet.
             </p>
@@ -178,7 +178,7 @@ export default function Home() {
               href="https://lu.ma/kycombinator"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-purple-700 text-white px-6 py-3 rounded-md hover:bg-purple-800 transition flex items-center gap-2"
+              className="bg-[#6B46C1] text-white px-6 py-3 rounded-md hover:bg-[#5B3AA8] transition flex items-center gap-2"
             >
               <Calendar className="w-5 h-5" />
               <span>View All Events</span>
@@ -201,7 +201,7 @@ export default function Home() {
       {/* FAQs Section */}
       <section id="faqs" className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-purple-700">FAQs</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-[#6B46C1]">FAQs</h2>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div className="bg-gray-50 p-6 rounded-lg shadow-md">
@@ -234,7 +234,7 @@ export default function Home() {
           </div>
 
           <div className="text-center mt-10">
-            <button className="bg-purple-700 text-white px-6 py-3 rounded-md hover:bg-purple-800 transition">
+            <button className="bg-[#6B46C1] text-white px-6 py-3 rounded-md hover:bg-[#5B3AA8] transition">
               View All FAQs
             </button>
           </div>

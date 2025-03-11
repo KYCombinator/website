@@ -2,23 +2,23 @@ export default function VelocityPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative py-20 bg-purple-700">
+      <section className="relative py-20 bg-[#6B46C1] pt-32">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Velocity Pitch Competition
             </h1>
-            <p className="text-xl text-purple-100 mb-4">
+            <p className="text-xl text-white/90 mb-4">
               April 29, 2025 - A 12-week sprint to unicorn speed
             </p>
-            <p className="text-lg text-purple-100 mb-8">
-              Back a Stallion: $500-$1000 bets on Kentucky&apos;s most ambitious founders
+            <p className="text-lg text-white/90 mb-8">
+              Back a Stallion: $500-$1000 bets on Kentucky's most ambitious founders
             </p>
             <a
               href="https://lu.ma/vr9guh5n"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-white text-purple-700 px-8 py-3 rounded-md font-semibold hover:bg-purple-50 transition"
+              className="inline-block bg-white text-[#6B46C1] px-8 py-3 rounded-md font-semibold hover:bg-[#6B46C1]/10 transition"
             >
               Apply Now
             </a>
@@ -36,8 +36,8 @@ export default function VelocityPage() {
                 The Velocity Pitch Competition is a 12-week competition where every team must get to customers and revenue. On May 1st, contestants pitch their ideas and their 12-week roadmap. We select 5 teams/founders to back, prioritizing roadmap ambition over idea quality.
               </p>
               
-              <div className="bg-purple-50 p-6 rounded-lg">
-                <h3 className="text-xl font-semibold text-purple-700 mb-4">What You Get</h3>
+              <div className="bg-[#6B46C1]/5 p-6 rounded-lg">
+                <h3 className="text-xl font-semibold text-[#6B46C1] mb-4">What You Get</h3>
                 <ul className="space-y-3">
                   <li>• A seat in the founders room with mentors (including Dan and others)</li>
                   <li>• Weekly accountability and mentorship to execute against your roadmap</li>
@@ -66,15 +66,15 @@ export default function VelocityPage() {
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Vision</h2>
             <div className="space-y-6">
               <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h3 className="text-xl font-semibold text-purple-700 mb-3">Short-term Goal</h3>
+                <h3 className="text-xl font-semibold text-[#6B46C1] mb-3">Short-term Goal</h3>
                 <p className="text-gray-600">Show early founders what unicorn speed looks like (both within the competition and the broader community of founders who are watching).</p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h3 className="text-xl font-semibold text-purple-700 mb-3">Mid-term Goal</h3>
+                <h3 className="text-xl font-semibold text-[#6B46C1] mb-3">Mid-term Goal</h3>
                 <p className="text-gray-600">Create population density of high-performing founders.</p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h3 className="text-xl font-semibold text-purple-700 mb-3">Long-term Goal</h3>
+                <h3 className="text-xl font-semibold text-[#6B46C1] mb-3">Long-term Goal</h3>
                 <p className="text-gray-600">Make Louisville the Bay Area of the Midwest by launching unicorn after unicorn until the short and mid-term goals are being hit on autopilot. It&apos;s a flywheel for founder innovation.</p>
               </div>
             </div>
@@ -104,7 +104,7 @@ export default function VelocityPage() {
                   href="https://lu.ma/vr9guh5n"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block bg-purple-700 text-white px-8 py-3 rounded-md font-semibold hover:bg-purple-800 transition"
+                  className="inline-block bg-[#6B46C1] text-white px-8 py-3 rounded-md font-semibold hover:bg-[#5B3AA8] transition"
                 >
                   Apply Now
                 </a>

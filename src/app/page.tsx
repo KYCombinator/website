@@ -1,4 +1,4 @@
-import { Calendar, Slack } from "lucide-react"
+import { Calendar, Slack, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -24,9 +24,16 @@ export default function Home() {
               <p className="text-gray-600 text-lg md:text-xl mb-4">
                 We&apos;re creating the highest density of ambitious, high-velocity founders and builders in Kentucky.
               </p>
-              <p className="text-gray-600 text-lg md:text-xl">
+              <p className="text-gray-600 text-lg md:text-xl mb-8">
                 Join a community of action-takers who move fast, build things, and support each other&apos;s growth.
               </p>
+              <Link
+                href="/velocity"
+                className="inline-flex items-center gap-2 bg-purple-700 text-white px-8 py-3 rounded-md font-semibold hover:bg-purple-800 transition"
+              >
+                Join the Velocity Pitch Competition
+                <ArrowRight className="w-5 h-5" />
+              </Link>
             </div>
             <div className="flex flex-col gap-4 justify-center items-center">
               <iframe 

@@ -1,9 +1,40 @@
+import Image from 'next/image';
+import Link from 'next/link';
 export default function VelocityPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative py-20 bg-[#6B46C1] pt-32">
-        <div className="container mx-auto px-4">
+      <section className="relative h-[85vh] bg-[#6B46C1]">
+        <div className="absolute inset-0 w-full h-full">
+          <div className="relative w-full h-full">
+            <Image
+              src="/velocity/real1.png"
+              alt="Velocity"
+              fill
+              className="absolute inset-0 object-cover opacity-20 animate-[fadeInOut_20s_ease-in-out_infinite]"
+            />
+            <Image
+              src="/velocity/real2.png" 
+              alt="Velocity"
+              fill
+              className="absolute inset-0 object-cover opacity-20 animate-[fadeInOut_20s_ease-in-out_5s_infinite]"
+            />
+            <Image
+              src="/velocity/real3.png"
+              alt="Velocity" 
+              fill
+              className="absolute inset-0 object-cover opacity-20 animate-[fadeInOut_20s_ease-in-out_10s_infinite]"
+            />
+            <Image
+              src="/velocity/real4.png"
+              alt="Velocity"
+              fill
+              className="absolute inset-0 object-cover opacity-20 animate-[fadeInOut_20s_ease-in-out_15s_infinite]"
+            />
+            <div className="absolute inset-0 bg-[#6B46C1]/60" />
+          </div>
+        </div>
+        <div className="container mx-auto px-4 h-full flex items-center justify-center relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Velocity Pitch Competition
@@ -12,16 +43,16 @@ export default function VelocityPage() {
               April 29, 2025 - A 12-week sprint to unicorn speed
             </p>
             <p className="text-lg text-white/90 mb-8">
-              Back a Stallion: $500-$1000 bets on Kentucky's most ambitious founders
+              Back a Stallion: $500-$1000 bets on Kentucky&apos;s most ambitious founders
             </p>
-            <a
+            <Link
               href="https://lu.ma/vr9guh5n"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-white text-[#6B46C1] px-8 py-3 rounded-md font-semibold hover:bg-[#6B46C1]/10 transition"
+              className="inline-block bg-white text-[#6B46C1] px-8 py-3 rounded-md font-semibold hover:bg-opacity-90 transition"
             >
               Apply Now
-            </a>
+            </Link>
           </div>
         </div>
       </section>

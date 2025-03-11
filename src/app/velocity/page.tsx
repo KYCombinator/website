@@ -12,7 +12,7 @@ export default function VelocityPage() {
               April 29, 2025 - A 12-week sprint to unicorn speed
             </p>
             <p className="text-lg text-purple-100 mb-8">
-              Back a Stallion: $500-$1000 bets on Kentucky's most ambitious founders
+              Back a Stallion: $500-$1000 bets on Kentucky&apos;s most ambitious founders
             </p>
             <a
               href="https://lu.ma/vr9guh5n"
@@ -75,7 +75,7 @@ export default function VelocityPage() {
               </div>
               <div className="bg-white p-6 rounded-lg shadow-sm">
                 <h3 className="text-xl font-semibold text-purple-700 mb-3">Long-term Goal</h3>
-                <p className="text-gray-600">Make Louisville the Bay Area of the Midwest by launching unicorn after unicorn until the short and mid-term goals are being hit on autopilot. It's a flywheel for founder innovation.</p>
+                <p className="text-gray-600">Make Louisville the Bay Area of the Midwest by launching unicorn after unicorn until the short and mid-term goals are being hit on autopilot. It&apos;s a flywheel for founder innovation.</p>
               </div>
             </div>
           </div>

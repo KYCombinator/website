@@ -9,7 +9,7 @@ export default function VelocityPage() {
               Velocity Pitch Competition
             </h1>
             <p className="text-xl text-purple-100 mb-4">
-              April 29, 2024 - A 12-week sprint to unicorn speed
+              April 29, 2025 - A 12-week sprint to unicorn speed
             </p>
             <p className="text-lg text-purple-100 mb-8">
               Back a Stallion: $500-$1000 bets on Kentucky's most ambitious founders

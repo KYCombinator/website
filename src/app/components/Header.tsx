@@ -19,13 +19,13 @@ export default function Header() {
             </Link>
           </div>
           <nav className="hidden md:flex space-x-8">
-            <Link href="#about" className="text-gray-700 hover:text-purple-700 font-medium">
+            <Link href="/#about" className="text-gray-700 hover:text-purple-700 font-medium">
               About
             </Link>
-            <Link href="#faqs" className="text-gray-700 hover:text-purple-700 font-medium">
+            <Link href="/#faqs" className="text-gray-700 hover:text-purple-700 font-medium">
               FAQs
             </Link>
-            <Link href="#events" className="text-gray-700 hover:text-purple-700 font-medium">
+            <Link href="/#events" className="text-gray-700 hover:text-purple-700 font-medium">
               Events
             </Link>
             <Link href="/reports" className="text-gray-700 hover:text-purple-700 font-medium">

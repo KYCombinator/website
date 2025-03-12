@@ -62,7 +62,7 @@ export default function VelocityPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative h-[85vh] bg-[#6B46C1]">
+      <section className="relative h-[65vh] bg-[#6B46C1]">
         <div className="absolute inset-0 w-full h-full">
           <Carousel />
         </div>

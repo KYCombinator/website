@@ -1,38 +1,70 @@
+'use client'
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
+
+const Carousel = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  
+  const slides = [
+    { src: '/velocity/real1.png', alt: 'Velocity 1' },
+    { src: '/velocity/real2.png', alt: 'Velocity 2' },
+    { src: '/velocity/real3.png', alt: 'Velocity 3' },
+    { src: '/velocity/real4.png', alt: 'Velocity 4' },
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 4000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="relative w-full h-full">
+      {slides.map((slide, index) => (
+        <div
+          key={slide.src}
+          className="absolute inset-0 w-full h-full transition-opacity duration-1000"
+          style={{
+            opacity: currentSlide === index ? 1 : 0,
+            zIndex: currentSlide === index ? 2 : 1,
+          }}
+        >
+          <Image
+            src={slide.src}
+            alt={slide.alt}
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+      ))}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            className={`w-2 h-2 rounded-full transition-all ${
+              currentSlide === index ? 'bg-white w-4' : 'bg-white/50'
+            }`}
+            onClick={() => setCurrentSlide(index)}
+          />
+        ))}
+      </div>
+      <div className="absolute inset-0 bg-[#6B46C1]/60 z-10" />
+    </div>
+  );
+};
+
 export default function VelocityPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative h-[85vh] bg-[#6B46C1]">
         <div className="absolute inset-0 w-full h-full">
-          <div className="relative w-full h-full">
-            <Image
-              src="/velocity/real1.png"
-              alt="Velocity"
-              fill
-              className="absolute inset-0 object-cover opacity-20 animate-[fadeInOut_20s_ease-in-out_infinite]"
-            />
-            <Image
-              src="/velocity/real2.png" 
-              alt="Velocity"
-              fill
-              className="absolute inset-0 object-cover opacity-20 animate-[fadeInOut_20s_ease-in-out_5s_infinite]"
-            />
-            <Image
-              src="/velocity/real3.png"
-              alt="Velocity" 
-              fill
-              className="absolute inset-0 object-cover opacity-20 animate-[fadeInOut_20s_ease-in-out_10s_infinite]"
-            />
-            <Image
-              src="/velocity/real4.png"
-              alt="Velocity"
-              fill
-              className="absolute inset-0 object-cover opacity-20 animate-[fadeInOut_20s_ease-in-out_15s_infinite]"
-            />
-            <div className="absolute inset-0 bg-[#6B46C1]/60" />
-          </div>
+          <Carousel />
         </div>
         <div className="container mx-auto px-4 h-full flex items-center justify-center relative z-10">
           <div className="max-w-3xl mx-auto text-center">
@@ -45,14 +77,24 @@ export default function VelocityPage() {
             <p className="text-lg text-white/90 mb-8">
               Back a Stallion: $500-$1000 bets on Kentucky&apos;s most ambitious founders
             </p>
-            <Link
-              href="https://lu.ma/vr9guh5n"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block bg-white text-[#6B46C1] px-8 py-3 rounded-md font-semibold hover:bg-opacity-90 transition"
-            >
-              Apply Now
-            </Link>
+            <div className="space-x-4">
+              <Link
+                href="https://lu.ma/vr9guh5n"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-[#6B46C1] text-white border-2 border-white px-8 py-3 rounded-md font-semibold hover:bg-[#6B46C1]/80 transition"
+              >
+                Register to Attend
+              </Link>
+              <Link
+                href="https://kycombinator.typeform.com/velocity"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-white text-[#6B46C1] px-8 py-3 rounded-md font-semibold hover:bg-opacity-90 transition"
+              >
+                Apply To Pitch
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -130,15 +172,23 @@ export default function VelocityPage() {
                   <li>12-week competition period</li>
                 </ul>
               </div>
-              <div className="mt-8">
-                <a
+              <div className="space-x-4">
+                <Link
                   href="https://lu.ma/vr9guh5n"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block bg-[#6B46C1] text-white px-8 py-3 rounded-md font-semibold hover:bg-[#5B3AA8] transition"
+                  className="inline-block bg-[#6B46C1] text-white border-2 border-white px-8 py-3 rounded-md font-semibold hover:bg-[#6B46C1]/80 transition"
                 >
-                  Apply Now
-                </a>
+                  Register to Attend
+                </Link>
+                <Link
+                  href="https://kycombinator.typeform.com/velocity"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-white text-[#6B46C1] px-8 py-3 rounded-md font-semibold hover:bg-opacity-90 transition"
+                >
+                  Apply To Pitch
+                </Link>
               </div>
             </div>
           </div>

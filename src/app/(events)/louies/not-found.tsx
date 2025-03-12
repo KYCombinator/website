@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function LouiesNotFound() {
+export default function NotFound() {
   return (
     <div className="min-h-screen bg-white flex items-center justify-center">
       <div className="max-w-2xl mx-auto text-center px-4">

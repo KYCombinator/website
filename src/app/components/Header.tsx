@@ -57,7 +57,7 @@ export default function Header() {
                 Reports
               </Link>
               <Link 
-                href="https://join.slack.com/t/kycombinator/shared_invite/zt-2tneu9hc6-Dx1ttf~_75rQHOb8NHXXkQ"
+                href="https://join.slack.com/t/kycombinator/shared_invite/zt-2viueybdu-QNv80gAKk~sJZ9paWebGVQ"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-[#6B46C1] text-white px-7 py-1.5 rounded text-base font-medium hover:bg-[#5B3AA8] transition"

@@ -46,7 +46,7 @@ export default function Home() {
                 <p className="text-lg font-semibold mb-4">Find Us Here</p>
                 <div className="flex gap-4 justify-center">
                   <Link 
-                    href="https://join.slack.com/t/kycombinator/shared_invite/zt-2tneu9hc6-Dx1ttf~_75rQHOb8NHXXkQ"
+                    href="https://join.slack.com/t/kycombinator/shared_invite/zt-2viueybdu-QNv80gAKk~sJZ9paWebGVQ"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-[#4A154B] text-white p-3 rounded-md hover:bg-[#611f64] transition"

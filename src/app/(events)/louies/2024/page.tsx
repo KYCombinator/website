@@ -46,7 +46,7 @@ const Carousel = () => {
 export default function Louies2024Page() {
   return (
     <div className="min-h-screen bg-white">
-      <section className="relative h-[65vh] bg-[#6B46C1]">
+      <section className="relative h-[85vh] bg-[#6B46C1]">
         <div className="absolute inset-0">
           <Carousel />
         </div>

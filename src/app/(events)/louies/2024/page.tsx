@@ -1,14 +1,65 @@
+'use client'
+
+import Image from 'next/image';
+import { useState, useEffect } from 'react';
+
+const Carousel = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  
+  const slides = [
+    { src: '/louies/louies1.jpg', alt: 'The Louies 2023 Event' },
+    { src: '/louies/louies2.jpg', alt: 'The Louies 2023 Celebration' },
+    { src: '/louies/louies3.jpg', alt: 'The Louies 2023 Awards' },
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 4000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="relative h-full w-full overflow-hidden">
+      {slides.map((slide, index) => (
+        <div
+          key={slide.src}
+          className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+        >
+          <div className="absolute inset-0 bg-purple-900/50 mix-blend-multiply z-10" />
+          <Image
+            src={slide.src}
+            alt={slide.alt}
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+      ))}
+    </div>
+  );
+};
+
+
+
 export default function Louies2024Page() {
   return (
     <div className="min-h-screen bg-white">
       <section className="relative h-[65vh] bg-[#6B46C1]">
-        {/* Hero section for 2024 */}
+        <div className="absolute inset-0">
+          <Carousel />
+        </div>
+
+        {/* Content overlay */}
         <div className="container mx-auto px-4 h-full flex items-center justify-center relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
               The Louies 2024
             </h1>
-            {/* Add 2024 specific content */}
+            <p className="text-xl text-white/90">
+              Celebrating Louisville&apos;s Most Innovative Founders & Startups
+            </p>
           </div>
         </div>
       </section>

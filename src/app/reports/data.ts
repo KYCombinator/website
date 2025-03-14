@@ -93,6 +93,7 @@ export const reports: Report[] = [
     status: "Published",
     date: "September 09, 1974", 
     badges: ["newspaper"],
-    file: "/reports/The New Yorker - Sep 09, 1974.pdf"
+    file: "/reports/The New Yorker - Sep 09, 1974.pdf",
+    componentKey: "newyorker"
   }
 ]

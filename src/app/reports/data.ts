@@ -85,5 +85,14 @@ export const reports: Report[] = [
     date: "September 2019", 
     badges: ["research"],
     file: "/reports/Endeavor_20190927.pdf"
+  },
+  {
+    slug: "city-in-transition",
+    title: "Cities in Transition",
+    description: "1974 New Yorker article on the state of Louisville",
+    status: "Published",
+    date: "September 09, 1974", 
+    badges: ["newspaper"],
+    file: "/reports/The New Yorker - Sep 09, 1974.pdf"
   }
 ]

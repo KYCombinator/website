@@ -108,7 +108,7 @@ export default function VelocityPage() {
             <h2 className="text-3xl font-bold text-gray-900 mb-6">What Is It</h2>
             <div className="space-y-6 text-lg text-gray-600">
               <p>
-                The Velocity Pitch Competition is a 12-week competition where every team must get to customers and revenue. On May 1st, contestants pitch their ideas and their 12-week roadmap. We select 5 teams/founders to back, prioritizing roadmap ambition over idea quality.
+                The Velocity Pitch Competition is a 12-week competition where every team must get to customers and revenue. On April 29th, contestants pitch their ideas and their 12-week roadmap. We select 5 teams/founders to back, prioritizing roadmap ambition over idea quality.
               </p>
               
               <div className="bg-[#6B46C1]/5 p-6 rounded-lg">

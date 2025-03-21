@@ -7,7 +7,7 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center bg-white">
-        <div className="container mx-auto px-4 text-center">
+        <div className="container mx-auto px-4 text-center pb-15 pt-8">
           <div className="max-w-3xl mx-auto">
             <div className="bg-white p-6 rounded-lg">
               <Image
@@ -78,7 +78,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="absolute bottom-10 left-0 right-0 flex justify-center">
+          <div className="absolute bottom-2 left-0 right-0 flex justify-center">
             <Link href="#is-for-you" className="text-[#6B46C1] animate-bounce">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

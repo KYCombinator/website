@@ -169,8 +169,8 @@ export default function VelocityPage() {
               <div className="space-y-4">
                 <h3 className="font-semibold text-gray-900">Key Dates:</h3>
                 <ul className="list-disc list-inside text-gray-600 space-y-2">
-                  <li>April 29, 2024 - Competition Kickoff</li>
-                  <li>May 1st, 2024 - Initial Pitch Day</li>
+                  <li>April 29, 2025 - Competition Kickoff</li>
+                  <li>May 1st, 2025 - Initial Pitch Day</li>
                   <li>12-week competition period</li>
                 </ul>
               </div>

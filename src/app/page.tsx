@@ -13,9 +13,9 @@ export default function Home() {
               <Image
                 src="/assets/Purple.png"
                 alt="KYCombinator"
-                width={480}
-                height={164}
-                className="w-full h-auto"
+                width={360}
+                height={123}
+                className="mx-auto w-auto h-[200px]"
                 priority
               />
               <h3 className="text-2xl md:text-3xl font-bold text-gray-800">Building Kentucky</h3>

@@ -1,7 +1,7 @@
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Reports | KYCombinator",
+  title: "Reports | KYC",
   description: "Acting in the present defines the future. Defining our future contextualizes our past. Explore data and insights from KYCombinator",
   openGraph: {
     images: ['/futurelou.png'],

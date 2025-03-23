@@ -10,7 +10,7 @@ export default function TermsPage() {
           
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">1. Agreement to Terms</h2>
-            <p>By accessing or using KYCombinator&apos;s services, you agree to be bound by these Terms of Service. If you disagree with any part of the terms, you do not have permission to access our services.</p>
+            <p>By accessing or using KYC&apos;s services, you agree to be bound by these Terms of Service. If you disagree with any part of the terms, you do not have permission to access our services.</p>
           </section>
 
           <section className="mb-8">
@@ -20,7 +20,7 @@ export default function TermsPage() {
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">3. Intellectual Property</h2>
-            <p>The service and its original content, features, and functionality are owned by KYCombinator and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.</p>
+            <p>The service and its original content, features, and functionality are owned by KYC and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.</p>
           </section>
 
           <section className="mb-8">

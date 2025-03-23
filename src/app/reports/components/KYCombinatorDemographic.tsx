@@ -1,4 +1,4 @@
-export default function KYCombinatorDemographic() {
+export default function KYCDemographic() {
   return (
     <div className="space-y-8">
       <section>

@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
-            <Image src="/assets/Purple.png" alt="KYCombinator Logo" width={200} height={44} />
+            <Image src="/assets/Purple.png" alt="KYC Logo" width={200} height={44} />
             <p className="text-gray-400 mx-2">Building Kentucky&apos;s next generation of tech innovators.</p>
           </div>
 

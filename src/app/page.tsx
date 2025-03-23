@@ -12,7 +12,7 @@ export default function Home() {
             <div className="bg-white p-6 rounded-lg">
               <Image
                 src="/assets/Purple.png"
-                alt="KYCombinator"
+                alt="KYC"
                 width={360}
                 height={123}
                 className="mx-auto w-auto h-[200px]"
@@ -100,7 +100,7 @@ export default function Home() {
           <blockquote className="text-2xl md:text-3xl italic font-light">
             We are the doers, the builders, the ones who execute with relentless intensity.
           </blockquote>
-          <p className="mt-4 font-semibold">— KYCombinator Principle</p>
+          <p className="mt-4 font-semibold">— KYC Principle</p>
         </div>
       </section>
 
@@ -110,7 +110,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-[#6B46C1] mb-6">About</h2>
             <p className="text-gray-600 text-lg mb-8">
-              KYCombinator is flat. There is no hierarchy. Anyone can drive an event.
+              KYC is flat. There is no hierarchy. Anyone can drive an event.
             </p>
             <p className="text-gray-600 text-lg mb-8">
               Our Mission: Build density of high-agency high-velocity founders & builders in Kentucky. 
@@ -148,7 +148,7 @@ export default function Home() {
       {/* Quote Section 1 */}
       <section className="bg-[#6B46C1] text-white py-12">
         <div className="container mx-auto px-4 text-center max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">What we do different at KYCombinator</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8">What we do different at KYC</h2>
           <div className="gap-2 text-left p-6 rounded-lg">
             <div>
               <h3 className="text-2xl font-semibold mb-2">1) DO</h3>
@@ -205,7 +205,7 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div className="bg-gray-50 p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold mb-3 text-gray-800">How does KYCombinator work?</h3>
+              <h3 className="text-xl font-bold mb-3 text-gray-800">How does KYC work?</h3>
               <p className="text-gray-600">
                 we&apos;re a self-organizing community.
               </p>

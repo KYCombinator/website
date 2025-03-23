@@ -16,12 +16,12 @@ export function generateMetadata({ params }) {
   
   if (!report) {
     return {
-      title: 'Report Not Found | KYCombinator',
+      title: 'Report Not Found | KYC',
     }
   }
 
   return {
-    title: `${report.title} | KYCombinator`,
+    title: `${report.title} | KYC`,
     description: report.description,
   }
 }

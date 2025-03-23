@@ -5,7 +5,7 @@ export default function OpenSourcePage() {
       
       <div className="prose prose-lg">
         <p className="mb-6">
-          KYCombinator is proud to be an open source project. We believe in transparency, collaboration, and community-driven development.
+          KYC is proud to be an open source project. We believe in transparency, collaboration, and community-driven development.
         </p>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4">Our GitHub Repository</h2>

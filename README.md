@@ -1,10 +1,10 @@
-# KYCombinator
+# KYC
 
 A community-driven accountability platform for personal and professional growth.
 
 ## Overview
 
-KYCombinator is a platform that brings together like-minded individuals committed to achieving their goals through mutual support and accountability. Our platform combines coworking spaces, events, and digital tools to create an environment where members can thrive.
+KYC is a platform that brings together like-minded individuals committed to achieving their goals through mutual support and accountability. Our platform combines coworking spaces, events, and digital tools to create an environment where members can thrive.
 
 ## Features
 

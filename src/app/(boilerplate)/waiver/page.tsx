@@ -16,7 +16,7 @@ export default function WaiverPage() {
             
             <div className="space-y-4 text-gray-700">
               <p className="text-lg">
-                I, for myself and on behalf of my heirs and personal representatives, hereby <span className="font-semibold">RELEASE AND HOLD HARMLESS</span> KYCombinator / Story / HackKentucky, its officers, employees, volunteers, sponsors, and agents (&quot;Releasees&quot;) from any and all claims, injuries, damages, losses or expenses I may suffer, <span className="font-semibold">WHETHER ARISING FROM NEGLIGENCE OR OTHERWISE</span>, to the fullest extent permitted by law.
+                I, for myself and on behalf of my heirs and personal representatives, hereby <span className="font-semibold">RELEASE AND HOLD HARMLESS</span> KYC / Story / HackKentucky, its officers, employees, volunteers, sponsors, and agents (&quot;Releasees&quot;) from any and all claims, injuries, damages, losses or expenses I may suffer, <span className="font-semibold">WHETHER ARISING FROM NEGLIGENCE OR OTHERWISE</span>, to the fullest extent permitted by law.
               </p>
 
               <div className="bg-yellow-50 p-4 rounded-lg">
@@ -36,11 +36,11 @@ export default function WaiverPage() {
 
             <div className="space-y-4 text-gray-700">
               <p className="text-lg">
-                By attending and/or submitting media to KYCombinator / Story / HackKentucky I agree to the following:
+                By attending and/or submitting media to KYC / Story / HackKentucky I agree to the following:
               </p>
               
               <p className="text-lg">
-                I authorize KYCombinator / Story / HackKentucky to use, reproduce, and distribute any media (photos, videos, or audio) captured of me at the event or submitted by me. This includes, but is not limited to, promotional, educational, social media, print, or web content without restriction or compensation. I understand that my consent is granted indefinitely unless I withdraw it in writing.
+                I authorize KYC / Story / HackKentucky to use, reproduce, and distribute any media (photos, videos, or audio) captured of me at the event or submitted by me. This includes, but is not limited to, promotional, educational, social media, print, or web content without restriction or compensation. I understand that my consent is granted indefinitely unless I withdraw it in writing.
               </p>
             </div>
           </div>

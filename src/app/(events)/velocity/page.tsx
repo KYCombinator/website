@@ -129,6 +129,14 @@ export default function VelocityPage() {
                   <li>• Winning team receives $10K MFN investment and investor intros</li>
                 </ul>
               </div>
+              <div className="mt-8 text-center">
+                <Link
+                  href="/velocity/info"
+                  className="inline-block bg-[#6B46C1] text-white px-6 py-2 rounded-md font-medium hover:bg-[#6B46C1]/80 transition"
+                >
+                  More Info
+                </Link>
+              </div>
             </div>
           </div>
         </div>

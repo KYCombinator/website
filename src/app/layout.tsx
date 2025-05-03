@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   openGraph: {
     images: ['werise1.png'],
   },
+  icons: {
+    icon: `${process.env.NEXT_PUBLIC_CDN_URL}/favicon.ico`,
+  },
 }
 
 export default function RootLayout({

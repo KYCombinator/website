@@ -1,19 +1,17 @@
-'use client'
+"use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
-
-
+import Image from "next/image";
+import Link from "next/link";
+import { useState, useEffect } from "react";
 
 const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  
+
   const slides = [
-    { src: '/velocity/real1.png', alt: 'Velocity 1' },
-    { src: '/velocity/real2.png', alt: 'Velocity 2' },
-    { src: '/velocity/real3.png', alt: 'Velocity 3' },
-    { src: '/velocity/real4.png', alt: 'Velocity 4' },
+    { src: "/velocity/real1.png", alt: "Velocity 1" },
+    { src: "/velocity/real2.png", alt: "Velocity 2" },
+    { src: "/velocity/real3.png", alt: "Velocity 3" },
+    { src: "/velocity/real4.png", alt: "Velocity 4" },
   ];
 
   useEffect(() => {
@@ -49,7 +47,7 @@ const Carousel = () => {
           <button
             key={index}
             className={`w-2 h-2 rounded-full transition-all ${
-              currentSlide === index ? 'bg-white w-4' : 'bg-white/50'
+              currentSlide === index ? "bg-white w-4" : "bg-white/50"
             }`}
             onClick={() => setCurrentSlide(index)}
           />
@@ -77,7 +75,8 @@ export default function VelocityPage() {
               April 29, 2025 - A 12-week sprint to unicorn speed
             </p>
             <p className="text-lg text-white/90 mb-8">
-              Back a Stallion: $500-$1000 bets on Kentucky&apos;s most ambitious founders
+              Back a Stallion: $500-$1000 bets on Kentucky&apos;s most ambitious
+              founders
             </p>
             <div className="space-x-4">
               <Link
@@ -105,19 +104,34 @@ export default function VelocityPage() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">What Is It</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+              What Is It
+            </h2>
             <div className="space-y-6 text-lg text-gray-600">
               <p>
-                The Velocity Pitch Competition is a 12-week competition where every team must get to customers and revenue. On April 29th, contestants pitch their ideas and their 12-week roadmap. We select 5 teams/founders to back, prioritizing roadmap ambition over idea quality.
+                The Velocity Pitch Competition is a 12-week competition where
+                every team must get to customers and revenue. On April 29th,
+                contestants pitch their ideas and their 12-week roadmap. We
+                select 5 teams/founders to back, prioritizing roadmap ambition
+                over idea quality.
               </p>
-              
+
               <div className="bg-[#6B46C1]/5 p-6 rounded-lg">
-                <h3 className="text-xl font-semibold text-[#6B46C1] mb-4">What You Get</h3>
+                <h3 className="text-xl font-semibold text-[#6B46C1] mb-4">
+                  What You Get
+                </h3>
                 <ul className="space-y-3">
-                  <li>• A seat in the founders room with mentors (including Dan and others)</li>
-                  <li>• Weekly accountability and mentorship to execute against your roadmap</li>
+                  <li>
+                    • A seat in the founders room with mentors (including Dan
+                    and others)
+                  </li>
+                  <li>
+                    • Weekly accountability and mentorship to execute against
+                    your roadmap
+                  </li>
                   <li>• Starting budget of $500</li>
-                  <li>• Weekly funding based on execution:
+                  <li>
+                    • Weekly funding based on execution:
                     <ul className="ml-6 mt-2 space-y-1">
                       <li>• First 2 weeks: $50/week</li>
                       <li>• Next 3 weeks: $75/week</li>
@@ -126,7 +140,10 @@ export default function VelocityPage() {
                     </ul>
                   </li>
                   <li>• Weekly stack ranking based on velocity</li>
-                  <li>• Winning team receives $10K MFN investment and investor intros</li>
+                  <li>
+                    • Winning team receives $10K MFN investment and investor
+                    intros
+                  </li>
                 </ul>
               </div>
               <div className="mt-8 text-center">
@@ -146,19 +163,38 @@ export default function VelocityPage() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Vision</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+              Our Vision
+            </h2>
             <div className="space-y-6">
               <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h3 className="text-xl font-semibold text-[#6B46C1] mb-3">Short-term Goal</h3>
-                <p className="text-gray-600">Show early founders what unicorn speed looks like (both within the competition and the broader community of founders who are watching).</p>
+                <h3 className="text-xl font-semibold text-[#6B46C1] mb-3">
+                  Short-term Goal
+                </h3>
+                <p className="text-gray-600">
+                  Show early founders what unicorn speed looks like (both within
+                  the competition and the broader community of founders who are
+                  watching).
+                </p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h3 className="text-xl font-semibold text-[#6B46C1] mb-3">Mid-term Goal</h3>
-                <p className="text-gray-600">Create population density of high-performing founders.</p>
+                <h3 className="text-xl font-semibold text-[#6B46C1] mb-3">
+                  Mid-term Goal
+                </h3>
+                <p className="text-gray-600">
+                  Create population density of high-performing founders.
+                </p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h3 className="text-xl font-semibold text-[#6B46C1] mb-3">Long-term Goal</h3>
-                <p className="text-gray-600">Make Louisville the Bay Area of the Midwest by launching unicorn after unicorn until the short and mid-term goals are being hit on autopilot. It&apos;s a flywheel for founder innovation.</p>
+                <h3 className="text-xl font-semibold text-[#6B46C1] mb-3">
+                  Long-term Goal
+                </h3>
+                <p className="text-gray-600">
+                  Make Louisville the Bay Area of the Midwest by launching
+                  unicorn after unicorn until the short and mid-term goals are
+                  being hit on autopilot. It&apos;s a flywheel for founder
+                  innovation.
+                </p>
               </div>
             </div>
           </div>
@@ -172,7 +208,9 @@ export default function VelocityPage() {
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Apply Now</h2>
             <div className="bg-white shadow-lg rounded-lg p-8 border border-gray-200">
               <p className="text-lg text-gray-600 mb-6">
-                Applications are now open for the Velocity Pitch Competition. Submit your application to be considered for this exciting opportunity.
+                Applications are now open for the Velocity Pitch Competition.
+                Submit your application to be considered for this exciting
+                opportunity.
               </p>
               <div className="space-y-4">
                 <h3 className="font-semibold text-gray-900">Key Dates:</h3>
@@ -205,5 +243,5 @@ export default function VelocityPage() {
         </div>
       </section>
     </div>
-  )
-} 
+  );
+}

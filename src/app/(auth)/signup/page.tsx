@@ -1,56 +1,59 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useAuth } from '@/hooks/useAuth'
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function SignUpPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [error, setError] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const [isValid, setIsValid] = useState(false)
-  const { signUp } = useAuth()
-  const router = useRouter()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+  const { signUp } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     // Validate email with regex
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    const isEmailValid = emailRegex.test(email)
-    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isEmailValid = emailRegex.test(email);
+
     // Validate password length and match
-    const isPasswordValid = password.length >= 6 && password === confirmPassword
-    
-    setIsValid(isEmailValid && isPasswordValid)
-  }, [email, password, confirmPassword])
+    const isPasswordValid =
+      password.length >= 6 && password === confirmPassword;
+
+    setIsValid(isEmailValid && isPasswordValid);
+  }, [email, password, confirmPassword]);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError(null)
+    e.preventDefault();
+    setError(null);
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match')
-      return
+      setError("Passwords do not match");
+      return;
     }
 
-    setIsLoading(true)
+    setIsLoading(true);
 
     try {
-      const { error: authError } = await signUp(email, password)
+      const { error: authError } = await signUp(email, password);
       if (authError) {
-        setError(authError.message)
+        setError(authError.message);
       } else {
         // Show success message and redirect to sign in
-        router.push('/signin?message=Please check your email to confirm your account')
+        router.push(
+          "/signin?message=Please check your email to confirm your account",
+        );
       }
     } catch {
-      setError('An unexpected error occurred')
+      setError("An unexpected error occurred");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="flex min-h-screen flex-col justify-center bg-gray-50 py-12 sm:px-6 lg:px-8">
@@ -59,7 +62,7 @@ export default function SignUpPage() {
           Create a new account
         </h1>
         <p className="mt-2 text-center text-sm text-gray-600">
-          Or{' '}
+          Or{" "}
           <Link
             href="/signin"
             className="font-medium text-indigo-600 hover:text-indigo-500"
@@ -146,17 +149,17 @@ export default function SignUpPage() {
                 type="submit"
                 disabled={!isValid || isLoading}
                 className={`btn w-full ${
-                  isValid && !isLoading 
-                    ? 'animate-pulse bg-indigo-600 hover:bg-indigo-700' 
-                    : 'bg-gray-400'
+                  isValid && !isLoading
+                    ? "animate-pulse bg-indigo-600 hover:bg-indigo-700"
+                    : "bg-gray-400"
                 } text-white font-medium py-3 px-4 rounded-md transition-all duration-300 ease-in-out`}
               >
-                {isLoading ? 'Creating account...' : 'Create account'}
+                {isLoading ? "Creating account..." : "Create account"}
               </button>
             </div>
           </form>
         </div>
       </div>
     </div>
-  )
-} 
+  );
+}

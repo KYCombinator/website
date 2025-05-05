@@ -15,4 +15,4 @@ export default function Louies2025Page() {
       {/* Add more sections specific to 2025 */}
     </div>
   );
-} 
+}

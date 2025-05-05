@@ -1,39 +1,41 @@
-import { Badge } from "@/components/ui/badge"
-import { Card } from "@/components/ui/card"
-import { notFound } from "next/navigation"
-import { reports, badges } from "../data"
-import { Download } from "lucide-react"
-import { reportComponents } from "../components"
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { notFound } from "next/navigation";
+import { reports, badges } from "../data";
+import { Download } from "lucide-react";
+import { reportComponents } from "../components";
 
 export function generateStaticParams() {
   return reports.map((report) => ({
     slug: report.slug,
-  }))
+  }));
 }
 
 export function generateMetadata({ params }) {
-  const report = reports.find((r) => r.slug === params.slug)
-  
+  const report = reports.find((r) => r.slug === params.slug);
+
   if (!report) {
     return {
-      title: 'Report Not Found | KYC',
-    }
+      title: "Report Not Found | KYC",
+    };
   }
 
   return {
     title: `${report.title} | KYC`,
     description: report.description,
-  }
+  };
 }
 
 export default function ReportPage({ params }) {
-  const report = reports.find((r) => r.slug === params.slug)
+  const report = reports.find((r) => r.slug === params.slug);
 
   if (!report) {
-    notFound()
+    notFound();
   }
 
-  const ReportComponent = report.componentKey ? reportComponents[report.componentKey] : null
+  const ReportComponent = report.componentKey
+    ? reportComponents[report.componentKey]
+    : null;
 
   return (
     <main className="container py-12 px-4 sm:px-6 lg:px-8">
@@ -41,9 +43,9 @@ export default function ReportPage({ params }) {
         <div className="flex items-center gap-4 mb-4">
           <div className="flex gap-2">
             {report.badges.map((badge) => (
-              <Badge 
+              <Badge
                 key={badge}
-                variant="outline" 
+                variant="outline"
                 className={`${badges[badge].color} shadow-sm`}
               >
                 {badges[badge].label}
@@ -55,9 +57,7 @@ export default function ReportPage({ params }) {
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl mb-4">
           {report.title}
         </h1>
-        <p className="text-xl text-muted-foreground">
-          {report.description}
-        </p>
+        <p className="text-xl text-muted-foreground">{report.description}</p>
       </div>
 
       {report.status === "Coming Soon" ? (
@@ -92,5 +92,5 @@ export default function ReportPage({ params }) {
         </>
       )}
     </main>
-  )
+  );
 }

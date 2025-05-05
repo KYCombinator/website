@@ -1,32 +1,32 @@
-import { useState } from 'react'
-import { useAuth } from '@/hooks/useAuth'
+import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
 
 export function Auth() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [isSignUp, setIsSignUp] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const { signIn, signUp } = useAuth()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const { signIn, signUp } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError(null)
+    e.preventDefault();
+    setError(null);
 
     const { error: authError } = isSignUp
       ? await signUp(email, password)
-      : await signIn(email, password)
+      : await signIn(email, password);
 
     if (authError) {
-      setError(authError.message)
+      setError(authError.message);
     }
-  }
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-            {isSignUp ? 'Create your account' : 'Sign in to your account'}
+            {isSignUp ? "Create your account" : "Sign in to your account"}
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -76,7 +76,7 @@ export function Auth() {
               type="submit"
               className="group relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              {isSignUp ? 'Sign up' : 'Sign in'}
+              {isSignUp ? "Sign up" : "Sign in"}
             </button>
           </div>
 
@@ -87,12 +87,12 @@ export function Auth() {
               onClick={() => setIsSignUp(!isSignUp)}
             >
               {isSignUp
-                ? 'Already have an account? Sign in'
+                ? "Already have an account? Sign in"
                 : "Don't have an account? Sign up"}
             </button>
           </div>
         </form>
       </div>
     </div>
-  )
-} 
+  );
+}

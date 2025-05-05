@@ -1,15 +1,15 @@
-'use client'
+"use client";
 
-import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import Image from "next/image";
+import { useState, useEffect } from "react";
 
 const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  
+
   const slides = [
-    { src: '/louies/louies1.jpg', alt: 'The Louies 2023 Event' },
-    { src: '/louies/louies2.jpg', alt: 'The Louies 2023 Celebration' },
-    { src: '/louies/louies3.jpg', alt: 'The Louies 2023 Awards' },
+    { src: "/louies/louies1.jpg", alt: "The Louies 2023 Event" },
+    { src: "/louies/louies2.jpg", alt: "The Louies 2023 Celebration" },
+    { src: "/louies/louies3.jpg", alt: "The Louies 2023 Awards" },
   ];
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Carousel = () => {
       {slides.map((slide, index) => (
         <div
           key={slide.src}
-          className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+          className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${index === currentSlide ? "opacity-100" : "opacity-0"}`}
         >
           <div className="absolute inset-0 bg-purple-900/50 mix-blend-multiply z-10" />
           <Image
@@ -40,8 +40,6 @@ const Carousel = () => {
     </div>
   );
 };
-
-
 
 export default function Louies2024Page() {
   return (
@@ -66,17 +64,25 @@ export default function Louies2024Page() {
 
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Awards and Nominees</h2>
-          
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Awards and Nominees
+          </h2>
+
           {/* Founder Awards */}
           <div className="mb-16">
-            <h3 className="text-2xl font-bold text-purple-700 mb-8">Founder Awards</h3>
-            
+            <h3 className="text-2xl font-bold text-purple-700 mb-8">
+              Founder Awards
+            </h3>
+
             <div className="grid md:grid-cols-2 gap-8">
               {/* Louisville's Favorite Founder */}
               <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">Louisville&apos;s Favorite Founder</h4>
-                <p className="text-sm text-gray-600 italic mb-4">Presented by Dan Ross-Li of KYCombinator</p>
+                <h4 className="text-xl font-semibold mb-2">
+                  Louisville&apos;s Favorite Founder
+                </h4>
+                <p className="text-sm text-gray-600 italic mb-4">
+                  Presented by Dan Ross-Li of KYCombinator
+                </p>
                 <div className="mb-4">
                   <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
                     Winner: Steven Plappert 🏆
@@ -94,8 +100,12 @@ export default function Louies2024Page() {
 
               {/* Louisville's Favorite Co-Founder */}
               <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">Louisville&apos;s Favorite Co-Founder</h4>
-                <p className="text-sm text-gray-600 italic mb-4">Presented by Kevin Gibson of Rise Marketing</p>
+                <h4 className="text-xl font-semibold mb-2">
+                  Louisville&apos;s Favorite Co-Founder
+                </h4>
+                <p className="text-sm text-gray-600 italic mb-4">
+                  Presented by Kevin Gibson of Rise Marketing
+                </p>
                 <div className="mb-4">
                   <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
                     Winner: Logan Burchett 🏆
@@ -112,8 +122,12 @@ export default function Louies2024Page() {
 
               {/* Louisville's Favorite Community Supporter */}
               <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">Louisville&apos;s Favorite Community Supporter</h4>
-                <p className="text-sm text-gray-600 italic mb-4">Presented by Justin Hogan of the Community Foundation</p>
+                <h4 className="text-xl font-semibold mb-2">
+                  Louisville&apos;s Favorite Community Supporter
+                </h4>
+                <p className="text-sm text-gray-600 italic mb-4">
+                  Presented by Justin Hogan of the Community Foundation
+                </p>
                 <div className="mb-4">
                   <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
                     Winner: Garrett French 🏆
@@ -132,8 +146,12 @@ export default function Louies2024Page() {
 
               {/* Most Improved Founder */}
               <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">Most Improved Founder</h4>
-                <p className="text-sm text-gray-600 italic mb-4">Presented by Zeeshan Bhatti of Keyhorse</p>
+                <h4 className="text-xl font-semibold mb-2">
+                  Most Improved Founder
+                </h4>
+                <p className="text-sm text-gray-600 italic mb-4">
+                  Presented by Zeeshan Bhatti of Keyhorse
+                </p>
                 <div className="mb-4">
                   <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
                     Winner: Aaron Peabody 🏆
@@ -152,12 +170,18 @@ export default function Louies2024Page() {
 
           {/* Money Awards */}
           <div className="mb-16">
-            <h3 className="text-2xl font-bold text-purple-700 mb-8">Money Awards</h3>
+            <h3 className="text-2xl font-bold text-purple-700 mb-8">
+              Money Awards
+            </h3>
             <div className="grid md:grid-cols-2 gap-8">
               {/* Louisville's Favorite Angel Investor */}
               <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">Louisville&apos;s Favorite Angel Investor</h4>
-                <p className="text-sm text-gray-600 italic mb-4">Presented by Rachel Edenfield of Swell</p>
+                <h4 className="text-xl font-semibold mb-2">
+                  Louisville&apos;s Favorite Angel Investor
+                </h4>
+                <p className="text-sm text-gray-600 italic mb-4">
+                  Presented by Rachel Edenfield of Swell
+                </p>
                 <div className="mb-4">
                   <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
                     Winner: Gill Holland 🏆
@@ -174,7 +198,9 @@ export default function Louies2024Page() {
               {/* Best Fundraise */}
               <div className="bg-gray-50 p-6 rounded-lg">
                 <h4 className="text-xl font-semibold mb-2">Best Fundraise</h4>
-                <p className="text-sm text-gray-600 italic mb-4">Presented by Kelby Price</p>
+                <p className="text-sm text-gray-600 italic mb-4">
+                  Presented by Kelby Price
+                </p>
                 <div className="mb-4">
                   <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
                     Winner: LullaFeed 🏆
@@ -194,12 +220,18 @@ export default function Louies2024Page() {
 
           {/* Company Awards */}
           <div className="mb-16">
-            <h3 className="text-2xl font-bold text-purple-700 mb-8">Company Awards</h3>
+            <h3 className="text-2xl font-bold text-purple-700 mb-8">
+              Company Awards
+            </h3>
             <div className="grid md:grid-cols-2 gap-8">
               {/* Best Startup Award */}
               <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">Best Startup Award</h4>
-                <p className="text-sm text-gray-600 italic mb-4">Presented by Natalia Bishop of Story</p>
+                <h4 className="text-xl font-semibold mb-2">
+                  Best Startup Award
+                </h4>
+                <p className="text-sm text-gray-600 italic mb-4">
+                  Presented by Natalia Bishop of Story
+                </p>
                 <div className="mb-4">
                   <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
                     Winner: RxLightning 🏆
@@ -216,8 +248,12 @@ export default function Louies2024Page() {
 
               {/* MVP Award */}
               <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">MVP Award - Best MVP</h4>
-                <p className="text-sm text-gray-600 italic mb-4">Presenter TBA</p>
+                <h4 className="text-xl font-semibold mb-2">
+                  MVP Award - Best MVP
+                </h4>
+                <p className="text-sm text-gray-600 italic mb-4">
+                  Presenter TBA
+                </p>
                 <div className="mb-4">
                   <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
                     Winner: The Nori Project 🏆
@@ -232,8 +268,12 @@ export default function Louies2024Page() {
 
               {/* SPAM Award */}
               <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">SPAM Award - Best E-mail Marketing</h4>
-                <p className="text-sm text-gray-600 italic mb-4">Presented by Garrett French of Citation Labs</p>
+                <h4 className="text-xl font-semibold mb-2">
+                  SPAM Award - Best E-mail Marketing
+                </h4>
+                <p className="text-sm text-gray-600 italic mb-4">
+                  Presented by Garrett French of Citation Labs
+                </p>
                 <div className="mb-4">
                   <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
                     Winner: Xena Intelligence 🏆
@@ -250,11 +290,15 @@ export default function Louies2024Page() {
 
           {/* Closing Awards */}
           <div className="mb-16">
-            <h3 className="text-2xl font-bold text-purple-700 mb-8">Closing Awards</h3>
+            <h3 className="text-2xl font-bold text-purple-700 mb-8">
+              Closing Awards
+            </h3>
             <div className="grid md:grid-cols-2 gap-8">
               {/* Startups that died in 2024 */}
               <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">Startups that died in 2024</h4>
+                <h4 className="text-xl font-semibold mb-2">
+                  Startups that died in 2024
+                </h4>
                 <ul className="list-disc list-inside space-y-2">
                   <li>Affinna</li>
                   <li>GoWild / Holler Commerce</li>
@@ -264,7 +308,9 @@ export default function Louies2024Page() {
 
               {/* Spouse of the Year */}
               <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">Spouse of the Year</h4>
+                <h4 className="text-xl font-semibold mb-2">
+                  Spouse of the Year
+                </h4>
                 <ul className="list-disc list-inside space-y-2">
                   <li>Zach Sensing</li>
                   <li>Sana Nair</li>
@@ -281,14 +327,14 @@ export default function Louies2024Page() {
           <div className="mt-16 text-center">
             <h3 className="text-2xl font-bold mb-6">Register & Vote</h3>
             <div className="space-y-4">
-              <a 
-                href="https://lu.ma/fb1728x3" 
+              <a
+                href="https://lu.ma/fb1728x3"
                 className="inline-block bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition mr-4"
               >
                 Register Now
               </a>
-              <a 
-                href="https://kycombinator.typeform.com/votelouies" 
+              <a
+                href="https://kycombinator.typeform.com/votelouies"
                 className="inline-block bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition"
               >
                 Vote Now
@@ -299,4 +345,4 @@ export default function Louies2024Page() {
       </section>
     </div>
   );
-} 
+}

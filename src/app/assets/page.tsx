@@ -1,5 +1,5 @@
-import { Download } from "lucide-react"
-import Image from "next/image"
+import { Download } from "lucide-react";
+import Image from "next/image";
 
 const assets = [
   {
@@ -8,7 +8,7 @@ const assets = [
     previewUrl: "/assets/purple.png",
     downloadUrl: "/assets/purple.png",
     dimensions: "2048x715",
-    format: "png"
+    format: "png",
   },
   {
     name: "KY Logo (White)",
@@ -17,7 +17,7 @@ const assets = [
     downloadUrl: "/assets/White_w_Purple.png",
     dimensions: "2048x715",
     backgroundColor: "#000",
-    format: "png"
+    format: "png",
   },
   {
     name: "KY Logo (Black)",
@@ -25,7 +25,7 @@ const assets = [
     previewUrl: "/assets/Black.png",
     downloadUrl: "/assets/Black.png",
     dimensions: "2048x715",
-    format: "png"
+    format: "png",
   },
   {
     name: "KY Logo Square",
@@ -33,25 +33,33 @@ const assets = [
     previewUrl: "/assets/Square Logo.png",
     downloadUrl: "/assets/Square Logo.png",
     dimensions: "500x500",
-    format: "png"
-  }
-]
+    format: "png",
+  },
+];
 
 export default function AssetsPage() {
   return (
     <div className="min-h-screen bg-white">
-      
       <main className="container mx-auto px-4 py-16">
-        <h1 className="text-4xl font-bold text-purple-700 mb-8">Brand Assets</h1>
+        <h1 className="text-4xl font-bold text-purple-700 mb-8">
+          Brand Assets
+        </h1>
         <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-8">
           <p className="text-sm text-yellow-800">
-            These brand assets are provided for use in accordance with our brand guidelines. By downloading and using these assets, you agree to use them only for purposes related to KYCombinator and not to modify or alter them in any way. For questions about usage, please contact our team.
+            These brand assets are provided for use in accordance with our brand
+            guidelines. By downloading and using these assets, you agree to use
+            them only for purposes related to KYCombinator and not to modify or
+            alter them in any way. For questions about usage, please contact our
+            team.
           </p>
         </div>
-        
+
         <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
           {assets.map((asset) => (
-            <div key={asset.name} className="bg-gray-50 rounded-lg p-4 shadow-sm">
+            <div
+              key={asset.name}
+              className="bg-gray-50 rounded-lg p-4 shadow-sm"
+            >
               <div className="aspect-square relative mb-2 bg-white rounded-lg overflow-hidden border border-gray-200">
                 <Image
                   src={asset.previewUrl}
@@ -61,15 +69,17 @@ export default function AssetsPage() {
                   style={{ backgroundColor: asset.backgroundColor }}
                 />
               </div>
-              
-              <h2 className="text-base font-semibold text-gray-800 mb-1">{asset.name}</h2>
+
+              <h2 className="text-base font-semibold text-gray-800 mb-1">
+                {asset.name}
+              </h2>
               <p className="text-sm text-gray-600 mb-2">{asset.description}</p>
-              
+
               <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
                 <span>{asset.dimensions}</span>
                 <span>{asset.format}</span>
               </div>
-              
+
               <a
                 href={asset.downloadUrl}
                 download
@@ -83,5 +93,5 @@ export default function AssetsPage() {
         </div>
       </main>
     </div>
-  )
-} 
+  );
+}

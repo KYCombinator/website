@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import Image from "next/image"
-import { useState } from "react"
-import { Menu, X } from "lucide-react"
+import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <header className="bg-white border-b fixed w-full top-0 z-50">
@@ -15,7 +15,7 @@ export default function Header() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
-              <Image 
+              <Image
                 src="/assets/Purple.png"
                 alt="KYCombinator"
                 width={220}
@@ -25,7 +25,7 @@ export default function Header() {
               />
             </Link>
           </div>
-          
+
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -41,22 +41,37 @@ export default function Header() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:justify-end flex-1 pl-8">
             <nav className="flex items-center space-x-6">
-              <Link href="/#about" className="text-gray-700 hover:text-purple-700 font-medium text-base">
+              <Link
+                href="/#about"
+                className="text-gray-700 hover:text-purple-700 font-medium text-base"
+              >
                 About
               </Link>
-              <Link href="/#faqs" className="text-gray-700 hover:text-purple-700 font-medium text-base">
+              <Link
+                href="/#faqs"
+                className="text-gray-700 hover:text-purple-700 font-medium text-base"
+              >
                 FAQs
               </Link>
-              <Link href="/#events" className="text-gray-700 hover:text-purple-700 font-medium text-base">
+              <Link
+                href="/#events"
+                className="text-gray-700 hover:text-purple-700 font-medium text-base"
+              >
                 Events
               </Link>
-              <Link href="https://www.hackkentucky.com" className="text-gray-700 hover:text-purple-700 font-medium text-base">
+              <Link
+                href="https://www.hackkentucky.com"
+                className="text-gray-700 hover:text-purple-700 font-medium text-base"
+              >
                 HackKentucky
               </Link>
-              <Link href="/reports" className="text-gray-700 hover:text-purple-700 font-medium text-base">
+              <Link
+                href="/reports"
+                className="text-gray-700 hover:text-purple-700 font-medium text-base"
+              >
                 Reports
               </Link>
-              <Link 
+              <Link
                 href="https://join.slack.com/t/kycombinator/shared_invite/zt-2viueybdu-QNv80gAKk~sJZ9paWebGVQ"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -72,22 +87,37 @@ export default function Header() {
         {isMenuOpen && (
           <div className="md:hidden absolute top-16 left-0 right-0 bg-white border-b z-50">
             <div className="px-4 py-3 space-y-2">
-              <Link href="/#about" className="block px-3 py-2 text-gray-700 hover:text-purple-700 font-medium text-base">
+              <Link
+                href="/#about"
+                className="block px-3 py-2 text-gray-700 hover:text-purple-700 font-medium text-base"
+              >
                 About
               </Link>
-              <Link href="/#faqs" className="block px-3 py-2 text-gray-700 hover:text-purple-700 font-medium text-base">
+              <Link
+                href="/#faqs"
+                className="block px-3 py-2 text-gray-700 hover:text-purple-700 font-medium text-base"
+              >
                 FAQs
               </Link>
-              <Link href="/#events" className="block px-3 py-2 text-gray-700 hover:text-purple-700 font-medium text-base">
+              <Link
+                href="/#events"
+                className="block px-3 py-2 text-gray-700 hover:text-purple-700 font-medium text-base"
+              >
                 Events
               </Link>
-              <Link href="https://www.hackkentucky.com" className="block px-3 py-2 text-gray-700 hover:text-purple-700 font-medium text-base">
+              <Link
+                href="https://www.hackkentucky.com"
+                className="block px-3 py-2 text-gray-700 hover:text-purple-700 font-medium text-base"
+              >
                 HackKentucky
               </Link>
-              <Link href="/reports" className="block px-3 py-2 text-gray-700 hover:text-purple-700 font-medium text-base">
+              <Link
+                href="/reports"
+                className="block px-3 py-2 text-gray-700 hover:text-purple-700 font-medium text-base"
+              >
                 Reports
               </Link>
-              <Link 
+              <Link
                 href="https://join.slack.com/t/kycombinator/shared_invite/zt-2tneu9hc6-Dx1ttf~_75rQHOb8NHXXkQ"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -100,5 +130,5 @@ export default function Header() {
         )}
       </div>
     </header>
-  )
-} 
+  );
+}

@@ -51,12 +51,12 @@ jobs:
       run: |
         aws ecr describe-repositories --repository-names ${{ env.APP_NAME }}-app || \
         aws ecr create-repository --repository-name ${{ env.APP_NAME }}-app
-
+    
     - name: Build, tag, and push image to Amazon ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: ${{ env.APP_NAME }}-app
-        IMAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG: latest  # 👈 static tag
       run: |
         docker build \
           -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .

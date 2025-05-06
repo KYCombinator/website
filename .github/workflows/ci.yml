@@ -43,9 +43,9 @@ jobs:
 
     - name: Upload /public assets to CDN
       run: |
-        echo "Syncing /public to s3://cdn.kycombinator.com/calendar"
-        aws s3 sync public/ s3://cdn.kycombinator.com/calendar --acl public-read
-        echo "✅ Done: Assets available at https://cdn.kycombinator.com/calendar/"
+        echo "Syncing /public to s3://cdn.kycombinator.com"
+        aws s3 sync public/ s3://cdn.kycombinator.com --acl public-read
+        echo "✅ Done: Assets available at https://cdn.kycombinator.com"
 
 
     - name: Login to Amazon ECR

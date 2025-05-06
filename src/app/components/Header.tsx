@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import CDNImage from "@/components/CDNImage";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,7 +15,7 @@ export default function Header() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
-              <Image
+              <CDNImage
                 src="/assets/Purple.png"
                 alt="KYCombinator"
                 width={220}

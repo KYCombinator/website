@@ -2,6 +2,7 @@
 import { useScroll, useTransform, motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 
 interface TimelineEntry {
   title: string;
@@ -326,13 +327,13 @@ const CruciblePage = () => {
             </p>
             {/* Newsletter Signup Section */}
             <div className="w-3/4 mt-6">
-              <a
+              <Link
                 href="https://magic.beehiiv.com/v1/04d3dfce-b968-4cc1-8ae5-46d51d19c2b6"
                 target="_blank"
                 className="inline-flex items-center justify-center px-6 py-4 text-base font-medium text-white transition-all duration-200 bg-black border border-transparent rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-700"
               >
                 Get Event Updates
-              </a>
+              </Link>
             </div>
           </div>
 

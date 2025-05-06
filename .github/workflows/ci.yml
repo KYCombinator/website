@@ -41,6 +41,13 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
+    - name: Upload /public assets to CDN
+      run: |
+        echo "Syncing /public to s3://cdn.kycombinator.com/calendar"
+        aws s3 sync public/ s3://cdn.kycombinator.com/calendar --acl public-read
+        echo "✅ Done: Assets available at https://cdn.kycombinator.com/calendar/"
+
+
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1

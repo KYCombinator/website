@@ -12,7 +12,7 @@ COPY lambda/server.js ./
 
 COPY .next .next
 # COPY --from=builder /app/next.config.js .
-# COPY --from=builder /app/public public
+COPY public public
 
 # Set Lambda handler
 CMD [ "server.handler" ]

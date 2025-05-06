@@ -44,7 +44,7 @@ jobs:
     - name: Upload /public assets to CDN
       run: |
         echo "Syncing /public to s3://cdn.kycombinator.com"
-        aws s3 sync public/ s3://cdn.kycombinator.com --acl public-read
+        aws s3 sync public/ s3://cdn.kycombinator.com/
         echo "✅ Done: Assets available at https://cdn.kycombinator.com"
 
 

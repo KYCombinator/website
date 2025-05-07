@@ -1,6 +1,7 @@
 import { Calendar, Slack, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import CDNImage from "@/components/CDNImage";
+import Image from "next/image";
+
 
 export default function Home() {
   return (
@@ -10,7 +11,7 @@ export default function Home() {
         <div className="container mx-auto px-4 text-center pb-15 pt-8">
           <div className="max-w-3xl mx-auto">
             <div className="bg-white p-6 rounded-lg">
-              <CDNImage
+              <Image
                 src="/assets/Purple.png"
                 alt="KYC"
                 width={360}

@@ -38,9 +38,8 @@ jobs:
 
     - name: Upload /public assets to CDN
       run: |
-        echo "Syncing /public to s3://cdn.kycombinator.com"
-        aws s3 sync public/ s3://cdn.kycombinator.com/
-        echo "✅ Done: Assets available at https://cdn.kycombinator.com"
+        aws s3 sync public/ s3://cdn.kycombinator.com/www/ --delete
+        aws s3 sync .next/static/ s3://cdn.kycombinator.com/www/_next/static/ --delete
 
 
     - name: Login to Amazon ECR

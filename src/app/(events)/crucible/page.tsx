@@ -3,7 +3,6 @@ import { useScroll, useTransform, motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import { cdnPath } from "@/components/CDNImage";
 
 interface TimelineEntry {
   title: string;
@@ -341,7 +340,7 @@ const CruciblePage = () => {
           {/* Image below text content */}
           <div className="relative mx-auto max-w-5xl border-8 border-gray-200 bg-gray-100 rounded-lg shadow-lg overflow-hidden mt-12">
             <motion.img
-              src={cdnPath(imageSrc)}
+              src={imageSrc}
               alt={imageAlt}
               className="aspect-video max-h-[800px] w-full object-cover rounded-sm"
               initial={{ opacity: 0, scale: 0.95 }}

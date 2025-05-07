@@ -10,7 +10,7 @@ RUN npm install
 # Copy Lambda server code
 COPY lambda/server.js ./
 
-COPY .next/standalone ./
+COPY .next .next
 # COPY --from=builder /app/next.config.js .
 
 # Set Lambda handler

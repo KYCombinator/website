@@ -17,7 +17,7 @@ Parameters:
     Description: The hosted zone id
 
 Resources:
-  CalendarFunction:
+  WebsiteFunction:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image

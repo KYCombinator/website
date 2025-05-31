@@ -167,19 +167,6 @@ Resources:
       CloudFrontOriginAccessIdentityConfig:
         Comment: "Access identity for S3 bucket cdn.kycombinator.com"
 
-  S3BucketPolicy:
-    Type: AWS::S3::BucketPolicy
-    Properties:
-      Bucket: cdn.kycombinator.com
-      PolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Effect: Allow
-            Principal:
-              CanonicalUser: !GetAtt S3OriginAccessIdentity.S3CanonicalUserId
-            Action: 's3:GetObject'
-            Resource: 'arn:aws:s3:::cdn.kycombinator.com/www/*'
-
 Outputs:
   ApiEndpoint:
     Description: "API Gateway endpoint URL"

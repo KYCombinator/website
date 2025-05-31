@@ -83,12 +83,72 @@ Resources:
             CustomOriginConfig:
               HTTPSPort: 443
               OriginProtocolPolicy: https-only
+          - Id: S3Bucket
+            DomainName: cdn.kycombinator.com.s3.us-east-1.amazonaws.com
+            OriginPath: '/www'
+            S3OriginConfig:
+              OriginAccessIdentity: !Ref S3OriginAccessIdentity
         PriceClass: PriceClass_100
         HttpVersion: http2
         ViewerCertificate:
           AcmCertificateArn: !Ref CertificateArn
           SslSupportMethod: sni-only
           MinimumProtocolVersion: TLSv1.2_2021
+        CacheBehaviors:
+          - PathPattern: "static/*"
+            TargetOriginId: S3Bucket
+            ViewerProtocolPolicy: redirect-to-https
+            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+            AllowedMethods:
+              - GET
+              - HEAD
+              - OPTIONS
+            Compress: true
+          - PathPattern: "_next/*"
+            TargetOriginId: S3Bucket
+            ViewerProtocolPolicy: redirect-to-https
+            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+            AllowedMethods:
+              - GET
+              - HEAD
+              - OPTIONS
+            Compress: true
+          - PathPattern: "*.jpg"
+            TargetOriginId: S3Bucket
+            ViewerProtocolPolicy: redirect-to-https
+            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+            AllowedMethods:
+              - GET
+              - HEAD
+              - OPTIONS
+            Compress: true
+          - PathPattern: "*.png"
+            TargetOriginId: S3Bucket
+            ViewerProtocolPolicy: redirect-to-https
+            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+            AllowedMethods:
+              - GET
+              - HEAD
+              - OPTIONS
+            Compress: true
+          - PathPattern: "*.svg"
+            TargetOriginId: S3Bucket
+            ViewerProtocolPolicy: redirect-to-https
+            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+            AllowedMethods:
+              - GET
+              - HEAD
+              - OPTIONS
+            Compress: true
+          - PathPattern: "*.pdf"
+            TargetOriginId: S3Bucket
+            ViewerProtocolPolicy: redirect-to-https
+            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+            AllowedMethods:
+              - GET
+              - HEAD
+              - OPTIONS
+            Compress: true
 
   DNSRecord:
     Type: AWS::Route53::RecordSet

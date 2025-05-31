@@ -86,8 +86,8 @@ Resources:
           - Id: S3Bucket
             DomainName: cdn.kycombinator.com.s3.us-east-1.amazonaws.com
             OriginPath: '/www'
-            S3OriginConfig:
-              OriginAccessIdentity: !Ref S3OriginAccessIdentity
+            S3OriginConfig: {}
+            OriginAccessControlId: !GetAtt S3OriginAccessControl.Id
         PriceClass: PriceClass_100
         HttpVersion: http2
         ViewerCertificate:
@@ -161,11 +161,15 @@ Resources:
         HostedZoneId: Z2FDTNDATAQYW2  # CloudFront's hosted zone ID
         EvaluateTargetHealth: false
 
-  S3OriginAccessIdentity:
-    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+  S3OriginAccessControl:
+    Type: AWS::CloudFront::OriginAccessControl
     Properties:
-      CloudFrontOriginAccessIdentityConfig:
-        Comment: "Access identity for S3 bucket cdn.kycombinator.com"
+      OriginAccessControlConfig:
+        Name: S3OriginAccessControl
+        Description: Access Control for S3 Bucket
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
 
 Outputs:
   ApiEndpoint:

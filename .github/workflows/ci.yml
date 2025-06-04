@@ -38,8 +38,8 @@ jobs:
 
     - name: Upload /public assets to CDN
       run: |
-        aws s3 sync public/ s3://cdn.kycombinator.com/www/ --delete
-        aws s3 sync .next/static/ s3://cdn.kycombinator.com/www/_next/static/ --delete
+        aws s3 sync public/ s3://cdn.kycombinator.com/${{ env.APP_NAME }}/ --delete
+        aws s3 sync .next/static/ s3://cdn.kycombinator.com/${{ env.APP_NAME }}/_next/static/ --delete
 
 
     - name: Login to Amazon ECR

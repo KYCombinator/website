@@ -179,7 +179,3 @@ Outputs:
   CloudFrontDomain:
     Description: "CloudFront Distribution Domain Name"
     Value: !GetAtt CloudFrontDistribution.DomainName
-
-  S3OriginAccessControl:
-    Description: "S3 Origin Access Control"
-    Value: !GetAtt S3OriginAccessControl.Id

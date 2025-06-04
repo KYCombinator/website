@@ -78,7 +78,7 @@ jobs:
         sam deploy \
           --no-confirm-changeset \
           --no-fail-on-empty-changeset \
-          --stack-name ${{ env.APP_NAME }}-stack \
+          --stack-name ${{ env.APP_NAME }}-frontend \
           --capabilities CAPABILITY_IAM \
           --region us-east-1 \
           --image-repository ${{ steps.login-ecr.outputs.registry }}/${{ env.APP_NAME }}-app \

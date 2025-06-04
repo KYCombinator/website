@@ -171,6 +171,7 @@ Resources:
         SigningBehavior: always
         SigningProtocol: sigv4
 
+
 Outputs:
   Api:
     Description: "API Gateway endpoint URL"

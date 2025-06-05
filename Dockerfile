@@ -1,4 +1,4 @@
-FROM public.ecr.aws/lambda/nodejs:18
+FROM public.ecr.aws/lambda/nodejs:22
 
 # Set working directory in Lambda container
 WORKDIR /var/task

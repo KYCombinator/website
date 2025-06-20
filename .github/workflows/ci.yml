@@ -10,24 +10,19 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env:
-      APP_NAME: www
+      NEXT_PUBLIC_CDN_URL: ${{ secrets.NEXT_PUBLIC_CDN_URL }}
     steps:
     - uses: actions/checkout@v4
 
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '22'
+        node-version: '20'
 
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build frontend
-      env:
-        NEXT_PUBLIC_CDN_URL: ${{ secrets.NEXT_PUBLIC_CDN_URL }}
-        NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
-      run: npm run build
+    - name: Install deps & build OpenNext
+      run: |
+        npm ci
+        npx open-next build
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
@@ -36,54 +31,5 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
-    - name: Upload /public assets to CDN
-      run: |
-        aws s3 sync public/ s3://cdn.kycombinator.com/${{ env.APP_NAME }}/ --delete
-        aws s3 sync .next/static/ s3://cdn.kycombinator.com/${{ env.APP_NAME }}/_next/static/ --delete
-
-
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
-
-    - name: Create ECR repository if not exists
-      run: |
-        aws ecr describe-repositories --repository-names ${{ env.APP_NAME }}-app || \
-        aws ecr create-repository --repository-name ${{ env.APP_NAME }}-app
-    
-    - name: Build, tag, and push image to Amazon ECR
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: ${{ env.APP_NAME }}-app
-        IMAGE_TAG: latest  # 👈 static tag
-      run: |
-        docker build \
-          -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-
-    - name: Install AWS SAM CLI
-      run: |
-        pip install aws-sam-cli
-
-    - name: SAM build
-      run: sam build
-
-    - name: SAM deploy
-      run: |
-        sam deploy \
-          --no-confirm-changeset \
-          --no-fail-on-empty-changeset \
-          --stack-name ${{ env.APP_NAME }}-stack \
-          --capabilities CAPABILITY_IAM \
-          --region us-east-1 \
-          --image-repository ${{ steps.login-ecr.outputs.registry }}/${{ env.APP_NAME }}-app \
-          --parameter-overrides \
-            ImageUri=${{ steps.login-ecr.outputs.registry }}/${{ env.APP_NAME }}-app:${{ github.sha }} \
-            CertificateArn=${{ secrets.CERTIFICATE_ARN }} \
-            DomainName=${{ env.APP_NAME }}.kycombinator.com \
-            HostedZoneId=${{ secrets.HOSTED_ZONE_ID }}
+    - name: Deploy with SST
+      run: npx sst deploy --stage prod 

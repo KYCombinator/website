@@ -2,24 +2,24 @@
 // import { Badge } from "@/components/ui/badge";
 // import { Card } from "@/components/ui/card";
 // import { Download } from "lucide-react";
-// import { reports, badges } from "../../data"; // adjust path!
+import { reports } from "../../data"; // adjust path!
 // import { reportComponents } from "../../components";
 
 // Dynamic metadata
-// export async function generateMetadata({ params }) {
-//   const report = reports.find((r) => r.slug === params.slug);
+export async function generateMetadata({ params }) {
+  const report = reports.find((r) => r.slug === params.slug);
 
-//   if (!report) {
-//     return {
-//       title: "Report Not Found | KYC",
-//     };
-//   }
+  if (!report) {
+    return {
+      title: "Report Not Found | KYC",
+    };
+  }
 
-//   return {
-//     title: `${report.title} | KYC`,
-//     description: report.description,
-//   };
-// }
+  return {
+    title: `${report.title} | KYC`,
+    description: report.description,
+  };
+}
 
 export default function ReportPage() {
   return (

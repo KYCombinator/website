@@ -29,9 +29,9 @@ export default function ReportPage({ params }) {
     notFound();
   }
 
-  const ReportComponent = report.componentKey
-    ? reportComponents[report.componentKey]
-    : null;
+  // const ReportComponent = report.componentKey
+  //   ? reportComponents[report.componentKey]
+  //   : null;
 
   return (
     <main className="container py-12 px-4 sm:px-6 lg:px-8">
@@ -56,7 +56,7 @@ export default function ReportPage({ params }) {
         <p className="text-xl text-muted-foreground">{report.description}</p>
       </div>
 
-      {report.status === "Coming Soon" ? (
+      {/* {report.status === "Coming Soon" ? (
         <Card className="p-6 bg-muted">
           <p className="text-center text-muted-foreground">
             This report is coming soon. Check back later!
@@ -86,7 +86,7 @@ export default function ReportPage({ params }) {
             )}
           </div>
         </>
-      )}
+      )} */}
     </main>
   );
 }

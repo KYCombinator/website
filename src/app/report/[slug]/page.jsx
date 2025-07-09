@@ -1,17 +1,12 @@
+import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { notFound } from "next/navigation";
-import { reports, badges } from "../data";
 import { Download } from "lucide-react";
-import { reportComponents } from "../components";
+import { reports, badges } from "../../data"; // adjust path!
+import { reportComponents } from "../../components";
 
-export function generateStaticParams() {
-  return reports.map((report) => ({
-    slug: report.slug,
-  }));
-}
-
-export function generateMetadata({ params }) {
+// Dynamic metadata
+export async function generateMetadata({ params }) {
   const report = reports.find((r) => r.slug === params.slug);
 
   if (!report) {
@@ -26,6 +21,7 @@ export function generateMetadata({ params }) {
   };
 }
 
+// Page
 export default function ReportPage({ params }) {
   const report = reports.find((r) => r.slug === params.slug);
 

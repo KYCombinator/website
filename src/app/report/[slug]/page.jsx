@@ -21,14 +21,6 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function ReportPage() {
-  return (
-    <div>
-      <h1>Report Page</h1>
-    </div>
-  );
-}
-
 // Page
 export default function ReportPage({ params }) {
   const report = reports.find((r) => r.slug === params.slug);

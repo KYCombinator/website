@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Download } from "lucide-react";
 import { reports, badges } from "../data"; // adjust path!
-import { reportComponents } from "../../components";
+import { reportComponents } from "../components";
 
 // Dynamic metadata
 export async function generateMetadata({ params }) {

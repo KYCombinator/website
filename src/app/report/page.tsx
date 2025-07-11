@@ -60,7 +60,7 @@ export default function ReportsPage() {
               </div>
             </Card>
           ) : (
-            <Link href={`/reports/${report.slug}`} key={report.title}>
+            <Link href={`/report/${report.slug}`} key={report.title}>
               <Card className="p-6 hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-white to-gray-50 border border-gray-200 hover:border-[#6B46C1]/20 cursor-pointer">
                 <div className="flex flex-col h-full">
                   <div className="mb-4">

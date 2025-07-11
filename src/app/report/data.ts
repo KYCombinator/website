@@ -84,7 +84,7 @@ export const reports: Report[] = [
     status: "Published",
     date: "September 2019", 
     badges: ["research"],
-    file: "https://cdn.kycombinator.com/reports/Endeavor_20190927.pdf"
+    file: "https://cdn.kycombinator.com/reports/Endeavor_20200927.pdf"
   },
   {
     slug: "city-in-transition",

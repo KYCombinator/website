@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { notFound } from "next/navigation";
 // import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";

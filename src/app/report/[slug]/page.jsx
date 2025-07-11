@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Download } from "lucide-react";
-import { reports } from "../data"; // adjust path!
+import { reports, badges } from "../data"; // adjust path!
 import { reportComponents } from "../components";
 import Link from "next/link";
 

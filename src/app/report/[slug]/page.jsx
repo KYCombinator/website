@@ -1,11 +1,12 @@
 export const dynamic = "force-dynamic";
 
 import { notFound } from "next/navigation";
-// import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-// import { Download } from "lucide-react";
+import { Download } from "lucide-react";
 import { reports } from "../data"; // adjust path!
-// import { reportComponents } from "../components";
+import { reportComponents } from "../components";
+import Link from "next/link";
 
 // Dynamic metadata
 export async function generateMetadata({ params }) {
@@ -31,15 +32,15 @@ export default function ReportPage({ params }) {
     notFound();
   }
 
-  // const ReportComponent = report.componentKey
-  //   ? reportComponents[report.componentKey]
-  //   : null;
+  const ReportComponent = report.componentKey
+    ? reportComponents[report.componentKey]
+    : null;
 
   return (
     <main className="container py-12 px-4 sm:px-6 lg:px-8">
       <div className="mb-8">
         <div className="flex items-center gap-4 mb-4">
-          {/* <div className="flex gap-2">
+          <div className="flex gap-2">
             {report.badges.map((badge) => (
               <Badge
                 key={badge}
@@ -49,7 +50,7 @@ export default function ReportPage({ params }) {
                 {badges[badge].label}
               </Badge>
             ))}
-          </div> */}
+          </div>
           <span className="text-sm text-muted-foreground">{report.date}</span>
         </div>
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl mb-4">
@@ -66,19 +67,19 @@ export default function ReportPage({ params }) {
         </Card>
       ) : (
         <>
-          {/* {report.file && (
+          {report.file && (
             <div className="mb-8">
-              <a
+              <Link
                 href={report.file}
                 download
                 className="inline-flex items-center gap-2 px-4 py-2 bg-purple-700 text-white rounded-md hover:bg-purple-800 transition"
               >
                 <Download className="w-4 h-4" />
                 Download Report
-              </a>
+              </Link>
             </div>
-          )} */}
-          {/* <div className="prose dark:prose-invert max-w-none">
+          )}
+          <div className="prose dark:prose-invert max-w-none">
             {ReportComponent ? (
               <ReportComponent />
             ) : (
@@ -86,7 +87,7 @@ export default function ReportPage({ params }) {
                 <p>Static content for this report will be added soon.</p>
               </div>
             )}
-          </div> */}
+          </div> 
         </>
       )}
     </main>

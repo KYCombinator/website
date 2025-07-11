@@ -1,17 +1,15 @@
+export const dynamic = "force-dynamic";
+
+import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { notFound } from "next/navigation";
-import { reports, badges } from "../data";
 import { Download } from "lucide-react";
+import { reports, badges } from "../data"; // adjust path!
 import { reportComponents } from "../components";
+import Link from "next/link";
 
-export function generateStaticParams() {
-  return reports.map((report) => ({
-    slug: report.slug,
-  }));
-}
-
-export function generateMetadata({ params }) {
+// Dynamic metadata
+export async function generateMetadata({ params }) {
   const report = reports.find((r) => r.slug === params.slug);
 
   if (!report) {
@@ -26,6 +24,7 @@ export function generateMetadata({ params }) {
   };
 }
 
+// Page
 export default function ReportPage({ params }) {
   const report = reports.find((r) => r.slug === params.slug);
 
@@ -70,14 +69,14 @@ export default function ReportPage({ params }) {
         <>
           {report.file && (
             <div className="mb-8">
-              <a
+              <Link
                 href={report.file}
                 download
                 className="inline-flex items-center gap-2 px-4 py-2 bg-purple-700 text-white rounded-md hover:bg-purple-800 transition"
               >
                 <Download className="w-4 h-4" />
                 Download Report
-              </a>
+              </Link>
             </div>
           )}
           <div className="prose dark:prose-invert max-w-none">
@@ -88,7 +87,7 @@ export default function ReportPage({ params }) {
                 <p>Static content for this report will be added soon.</p>
               </div>
             )}
-          </div>
+          </div> 
         </>
       )}
     </main>

@@ -1,7 +1,7 @@
-// import { Badge } from "@/components/ui/badge";
-// import { Card } from "@/components/ui/card";
-// import Link from "next/link";
-// import { reports, badges } from "./data";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import Link from "next/link";
+import { reports, badges } from "./data";
 
 export default function ReportsPage() {
   return (
@@ -19,7 +19,7 @@ export default function ReportsPage() {
           educational purposes.
         </p>
       </div>
-      {/* <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
         {reports.map((report) =>
           report.status === "Coming Soon" ? (
             <Card
@@ -96,7 +96,7 @@ export default function ReportsPage() {
             </Link>
           ),
         )}
-      </div> */}
+      </div>
 
       <div className="mt-12 p-8 border rounded-lg bg-gradient-to-br from-[#6B46C1]/10 to-white border-[#6B46C1]/20 shadow-sm">
         <h2 className="text-2xl font-semibold mb-4 text-gray-800">

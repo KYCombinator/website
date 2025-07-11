@@ -56,7 +56,7 @@ export const reports: Report[] = [
         status: "Published",
         date: "December 28, 2024",
         badges: ["research", "newspaper"],
-        file: "/reports/NYTimes AI reshaping America.pdf",
+        file: "https://cdn.kycombinator.com/reports/NYTimes AI reshaping America.pdf",
         componentKey: "nytimes-ai-geography"
     },
     {
@@ -66,7 +66,7 @@ export const reports: Report[] = [
     status: "Published",
     date: "November 2024",
     badges: ["research"], 
-    file: "/reports/Endeavor_10_Year_Impact_Report_20241112.pdf"
+    file: "https://cdn.kycombinator.com/reports/Endeavor_10_Year_Impact_Report_20241112.pdf"
     },
   {
     slug: "techstars-roadmap-2019",
@@ -75,7 +75,7 @@ export const reports: Report[] = [
     status: "Published", 
     date: "March 2019",
     badges: ["research"],
-    file: "/reports/techstars_20190301.pdf"
+    file: "https://cdn.kycombinator.com/reports/techstars_20190301.pdf"
   },
   {
     slug: "endeavor-cities-2019",
@@ -84,7 +84,7 @@ export const reports: Report[] = [
     status: "Published",
     date: "September 2019", 
     badges: ["research"],
-    file: "/reports/Endeavor_20190927.pdf"
+    file: "https://cdn.kycombinator.com/reports/Endeavor_20190927.pdf"
   },
   {
     slug: "city-in-transition",
@@ -93,7 +93,7 @@ export const reports: Report[] = [
     status: "Published",
     date: "September 09, 1974", 
     badges: ["newspaper"],
-    file: "/reports/The New Yorker - Sep 09, 1974.pdf",
+    file: "https://cdn.kycombinator.com/reports/The New Yorker - Sep 09, 1974.pdf",
     componentKey: "newyorker"
   }
 ]

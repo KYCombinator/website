@@ -29,9 +29,9 @@ export default function ReportPage({ params }) {
     notFound();
   }
 
-  const ReportComponent = report.componentKey
-    ? reportComponents[report.componentKey]
-    : null;
+  // const ReportComponent = report.componentKey
+  //   ? reportComponents[report.componentKey]
+  //   : null;
 
   return (
     <main className="container py-12 px-4 sm:px-6 lg:px-8">
@@ -76,7 +76,7 @@ export default function ReportPage({ params }) {
               </a>
             </div>
           )}
-          <div className="prose dark:prose-invert max-w-none">
+          {/* <div className="prose dark:prose-invert max-w-none">
             {ReportComponent ? (
               <ReportComponent />
             ) : (
@@ -84,7 +84,7 @@ export default function ReportPage({ params }) {
                 <p>Static content for this report will be added soon.</p>
               </div>
             )}
-          </div>
+          </div> */}
         </>
       )}
     </main>

@@ -65,6 +65,12 @@ export default function Header() {
                 HackKentucky
               </Link>
               <Link
+                href="/report"
+                className="text-neutral-500 hover:text-primary-700 font-medium text-base"
+              >
+                Report
+              </Link>
+              <Link
                 href="https://join.slack.com/t/kycombinator/shared_invite/zt-2viueybdu-QNv80gAKk~sJZ9paWebGVQ"
                 target="_blank"
                 rel="noopener noreferrer"

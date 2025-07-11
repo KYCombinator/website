@@ -42,33 +42,27 @@ export default function Header() {
             <nav className="flex items-center space-x-6">
               <Link
                 href="/#about"
-                className="text-gray-700 hover:text-purple-700 font-medium text-base"
+                className="text-neutral-500 hover:text-primary-700 font-medium text-base"
               >
                 About
               </Link>
               <Link
                 href="/#faqs"
-                className="text-gray-700 hover:text-purple-700 font-medium text-base"
+                className="text-neutral-500 hover:text-primary-700 font-medium text-base"
               >
                 FAQs
               </Link>
               <Link
                 href="/#events"
-                className="text-gray-700 hover:text-purple-700 font-medium text-base"
+                className="text-neutral-500 hover:text-primary-700 font-medium text-base"
               >
                 Events
               </Link>
               <Link
                 href="https://www.hackkentucky.com"
-                className="text-gray-700 hover:text-purple-700 font-medium text-base"
+                className="text-neutral-500 hover:text-primary-700 font-medium text-base"
               >
                 HackKentucky
-              </Link>
-              <Link
-                href="/reports"
-                className="text-gray-700 hover:text-purple-700 font-medium text-base"
-              >
-                Reports
               </Link>
               <Link
                 href="https://join.slack.com/t/kycombinator/shared_invite/zt-2viueybdu-QNv80gAKk~sJZ9paWebGVQ"

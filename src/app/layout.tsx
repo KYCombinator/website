@@ -27,7 +27,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script async src="https://cdn.splitbee.io/sb.js"></script>
+        <link
+          rel="stylesheet"
+          href={`${process.env.NEXT_PUBLIC_CDN_URL}/globals.css`}
+        />
       </head>
       <body className={cabin.className}>
         <Header />

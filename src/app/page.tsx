@@ -2,7 +2,6 @@ import { Calendar, Slack, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
-
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
@@ -13,7 +12,7 @@ export default function Home() {
             <div className="bg-white p-6 rounded-lg">
               <Image
                 src="/assets/Purple.png"
-                alt="KYC"
+                alt="KYX"
                 width={360}
                 height={123}
                 className="mx-auto w-auto h-[200px]"
@@ -58,7 +57,7 @@ export default function Home() {
                     href="https://join.slack.com/t/kycombinator/shared_invite/zt-2viueybdu-QNv80gAKk~sJZ9paWebGVQ"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-[#4A154B] text-white p-3 rounded-md hover:bg-[#611f64] transition"
+                    className="bg-primary-500 text-white p-3 rounded-md hover-primary-700 transition"
                   >
                     <Slack className="w-6 h-6" />
                   </Link>

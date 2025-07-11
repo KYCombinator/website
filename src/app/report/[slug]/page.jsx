@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
-import { Badge } from "@/components/ui/badge";
+// import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { Download } from "lucide-react";
-import { reports, badges } from "../data"; // adjust path!
-import { reportComponents } from "../components";
+// import { Download } from "lucide-react";
+import { reports } from "../data"; // adjust path!
+// import { reportComponents } from "../components";
 
 // Dynamic metadata
 export async function generateMetadata({ params }) {
@@ -37,7 +37,7 @@ export default function ReportPage({ params }) {
     <main className="container py-12 px-4 sm:px-6 lg:px-8">
       <div className="mb-8">
         <div className="flex items-center gap-4 mb-4">
-          <div className="flex gap-2">
+          {/* <div className="flex gap-2">
             {report.badges.map((badge) => (
               <Badge
                 key={badge}
@@ -47,7 +47,7 @@ export default function ReportPage({ params }) {
                 {badges[badge].label}
               </Badge>
             ))}
-          </div>
+          </div> */}
           <span className="text-sm text-muted-foreground">{report.date}</span>
         </div>
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl mb-4">
@@ -64,7 +64,7 @@ export default function ReportPage({ params }) {
         </Card>
       ) : (
         <>
-          {report.file && (
+          {/* {report.file && (
             <div className="mb-8">
               <a
                 href={report.file}
@@ -75,7 +75,7 @@ export default function ReportPage({ params }) {
                 Download Report
               </a>
             </div>
-          )}
+          )} */}
           {/* <div className="prose dark:prose-invert max-w-none">
             {ReportComponent ? (
               <ReportComponent />

@@ -70,6 +70,8 @@ export default function ReportPage({ params }) {
               <a
                 href={report.file}
                 download
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-purple-700 text-white rounded-md hover:bg-purple-800 transition"
               >
                 <Download className="w-4 h-4" />

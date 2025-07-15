@@ -46,7 +46,7 @@ const Timeline = ({ data }: { data: TimelineEntry[] }) => {
     <div className="w-fullfont-sans md:px-10" ref={containerRef}>
       <div className=" mx-auto max-w-5xl">
         <h2 className="text-lg font-bold md:text-5xl mb-4 text-black max-w-4xl">
-          The Crucible Roadmap
+          The Forge Roadmap
         </h2>
         <p className="text-neutral-500 text-sm md:text-base max-w-sm">
           Founders Aren&apos;t Born They&apos;re Forged.
@@ -107,7 +107,7 @@ const timelineData: TimelineEntry[] = [
     content: (
       <div className="text-md text-neutral-400">
         <p>
-          Kick off the Crucible journey with the Velocity Pitch Competition.
+          Kick off The Forge journey with the Velocity Pitch Competition.
           Teams begin a 12-week sprint to validate their ideas, find customers,
           and generate revenue.
         </p>
@@ -133,7 +133,7 @@ const timelineData: TimelineEntry[] = [
     content: (
       <div className="text-sm text-neutral-400">
         <p>
-          A statewide hackathon where Crucible teams can recruit technical
+          A statewide hackathon where Forge teams can recruit technical
           talent, rapidly prototype solutions, and gain visibility.
         </p>
         <p className="mt-2">
@@ -189,12 +189,12 @@ const timelineData: TimelineEntry[] = [
 ];
 
 // Default export component for the page
-const CruciblePage = () => {
+const Page = () => {
   // Header props
   const badge = "Founders Aren't Born, They're Forged ";
-  const heading = "The Crucible of Excellence";
+  const heading = "The Forge of Excellence";
   const imageSrc = "/crucible/cover2.png";
-  const imageAlt = "Crucible event cover photo";
+  const imageAlt = "Forge event cover photo";
 
   // Animation variants
   const sectionVariants = {
@@ -321,7 +321,7 @@ const CruciblePage = () => {
             </h1>
             {/* Descriptive Text Placeholder */}
             <p className="text-lg text-neutral-600 mt-2 max-w-4xl">
-              Step into the forge. The Crucible is a high-intensity, real-world
+              Step into the forge. The Forge is a high-intensity, real-world
               simulation designed to test your limits, refine your business
               model, and build the resilience needed to lead a thriving startup.
             </p>
@@ -361,7 +361,7 @@ const CruciblePage = () => {
       >
         <div className="px-4 mx-auto max-w-5xl">
           <h2 className="text-2xl font-bold md:text-5xl mb-8 text-black text-left">
-            Why The Crucible?
+            Why The Forge?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-1 gap-12 items-center">
             {/* Text Content */}
@@ -381,7 +381,7 @@ const CruciblePage = () => {
                   <span className="font-semibold">
                     unwavering determination
                   </span>
-                  . The Crucible is meticulously designed to simulate the
+                  . The Forge is meticulously designed to simulate the
                   intense pressures and challenges of the real entrepreneurial
                   world.
                 </p>
@@ -516,4 +516,4 @@ const CruciblePage = () => {
   );
 };
 
-export default CruciblePage;
+export default Page;

@@ -34,20 +34,9 @@ async function LoggedInMessage() {
   }
 
   return (
-    <>
-      <div className="w-full space-y-4">
-        <h1 className="text-2xl font-bold text-center mb-6">Welcome</h1>
-        <p>You are logged in as {user?.email}.</p>
-      </div>
-
-      <div className="text-center">
-        <p className="text-sm text-gray-600">
-          Don&apos;t have an account?{' '}
-          <a href="/signup" className="text-blue-600 hover:text-blue-800 underline font-medium">
-            Sign up
-          </a>
-        </p>
-      </div>
-    </>
+    <div className="w-full space-y-4">
+      <h1 className="text-2xl font-bold text-center mb-6">Welcome</h1>
+      <p>You are logged in as {user?.email}.</p>
+    </div>
   );
 }

@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import Avatar from "./Avatar";
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -70,14 +72,7 @@ export default function Header() {
               >
                 Report
               </Link>
-              <Link
-                href="https://join.slack.com/t/kycombinator/shared_invite/zt-2viueybdu-QNv80gAKk~sJZ9paWebGVQ"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-[#6B46C1] text-white px-7 py-1.5 rounded text-base font-medium hover:bg-[#5B3AA8] transition"
-              >
-                Join Now
-              </Link>
+              <Avatar />
             </nav>
           </div>
         </div>

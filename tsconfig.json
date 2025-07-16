@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/reports/[slug]/page.jsx", "next.config.mjs"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/reports/[slug]/page.jsx", "next.config.cjs", "middleware.js"],
   "exclude": ["node_modules","sst.config.ts"]
 }

@@ -2,7 +2,6 @@ import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 const Avatar = async () => {
     const cookieStore = await cookies();
@@ -39,7 +38,7 @@ const Avatar = async () => {
     </div>
     ) : (
       <Link href="https://auth.kycombinator.com?redirect_uri=https://www.kycombinator.com">
-        <Button>Login</Button>
+        <div className="btn btn-primary">Login</div>
       </Link>
     )}
     </>

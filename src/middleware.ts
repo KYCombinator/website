@@ -4,7 +4,10 @@ import jwt from 'jsonwebtoken';
 
 export function middleware(req: NextRequest) {
   const APP_ID = process.env.APP_ID;
-  
+
+  console.log("🔒 Middleware is running on:", req.nextUrl.pathname);
+  console.log("🔒 APP_ID:", APP_ID);
+
   const token = req.cookies.get(`hzzh.${APP_ID}.token`)?.value;
 
   if (!token) {
@@ -15,7 +18,7 @@ export function middleware(req: NextRequest) {
     jwt.verify(token, process.env.JWT_SECRET || "cinderblock");
     return NextResponse.next();
   } catch {
-    return NextResponse.redirect("https://auth.kycombinator.com/?redirect_uri=https://www.kycombinator.com");
+    return NextResponse.redirect("https://auth.kycombinator.com/?redirect_uri=https://www.kycombinator.com&status=expired");
   }
 }
 

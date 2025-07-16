@@ -13,6 +13,8 @@ jobs:
       NEXT_PUBLIC_CDN_URL: ${{ secrets.NEXT_PUBLIC_CDN_URL }}
       HOSTED_ZONE_ID: ${{ secrets.HOSTED_ZONE_ID }}
       CERTIFICATE_ARN: ${{ secrets.CERTIFICATE_ARN }}
+      APP_ID: ${{ secrets.APP_ID }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
     steps:
     - uses: actions/checkout@v4
 

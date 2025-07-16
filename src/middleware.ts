@@ -3,8 +3,9 @@ import type { NextRequest } from 'next/server';
 import jwt from 'jsonwebtoken';
 
 export function middleware(req: NextRequest) {
-  const token = req.cookies.get("kycombinator_token")?.value;
-
+  const APP_ID = process.env.APP_ID;
+  
+  const token = req.cookies.get(`hzzh.${APP_ID}.token`)?.value;
 
   if (!token) {
     return NextResponse.redirect("https://auth.kycombinator.com/?redirect_uri=https://www.kycombinator.com");

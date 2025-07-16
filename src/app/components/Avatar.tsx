@@ -29,18 +29,18 @@ const Avatar = async () => {
     <>
     {user ? (
     <div className="flex items-center gap-2">
-        <Image 
+      <Image 
         src={user?.picture || ""} 
         alt={user?.name || ""} 
         width={32} 
         height={32} 
         className="rounded-full"
-        />
+      />
     </div>
     ) : (
-        <Link href="https://auth.kycombinator.com?redirect_uri=https://www.kycombinator.com">
-            <Button>Login</Button>
-        </Link>
+      <Link href="https://auth.kycombinator.com?redirect_uri=https://www.kycombinator.com">
+        <Button>Login</Button>
+      </Link>
     )}
     </>
   )

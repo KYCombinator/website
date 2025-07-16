@@ -1,5 +1,10 @@
 module.exports = {
     images: {
-      unoptimized: true, // disables Image Optimization
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: 'lh3.googleusercontent.com',
+        },
+      ]
     },
   }

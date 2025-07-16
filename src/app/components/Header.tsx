@@ -4,9 +4,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
-import Avatar from "./Avatar";
 
-export default function Header() {
+export default function Header({children}: {children: React.ReactNode}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -72,7 +71,7 @@ export default function Header() {
               >
                 Report
               </Link>
-              <Avatar />
+              {children}
             </nav>
           </div>
         </div>

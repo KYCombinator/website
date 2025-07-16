@@ -4,6 +4,7 @@ import { Cabin } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Avatar from "./components/Avatar";
 
 const cabin = Cabin({ subsets: ["latin"] });
 
@@ -33,7 +34,9 @@ export default function RootLayout({
         />
       </head>
       <body className={cabin.className}>
-        <Header />
+        <Header>
+          <Avatar />
+        </Header>
         {children}
         <Footer />
       </body>

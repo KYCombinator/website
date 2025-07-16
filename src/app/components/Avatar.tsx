@@ -1,3 +1,5 @@
+'use server'
+
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import Image from "next/image";

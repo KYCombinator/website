@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const Avatar = async () => {
     const cookieStore = await cookies();
-    const token = cookieStore.get("kycombinator_token")?.value;
+    const token = cookieStore.get(`hzzh.${process.env.APP_ID}.token`)?.value;
     let user: {
       email: string;
       name: string;

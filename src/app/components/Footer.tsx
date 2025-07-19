@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           <div>
             <Image
-              src="/assets/Purple.png"
+              src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.png`}
               alt="KYC Logo"
               width={200}
               height={44}
@@ -115,7 +115,7 @@ export default function Footer() {
               Join our newsletter to stay updated on events and resources.
             </p>
             <iframe
-              src="https://embeds.beehiiv.com/618e6261-6b72-4d51-95d9-821977f9f63e?slim=true"
+              src="https://embeds.beehiiv.com/3cab38c3-d1b9-4443-bdb3-2a0de2d047a6?slim=true"
               data-test-id="beehiiv-embed"
               height="52"
               style={{

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     images: ["werise1.png"],
   },
   icons: {
-    icon: `${process.env.NEXT_PUBLIC_CDN_URL}/favicon.ico`,
+    icon: `${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.png`,
   },
 };
 

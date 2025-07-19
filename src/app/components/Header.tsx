@@ -16,7 +16,7 @@ export default function Header({children}: {children: React.ReactNode}) {
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
               <Image
-                src="/assets/Purple.png"
+                src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.png`}
                 alt="KYCombinator"
                 width={220}
                 height={82}

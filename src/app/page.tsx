@@ -11,7 +11,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto">
             <div className="bg-white p-6 rounded-lg">
               <Image
-                src="/assets/Purple.png"
+                src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.png`}
                 alt="KYX"
                 width={360}
                 height={123}
@@ -33,7 +33,7 @@ export default function Home() {
               </p>
               <Link
                 href="/velocity"
-                className="inline-flex items-center gap-2 bg-[#6B46C1] text-white px-8 py-3 rounded-md font-semibold hover:bg-[#5B3AA8] transition"
+                className="inline-flex items-center gap-2 bg-primary-500 text-primary-on-500 px-8 py-3 rounded-md font-semibold hover:bg-primary-700 transition"
               >
                 Join the Velocity Pitch Competition
                 <ArrowRight className="w-5 h-5" />
@@ -41,7 +41,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col gap-4 justify-center items-center">
               <iframe
-                src="https://embeds.beehiiv.com/618e6261-6b72-4d51-95d9-821977f9f63e?slim=true"
+                src="https://embeds.beehiiv.com/3cab38c3-d1b9-4443-bdb3-2a0de2d047a6?slim=true"
                 data-test-id="beehiiv-embed"
                 height="52"
                 style={{
@@ -57,7 +57,7 @@ export default function Home() {
                     href="https://join.slack.com/t/kycombinator/shared_invite/zt-2viueybdu-QNv80gAKk~sJZ9paWebGVQ"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-primary-500 text-white p-3 rounded-md hover-primary-700 transition"
+                    className="bg-primary-500 text-primary-on-500 p-3 rounded-md hover-primary-700 transition"
                   >
                     <Slack className="w-6 h-6" />
                   </Link>
@@ -109,7 +109,7 @@ export default function Home() {
           </div>
 
           <div className="absolute bottom-2 left-0 right-0 flex justify-center">
-            <Link href="#is-for-you" className="text-[#6B46C1] animate-bounce">
+            <Link href="#is-for-you" className="text-primary-500 animate-bounce">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-8 w-8"
@@ -130,7 +130,7 @@ export default function Home() {
       </section>
 
       {/* Quote Section 1 */}
-      <section className="bg-[#6B46C1] text-white py-12">
+      <section className="bg-primary-500 text-white py-12">
         <div className="container mx-auto px-4 text-center">
           <blockquote className="text-2xl md:text-3xl italic font-light">
             We are the doers, the builders, the ones who execute with relentless
@@ -144,7 +144,7 @@ export default function Home() {
       <section id="about" className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#6B46C1] mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary-500 mb-6">
               About
             </h2>
             <p className="text-gray-600 text-lg mb-8">
@@ -155,7 +155,7 @@ export default function Home() {
               builders in Kentucky.
             </p>
             <div className="bg-purple-50 p-6 rounded-lg mb-8">
-              <h3 className="text-xl font-bold text-[#6B46C1] mb-3">
+              <h3 className="text-xl font-bold text-primary-500 mb-3">
                 HAVES (High-Agency Violent Execution Stallions)
               </h3>
               <p className="text-gray-600">
@@ -168,7 +168,7 @@ export default function Home() {
             </div>
             <div className="grid md:grid-cols-2 gap-6 mt-12">
               <div className="bg-purple-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-[#6B46C1] mb-3">
+                <h3 className="text-xl font-bold text-primary-500 mb-3">
                   How We Do It
                 </h3>
                 <ul className="text-left text-gray-600 space-y-3">
@@ -185,7 +185,7 @@ export default function Home() {
                 </ul>
               </div>
               <div className="bg-purple-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-[#6B46C1] mb-3">
+                <h3 className="text-xl font-bold text-primary-500 mb-3">
                   What You Get
                 </h3>
                 <ul className="text-left text-gray-600 space-y-3">
@@ -201,7 +201,7 @@ export default function Home() {
       </section>
 
       {/* Quote Section 1 */}
-      <section className="bg-[#6B46C1] text-white py-12">
+      <section className="bg-primary-500 text-primary-on-500 py-12">
         <div className="container mx-auto px-4 text-center max-w-3xl">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">
             What we do different at KYC
@@ -226,7 +226,7 @@ export default function Home() {
       <section id="events" className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#6B46C1] mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary-500 mb-4">
               Upcoming Events
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -240,7 +240,7 @@ export default function Home() {
               href="https://lu.ma/kycombinator"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#6B46C1] text-white px-6 py-3 rounded-md hover:bg-[#5B3AA8] transition flex items-center gap-2"
+              className="bg-primary-500 text-white px-6 py-3 rounded-md hover:bg-primary-700 transition flex items-center gap-2"
             >
               <Calendar className="w-5 h-5" />
               <span>View All Events</span>
@@ -263,7 +263,7 @@ export default function Home() {
       {/* FAQs Section */}
       <section id="faqs" className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-[#6B46C1]">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-primary-500">
             FAQs
           </h2>
 
@@ -302,7 +302,7 @@ export default function Home() {
           </div>
 
           <div className="text-center mt-10">
-            <button className="bg-[#6B46C1] text-white px-6 py-3 rounded-md hover:bg-[#5B3AA8] transition">
+            <button className="bg-primary-500 text-white px-6 py-3 rounded-md hover:bg-primary-700 transition">
               View All FAQs
             </button>
           </div>

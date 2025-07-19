@@ -14,7 +14,7 @@ export default function Home() {
 
 async function LoggedInMessage() {
   const cookieStore = await cookies();
-  const token = cookieStore.get(`hzzh.${process.env.APP_ID}.token`)?.value;
+  const token = cookieStore.get(`hzzh.${process.env.NEXT_PUBLIC_APP_ID}.token`)?.value;
   let user: {
     email: string;
     name: string;
@@ -23,7 +23,7 @@ async function LoggedInMessage() {
 
   if (token) {
     try {
-      user = jwt.verify(token, process.env.JWT_SECRET || "cinderblock") as {
+      user = jwt.verify(token, process.env.NEXT_PUBLIC_JWT_SECRET || "cinderblock") as {
         email: string;
         name: string;
         picture: string;

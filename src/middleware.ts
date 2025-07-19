@@ -3,8 +3,8 @@ import type { NextRequest } from 'next/server';
 import jwt from 'jsonwebtoken';
 
 export async function middleware(req: NextRequest) {
-  const APP_ID = process.env.APP_ID;
-  const JWT_SECRET = process.env.JWT_SECRET || "cinderblock";
+  const APP_ID = process.env.NEXT_PUBLIC_APP_ID;
+  const JWT_SECRET = process.env.NEXT_PUBLIC_JWT_SECRET || "cinderblock";
 
   const token = req.cookies.get(`hzzh.${APP_ID}.token`)?.value;
   const refresh = req.cookies.get(`hzzh.${APP_ID}.refresh`)?.value;

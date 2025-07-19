@@ -9,6 +9,9 @@ const Avatar = async () => {
   const cookieStore = await cookies();
   const token = cookieStore.get(`hzzh.${process.env.APP_ID}.token`)?.value;
 
+  console.log(process.env.APP_ID);
+  console.log(token);
+
   let user: {
     email: string;
     name: string;

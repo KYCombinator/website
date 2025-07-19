@@ -9,9 +9,9 @@ import Avatar from "./components/Avatar";
 const cabin = Cabin({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "KYCombinator - Building the Kentucky of Tomorrow",
+  title: "This is KYX",
   description:
-    "We're creating the highest density of ambitious, high-velocity founders and builders in Kentucky.",
+    "Attract, retain, and grow Louisville's top builders—tilting the odds for the ambitious few willing to out‑work and out‑execute—to forge a critical mass of Series A ready companies in Louisville.",
   openGraph: {
     images: ["werise1.png"],
   },

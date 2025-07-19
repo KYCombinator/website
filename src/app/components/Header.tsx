@@ -9,7 +9,7 @@ export default function Header({children}: {children: React.ReactNode}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white border-b fixed w-full top-0 z-50">
+    <header className="bg-background-900 border-b border-background-800 sticky w-full top-0 z-50 text-foreground-700">
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -39,85 +39,105 @@ export default function Header({children}: {children: React.ReactNode}) {
           </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center md:justify-end flex-1 pl-8">
-            <nav className="flex items-center space-x-6">
+          <div className="hidden md:flex md:items-center md:justify-start flex-1 pl-8">
+            <nav className="flex items-center gap-8 text-foreground-700 font-medium text-base whitespace-nowrap">
+              <Link
+                href="/"
+                className="hover:text-white"
+              >
+                Home
+              </Link>
               <Link
                 href="/#about"
-                className="text-neutral-500 hover:text-primary-700 font-medium text-base"
+                className="hover:text-white"
               >
                 About
               </Link>
               <Link
                 href="/#faqs"
-                className="text-neutral-500 hover:text-primary-700 font-medium text-base"
+                className="hover:text-white"
               >
                 FAQs
               </Link>
               <Link
+                href="/type"
+                className="hover:text-white"
+              >
+                Our Type
+              </Link>
+              <Link
                 href="/#events"
-                className="text-neutral-500 hover:text-primary-700 font-medium text-base"
+                className="hover:text-white"
               >
                 Events
               </Link>
               <Link
-                href="https://www.hackkentucky.com"
-                className="text-neutral-500 hover:text-primary-700 font-medium text-base"
+                href="/cinderblock"
+                className="hover:text-white"
               >
-                HackKentucky
+                The Block
               </Link>
               <Link
                 href="/report"
-                className="text-neutral-500 hover:text-primary-700 font-medium text-base"
+                className="hover:text-white"
               >
                 Report
               </Link>
-              {children}
+              
             </nav>
+          </div>
+          <div className="hidden md:flex md:items-center md:justify-end flex-1 pl-8">
+            {children}
           </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden absolute top-16 left-0 right-0 bg-white border-b z-50">
-            <div className="px-4 py-3 space-y-2">
+            <div className="px-4 py-3 space-y-2 font-medium text-base text-foreground-700">
+              <Link
+                href="/"
+                className="block px-3 py-2  hover:text-purple-700"
+              >
+                Home
+              </Link>
               <Link
                 href="/#about"
-                className="block px-3 py-2 text-gray-700 hover:text-purple-700 font-medium text-base"
+                className="block px-3 py-2  hover:text-purple-700"
               >
                 About
               </Link>
               <Link
                 href="/#faqs"
-                className="block px-3 py-2 text-gray-700 hover:text-purple-700 font-medium text-base"
+                className="block px-3 py-2 hover:text-purple-700"
               >
                 FAQs
               </Link>
               <Link
+                href="/type"
+                className="block px-3 py-2 hover:text-purple-700"
+              >
+                Our Type
+              </Link>
+              <Link
                 href="/#events"
-                className="block px-3 py-2 text-gray-700 hover:text-purple-700 font-medium text-base"
+                className="block px-3 py-2 hover:text-purple-700"
               >
                 Events
               </Link>
               <Link
-                href="https://www.hackkentucky.com"
-                className="block px-3 py-2 text-gray-700 hover:text-purple-700 font-medium text-base"
+                href="/cinderblock"
+                className="block px-3 py-2 hover:text-purple-700"
               >
-                HackKentucky
+                The Block
               </Link>
               <Link
-                href="/reports"
-                className="block px-3 py-2 text-gray-700 hover:text-purple-700 font-medium text-base"
+                href="/report"
+                className="block px-3 py-2 hover:text-purple-700"
               >
-                Reports
+                Report
               </Link>
-              <Link
-                href="https://join.slack.com/t/kycombinator/shared_invite/zt-2tneu9hc6-Dx1ttf~_75rQHOb8NHXXkQ"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block mx-3 mt-3 bg-[#6B46C1] text-white py-2 rounded text-base font-medium text-center hover:bg-[#5B3AA8] transition"
-              >
-                Join Now
-              </Link>
+              {children}
             </div>
           </div>
         )}

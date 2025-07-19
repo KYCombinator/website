@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-12">
+    <footer className="bg-background-900 text-foreground-700 py-12">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
@@ -13,8 +13,8 @@ export default function Footer() {
               width={200}
               height={44}
             />
-            <p className="text-gray-400 mx-2">
-              Building Kentucky&apos;s next generation of tech innovators.
+            <p className="mx-2">
+              Attract, retain, and grow Louisville&apos;s top builders.
             </p>
           </div>
 
@@ -26,7 +26,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/"
-                  className="text-gray-400 hover:text-white transition"
+                  className="hover:text-white transition"
                 >
                   Home
                 </Link>
@@ -34,7 +34,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/#about"
-                  className="text-gray-400 hover:text-white transition"
+                  className="hover:text-white transition"
                 >
                   About
                 </Link>
@@ -42,7 +42,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#is-for-you"
-                  className="text-gray-400 hover:text-white transition"
+                  className="hover:text-white transition"
                 >
                   Is It For You?
                 </Link>
@@ -50,7 +50,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/#faqs"
-                  className="text-gray-400 hover:text-white transition"
+                  className="hover:text-white transition"
                 >
                   FAQs
                 </Link>

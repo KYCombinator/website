@@ -36,4 +36,5 @@ jobs:
         aws-region: us-east-1
 
     - name: Deploy with SST
-      run: npx sst deploy --stage prod 
+      run: |
+        APP_ID=${APP_ID} JWT_SECRET=${JWT_SECRET} npx sst deploy --stage prod

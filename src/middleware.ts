@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken';
 export async function middleware(req: NextRequest) {
   const APP_ID = process.env.APP_ID;
   const JWT_SECRET = process.env.JWT_SECRET || "cinderblock";
-  const REFRESH_SECRET = process.env.REFRESH_SECRET || "gravelblock";
 
   const token = req.cookies.get(`hzzh.${APP_ID}.token`)?.value;
   const refresh = req.cookies.get(`hzzh.${APP_ID}.refresh`)?.value;
@@ -22,7 +21,7 @@ export async function middleware(req: NextRequest) {
 
   if (refresh) {
     try {
-      const payload = jwt.verify(refresh, REFRESH_SECRET) as { email: string };
+      const payload = jwt.verify(refresh, JWT_SECRET) as { email: string };
       const newToken = jwt.sign({ email: payload.email }, JWT_SECRET, { expiresIn: "15m" });
 
       const res = NextResponse.next();

@@ -13,8 +13,8 @@ jobs:
       NEXT_PUBLIC_CDN_URL: ${{ secrets.NEXT_PUBLIC_CDN_URL }}
       HOSTED_ZONE_ID: ${{ secrets.HOSTED_ZONE_ID }}
       CERTIFICATE_ARN: ${{ secrets.CERTIFICATE_ARN }}
-      APP_ID: ${{ secrets.APP_ID }}
-      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      NEXT_PUBLIC_APP_ID: ${{ secrets.APP_ID }}
+      NEXT_PUBLIC_JWT_SECRET: ${{ secrets.JWT_SECRET }}
     steps:
     - uses: actions/checkout@v4
 
@@ -37,4 +37,4 @@ jobs:
 
     - name: Deploy with SST
       run: |
-        APP_ID=${APP_ID} JWT_SECRET=${JWT_SECRET} npx sst deploy --stage prod
+        npx sst deploy --stage prod

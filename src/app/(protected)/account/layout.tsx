@@ -18,12 +18,11 @@ async function isValidJWT(token: string): Promise<boolean> {
   }
 }
 
-async function refreshAccessToken(refreshToken: string): Promise<string | null> {
+async function refreshAccessToken(): Promise<string | null> {
   try {
     const res = await fetch(REFRESH_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ refreshToken }),
       credentials: 'include',
       cache: 'no-store',
     });
@@ -45,7 +44,7 @@ export default async function ProtectedLayout({ children }: { children: React.Re
   const tokenIsValid = accessToken && await isValidJWT(accessToken);
 
   if (!tokenIsValid && refreshToken) {
-    const newToken = await refreshAccessToken(refreshToken);
+    const newToken = await refreshAccessToken();
     if (newToken && await isValidJWT(newToken)) {
       // Let the API route set the cookie with Set-Cookie header
       // This layout just trusts that if the token is valid, we're good

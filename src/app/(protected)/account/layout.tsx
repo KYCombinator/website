@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import jwt from 'jsonwebtoken';
 
-const APP_ID = process.env.NEXT_PUBLIC_APP_ID!;
+const APP_ID = process.env.NEXT_PUBLIC_APP_ID;
 const JWT_SECRET = process.env.JWT_SECRET || 'cinderblock';
 const REFRESH_URL = 'https://api.kycombinator.com/auth/refresh';
 
@@ -20,11 +20,14 @@ async function isValidJWT(token: string): Promise<boolean> {
 
 async function refreshAccessToken(refreshToken: string): Promise<string | null> {
   try {
+    console.log("Refreshing access token");
+    console.log("refreshToken", refreshToken);
+    console.log("APP_ID", APP_ID);
     const res = await fetch(REFRESH_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Cookie': `hzzh.${APP_ID}.refresh=${refreshToken}`,
+        'Set-Cookie': `hzzh.${APP_ID}.refresh=${refreshToken}`,
       },
       cache: 'no-store',
     });

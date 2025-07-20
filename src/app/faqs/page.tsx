@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
 import React from 'react'
 
 export const metadata: Metadata = {
@@ -110,6 +111,30 @@ const page = () => {
           </div>
         </div>
 
+        <section id="support" className="max-w-3xl mx-auto text-center mt-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary-500 mb-6">
+            How Can You Support
+          </h2>
+          <div className="flex items-center justify-center gap-4">
+            <div className="flex flex-col items-center">
+              <div className="flex justify-center mb-4 text-lg font-bold text-foreground-800">
+                Sponsor a slice of pizza
+              </div>
+              <div className="btn btn-primary">
+                <Link href="https://buy.stripe.com/dRm4gz8jwfrk7Dx02oc7u00">Slice Sponsor ($2)</Link>
+              </div>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="flex justify-center mb-4 text-lg font-bold text-foreground-800">
+                Sponsor a whole pizza
+              </div>
+              <div className="btn btn-primary">
+                <Link href="https://buy.stripe.com/28E14n8jwa708HB8yUc7u01">Pizza Sponsor ($5)</Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <div className="max-w-3xl mx-auto text-center mt-16">
           <div className="bg-background-800 p-6 rounded-lg mb-8">
             <p className="text-foreground-800 text-lg">
@@ -117,6 +142,7 @@ const page = () => {
             </p>
           </div>
         </div>
+        
       </div>
     </section>
   )

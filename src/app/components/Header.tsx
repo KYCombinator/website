@@ -48,25 +48,25 @@ export default function Header({children}: {children: React.ReactNode}) {
                 Home
               </Link>
               <Link
-                href="/#about"
+                href="/about"
                 className="hover:text-white"
               >
                 About
               </Link>
               <Link
-                href="/#faqs"
+                href="/faqs"
                 className="hover:text-white"
               >
                 FAQs
               </Link>
               <Link
-                href="/type"
+                href="/ourtype"
                 className="hover:text-white"
               >
                 Our Type
               </Link>
               <Link
-                href="/#events"
+                href="/events"
                 className="hover:text-white"
               >
                 Events

@@ -33,7 +33,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/#about"
+                  href="/about"
                   className="hover:text-white transition"
                 >
                   About
@@ -41,7 +41,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#is-for-you"
+                  href="/ourtype"
                   className="hover:text-white transition"
                 >
                   Is It For You?
@@ -49,7 +49,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/#faqs"
+                  href="/faqs"
                   className="hover:text-white transition"
                 >
                   FAQs
@@ -65,8 +65,8 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/#events"
-                  className="text-gray-400 hover:text-white transition"
+                  href="/events"
+                  className="text-foreground-700 hover:text-white transition"
                 >
                   Events
                 </Link>
@@ -75,7 +75,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="https://www.hackkentucky.com"
-                  className="text-gray-400 hover:text-white transition"
+                  className="text-foreground-700 hover:text-white transition"
                 >
                   HackKentucky
                 </Link>
@@ -83,7 +83,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="https://kycombinator.beehiiv.com/"
-                  className="text-gray-400 hover:text-white transition"
+                  className="text-foreground-700 hover:text-white transition"
                 >
                   Blog
                 </Link>
@@ -91,15 +91,15 @@ export default function Footer() {
               <li>
                 <Link
                   href="/assets"
-                  className="text-gray-400 hover:text-white transition"
+                  className="text-foreground-700 hover:text-white transition"
                 >
                   Assets
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/reports"
-                  className="text-gray-400 hover:text-white transition"
+                  href="/report"
+                  className="text-foreground-700 hover:text-white transition"
                 >
                   Reports
                 </Link>
@@ -111,7 +111,7 @@ export default function Footer() {
             <h4 className="font-bold mb-4 uppercase text-sm tracking-wider">
               Connect
             </h4>
-            <p className="text-gray-400 mb-4">
+            <p className="text-foreground-700 mb-4">
               Join our newsletter to stay updated on events and resources.
             </p>
             <iframe
@@ -128,31 +128,31 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
+          <p className="text-foreground-700 text-sm">
             © 2025 KYCombinator. All rights reserved.
           </p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <Link
               href="/privacy"
-              className="text-gray-400 hover:text-white transition"
+              className="text-foreground-700 hover:text-white transition"
             >
               Privacy Policy
             </Link>
             <Link
               href="/terms"
-              className="text-gray-400 hover:text-white transition"
+              className="text-foreground-700 hover:text-white transition"
             >
               Terms of Service
             </Link>
             <Link
               href="/waiver"
-              className="text-gray-400 hover:text-white transition"
+              className="text-foreground-700 hover:text-white transition"
             >
               Waiver
             </Link>
             <Link
               href="/rules"
-              className="text-gray-400 hover:text-white transition"
+              className="text-foreground-700 hover:text-white transition"
             ></Link>
           </div>
         </div>

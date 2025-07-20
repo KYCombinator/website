@@ -9,29 +9,29 @@ const Avatar = async () => {
   const cookieStore = await cookies();
   const token = cookieStore.get(`hzzh.${process.env.NEXT_PUBLIC_APP_ID}.token`)?.value;
 
-  console.log(process.env.NEXT_PUBLIC_APP_ID);
-  console.log(token);
+  console.log("avatar process.env.NEXT_PUBLIC_APP_ID", process.env.NEXT_PUBLIC_APP_ID);
+  console.log("avatar token", token);
 
   let user: {
-    email: string;
-    name: string;
-    picture: string;
+    email: string | null;
+    name: string | null;
+    picture: string | null;
   } | null = null;
 
   if (token) {
     const decoded = jwt.decode(token) as { email?: string; name?: string; picture?: string } | null;
-    if (decoded?.email && decoded.name && decoded.picture) {
+    if (decoded) {
       user = {
-        email: decoded.email,
-        name: decoded.name,
-        picture: decoded.picture,
+        email: decoded.email || null,
+        name: decoded.name || null,
+        picture: decoded.picture || null,
       };
     }
   }
 
   return (
     <>
-      {user ? (
+      {user && user.picture && user.name ? (
         <div className="flex items-center gap-2">
           <Image 
             src={user.picture} 

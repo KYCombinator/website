@@ -9,6 +9,11 @@ export async function middleware(req: NextRequest) {
   const token = req.cookies.get(`hzzh.${APP_ID}.token`)?.value;
   const refresh = req.cookies.get(`hzzh.${APP_ID}.refresh`)?.value;
 
+  console.log("APP_ID", APP_ID);
+  console.log("JWT_SECRET", JWT_SECRET);
+  console.log("token", token);
+  console.log("refresh", refresh);
+
   try {
     if (token) {
       jwt.verify(token, JWT_SECRET);

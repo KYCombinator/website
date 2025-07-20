@@ -7,9 +7,9 @@ import Link from "next/link";
 
 const Avatar = async () => {
   const cookieStore = await cookies();
-  const token = cookieStore.get(`hzzh.${process.env.APP_ID}.token`)?.value;
+  const token = cookieStore.get(`hzzh.${process.env.NEXT_PUBLIC_APP_ID}.token`)?.value;
 
-  console.log(process.env.APP_ID);
+  console.log(process.env.NEXT_PUBLIC_APP_ID);
   console.log(token);
 
   let user: {

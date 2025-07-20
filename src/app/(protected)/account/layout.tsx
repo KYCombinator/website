@@ -27,8 +27,11 @@ async function refreshAccessToken(refreshToken: string): Promise<string | null> 
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Set-Cookie': `hzzh.${APP_ID}.refresh=${refreshToken}`,
+        'Cookie': `hzzh.${APP_ID}.refresh=${refreshToken}`,
       },
+      body: JSON.stringify({
+        refreshToken: refreshToken,
+      }),
       cache: 'no-store',
     });
 

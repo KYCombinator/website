@@ -26,21 +26,22 @@ export async function middleware(req: NextRequest) {
 
   if (refresh) {
     try {
-      const payload = jwt.verify(refresh, JWT_SECRET) as { email: string };
-      const newToken = jwt.sign({ email: payload.email }, JWT_SECRET, { expiresIn: "15m" });
-
-      const res = NextResponse.next();
-      res.cookies.set(`hzzh.${APP_ID}.token`, newToken, {
-        httpOnly: true,
-        sameSite: 'none',
-        secure: true,
-        path: '/',
-        maxAge: 60 * 15,
-        domain: 'kycombinator.com',
+      const response = await fetch('https://api.kycombinator.com/auth/refresh', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ refresh }),
       });
-      return res;
+
+      if (response.ok) {
+        // The API should handle setting the new token cookie
+        return NextResponse.next();
+      } else {
+        console.warn("Refresh token invalid/expired:", response.statusText);
+      }
     } catch (err) {
-      console.warn("Refresh token invalid/expired:", err instanceof Error ? err.message : err);
+      console.warn("Error refreshing token:", err instanceof Error ? err.message : err);
     }
   }
 

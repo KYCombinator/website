@@ -49,12 +49,12 @@ export default function ReportPage({ params }) {
               </Badge>
             ))}
           </div>
-          <span className="text-sm text-muted-foreground">{report.date}</span>
+          <span className="text-sm text-foreground-800">{report.date}</span>
         </div>
-        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl mb-4">
+        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl mb-4 text-primary-500">
           {report.title}
         </h1>
-        <p className="text-xl text-muted-foreground">{report.description}</p>
+        <p className="text-xl text-foreground-800">{report.description}</p>
       </div>
 
       {report.status === "Coming Soon" ? (
@@ -79,7 +79,7 @@ export default function ReportPage({ params }) {
               </a>
             </div>
           )}
-          <div className="prose dark:prose-invert max-w-none">
+          <div className="prose dark:prose-invert max-w-none text-foreground-800">
             {ReportComponent ? (
               <ReportComponent />
             ) : (

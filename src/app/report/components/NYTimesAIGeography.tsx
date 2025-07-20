@@ -1,7 +1,7 @@
 export default function NYTimesAIGeography() {
   return (
     <div className="space-y-8">
-      <section className="bg-gray-50 p-6 rounded-lg">
+      <section className="bg-background-300 text-foreground-300 p-6 rounded-lg">
         <h2 className="text-lg font-semibold mb-4">Sources & References</h2>
         <ul className="space-y-2">
           <li>
@@ -59,7 +59,7 @@ export default function NYTimesAIGeography() {
         <h2 className="text-2xl font-bold mb-4">
           Key Advantages of Midsize Cities
         </h2>
-        <div className="bg-gray-50 p-6 rounded-lg">
+        <div className="bg-background-300 text-foreground-300 p-6 rounded-lg">
           <ul className="list-disc list-inside space-y-2">
             <li>Educated workforce ready for AI adoption</li>
             <li>More affordable housing compared to major tech hubs</li>
@@ -71,7 +71,7 @@ export default function NYTimesAIGeography() {
 
       <section>
         <h2 className="text-2xl font-bold mb-4">Case Study: Chattanooga</h2>
-        <div className="bg-purple-50 p-6 rounded-lg">
+        <div className="bg-background-300 text-foreground-300 p-6 rounded-lg">
           <h3 className="text-xl font-semibold mb-3">Success Stories</h3>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="p-4 bg-white rounded shadow">
@@ -127,7 +127,7 @@ export default function NYTimesAIGeography() {
         </div>
       </section>
 
-      <section className="bg-blue-50 p-6 rounded-lg">
+      <section className="bg-background-300 text-foreground-300 p-6 rounded-lg">
         <h2 className="text-2xl font-bold mb-4">Looking Forward</h2>
         <p>
           The research suggests that the geographic distribution of AI benefits

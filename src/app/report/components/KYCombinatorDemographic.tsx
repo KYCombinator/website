@@ -26,7 +26,7 @@ export default function KYCDemographic() {
 
       <section>
         <h2 className="text-2xl font-bold mb-4">The Divergence</h2>
-        <div className="bg-gray-50 p-6 rounded-lg mb-6">
+        <div className="bg-background-300 text-foreground-300 p-6 rounded-lg mb-6">
           <h3 className="text-xl font-semibold mb-4">By 1974</h3>
           <ul className="list-disc list-inside space-y-2">
             <li>
@@ -40,7 +40,7 @@ export default function KYCDemographic() {
           </ul>
         </div>
 
-        <div className="bg-purple-50 p-6 rounded-lg">
+        <div className="bg-background-300 text-foreground-300 p-6 rounded-lg">
           <h3 className="text-xl font-semibold mb-4">By 2020</h3>
           <ul className="list-disc list-inside space-y-2">
             <li>
@@ -57,7 +57,7 @@ export default function KYCDemographic() {
       <section>
         <h2 className="text-2xl font-bold mb-4">Data Visualization</h2>
         <div className="space-y-4">
-          <div className="bg-gray-50 p-6 rounded-lg">
+          <div className="bg-background-300 text-foreground-300 p-6 rounded-lg">
             <h3 className="text-lg font-semibold mb-2">
               Interactive Population Growth Comparison
             </h3>
@@ -70,7 +70,7 @@ export default function KYCDemographic() {
             </div>
           </div>
 
-          <div className="bg-gray-50 p-6 rounded-lg">
+          <div className="bg-background-300 text-foreground-300 p-6 rounded-lg">
             <h3 className="text-lg font-semibold mb-2">
               Population Growth Projections
             </h3>
@@ -83,7 +83,7 @@ export default function KYCDemographic() {
             </div>
           </div>
 
-          <div className="bg-gray-50 p-6 rounded-lg">
+          <div className="bg-background-300 text-foreground-300 p-6 rounded-lg">
             <h3 className="text-lg font-semibold mb-2">Median Income Trends</h3>
             <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
               <iframe
@@ -94,7 +94,7 @@ export default function KYCDemographic() {
             </div>
           </div>
 
-          <div className="bg-gray-50 p-6 rounded-lg">
+          <div className="bg-background-300 text-foreground-300 p-6 rounded-lg">
             <h3 className="text-lg font-semibold mb-2">
               Total Income Comparison
             </h3>
@@ -109,7 +109,7 @@ export default function KYCDemographic() {
         </div>
       </section>
 
-      <section className="bg-blue-50 p-6 rounded-lg">
+      <section className="bg-background-300 text-foreground-300 p-6 rounded-lg">
         <h2 className="text-2xl font-bold mb-4">Looking Forward</h2>
         <p className="mb-4">
           While some suggest Louisville could catch up to Nashville or

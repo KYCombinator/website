@@ -16,7 +16,7 @@ export default function NewYorker() {
       <section>
         <h2 className="text-2xl font-bold mb-4">Key Observations</h2>
         <div className="space-y-6">
-          <div className="bg-gray-50 p-6 rounded-lg">
+          <div className="bg-background-300 text-foreground-300 p-6 rounded-lg">
             <h3 className="text-xl font-semibold mb-4">
               The Atlanta Comparison
             </h3>
@@ -28,7 +28,7 @@ export default function NewYorker() {
             </blockquote>
           </div>
 
-          <div className="bg-gray-50 p-6 rounded-lg">
+          <div className="bg-background-300 text-foreground-300 p-6 rounded-lg">
             <h3 className="text-xl font-semibold mb-4">The Inertia Problem</h3>
             <blockquote className="border-l-4 border-gray-300 pl-4 italic">
               &quot;One of these Louisvillians, a young executive named H.
@@ -40,7 +40,7 @@ export default function NewYorker() {
             </blockquote>
           </div>
 
-          <div className="bg-gray-50 p-6 rounded-lg">
+          <div className="bg-background-300 text-foreground-300 p-6 rounded-lg">
             <h3 className="text-xl font-semibold mb-4">
               Economic Identity Crisis
             </h3>

@@ -45,43 +45,43 @@ export default function Header({children}: {children: React.ReactNode}) {
                 href="/"
                 className="hover:text-white"
               >
-                Home
+                home
               </Link>
               <Link
                 href="/about"
                 className="hover:text-white"
               >
-                About
+                about
               </Link>
               <Link
                 href="/faqs"
                 className="hover:text-white"
               >
-                FAQs
+                faqs
               </Link>
               <Link
                 href="/ourtype"
                 className="hover:text-white"
               >
-                Our Type
+                our type
               </Link>
               <Link
                 href="/events"
                 className="hover:text-white"
               >
-                Events
+                events
               </Link>
               <Link
                 href="/cinderblock"
                 className="hover:text-white"
               >
-                The Block
+                the block
               </Link>
               <Link
                 href="/report"
                 className="hover:text-white"
               >
-                Report
+                report
               </Link>
               
             </nav>
@@ -99,43 +99,43 @@ export default function Header({children}: {children: React.ReactNode}) {
                 href="/"
                 className="block px-3 py-2  hover:text-purple-700"
               >
-                Home
+                home
               </Link>
               <Link
                 href="/#about"
                 className="block px-3 py-2  hover:text-purple-700"
               >
-                About
+                about
               </Link>
               <Link
                 href="/#faqs"
                 className="block px-3 py-2 hover:text-purple-700"
               >
-                FAQs
+                faqs
               </Link>
               <Link
                 href="/type"
                 className="block px-3 py-2 hover:text-purple-700"
               >
-                Our Type
+                our type
               </Link>
               <Link
                 href="/#events"
                 className="block px-3 py-2 hover:text-purple-700"
               >
-                Events
+                events
               </Link>
               <Link
                 href="/cinderblock"
                 className="block px-3 py-2 hover:text-purple-700"
               >
-                The Block
+                the block
               </Link>
               <Link
                 href="/report"
                 className="block px-3 py-2 hover:text-purple-700"
               >
-                Report
+                report
               </Link>
               {children}
             </div>

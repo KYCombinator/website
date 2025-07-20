@@ -12,13 +12,22 @@ export const metadata: Metadata = {
   title: "This is KYX",
   description:
     "Attract, retain, and grow Louisville's top builders—tilting the odds for the ambitious few willing to out‑work and out‑execute—to forge a critical mass of Series A ready companies in Louisville.",
+  authors: [{ name: "KYX Team", url: "https://kycombinator.com/about" }],
   openGraph: {
-    images: ["werise1.png"],
+    images: [`${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.png`],
   },
   icons: {
     icon: `${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.png`,
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "This is KYX",
+    description:
+      "Attract, retain, and grow Louisville's top builders—tilting the odds for the ambitious few willing to out‑work and out‑execute—to forge a critical mass of Series A ready companies in Louisville.",
+    images: [`${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.png`],
+  },
 };
+
 
 export default function RootLayout({
   children,

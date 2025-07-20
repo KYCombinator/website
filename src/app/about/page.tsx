@@ -1,4 +1,17 @@
+import { Metadata } from 'next'
 import React from 'react'
+
+export const metadata: Metadata = {
+  title: "About KYX",
+  description: "Our Vision and Mission. Problem & Opportunity. Team.",
+  authors: [{ name: "KYX Team", url: "https://kycombinator.com/about" }],
+  openGraph: {
+    images: [`${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.png`],
+  },
+  icons: {
+    icon: `${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.png`,
+  },
+}
 
 const page = () => {
   return (

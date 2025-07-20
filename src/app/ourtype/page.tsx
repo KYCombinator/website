@@ -67,7 +67,7 @@ const page = () => {
             <div>
               <h3 className="text-xl font-semibold text-primary-500 mb-2">Trust</h3>
               <p className="text-foreground-800">
-                You do what you say you'll do. You keep your word.
+                You do what you say you&apos;ll do. You keep your word.
               </p>
             </div>
             <div>

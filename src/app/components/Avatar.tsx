@@ -12,12 +12,13 @@ const Avatar = async () => {
   let user: AuthUser | null = null;
 
   if (token) {
-    const decoded = jwt.decode(token) as { email?: string; name?: string; picture?: string } | null;
+    const decoded = jwt.decode(token) as AuthUser | null;
     if (decoded) {
       user = {
-        email: decoded.email || "",
-        name: decoded.name || "",
-        picture: decoded.picture || "",
+        id: decoded?.id,
+        email: decoded?.email,
+        name: decoded?.name,
+        picture: decoded?.picture,
       };
     }
   }

@@ -132,6 +132,14 @@ const page = () => {
                 <Link href="https://buy.stripe.com/28E14n8jwa708HB8yUc7u01">Pizza Sponsor ($5)</Link>
               </div>
             </div>
+            <div className="flex flex-col items-center">
+              <div className="flex justify-center mb-4 text-lg font-bold text-foreground-800">
+                Sponsor a Cinderblock
+              </div>
+              <div className="btn btn-primary">
+                <Link href="https://buy.stripe.com/aFa9ATdDQ7YScXRaH2c7u02">Cinderblock Sponsor ($25)</Link>
+              </div>
+            </div>
           </div>
         </section>
 

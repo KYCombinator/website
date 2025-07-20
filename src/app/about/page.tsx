@@ -69,7 +69,7 @@ const page = () => {
               <div>
                 <h3 className="text-xl font-semibold text-primary-500 mb-2">Dan Ross‑Li, Cofounder</h3>
                 <p className="text-foreground-800">
-                  Louisville transplant, father of two, and local founder with 8 years in YC-backed startups and Bay Area high-growth tech companies; previously a high-frequency trader in Chicago, he holds an MBA from Chicago Booth and a BA in Economics from Yale. He is known amongst friends as Erlich.
+                  Louisville transplant, father of two, and local founder with 8 years in YC-backed startups and Bay Area high-growth tech companies; previously a high-frequency trader in Chicago, he holds an MBA from Chicago Booth and a BA in Economics from Yale. He is known amongst friends as Peter Gregory.
                 </p>
               </div>
               <div>

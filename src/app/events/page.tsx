@@ -4,13 +4,13 @@ import { Calendar } from 'lucide-react'
 
 const page = () => {
   return (
-    <section id="events" className="py-16 bg-gray-50">
+    <section id="events" className="py-16 bg-background-900">
     <div className="container mx-auto px-4">
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-bold text-primary-500 mb-4">
           Upcoming Events
         </h2>
-        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+        <p className="text-foreground-800 text-lg max-w-2xl mx-auto">
           Events are open to all. We encourage you to show up. Vote with
           your feet.
         </p>

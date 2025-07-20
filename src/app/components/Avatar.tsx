@@ -19,23 +19,28 @@ const Avatar = async () => {
   } | null = null;
 
   if (token) {
+    console.log("in token");
     const decoded = jwt.decode(token) as { email?: string; name?: string; picture?: string } | null;
     if (decoded) {
+      console.log("in decoded");
       user = {
         email: decoded.email || null,
         name: decoded.name || null,
         picture: decoded.picture || null,
       };
+      console.log("user", user);
     }
   }
 
+  console.log("avatar user return statement");
+
   return (
     <>
-      {user && user.picture && user.name ? (
+      {user ? (
         <div className="flex items-center gap-2">
           <Image 
-            src={user.picture} 
-            alt={user.name} 
+            src={user?.picture || ""} 
+            alt={user?.name || ""} 
             width={32} 
             height={32} 
             className="rounded-full"

@@ -5,15 +5,15 @@ import { reports, badges } from "./data";
 
 export default function ReportsPage() {
   return (
-    <main className="py-12 px-4 sm:px-6 lg:px-8 mt-16">
+    <main className="py-12 px-4 sm:px-6 lg:px-8 bg-background-900 text-foreground-800">
       <div className="mb-12">
-        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl mb-4">
+        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl mb-4 text-primary-500">
           Reports & Analytics
         </h1>
         <p className="text-xl text-muted-foreground">
           Data-driven insights into Kentucky&apos;s tech community
         </p>
-        <p className="mt-4 text-sm italic text-muted-foreground bg-gray-50 border border-gray-200 rounded-lg p-4">
+        <p className="mt-4 text-sm italic text-muted-foreground bg-background-300 border border-gray-200 rounded-lg p-4 text-foreground-300">
           All information provided is for educational and research purposes
           only. Reports may contain copyrighted material used under fair use for
           educational purposes.
@@ -98,11 +98,11 @@ export default function ReportsPage() {
         )}
       </div>
 
-      <div className="mt-12 p-8 border rounded-lg bg-gradient-to-br from-[#6B46C1]/10 to-white border-[#6B46C1]/20 shadow-sm">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+      <div className="mt-12 p-8 border rounded-lg bg-background-300 border-foreground-300 shadow-sm">
+        <h2 className="text-2xl font-semibold mb-4 text-foreground-300">
           Looking for Custom Reports?
         </h2>
-        <p className="text-gray-600 mb-4">
+        <p className="text-foreground-300 mb-4">
           Need specific data or insights about Kentucky&apos;s tech ecosystem?
           We&apos;re happy to help with custom analytics and reports.
         </p>

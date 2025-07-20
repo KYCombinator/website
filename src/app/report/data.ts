@@ -45,7 +45,7 @@ export const reports: Report[] = [
         title: "KYCombinator Community Demographics Report",
         description: "Analysis of Kentucky's tech workforce demographics, education levels, and geographic distribution",
         status: "Published",
-        date: "March 2024",
+        date: "March 2025",
         badges: ["research", "KYCombinator"],
         componentKey: "kycombinator-demographic"
     },

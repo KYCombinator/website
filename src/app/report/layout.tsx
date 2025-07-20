@@ -15,8 +15,10 @@ export default function ReportsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex flex-col container mx-auto pt-12">
+    <div className="bg-background-900">
+    <div className="min-h-screen flex flex-col container mx-auto">
       {children}
+    </div>
     </div>
   );
 }

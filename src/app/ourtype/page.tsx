@@ -53,27 +53,27 @@ const page = () => {
           </h2>
           <div className="text-left space-y-6">
             <div>
-              <h3 className="text-xl font-semibold text-primary-500 mb-2">High-Agency Founders</h3>
+              <h3 className="text-xl font-semibold text-primary-500 mb-2">High-Agency</h3>
               <p className="text-foreground-800">
-                People who don&apos;t wait for permission. You take action, move fast, and create impact. You&apos;re building something meaningful and you&apos;re ready to scale.
+                Take action. No permission needed.
               </p>
             </div>
             <div>
-              <h3 className="text-xl font-semibold text-primary-500 mb-2">Execution-Focused Builders</h3>
+              <h3 className="text-xl font-semibold text-primary-500 mb-2">Surplus Value</h3>
               <p className="text-foreground-800">
-                You&apos;re shipping products, acquiring customers, and iterating quickly. You&apos;re not just talking about ideas—you&apos;re building and selling.
+                You provide surplus value to the community. Give more than you take.
               </p>
             </div>
             <div>
-              <h3 className="text-xl font-semibold text-primary-500 mb-2">Ambitious & Relentless</h3>
+              <h3 className="text-xl font-semibold text-primary-500 mb-2">Trust</h3>
               <p className="text-foreground-800">
-                You have big goals and you&apos;re willing to out-work and out-execute everyone else. You&apos;re not afraid of the trough of sorrow—you&apos;re ready to push through it.
+                You do what you say you'll do. You keep your word.
               </p>
             </div>
             <div>
               <h3 className="text-xl font-semibold text-primary-500 mb-2">Local Commitment</h3>
               <p className="text-foreground-800">
-                You&apos;re committed to building in Louisville and growing the local ecosystem. You want to be part of creating a critical mass of Series A ready companies here.
+                You&apos;re committed to building in Louisville and growing the local ecosystem.
               </p>
             </div>
           </div>
@@ -93,13 +93,13 @@ const page = () => {
             <div>
               <h3 className="text-xl font-semibold text-primary-500 mb-2">Passive Participants</h3>
               <p className="text-foreground-800">
-                This isn&apos;t a networking group or a place to just show up. 
+                This isn&apos;t a networking group. 
               </p>
             </div>
             <div>
-              <h3 className="text-xl font-semibold text-primary-500 mb-2">Short-Term Thinkers</h3>
+              <h3 className="text-xl font-semibold text-primary-500 mb-2">The Gallery</h3>
               <p className="text-foreground-800">
-                We&apos;re building for the long term. We want people who are committed to the journey, not just looking for quick wins.
+                Comments from the gallery are not welcome.
               </p>
             </div>
           </div>

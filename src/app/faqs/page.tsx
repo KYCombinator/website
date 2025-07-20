@@ -79,7 +79,7 @@ const page = () => {
             <div>
               <h3 className="text-xl font-semibold text-primary-500 mb-2">How do you measure success?</h3>
               <p className="text-foreground-800">
-                We measure success by the number of Series A ready companies created in Louisville. Our goal is to systematically identify and accelerate the best local founders.
+                We measure success by the number of revenue generating startups created in Louisville. Our goal is to systematically identify and accelerate the best local founders.
               </p>
             </div>
           </div>

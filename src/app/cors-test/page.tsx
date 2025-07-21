@@ -7,7 +7,7 @@ export default function CorsTestPage() {
   const [result, setResult] = useState<string>("Pending...");
 
   useEffect(() => {
-    fetch("https://api.kycombinator.com/auth/cors-test", {
+    fetch("https://api.kycombinator.com/auth/corstest", {
       method: "GET",
       credentials: "include",
     })

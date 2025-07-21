@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           <div>
             <Image
-              src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.png`}
+              src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.svg`}
               alt="KYC Logo"
               width={200}
               height={44}

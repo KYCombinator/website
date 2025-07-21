@@ -10,7 +10,7 @@ export default function Home() {
         <div className="container mx-auto text-center h-full">
           <div className="bg-background-900 rounded-lg">
             <Image
-              src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.png`}
+              src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.svg`}
               alt="KYX"
               width={360}
               height={123}

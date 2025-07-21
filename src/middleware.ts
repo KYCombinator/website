@@ -9,6 +9,9 @@ export function middleware(req: NextRequest) {
   const token = req.cookies.get(`hzzh.${APP_ID}.token`)?.value;
   const url = req.nextUrl.clone();
 
+  console.log("token", token);
+  console.log("JWT_SECRET", JWT_SECRET);
+
   if (!token) {
     url.pathname = '/soft-refresh';
     url.searchParams.set('redirect', req.nextUrl.pathname);
@@ -19,6 +22,7 @@ export function middleware(req: NextRequest) {
     jwt.verify(token, JWT_SECRET);
     return NextResponse.next();
   } catch {
+    console.log("token expired try redirecting");
     url.pathname = '/soft-refresh';
     url.searchParams.set('redirect', req.nextUrl.pathname);
     return NextResponse.redirect(url);

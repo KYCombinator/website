@@ -1,16 +1,16 @@
-// middleware.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import jwt from 'jsonwebtoken';
 
-export function middleware(req: NextRequest) {
-  const APP_ID = process.env.NEXT_PUBLIC_APP_ID;
-  const JWT_SECRET = process.env.JWT_SECRET || "cinderblock";
+export const config = {
+  matcher: ['/account/:path*'],
+};
+
+const APP_ID = process.env.NEXT_PUBLIC_APP_ID!;
+const JWT_SECRET = process.env.JWT_SECRET || "cinderblock";
+
+export async function middleware(req: NextRequest) {
   const token = req.cookies.get(`hzzh.${APP_ID}.token`)?.value;
   const url = req.nextUrl.clone();
-
-  console.log("token", token);
-  console.log("JWT_SECRET", JWT_SECRET);
 
   if (!token) {
     url.pathname = '/soft-refresh';
@@ -18,17 +18,40 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  try {
-    jwt.verify(token, JWT_SECRET);
-    return NextResponse.next();
-  } catch {
-    console.log("token expired try redirecting");
+  const payload = await verifyJwt(token, JWT_SECRET);
+  if (!payload || (payload.exp && payload.exp * 1000 < Date.now())) {
     url.pathname = '/soft-refresh';
     url.searchParams.set('redirect', req.nextUrl.pathname);
     return NextResponse.redirect(url);
   }
+
+  return NextResponse.next();
 }
 
-export const config = {
-  matcher: ['/account/:path*'], // adjust for your protected routes
-};
+// Edge-safe JWT verifier
+async function verifyJwt(token: string, secret: string): Promise<any | null> {
+  const [headerB64, payloadB64, signatureB64] = token.split(".");
+  if (!headerB64 || !payloadB64 || !signatureB64) return null;
+
+  const enc = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    "raw",
+    enc.encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["verify"]
+  );
+
+  const data = `${headerB64}.${payloadB64}`;
+  const signature = Uint8Array.from(atob(signatureB64), c => c.charCodeAt(0));
+
+  const valid = await crypto.subtle.verify("HMAC", key, signature, enc.encode(data));
+  if (!valid) return null;
+
+  try {
+    const payloadJson = atob(payloadB64);
+    return JSON.parse(payloadJson);
+  } catch {
+    return null;
+  }
+}

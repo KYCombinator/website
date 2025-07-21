@@ -13,7 +13,7 @@ export async function middleware(req: NextRequest) {
   const url = req.nextUrl.clone();
 
   if (!token) {
-    url.pathname = '/soft-refresh';
+    url.pathname = 'https://auth.kycombinator.com';
     url.searchParams.set('redirect', req.nextUrl.pathname);
     return NextResponse.redirect(url);
   }
@@ -52,9 +52,13 @@ async function verifyJwt(token: string, secret: string): Promise<any | null> {
   if (!isValid) return null;
 
   try {
-    const json = atob(payloadB64);
+    const json = atob(base64UrlToBase64(payloadB64));
     return JSON.parse(json);
   } catch {
     return null;
   }
 }
+
+function base64UrlToBase64(input: string): string {
+    return input.replace(/-/g, '+').replace(/_/g, '/').padEnd(Math.ceil(input.length / 4) * 4, '=');
+  }

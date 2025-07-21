@@ -30,7 +30,7 @@ const Avatar = async () => {
           <p>Welcome, {user.name}</p>
         </div>
       ) : (
-        <Link href="https://auth.kycombinator.com?redirect_uri=https://www.kycombinator.com">
+        <Link href="https://auth.kycombinator.com?redirect=https://www.kycombinator.com">
           <div className="btn btn-primary">Login</div>
         </Link>
       )}

@@ -7,9 +7,8 @@ export default function SoftRefresh() {
   const router = useRouter();
   const params = useSearchParams();
   const redirectPath = params.get('redirect') || '/';
-
-  console.log("redirectPath", redirectPath);
-
+  const currentUrl = window.location.href;
+  const returnUrl = 'https://auth.kycombinator.com?redirect=' + encodeURIComponent(currentUrl + redirectPath);
 
   useEffect(() => {
     fetch('https://api.kycombinator.com/auth/refresh', {
@@ -18,9 +17,9 @@ export default function SoftRefresh() {
     }).then((res) => {
       console.log("res", res);
       if (res.ok) {
-        router.replace('/');
+        router.replace(redirectPath);
       } else {
-        router.replace('/login');
+        router.replace(returnUrl);
       }
     });
   }, [redirectPath, router]);

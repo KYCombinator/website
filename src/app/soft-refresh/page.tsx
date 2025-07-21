@@ -8,11 +8,15 @@ export default function SoftRefresh() {
   const params = useSearchParams();
   const redirectPath = params.get('redirect') || '/';
 
+  console.log("redirectPath", redirectPath);
+
+
   useEffect(() => {
     fetch('https://api.kycombinator.com/auth/refresh', {
       method: 'POST',
       credentials: 'include',
     }).then((res) => {
+      console.log("res", res);
       if (res.ok) {
         router.replace(redirectPath);
       } else {

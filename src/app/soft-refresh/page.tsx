@@ -18,7 +18,7 @@ export default function SoftRefresh() {
     }).then((res) => {
       console.log("res", res);
       if (res.ok) {
-        router.replace(redirectPath);
+        router.replace('/');
       } else {
         router.replace('/login');
       }

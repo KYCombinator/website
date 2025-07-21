@@ -59,7 +59,7 @@ export default function Home() {
               </svg>
             </Link>
             <Link
-              href="https://x.com/ky_exe_"
+              href="https://x.com/kycombinator"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-black text-white p-3 rounded-md hover:bg-gray-900 transition"

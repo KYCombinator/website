@@ -46,7 +46,7 @@ async function verifyJwt(token: string, secret: string): Promise<any | null> {
   );
 
   const data = `${headerB64}.${payloadB64}`;
-  const signature = Uint8Array.from(atob(signatureB64), c => c.charCodeAt(0));
+  const signature = Uint8Array.from(atob(base64UrlToBase64(signatureB64)), c => c.charCodeAt(0));
 
   const isValid = await crypto.subtle.verify('HMAC', key, signature, enc.encode(data));
   if (!isValid) return null;

@@ -17,8 +17,8 @@ export default function VelocityInfo() {
             </h2>
 
             <div className="space-y-8">
-              <div className="bg-[#6B46C1]/5 p-6 rounded-lg">
-                <h3 className="text-xl font-semibold text-[#6B46C1] mb-4">
+              <div className="bg-primary-500/5 p-6 rounded-lg">
+                <h3 className="text-xl font-semibold text-primary-500 mb-4">
                   Overview
                 </h3>
                 <div className="space-y-4 text-gray-600">
@@ -51,7 +51,7 @@ export default function VelocityInfo() {
                     toward their roadmap goals
                   </p>
                   <hr />
-                  <h3 className="text-xl font-semibold text-[#6B46C1] mb-4">
+                  <h3 className="text-xl font-semibold text-primary-500 mb-4">
                     Pitch Day
                   </h3>
                   <p>
@@ -80,7 +80,7 @@ export default function VelocityInfo() {
                   </ul>
                   <hr />
 
-                  <h3 className="text-xl font-semibold text-[#6B46C1] mb-4">
+                  <h3 className="text-xl font-semibold text-primary-500 mb-4">
                     Roadmap Samples
                   </h3>
 
@@ -333,7 +333,7 @@ export default function VelocityInfo() {
                   </div>
 
                   <hr />
-                  <h3 className="text-xl font-semibold text-[#6B46C1] mb-4">
+                  <h3 className="text-xl font-semibold text-primary-500 mb-4">
                     Winning
                   </h3>
                   <p>

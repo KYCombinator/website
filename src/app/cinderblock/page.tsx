@@ -74,6 +74,74 @@ const page = () => {
             </p>
           </div>
         </div>
+
+        <section id="community-guidelines" className="max-w-3xl mx-auto mt-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary-500 mb-6 text-center">
+            Community Guidelines
+          </h2>
+          <div className="text-left space-y-6">
+            <p className="text-foreground-800 text-lg">
+              Welcome to Cinderblock. This space exists to help you build faster, think sharper, and go further—with others who are doing the same. To keep the atmosphere focused, intense, and collaborative, we expect all members to operate under the following principles:
+            </p>
+
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-xl font-semibold text-primary-500 mb-2">1. Own Your Work</h3>
+                <p className="text-foreground-800">
+                  This space is a forge—not a daycare. You&apos;re here to build. Be accountable for your time, your energy, and your presence. Clean up after yourself. Show up prepared. Don&apos;t waste anyone&apos;s momentum.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-semibold text-primary-500 mb-2">2. Respect the Grind</h3>
+                <p className="text-foreground-800">
+                  Everyone here is under pressure—pushing through unknowns, solving real problems. Respect the effort. Noise, distractions, and ego kill velocity. Keep calls in designated areas. Don&apos;t interrupt deep work. Don&apos;t pitch unsolicited.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-semibold text-primary-500 mb-2">3. Default to Contribution</h3>
+                <p className="text-foreground-800">
+                  This isn&apos;t a services marketplace. Give before you ask. If you see someone stuck, offer help. If you&apos;ve shipped something useful, share it. Your signal-to-noise ratio determines how valuable you are to the room.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-semibold text-primary-500 mb-2">4. No Tourists</h3>
+                <p className="text-foreground-800">
+                  This isn&apos;t a hangout for &quot;networkers&quot; or &quot;idea guys.&quot; If you&apos;re not actively building or enabling others who are, this isn&apos;t the place for you. No clout-chasing. No empty posturing. Execution earns respect.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-semibold text-primary-500 mb-2">5. Zero Tolerance for Bullshit</h3>
+                <p className="text-foreground-800">
+                  We do not tolerate harassment, discrimination, or exploitation—period.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-semibold text-primary-500 mb-2">6. Confidentiality is Default</h3>
+                <p className="text-foreground-800">
+                  What happens in Cinderblock stays in Cinderblock. Don&apos;t share others&apos; work, strategies, or data without explicit permission. We&apos;re not in the business of leaking decks or ideas.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-semibold text-primary-500 mb-2">7. Leave It Better</h3>
+                <p className="text-foreground-800">
+                  Whether it&apos;s the space, the culture, or the conversation—leave it stronger than you found it. That&apos;s how we build something lasting.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-background-800 p-6 rounded-lg mt-8">
+              <p className="text-foreground-800 font-semibold">
+                <strong>Violations of these guidelines may result in suspension or termination of your membership.</strong> This is a space for serious builders. If that&apos;s you—you&apos;re in the right place.
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
     </section>
   )

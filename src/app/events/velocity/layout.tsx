@@ -9,14 +9,14 @@ export const metadata: Metadata = {
     title: "Velocity Pitch Competition | KY Combinator",
     description:
       "Join the Velocity Pitch Competition - a 12-week startup competition in Louisville showcasing high-growth potential startups. Register to attend or apply to pitch your startup.",
-    images: ["/velocity/real1.png"],
+    images: [`${process.env.NEXT_PUBLIC_CDN_URL}/velocity.png`],
   },
   twitter: {
     card: "summary_large_image",
     title: "Velocity Pitch Competition | KY Combinator",
     description:
       "Join the Velocity Pitch Competition - a 12-week startup competition in Louisville showcasing high-growth potential startups. Register to attend or apply to pitch your startup.",
-    images: ["/velocity/real1.png"],
+    images: [`${process.env.NEXT_PUBLIC_CDN_URL}/velocity.png`],
   },
 };
 

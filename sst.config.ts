@@ -24,21 +24,53 @@ export default $config({
     });
 
     // ✅ Redirect www → root
+    // CloudFront Function: preserve path + query when redirecting www -> apex
     const redirectFn = new aws.cloudfront.Function("RedirectWWW", {
-      runtime: "cloudfront-js-1.0", // ✅ required
+      runtime: "cloudfront-js-1.0",  // ✅ required
       code: `
         function handler(event) {
-          var host = event.request.headers.host.value;
+          var req = event.request;
+          var host = (req.headers.host && req.headers.host.value || "").toLowerCase();
+
           if (host === "www.kycombinator.com") {
+            var uri = req.uri || "/";
+            var qs = req.querystring || {};
+            var keys = Object.keys(qs);
+            var qsStr = "";
+            if (keys.length > 0) {
+              var pairs = [];
+              for (var i = 0; i < keys.length; i++) {
+                var k = keys[i];
+                var entry = qs[k];
+                if (entry && typeof entry.value === "string") {
+                  pairs.push(encodeURIComponent(k) + "=" + encodeURIComponent(entry.value));
+                }
+                if (entry && entry.multiValue) {
+                  for (var j = 0; j < entry.multiValue.length; j++) {
+                    var mv = entry.multiValue[j];
+                    if (mv && typeof mv.value === "string") {
+                      pairs.push(encodeURIComponent(k) + "=" + encodeURIComponent(mv.value));
+                    }
+                  }
+                }
+              }
+              if (pairs.length > 0) qsStr = "?" + pairs.join("&");
+            }
+
+            var location = "https://kycombinator.com" + uri + qsStr;
+
             return {
               statusCode: 301,
               statusDescription: "Moved Permanently",
               headers: {
-                location: { value: "https://kycombinator.com" }
+                location: { value: location }
+                // Optional HSTS:
+                //, "strict-transport-security": { value: "max-age=31536000; includeSubDomains; preload" }
               }
             };
           }
-          return event.request;
+
+          return req;
         }
       `,
     });

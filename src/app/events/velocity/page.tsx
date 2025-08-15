@@ -105,7 +105,7 @@ export default function VelocityPage() {
               className="mt-8 flex flex-wrap gap-4"
             >
               <Link
-                href="https://lu.ma/velocitypitch"
+                href="https://lu.ma/velocityky"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-2xl border border-white/20 bg-white/10 px-6 py-3 font-semibold backdrop-blur transition hover:bg-white/20"
@@ -227,7 +227,7 @@ export default function VelocityPage() {
               Apply to Pitch
             </Link>
             <Link
-              href="https://lu.ma/velocitypitch"
+              href="https://lu.ma/velocityky"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-xl border border-white/20 bg-white/10 px-6 py-3 font-semibold backdrop-blur transition hover:bg-white/20"

@@ -87,7 +87,7 @@ export default function VelocityPage() {
               transition={{ delay: 0.15, duration: 0.6 }}
               className={`text-4xl md:text-6xl font-extrabold tracking-tight ${glow}`}
             >
-              Velocity Competition
+              Velocity Challenge
             </motion.h1>
             <motion.p
               initial={{ y: 20, opacity: 0 }}
@@ -118,7 +118,7 @@ export default function VelocityPage() {
                 rel="noopener noreferrer"
                 className="rounded-2xl bg-white px-6 py-3 font-semibold text-black transition hover:bg-white/90"
               >
-                Apply to Pitch
+                Apply Velocity
               </Link>
             </motion.div>
           </div>
@@ -224,7 +224,7 @@ export default function VelocityPage() {
               rel="noopener noreferrer"
               className="rounded-xl bg-white px-6 py-3 font-semibold text-black transition hover:bg-white/90"
             >
-              Apply to Pitch
+              Apply Velocity
             </Link>
             <Link
               href="https://lu.ma/velocityky"

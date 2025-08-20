@@ -18,11 +18,19 @@ const page = () => {
     <section id="cinderblock" className="py-16 bg-background-900 min-h-screen">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
+          {/* Address at the top */}
+          <div className="mb-8 p-4 bg-background-800 rounded-lg border border-primary-500/20">
+            <p className="text-primary-400 font-medium text-lg">
+              1205 East Washington Street Suite 111<br />
+              Louisville, KY 40206
+            </p>
+          </div>
+          
           <h2 className="text-3xl md:text-4xl font-bold text-primary-500 mb-6">
             Cinderblock
           </h2>
           <p className="text-foreground-800 text-lg mb-8">
-            Cinderblock is our initial prototype for building toward a Brickyard-style venture studio.
+            Cinderblock is our initial prototype for building toward a Brickyard-style venture studio, located at 1205 East Washington Street Suite 111, Louisville, KY 40206.
           </p>
           
           {/* Top Apply Button */}
@@ -86,6 +94,19 @@ const page = () => {
           <div className="bg-background-800 p-6 rounded-lg mb-8">
             <p className="text-foreground-800 text-lg">
               Cinderblock is how we validate our thesis on concentration and aligned incentives — in a controlled, focused setting. It&apos;s the groundwork for systematically identifying and accelerating the best local founders.
+            </p>
+          </div>
+        </div>
+
+        {/* Location Section */}
+        <div className="max-w-3xl mx-auto text-center mt-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary-500 mb-6">
+            Visit Us
+          </h2>
+          <div className="bg-background-800 p-6 rounded-lg mb-8">
+            <p className="text-primary-400 font-semibold text-xl">
+              1205 East Washington Street Suite 111<br />
+              Louisville, KY 40206
             </p>
           </div>
         </div>

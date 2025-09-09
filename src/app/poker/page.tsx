@@ -2,7 +2,18 @@
 
 import React, { useEffect, useState } from "react";
 import { Player, RatingRow, LeaderboardRow } from "@/types/poker";
-import { getAllPlayers, createMatch } from "@/lib/api";
+
+interface Match {
+  matchId: string;
+  date: string;
+  amount: number;
+  blinds: number;
+  player1Id: string;
+  player2Id: string;
+  winnerId: string;
+  createdAt: string;
+}
+import { getAllPlayers, createMatch, getMatches } from "@/lib/api";
 import { SectionCard, Pill, Stat, Modal, Select, Input, RatingList, Leaderboard } from "./functions";
 
 export default function PokerPage() {
@@ -12,6 +23,7 @@ export default function PokerPage() {
 
   // Data from API
   const [players, setPlayers] = useState<Player[]>([]);
+  const [matches, setMatches] = useState<Match[]>([]);
 
   // Derived data for UI
   const ratings: RatingRow[] = players.map(p => ({
@@ -57,10 +69,17 @@ export default function PokerPage() {
     setLoading(true);
     setError("");
     try {
-      const [pl] = await Promise.all([
+      // Calculate date 7 days ago
+      const sevenDaysAgo = new Date();
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+      const startDate = sevenDaysAgo.toISOString().slice(0, 10);
+      
+      const [pl, matchesData] = await Promise.all([
         getAllPlayers(),
+        getMatches({ startDate, limit: 50 })
       ]);
       setPlayers(pl);
+      setMatches(matchesData.matches);
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : "Failed to load data");
     } finally {
@@ -181,40 +200,60 @@ export default function PokerPage() {
       {/* <Matrix /> */}
 
       {/* Recent Matches */}
-      {/* <SectionCard title="Recent Matches" right={<Pill>{matches.length}</Pill>}>
+      <SectionCard title="Recent Matches (Last 7 Days)" right={<Pill>{matches.length}</Pill>}>
         {!matches.length ? (
-          <div className="text-neutral-400">Add your first match to get started.</div>
+          <div className="text-neutral-400">No matches in the last 7 days.</div>
         ) : (
           <div className="overflow-auto -mx-2 sm:mx-0">
             <table className="min-w-full text-sm">
               <thead>
                 <tr className="text-neutral-400">
-                  <th className="p-2 text-left">Date</th>
-                  <th className="p-2 text-left">Player</th>
-                  <th className="p-2 text-left">Opponent</th>
                   <th className="p-2 text-left">Winner</th>
-                  <th className="p-2 text-right">Wager</th>
-                  <th className="p-2 text-right">Start BB</th>
+                  <th className="p-2 text-left">Opponent</th>
+                  <th className="p-2 text-right">Amount Wagered</th>
+                  <th className="p-2 text-right">Blinds</th>
+                  <th className="p-2 text-right">Blind Size</th>
                 </tr>
               </thead>
               <tbody>
                 {[...matches]
-                  .sort((a, b) => b.date.localeCompare(a.date))
-                  .map((m) => (
-                    <tr key={m.matchId} className="border-t border-neutral-800 text-neutral-200">
-                      <td className="p-2 whitespace-nowrap">{m.date}</td>
-                      <td className="p-2">{players.find(p=>p.pokerId===m.pokerIdA)?.name || m.pokerIdA}</td>
-                      <td className="p-2">{players.find(p=>p.pokerId===m.pokerIdB)?.name || m.pokerIdB}</td>
-                      <td className="p-2">{players.find(p=>p.pokerId===m.winnerId)?.name || m.winnerId}</td>
-                      <td className="p-2 text-right">${m.amount.toLocaleString()}</td>
-                      <td className="p-2 text-right">{m.startingBB}</td>
-                    </tr>
-                  ))}
+                  .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+                  .map((m) => {
+                    const winner = players.find(p => p.pokerId === m.winnerId);
+                    const opponent = players.find(p => p.pokerId === (m.winnerId === m.player1Id ? m.player2Id : m.player1Id));
+                    const blindSize = (m.blinds && m.blinds > 0) ? ((m.amount || 0) / m.blinds).toFixed(2) : "0.00";
+                    
+                    return (
+                      <tr key={m.matchId} className="border-t border-neutral-800 text-neutral-200">
+                        <td className="p-2">
+                          {winner ? (
+                            <>
+                              {winner.name} <span className="italic text-neutral-400">{winner.nickname}</span>
+                            </>
+                          ) : (
+                            m.winnerId
+                          )}
+                        </td>
+                        <td className="p-2">
+                          {opponent ? (
+                            <>
+                              {opponent.name} <span className="italic text-neutral-400">{opponent.nickname}</span>
+                            </>
+                          ) : (
+                            m.winnerId === m.player1Id ? m.player2Id : m.player1Id
+                          )}
+                        </td>
+                        <td className="p-2 text-right">${(m.amount || 0).toLocaleString()}</td>
+                        <td className="p-2 text-right">{m.blinds || 0}</td>
+                        <td className="p-2 text-right">${blindSize}</td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </table>
           </div>
         )}
-      </SectionCard> */}
+      </SectionCard>
 
       {/* Modal */}
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} title="Add Match">

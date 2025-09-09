@@ -97,7 +97,7 @@ export async function getMatches(params?: {
     if (params?.startDate) searchParams.append('startDate', params.startDate);
     if (params?.endDate) searchParams.append('endDate', params.endDate);
     
-    const url = `${baseurl}/matches${searchParams.toString() ? `?${searchParams.toString()}` : ''}`;
+    const url = `${baseurl}/match${searchParams.toString() ? `?${searchParams.toString()}` : ''}`;
     const response = await fetch(url);
     
     if (!response.ok) {

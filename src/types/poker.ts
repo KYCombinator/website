@@ -10,10 +10,10 @@ interface Player {
     kingOfTheBlockSince?: string
     kingCount?: number
 }
-interface MatchRow { matchId: string; date: string; playerIdA: string; playerIdB: string; winnerId: string; amount: number; startingBB: number }
+interface Match { matchId: string; date: string; playerIdA: string; playerIdB: string; winnerId: string; amount: number; startingBB: number }
 interface RatingRow { playerId: string; name: string; nickname: string; rating: number }
 interface LeaderboardRow { playerId: string; name: string; wins: number; losses: number; diff: number; rating: number }
 interface MatrixPair { a: string; b: string; winsA: number; winsB: number }
 interface King { playerId: string; name: string; rating: number; since: string }
 
-export type { Player, MatchRow, RatingRow, LeaderboardRow, MatrixPair, King };
+export type { Player, Match, RatingRow, LeaderboardRow, MatrixPair, King };

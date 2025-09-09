@@ -97,7 +97,7 @@ export function RatingList({ ratings }: { ratings: RatingRow[] }) {
           <div key={r.playerId} className="flex items-center justify-between py-1">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-purple-500" />
-              <span className="text-white">{r.name}</span>
+              <span className="text-white">{r.name} <span className="italic">{r.nickname}</span></span>
             </div>
             <span className="text-neutral-300">{r.rating}</span>
           </div>

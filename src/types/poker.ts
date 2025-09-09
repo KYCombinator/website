@@ -6,9 +6,12 @@ interface Player {
     wins?: number
     losses?: number
     pokerId: string
+    isKingOfTheBlock?: boolean
+    kingOfTheBlockSince?: string
+    kingCount?: number
 }
 interface MatchRow { matchId: string; date: string; playerIdA: string; playerIdB: string; winnerId: string; amount: number; startingBB: number }
-interface RatingRow { playerId: string; name: string; rating: number }
+interface RatingRow { playerId: string; name: string; nickname: string; rating: number }
 interface LeaderboardRow { playerId: string; name: string; wins: number; losses: number; diff: number; rating: number }
 interface MatrixPair { a: string; b: string; winsA: number; winsB: number }
 interface King { playerId: string; name: string; rating: number; since: string }

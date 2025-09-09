@@ -17,6 +17,7 @@ export default function PokerPage() {
   const ratings: RatingRow[] = players.map(p => ({
     playerId: p.pokerId,
     name: p.name,
+    nickname: p.nickname,
     rating: p.elo
   }));
 
@@ -37,6 +38,9 @@ export default function PokerPage() {
     diff: (p.wins || 0) - (p.losses || 0),
     rating: p.elo
   })).sort((a, b) => b.wins - a.wins);
+
+  // Find the current King of the Block
+  const currentKing = players.find(p => p.isKingOfTheBlock);
 
   // Add-Match modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -120,19 +124,30 @@ export default function PokerPage() {
 
   // --- Render page ---
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+    <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-10">
       {/* King of the Block */}
       <div className="mb-6">
         <div className="bg-gradient-to-r from-primary-500 to-primary-100 rounded-2xl p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-secondary-500 grid place-items-center text-2xl">👑</div>
-            {/* <div>
+            <div>
               <div className="text-neutral-300 text-sm">King of the Block</div>
               <div className="text-white text-2xl font-bold leading-tight">
-                {king ? king.name : loading ? "Loading…" : "No matches yet"}
+                {currentKing ? (
+                  <>
+                    {currentKing.name} <span className="italic font-normal">{currentKing.nickname}</span>
+                  </>
+                ) : loading ? "Loading…" : "No king yet"}
               </div>
-              {king && <div className="text-neutral-300">Rating {king.rating} • since {king.since}</div>}
-            </div> */}
+              {currentKing && (
+                <div className="text-neutral-300">
+                  Rating {currentKing.elo} • {currentKing.kingCount || 0} wins as king
+                  {currentKing.kingOfTheBlockSince && (
+                    <span> • since {new Date(currentKing.kingOfTheBlockSince).toLocaleDateString()}</span>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
           <div className="flex items-center gap-6">
             <Stat label="Players" value={<span>{players.length}</span>} />

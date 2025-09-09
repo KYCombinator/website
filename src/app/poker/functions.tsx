@@ -2,7 +2,7 @@ import { LeaderboardRow, Player, RatingRow, MatrixPair } from "@/types/poker";
 
 export function SectionCard({ title, children, right }: { title: string; children: React.ReactNode; right?: React.ReactNode }) {
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-4 sm:p-6 shadow">
+    <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-4 sm:p-6 shadow mb-6">
       <div className="flex items-center justify-between gap-3 mb-4">
         <h2 className="text-lg sm:text-xl font-semibold text-white">{title}</h2>
         {right}

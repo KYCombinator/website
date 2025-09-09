@@ -111,3 +111,34 @@ export async function getMatches(params?: {
     throw error;
   }
 }
+
+export async function getMatchMatrix(playerIds?: string[]): Promise<{
+  ok: boolean;
+  matrix: Record<string, Record<string, {
+    netWins: number;
+    games: number;
+    eloGained: number;
+    moneyWon: number;
+    totalAmount: number;
+  }>>;
+}> {
+  try {
+    const searchParams = new URLSearchParams();
+    if (playerIds && playerIds.length > 0) {
+      searchParams.append('players', playerIds.join(','));
+    }
+    
+    const url = `${baseurl}/match/matrix${searchParams.toString() ? `?${searchParams.toString()}` : ''}`;
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to fetch match matrix');
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching match matrix:', error);
+    throw error;
+  }
+}

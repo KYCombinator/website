@@ -13,7 +13,7 @@ interface Match {
   winnerId: string;
   createdAt: string;
 }
-import { getAllPlayers, createMatch, getMatches } from "@/lib/api";
+import { getAllPlayers, createMatch, getMatches, getMatchMatrix } from "@/lib/api";
 import { SectionCard, Pill, Stat, Modal, Select, Input, RatingList, Leaderboard } from "./functions";
 
 export default function PokerPage() {
@@ -24,6 +24,16 @@ export default function PokerPage() {
   // Data from API
   const [players, setPlayers] = useState<Player[]>([]);
   const [matches, setMatches] = useState<Match[]>([]);
+  const [matrix, setMatrix] = useState<Record<string, Record<string, {
+    netWins: number;
+    games: number;
+    eloGained: number;
+    moneyWon: number;
+    totalAmount: number;
+  }>>>({});
+
+  // Matrix filter state
+  const [matrixFilter, setMatrixFilter] = useState<'netWins' | 'games' | 'elo' | 'money'>('netWins');
 
   // Derived data for UI
   const ratings: RatingRow[] = players.map(p => ({
@@ -74,12 +84,14 @@ export default function PokerPage() {
       sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
       const startDate = sevenDaysAgo.toISOString().slice(0, 10);
       
-      const [pl, matchesData] = await Promise.all([
+      const [pl, { matches }, { matrix }] = await Promise.all([
         getAllPlayers(),
-        getMatches({ startDate, limit: 50 })
+        getMatches({ startDate, limit: 50 }),
+        getMatchMatrix()
       ]);
       setPlayers(pl);
-      setMatches(matchesData.matches);
+      setMatches(matches);
+      setMatrix(matrix);
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : "Failed to load data");
     } finally {
@@ -143,7 +155,7 @@ export default function PokerPage() {
 
   // --- Render page ---
   return (
-    <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-10">
+    <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-10 gap-4">
       {/* King of the Block */}
       <div className="mb-6">
         <div className="bg-gradient-to-r from-primary-500 to-primary-100 rounded-2xl p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -196,8 +208,6 @@ export default function PokerPage() {
         <Leaderboard title="This Month" rows={monthLB} />
       </div>
 
-      {/* Matrix */}
-      {/* <Matrix /> */}
 
       {/* Recent Matches */}
       <SectionCard title="Recent Matches (Last 7 Days)" right={<Pill>{matches.length}</Pill>}>
@@ -208,6 +218,7 @@ export default function PokerPage() {
             <table className="min-w-full text-sm">
               <thead>
                 <tr className="text-neutral-400">
+                  <th className="p-2 text-left">Date</th>
                   <th className="p-2 text-left">Winner</th>
                   <th className="p-2 text-left">Opponent</th>
                   <th className="p-2 text-right">Amount Wagered</th>
@@ -225,6 +236,7 @@ export default function PokerPage() {
                     
                     return (
                       <tr key={m.matchId} className="border-t border-neutral-800 text-neutral-200">
+                        <td className="p-2 whitespace-nowrap">{m.date || 'N/A'}</td>
                         <td className="p-2">
                           {winner ? (
                             <>
@@ -249,6 +261,85 @@ export default function PokerPage() {
                       </tr>
                     );
                   })}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </SectionCard>
+
+      {/* Match Matrix */}
+      <SectionCard title="Match Matrix" right={
+        <Select
+          id="matrixFilter"
+          label="Filter"
+          value={matrixFilter}
+          onChange={(value) => setMatrixFilter(value as 'netWins' | 'games' | 'elo' | 'money')}
+          options={[
+            { value: 'netWins', label: 'Net Wins' },
+            { value: 'games', label: 'Games' },
+            { value: 'elo', label: 'ELO Gained' },
+            { value: 'money', label: 'Money Won' }
+          ]}
+        />
+      }>
+        {Object.keys(matrix).length === 0 ? (
+          <div className="text-neutral-400">No match data available for matrix.</div>
+        ) : (
+          <div className="overflow-auto -mx-2 sm:mx-0">
+            <table className="min-w-full text-sm">
+              <thead>
+                <tr className="text-neutral-400">
+                  <th className="p-2 text-left">Player</th>
+                  {players.map(player => (
+                    <th key={player.pokerId} className="p-2 text-center min-w-[80px]">
+                      {player.name}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {players.map(player => (
+                  <tr key={player.pokerId} className="border-t border-neutral-800 text-neutral-200">
+                    <td className="p-2 font-medium">
+                      {player.name} <span className="italic text-neutral-400">{player.nickname}</span>
+                    </td>
+                    {players.map(opponent => {
+                      const data = matrix[player.pokerId]?.[opponent.pokerId];
+                      let value = '-';
+                      let className = 'p-2 text-center';
+                      
+                      if (data && data.games > 0) {
+                        switch (matrixFilter) {
+                          case 'netWins':
+                            value = data.netWins > 0 ? `+${data.netWins}` : data.netWins.toString();
+                            className += data.netWins > 0 ? ' text-green-400' : data.netWins < 0 ? ' text-red-400' : '';
+                            break;
+                          case 'games':
+                            value = data.games.toString();
+                            className += ' text-blue-400';
+                            break;
+                          case 'elo':
+                            value = data.eloGained > 0 ? `+${data.eloGained.toFixed(1)}` : data.eloGained.toFixed(1);
+                            className += data.eloGained > 0 ? ' text-green-400' : data.eloGained < 0 ? ' text-red-400' : '';
+                            break;
+                          case 'money':
+                            value = data.moneyWon > 0 ? `+$${data.moneyWon.toLocaleString()}` : `-$${Math.abs(data.moneyWon).toLocaleString()}`;
+                            className += data.moneyWon > 0 ? ' text-green-400' : data.moneyWon < 0 ? ' text-red-400' : '';
+                            break;
+                        }
+                      } else if (player.pokerId === opponent.pokerId) {
+                        value = '-';
+                        className += ' text-neutral-600';
+                      }
+                      
+                      return (
+                        <td key={opponent.pokerId} className={className}>
+                          {value}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

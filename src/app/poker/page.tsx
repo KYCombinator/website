@@ -33,7 +33,7 @@ export default function PokerPage() {
   }>>>({});
 
   // Matrix filter state
-  const [matrixFilter, setMatrixFilter] = useState<'netWins' | 'games' | 'elo' | 'money'>('netWins');
+  const [matrixFilter, setMatrixFilter] = useState<'netWins' | 'games' | 'elo' | 'money' | 'totalAmount' | 'winPercentage'>('netWins');
 
   // Derived data for UI
   const ratings: RatingRow[] = players.map(p => ({
@@ -273,12 +273,14 @@ export default function PokerPage() {
           id="matrixFilter"
           label="Filter"
           value={matrixFilter}
-          onChange={(value) => setMatrixFilter(value as 'netWins' | 'games' | 'elo' | 'money')}
+          onChange={(value) => setMatrixFilter(value as 'netWins' | 'games' | 'elo' | 'money' | 'totalAmount' | 'winPercentage')}
           options={[
             { value: 'netWins', label: 'Net Wins' },
             { value: 'games', label: 'Games' },
             { value: 'elo', label: 'ELO Gained' },
-            { value: 'money', label: 'Money Won' }
+            { value: 'money', label: 'Money Won' },
+            { value: 'totalAmount', label: 'Total Amount Wagered' },
+            { value: 'winPercentage', label: 'Win Percentage (ELO)' }
           ]}
         />
       }>
@@ -308,7 +310,21 @@ export default function PokerPage() {
                       let value = '-';
                       let className = 'p-2 text-center';
                       
-                      if (data && data.games > 0) {
+                      if (matrixFilter === 'winPercentage') {
+                        // For win percentage, show ELO-based calculation for all squares except diagonal
+                        if (player.pokerId === opponent.pokerId) {
+                          value = '-';
+                          className += ' text-neutral-600';
+                        } else {
+                          // Calculate expected win percentage based on ELO ratings
+                          const playerElo = player.elo;
+                          const opponentElo = opponent.elo;
+                          const expectedWinRate = 1 / (1 + Math.pow(10, (opponentElo - playerElo) / 400));
+                          const winPercentage = (expectedWinRate * 100).toFixed(1);
+                          value = `${winPercentage}%`;
+                          className += expectedWinRate > 0.5 ? ' text-green-400' : expectedWinRate < 0.5 ? ' text-red-400' : ' text-neutral-400';
+                        }
+                      } else if (data && data.games > 0) {
                         switch (matrixFilter) {
                           case 'netWins':
                             value = data.netWins > 0 ? `+${data.netWins}` : data.netWins.toString();
@@ -325,6 +341,10 @@ export default function PokerPage() {
                           case 'money':
                             value = data.moneyWon > 0 ? `+$${data.moneyWon.toLocaleString()}` : `-$${Math.abs(data.moneyWon).toLocaleString()}`;
                             className += data.moneyWon > 0 ? ' text-green-400' : data.moneyWon < 0 ? ' text-red-400' : '';
+                            break;
+                          case 'totalAmount':
+                            value = `$${data.totalAmount.toLocaleString()}`;
+                            className += ' text-blue-400';
                             break;
                         }
                       } else if (player.pokerId === opponent.pokerId) {

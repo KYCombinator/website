@@ -1,4 +1,4 @@
-import { Player } from "@/types/poker";
+import { Blockhead } from "@/types/poker";
 
 interface Match {
   PK: string;
@@ -18,7 +18,7 @@ interface Match {
 
 const baseurl = "https://api.kycombinator.com/poker";
 
-export async function getAllPlayers(): Promise<Player[]> {
+export async function getAllPlayers(): Promise<Blockhead[]> {
   try {
     const response = await fetch(`${baseurl}`);
     
@@ -35,7 +35,7 @@ export async function getAllPlayers(): Promise<Player[]> {
   }
 } 
 
-export async function getPlayer(playerId: string): Promise<Player> {
+export async function getPlayer(playerId: string): Promise<Blockhead> {
   try {
     const response = await fetch(`${baseurl}/${playerId}`);
     
@@ -139,6 +139,95 @@ export async function getMatchMatrix(playerIds?: string[]): Promise<{
     return response.json();
   } catch (error) {
     console.error('Error fetching match matrix:', error);
+    throw error;
+  }
+}
+
+interface Checkin {
+  userId: string;
+  timestamp: string;
+  duration: number;
+  checkInDate: string;
+  checkInTimestamp: string;
+  checkoutTimestamp: string;
+}
+
+export async function getCheckins(): Promise<{
+  ok: boolean;
+  checkins: Checkin[];
+}> {
+  try {
+    const response = await fetch(`${baseurl}/cinderblock`);
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to fetch checkins');
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching checkins:', error);
+    throw error;
+  }
+}
+
+export async function postCheckin(checkinData: {
+  userId: string;
+  timestamp: string;
+}): Promise<{
+  ok: boolean;
+  checkin: Checkin;
+}> {
+  try {
+    const response = await fetch(`${baseurl}/cinderblock/checkin`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(checkinData),
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to post checkin');
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error('Error posting checkin:', error);
+    throw error;
+  }
+}
+interface Checkout {
+  userId: string;
+  timestamp: string;
+  duration: number;
+  checkOutDate: string;
+  checkOutTimestamp: string;
+}
+
+
+export async function postCheckout(checkoutData: {
+  userId: string;
+  timestamp: string;
+}): Promise<{
+  ok: boolean;
+  checkout: Checkout;
+}> {
+  try {
+    const response = await fetch(`${baseurl}/cinderblock/checkout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(checkoutData),
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to post checkout');
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error('Error posting checkout:', error);
     throw error;
   }
 }

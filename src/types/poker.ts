@@ -1,5 +1,5 @@
 // === Types (mirror your API responses) ===
-interface Player { 
+interface Blockhead { 
     name: string, 
     nickname: string
     elo: number
@@ -9,6 +9,9 @@ interface Player {
     isKingOfTheBlock?: boolean
     kingOfTheBlockSince?: string
     kingCount?: number
+    avatarUrl?: string
+    isCheckedIn?: boolean
+    lastCheckInTimestamp?: string
 }
 interface Match { matchId: string; date: string; playerIdA: string; playerIdB: string; winnerId: string; amount: number; startingBB: number }
 interface RatingRow { playerId: string; name: string; nickname: string; rating: number }
@@ -16,4 +19,4 @@ interface LeaderboardRow { playerId: string; name: string; wins: number; losses:
 interface MatrixPair { a: string; b: string; winsA: number; winsB: number }
 interface King { playerId: string; name: string; rating: number; since: string }
 
-export type { Player, Match, RatingRow, LeaderboardRow, MatrixPair, King };
+export type { Blockhead, Match, RatingRow, LeaderboardRow, MatrixPair, King };

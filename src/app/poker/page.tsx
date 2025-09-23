@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from "react";
-import { Player, RatingRow, LeaderboardRow } from "@/types/poker";
+import { Blockhead, RatingRow, LeaderboardRow } from "@/types/poker";
 
 interface Match {
   matchId: string;
@@ -22,7 +22,7 @@ export default function PokerPage() {
   const [error, setError] = useState<string>("");
 
   // Data from API
-  const [players, setPlayers] = useState<Player[]>([]);
+  const [players, setPlayers] = useState<Blockhead[]>([]);
   const [matches, setMatches] = useState<Match[]>([]);
   const [matrix, setMatrix] = useState<Record<string, Record<string, {
     netWins: number;
@@ -372,9 +372,9 @@ export default function PokerPage() {
           <Input id="date" label="Date" type="date" value={date} onChange={setDate} />
           <Input id="amount" label="Amount Wagered ($)" type="number" value={amount} onChange={setAmount} />
           <Input id="startingBB" label="Starting Big Blinds" type="number" value={startingBB} onChange={setStartingBB} />
-          <Select id="player" label="Player" value={pokerId} onChange={setpokerId} options={[{value:"",label:"Select…"}, ...players.map(p=>({value:p.pokerId,label:p.name}))]} />
-          <Select id="opponent" label="Opponent" value={opponentId} onChange={setOpponentId} options={[{value:"",label:"Select…"}, ...players.filter(p=>p.pokerId!==pokerId).map(p=>({value:p.pokerId,label:p.name}))]} />
-          <Select id="winner" label="Winner" value={winnerId} onChange={setWinnerId} options={[{value:"",label:"Select…"}, ...(pokerId && opponentId ? [pokerId, opponentId].map(id=>({value:id, label: players.find(p=>p.pokerId===id)?.name || id})) : [])]} />
+          <Select id="player" label="Player" value={pokerId} onChange={setpokerId} options={[...players.map(p=>({value:p.pokerId,label:p.name}))]} />
+          <Select id="opponent" label="Opponent" value={opponentId} onChange={setOpponentId} options={[...players.filter(p=>p.pokerId!==pokerId).map(p=>({value:p.pokerId,label:p.name}))]} />
+          <Select id="winner" label="Winner" value={winnerId} onChange={setWinnerId} options={[...(pokerId && opponentId ? [pokerId, opponentId].map(id=>({value:id, label: players.find(p=>p.pokerId===id)?.name || id})) : [])]} />
         </div>
         {formError && <div className="text-red-400 mt-3 text-sm">{formError}</div>}
         <div className="mt-4 flex items-center justify-end gap-2">

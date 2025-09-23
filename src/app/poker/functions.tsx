@@ -1,4 +1,4 @@
-import { LeaderboardRow, Player, RatingRow, MatrixPair } from "@/types/poker";
+import { LeaderboardRow, Blockhead, RatingRow, MatrixPair } from "@/types/poker";
 
 export function SectionCard({ title, children, right }: { title: string; children: React.ReactNode; right?: React.ReactNode }) {
   return (
@@ -134,7 +134,7 @@ export function Leaderboard({ title, rows }: { title: string; rows: LeaderboardR
   );
 }
 
-export function Matrix({ players, ratings, matrix }: { players: Player[]; ratings: RatingRow[]; matrix: MatrixPair[] }) {
+export function Matrix({ players, ratings, matrix }: { players: Blockhead[]; ratings: RatingRow[]; matrix: MatrixPair[] }) {
   // Build an index of pokerId -> name
   const name = new Map(players.map((p) => [p.pokerId, p.name] as const));
   // Build a sorted unique list of players present in ratings or players list

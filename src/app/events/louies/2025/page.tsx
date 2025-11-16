@@ -168,11 +168,19 @@ export default function Louies2025Page() {
             <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-foreground-900">
               The Louies 2025
             </h1>
-            <p className="text-base md:text-lg text-foreground-700 max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-foreground-700 max-w-2xl mx-auto mb-6">
               The ecosystem event of Louisville. An extremely local celebration of the founders,
               operators, and enablers who keep Louisville&apos;s startup scene
               moving.
-            </p>  
+            </p>
+            <a
+              href="https://luma.com/8rgsdubd"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm md:text-base font-semibold bg-foreground-900 text-primary shadow-sm hover:bg-foreground-800 transition"
+            >
+              Register for the Event
+            </a>
           </div>
         </div>
       </section>

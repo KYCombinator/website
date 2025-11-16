@@ -169,7 +169,7 @@ export default function Louies2025Page() {
               Louisville Startup Awards
             </p>
             <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-white">
-              The Louies 2025
+              The LOUIES 2025
             </h1>
             <p className="text-base md:text-lg text-white/90 max-w-2xl mx-auto mb-6">
               The ecosystem event of Louisville. An extremely local celebration of the founders,
@@ -182,7 +182,7 @@ export default function Louies2025Page() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm md:text-base font-semibold bg-white text-primary shadow-sm hover:bg-white/90 transition"
             >
-              Register for the Event
+              Register for The LOUIES
             </a>
           </div>
         </div>

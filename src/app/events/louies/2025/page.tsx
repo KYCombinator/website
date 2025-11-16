@@ -4,11 +4,20 @@ export const metadata: Metadata = {
   title: "The Louies 2025 | Louisville Startup Awards | KYX | Sponsored by JPMorgan Chase",
   description:
     "The ecosystem event of Louisville. An extremely local celebration of the founders, operators, and enablers who keep Louisville's startup scene moving. Nominations open for The Louies 2025.",
+  authors: [{ name: "KYX Team", url: "https://kycombinator.com/about" }],
   openGraph: {
     title: "The Louies 2025 | Louisville Startup Awards | KYX | Sponsored by JPMorgan Chase",
     description:
       "The ecosystem event of Louisville. An extremely local celebration of the founders, operators, and enablers who keep Louisville's startup scene moving.",
     type: "website",
+    images: ["https://cdn.kycombinator.com/TheLouies2025.gif"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Louies 2025 | Louisville Startup Awards | KYX | Sponsored by JPMorgan Chase",
+    description:
+      "The ecosystem event of Louisville. An extremely local celebration of the founders, operators, and enablers who keep Louisville's startup scene moving.",
+    images: ["https://cdn.kycombinator.com/TheLouies2025.gif"],
   },
 };
 
@@ -25,7 +34,7 @@ export default function Louies2025Page() {
       name: "Assistant to the Founder",
       category: "Individual",
       description:
-        "Not Assistant Founder or Co-Founder, let’s be clear—just the cofounder doing 80% of the work with 20% of the credit. Together, unstoppable.",
+        "Not Assistant Founder or Co-Founder, let’s be clear—just the cofounder doing 80% of the work with 20% of the credit. The Dwight Schrute of the startup world.",
       presentedBy: "",
     },
     {

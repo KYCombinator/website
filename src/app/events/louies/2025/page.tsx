@@ -158,17 +158,20 @@ export default function Louies2025Page() {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero */}
-      <section className="relative h-[65vh] bg-primary text-primary-foreground">
-        <div className="absolute inset-0 opacity-20 bg-primary/30" />
+      <section 
+        className="relative h-[65vh] text-primary-foreground bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url(https://cdn.kycombinator.com/TheLouies2025.png)' }}
+      >
+        <div className="absolute inset-0 bg-black/40" />
         <div className="container mx-auto px-4 h-full flex items-center justify-center relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <p className="uppercase tracking-[0.25em] text-xs md:text-sm mb-4 text-foreground-900">
+            <p className="uppercase tracking-[0.25em] text-xs md:text-sm mb-4 text-white">
               Louisville Startup Awards
             </p>
-            <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-foreground-900">
+            <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-white">
               The Louies 2025
             </h1>
-            <p className="text-base md:text-lg text-foreground-700 max-w-2xl mx-auto mb-6">
+            <p className="text-base md:text-lg text-white/90 max-w-2xl mx-auto mb-6">
               The ecosystem event of Louisville. An extremely local celebration of the founders,
               operators, and enablers who keep Louisville&apos;s startup scene
               moving.
@@ -177,7 +180,7 @@ export default function Louies2025Page() {
               href="https://luma.com/8rgsdubd"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm md:text-base font-semibold bg-foreground-900 text-primary shadow-sm hover:bg-foreground-800 transition"
+              className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm md:text-base font-semibold bg-white text-primary shadow-sm hover:bg-white/90 transition"
             >
               Register for the Event
             </a>

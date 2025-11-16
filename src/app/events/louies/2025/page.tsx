@@ -1,3 +1,17 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "The Louies 2025 | Louisville Startup Awards | KYX | Sponsored by JPMorgan Chase",
+  description:
+    "The ecosystem event of Louisville. An extremely local celebration of the founders, operators, and enablers who keep Louisville's startup scene moving. Nominations open for The Louies 2025.",
+  openGraph: {
+    title: "The Louies 2025 | Louisville Startup Awards | KYX | Sponsored by JPMorgan Chase",
+    description:
+      "The ecosystem event of Louisville. An extremely local celebration of the founders, operators, and enablers who keep Louisville's startup scene moving.",
+    type: "website",
+  },
+};
+
 export default function Louies2025Page() {
   const awards = [
     {

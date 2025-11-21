@@ -176,6 +176,17 @@ export default function Louies2025Page() {
               operators, and enablers who keep Louisville&apos;s startup scene
               moving.
             </p>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 mb-6 text-white/90">
+              <div className="text-sm md:text-base">
+                <span className="font-semibold">5:00 PM</span> Networking
+              </div>
+              <div className="text-sm md:text-base">
+                <span className="font-semibold">5:45 PM</span> Velocity
+              </div>
+              <div className="text-sm md:text-base">
+                <span className="font-semibold">6:30 PM</span> The LOUIES
+              </div>
+            </div>
             <a
               href="https://luma.com/8rgsdubd"
               target="_blank"

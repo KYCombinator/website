@@ -88,14 +88,59 @@ export default function VelocityPage() {
         )}
       </AnimatePresence>
 
-      {/* HERO: Accordion at top, content below */}
+      {/* HERO: 6-part Accordion at top */}
       <section className="relative bg-black min-h-screen flex flex-col">
-        {/* Horizontal Accordion at the top */}
-        <div className="w-full h-[70vh] flex gap-1 md:gap-2 px-4 md:px-6 pt-24 pb-8">
+        {/* Horizontal Accordion - 6 parts, no gaps, goes to top */}
+        <div className="w-full h-[70vh] flex">
+          {/* First part: Title, Description, Button */}
+          <motion.div
+            className="relative flex flex-col bg-gradient-to-br from-purple-900/20 to-black border-r border-white/20"
+            initial={false}
+            animate={{
+              flex: hoveredCompany === null ? 1.5 : 0.8,
+            }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+          >
+            <div className="flex-1 flex flex-col justify-center p-6 md:p-8 lg:p-12">
+              <motion.h1
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.15, duration: 0.6 }}
+                className={`text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight ${glow} mb-4`}
+              >
+                Velocity Finale
+              </motion.h1>
+              <motion.p
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                className="text-base md:text-lg lg:text-xl text-white/80 mb-8"
+              >
+                Watch 5 startups present their 12‑week journey. Part of the Velocity / The LOUIES - KYX 2025 Celebration.
+              </motion.p>
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.45, duration: 0.6 }}
+                className="mt-auto"
+              >
+                <Link
+                  href="https://luma.com/8rgsdubd"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block rounded-2xl border border-white/20 bg-white/10 px-6 py-3 font-semibold backdrop-blur transition hover:bg-white/20 text-white"
+                >
+                  Register to Attend
+                </Link>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* 5 Company parts */}
           {companies.map((company, idx) => (
             <motion.div
               key={idx}
-              className="relative flex-1 flex flex-col cursor-pointer group"
+              className="relative flex flex-col cursor-pointer group"
               onHoverStart={() => setHoveredCompany(idx)}
               onHoverEnd={() => setHoveredCompany(null)}
               initial={false}
@@ -103,9 +148,13 @@ export default function VelocityPage() {
                 flex: hoveredCompany === idx ? 3 : hoveredCompany === null ? 1 : 0.7,
               }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
+              style={{
+                marginLeft: idx === 0 ? "-1px" : "-1px", // Overlap to remove gaps
+                zIndex: hoveredCompany === idx ? 30 : 10 + idx,
+              }}
             >
               {/* Image Container */}
-              <div className="relative flex-1 overflow-hidden rounded-t-2xl border border-white/20">
+              <div className="relative flex-1 overflow-hidden border-r border-white/20">
                 <motion.img
                   src={company.image}
                   alt={company.name}
@@ -116,76 +165,33 @@ export default function VelocityPage() {
                   transition={{ duration: 0.4 }}
                 />
                 {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent" />
                 
-                {/* Description - appears on hover */}
-                <AnimatePresence>
-                  {hoveredCompany === idx && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 20 }}
-                      transition={{ duration: 0.3 }}
-                      className="absolute bottom-0 left-0 right-0 p-4 md:p-6"
-                    >
-                      <p className="text-white text-sm md:text-base leading-relaxed">
-                        {company.description}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Company Name */}
-              <div className="bg-black/80 backdrop-blur-sm border-x border-b border-white/20 rounded-b-2xl px-4 py-3 md:py-4">
-                <h3 className="text-white font-semibold text-sm md:text-base lg:text-lg text-center">
-                  {company.name}
-                </h3>
+                {/* Company Name - overlay near bottom */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                  <h3 className="text-white font-bold text-lg md:text-xl lg:text-2xl mb-2">
+                    {company.name}
+                  </h3>
+                  
+                  {/* Description - appears on hover/expand */}
+                  <AnimatePresence>
+                    {hoveredCompany === idx && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <p className="text-white/90 text-sm md:text-base leading-relaxed">
+                          {company.description}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
             </motion.div>
           ))}
-        </div>
-
-        {/* Content below accordion */}
-        <div className="container mx-auto px-6 pb-16">
-          <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-8">
-            {/* CTA Button - to the left */}
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.45, duration: 0.6 }}
-              className="flex-shrink-0"
-            >
-              <Link
-                href="https://luma.com/8rgsdubd"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block rounded-2xl border border-white/20 bg-white/10 px-6 py-3 font-semibold backdrop-blur transition hover:bg-white/20 text-white whitespace-nowrap"
-              >
-                Register to Attend
-              </Link>
-            </motion.div>
-
-            {/* Title and Description */}
-            <div className="flex-1">
-              <motion.h1
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.15, duration: 0.6 }}
-                className={`text-4xl md:text-6xl font-extrabold tracking-tight ${glow} mb-4`}
-              >
-                Velocity Finale
-              </motion.h1>
-              <motion.p
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-                className="text-lg md:text-xl text-white/80"
-              >
-                Watch 5 startups present their 12‑week journey. Part of the Velocity / The LOUIES - KYX 2025 Celebration.
-              </motion.p>
-            </div>
-          </div>
         </div>
 
         {/* subtle bottom cue */}

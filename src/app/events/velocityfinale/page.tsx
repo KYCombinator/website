@@ -62,37 +62,6 @@ export default function VelocityPage() {
 
   return (
     <main className="relative min-h-screen bg-black text-white">
-      {/* COUNTDOWN / LIFTOFF OVERLAY */}
-      <AnimatePresence mode="wait">
-        {(phase === "countdown") && (
-          <motion.div
-            key={phase}
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black"
-          >
-            <motion.div
-              key="countdown"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: "spring", stiffness: 120, damping: 14 }}
-              className="relative select-none"
-            >
-              <div
-                className={`text-[22vw] leading-none font-extrabold tracking-tight ${glow}`}
-                style={{ fontVariantNumeric: "tabular-nums" }}
-              >
-                {count}
-              </div>
-              {/* shimmer sweep */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[shimmer_1.1s_ease-in-out_infinite] [mask-image:radial-gradient(white,transparent_70%)]" />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* HERO: 6-part Accordion at top */}
       <section className="relative bg-black min-h-screen flex flex-col">
         {/* Horizontal Accordion - 6 parts, no gaps, goes to top */}

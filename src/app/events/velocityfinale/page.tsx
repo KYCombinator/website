@@ -299,7 +299,7 @@ export default function VelocityPage() {
                   <h3 className="text-xl font-semibold mb-3">Location</h3>
                   <p className="text-white/85">
                     Solyco Capital<br />
-                    101 West Main Street<br />
+                    111 West Main Street<br />
                     LOUIESville, KY 40206
                   </p>
                 </div>

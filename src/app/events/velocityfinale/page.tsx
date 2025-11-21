@@ -14,29 +14,29 @@ export default function VelocityPage() {
 
   const companies = [
     {
-      name: "Company Name",
+      name: "Bottle Episodes",
       description: "Brief description of what they built and their journey during the 12-week Velocity program.",
-      image: "https://via.placeholder.com/800x600/6366f1/ffffff?text=Company+1",
+      image: "https://cdn.kycombinator.com/velocity/bottleepisodes.png",
     },
     {
-      name: "Company Name",
+      name: "DueGooder",
       description: "Brief description of what they built and their journey during the 12-week Velocity program.",
-      image: "https://via.placeholder.com/800x600/8b5cf6/ffffff?text=Company+2",
+      image: "https://cdn.kycombinator.com/velocity/duegooder.png",
     },
     {
-      name: "Company Name",
+      name: "Jokester",
       description: "Brief description of what they built and their journey during the 12-week Velocity program.",
-      image: "https://via.placeholder.com/800x600/a855f7/ffffff?text=Company+3",
+      image: "https://cdn.kycombinator.com/velocity/jokester.jpg",
     },
     {
-      name: "Company Name",
+      name: "LeapFrog",
       description: "Brief description of what they built and their journey during the 12-week Velocity program.",
-      image: "https://via.placeholder.com/800x600/c084fc/ffffff?text=Company+4",
+      image: "https://cdn.kycombinator.com/velocity/felipe.jpg",
     },
     {
-      name: "Company Name",
+      name: "MoneyBot",
       description: "Brief description of what they built and their journey during the 12-week Velocity program.",
-      image: "https://via.placeholder.com/800x600/d946ef/ffffff?text=Company+5",
+      image: "https://cdn.kycombinator.com/velocity/moneybot.jpg",
     },
   ];
 

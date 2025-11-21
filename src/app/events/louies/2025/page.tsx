@@ -195,6 +195,9 @@ export default function Louies2025Page() {
             >
               Register for The LOUIES
             </a>
+            <p className="text-white/70 text-sm md:text-base mt-4">
+              Solyco Capital, 111 West Main Street, LOUIESville, KY
+            </p>
           </div>
         </div>
       </section>

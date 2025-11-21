@@ -109,7 +109,7 @@ export default function VelocityPage() {
                   Register to Attend
                 </Link>
                 <p className="text-white/70 text-sm md:text-base mt-4">
-                  Thursday, December 4th, 5pm at Solyco Capital 101 West Main Street, LOUIESville, KY
+                  Thursday, December 4th, 5pm at Solyco Capital 111 West Main Street, LOUIESville, KY
                 </p>
               </motion.div>
             </div>

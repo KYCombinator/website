@@ -14,31 +14,36 @@ export default function VelocityPage() {
 
   const companies = [
     {
-      name: "Bottle Episodes",
-      description: "Brief description of what they built and their journey during the 12-week Velocity program.",
-      image: "https://cdn.kycombinator.com/velocity/bottleepisodes.png",
+    name: "Bottle Episodes",
+    description:
+    "A platform for gamers to create and share their own custom games.",
+    image: "https://cdn.kycombinator.com/velocity/bottleepisodes.png",
     },
     {
-      name: "DueGooder",
-      description: "Brief description of what they built and their journey during the 12-week Velocity program.",
-      image: "https://cdn.kycombinator.com/velocity/duegooder.png",
+    name: "DueGooder",
+    description:
+    "Students's accountability partner that helps them stay on track with their goals.",
+    image: "https://cdn.kycombinator.com/velocity/duegooder.png",
     },
     {
-      name: "Jokester",
-      description: "Brief description of what they built and their journey during the 12-week Velocity program.",
-      image: "https://cdn.kycombinator.com/velocity/jokester.jpg",
+    name: "Jokester",
+    description:
+    "Livestreaming comedy platform built exclusively for comedians.",
+    image: "https://cdn.kycombinator.com/velocity/jokester.jpg",
     },
     {
-      name: "LeapFrog",
-      description: "Brief description of what they built and their journey during the 12-week Velocity program.",
-      image: "https://cdn.kycombinator.com/velocity/felipe.jpg",
+    name: "LeapFrog",
+    description:
+    "Remote work platform for companies to hire Brazilian remote workers.",
+    image: "https://cdn.kycombinator.com/velocity/felipe.jpg",
     },
     {
-      name: "MoneyBot",
-      description: "Brief description of what they built and their journey during the 12-week Velocity program.",
-      image: "https://cdn.kycombinator.com/velocity/moneybot.jpg",
+    name: "MoneyBot",
+    description:
+    "Financial literacy platform for kids to learn about money and investing.",
+    image: "https://cdn.kycombinator.com/velocity/moneybot.jpg",
     },
-  ];
+    ];
 
   useEffect(() => {
     if (phase !== "countdown") return;
@@ -94,13 +99,16 @@ export default function VelocityPage() {
         <div className="w-full h-[70vh] flex">
           {/* First part: Title, Description, Button */}
           <motion.div
-            className="relative flex flex-col bg-gradient-to-br from-purple-900/20 to-black border-r border-white/20"
+            className="relative flex flex-col bg-gradient-to-br from-purple-900/20 to-black"
             initial={false}
             animate={{
               flex: hoveredCompany === null ? 1.5 : 0.8,
             }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
           >
+            {/* Shimmer border on the right */}
+            <div className="absolute right-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-purple-500 to-transparent animate-[shimmer-border_3s_ease-in-out_infinite] z-20" />
+            
             <div className="flex-1 flex flex-col justify-center p-6 md:p-8 lg:p-12">
               <motion.h1
                 initial={{ y: 20, opacity: 0 }}
@@ -114,7 +122,7 @@ export default function VelocityPage() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
-                className="text-base md:text-lg lg:text-xl text-white/80 mb-8"
+                className="text-base md:text-lg lg:text-xl text-white/80 mb-6"
               >
                 Watch 5 startups present their 12‑week journey. Part of the Velocity / The LOUIES - KYX 2025 Celebration.
               </motion.p>
@@ -122,7 +130,6 @@ export default function VelocityPage() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.45, duration: 0.6 }}
-                className="mt-auto"
               >
                 <Link
                   href="https://luma.com/8rgsdubd"
@@ -153,8 +160,12 @@ export default function VelocityPage() {
                 zIndex: hoveredCompany === idx ? 30 : 10 + idx,
               }}
             >
+              {/* Shimmer border on the right */}
+              <div className="absolute right-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-purple-500 to-transparent animate-[shimmer-border_3s_ease-in-out_infinite] z-20" 
+                   style={{ animationDelay: `${idx * 0.2}s` }} />
+              
               {/* Image Container */}
-              <div className="relative flex-1 overflow-hidden border-r border-white/20">
+              <div className="relative flex-1 overflow-hidden">
                 <motion.img
                   src={company.image}
                   alt={company.name}
@@ -367,6 +378,16 @@ export default function VelocityPage() {
         @keyframes shimmer {
           0% { transform: translateX(-120%); }
           100% { transform: translateX(120%); }
+        }
+        @keyframes shimmer-border {
+          0%, 100% {
+            opacity: 0.3;
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+          }
+          50% {
+            opacity: 1;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.8), 0 0 30px rgba(168, 85, 247, 0.5);
+          }
         }
       `}</style>
     </main>

@@ -139,6 +139,9 @@ export default function VelocityPage() {
                 >
                   Register to Attend
                 </Link>
+                <p className="text-white/70 text-sm md:text-base mt-4">
+                  5pm at Solyco Capital 101 West Main Street, LOUIESville, KY
+                </p>
               </motion.div>
             </div>
           </motion.div>
@@ -241,33 +244,7 @@ export default function VelocityPage() {
         <div className="container mx-auto px-6">
           <h2 className={`text-3xl md:text-4xl font-bold ${glow} mb-12`}>The 5 Finalists</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
-            {[
-              {
-                name: "Company Name",
-                description: "Brief description of what they built and their journey.",
-                website: "#",
-              },
-              {
-                name: "Company Name",
-                description: "Brief description of what they built and their journey.",
-                website: "#",
-              },
-              {
-                name: "Company Name",
-                description: "Brief description of what they built and their journey.",
-                website: "#",
-              },
-              {
-                name: "Company Name",
-                description: "Brief description of what they built and their journey.",
-                website: "#",
-              },
-              {
-                name: "Company Name",
-                description: "Brief description of what they built and their journey.",
-                website: "#",
-              },
-            ].map((company, idx) => (
+            {companies.map((company, idx) => (
               <motion.div
                 key={idx}
                 initial={{ y: 20, opacity: 0 }}
@@ -275,18 +252,8 @@ export default function VelocityPage() {
                 transition={{ delay: 0.1 * idx, duration: 0.6 }}
                 className="rounded-2xl border border-white/10 bg-white/5 p-6 hover:bg-white/10 transition"
               >
-                <h3 className="text-xl font-semibold mb-3">{company.name}</h3>
+                <h3 className="text-xl font-semibold mb-3 text-white">{company.name}</h3>
                 <p className="text-white/80 mb-4">{company.description}</p>
-                {company.website !== "#" && (
-                  <a
-                    href={company.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-white/60 hover:text-white transition"
-                  >
-                    Learn more →
-                  </a>
-                )}
               </motion.div>
             ))}
           </div>
@@ -362,15 +329,16 @@ export default function VelocityPage() {
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
                   <h3 className="text-xl font-semibold mb-3">Location</h3>
                   <p className="text-white/85">
-                    1205 E Washington St<br />
-                    Louisville, KY 40206
+                    Solyco Capital<br />
+                    101 West Main Street<br />
+                    LOUIESville, KY 40206
                   </p>
                 </div>
 
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
                   <h3 className="text-xl font-semibold mb-3">The Prize</h3>
                   <p className="text-white/85">
-                    The startup with the highest velocity will be eligible for a <span className="font-semibold">$10K MFN investment</span> and membership to <span className="font-semibold">The Block</span>, Louisville&apos;s startup war room.
+                    The startup with the highest velocity will be eligible for a <span className="font-semibold">$25K MFN investment</span> and membership to <span className="font-semibold">Cinderblock</span>, Louisville&apos;s startup war room.
                   </p>
                 </div>
               </div>
@@ -382,7 +350,7 @@ export default function VelocityPage() {
                 href="https://luma.com/8rgsdubd"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-xl bg-white px-6 py-3 font-semibold text-black transition hover:bg-white/90"
+                className="rounded-xl bg-primary-500 hover:bg-primary-700 text-white px-6 py-3 font-semibold transition"
               >
                 Register to Attend
               </Link>

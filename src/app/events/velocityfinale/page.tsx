@@ -170,28 +170,50 @@ export default function VelocityPage() {
                   src={company.image}
                   alt={company.name}
                   className="w-full h-full object-cover"
+                  style={{ transformOrigin: "center center" }}
                   animate={{
                     scale: hoveredCompany === idx ? 1.1 : 1,
                   }}
-                  transition={{ duration: 0.4 }}
+                  transition={{ 
+                    duration: 0.5,
+                    ease: "easeOut"
+                  }}
                 />
                 {/* Overlay gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent" />
                 
-                {/* Company Name - overlay near bottom */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
-                  <h3 className="text-white font-bold text-lg md:text-xl lg:text-2xl mb-2">
-                    {company.name}
-                  </h3>
+                {/* Company Name - overlay near bottom, fixed position */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 pointer-events-none">
+                  {/* Title - always visible, fixed position */}
+                  <div className="mb-2 pointer-events-auto">
+                    <h3 className="text-white font-bold text-lg md:text-xl lg:text-2xl">
+                      {company.name}
+                    </h3>
+                  </div>
                   
-                  {/* Description - appears on hover/expand */}
-                  <AnimatePresence>
+                  {/* Description - appears on hover/expand with delay, positioned below title */}
+                  <AnimatePresence mode="wait">
                     {hoveredCompany === idx && (
                       <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.3 }}
+                        key="description"
+                        initial={{ opacity: 0, maxHeight: 0, marginTop: 0 }}
+                        animate={{ 
+                          opacity: 1, 
+                          maxHeight: 200,
+                          marginTop: 8
+                        }}
+                        exit={{ 
+                          opacity: 0, 
+                          maxHeight: 0,
+                          marginTop: 0
+                        }}
+                        transition={{ 
+                          duration: 0.4,
+                          delay: 0.3, // Delay so accordion expands first
+                          ease: "easeInOut"
+                        }}
+                        className="overflow-hidden pointer-events-auto"
+                        style={{ willChange: "max-height, opacity" }}
                       >
                         <p className="text-white/90 text-sm md:text-base leading-relaxed">
                           {company.description}

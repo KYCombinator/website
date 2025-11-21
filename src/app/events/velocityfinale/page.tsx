@@ -135,7 +135,7 @@ export default function VelocityPage() {
                   href="https://luma.com/8rgsdubd"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block rounded-2xl border border-white/20 bg-white/10 px-6 py-3 font-semibold backdrop-blur transition hover:bg-white/20 text-white"
+                  className="inline-block rounded-2xl border border-white/20 bg-primary-500 px-6 py-3 font-semibold backdrop-blur transition hover:bg-primary-700 text-white"
                 >
                   Register to Attend
                 </Link>
@@ -205,9 +205,12 @@ export default function VelocityPage() {
                         exit={{ 
                           opacity: 0, 
                           maxHeight: 0,
-                          marginTop: 0
+                          marginTop: 0,
+                          transition: {
+                            duration: 0, // Exit immediately
+                          }
                         }}
-                        transition={{ 
+                        transition={{
                           duration: 0.4,
                           delay: 0.3, // Delay so accordion expands first
                           ease: "easeInOut"

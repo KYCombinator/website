@@ -23,9 +23,9 @@ export default function EventBanner() {
   if (!isVisible) return null;
 
   return (
-    <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 px-4 relative z-50">
-      <div className="container mx-auto flex items-center justify-center gap-4 flex-wrap">
-        <div className="text-center md:text-left">
+    <div className="fixed top-0 left-0 right-0 bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 px-4 z-[60]">
+      <div className="container mx-auto flex items-center justify-center">
+        <div className="text-center">
           <span className="font-semibold">December 4th:</span>{" "}
           <Link
             href="/events/velocityfinale"
@@ -41,14 +41,14 @@ export default function EventBanner() {
             The LOUIES
           </Link>
         </div>
-        <button
-          onClick={handleDismiss}
-          className="ml-auto p-1 hover:bg-white/20 rounded transition-colors"
-          aria-label="Dismiss banner"
-        >
-          <X size={20} />
-        </button>
       </div>
+      <button
+        onClick={handleDismiss}
+        className="absolute top-1/2 right-4 -translate-y-1/2 p-1 hover:bg-white/20 rounded transition-colors"
+        aria-label="Dismiss banner"
+      >
+        <X size={20} />
+      </button>
     </div>
   );
 }

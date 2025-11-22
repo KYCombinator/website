@@ -146,6 +146,7 @@ export default function VelocityPage() {
                   style={{ transformOrigin: "center center" }}
                   animate={{
                     scale: hoveredCompany === idx ? 1.1 : 1,
+                    filter: hoveredCompany === idx ? "brightness(1.15)" : "brightness(1)",
                   }}
                   transition={{ 
                     duration: 0.5,
@@ -154,6 +155,16 @@ export default function VelocityPage() {
                 />
                 {/* Overlay gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent" />
+                
+                {/* Primary-900 filter overlay - visible when not hovered */}
+                <motion.div
+                  className="absolute inset-0 bg-primary-900"
+                  initial={false}
+                  animate={{
+                    opacity: hoveredCompany === idx ? 0.1 : 0.3,
+                  }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                />
                 
                 {/* Company Name - overlay near bottom, fixed position */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 pointer-events-none">

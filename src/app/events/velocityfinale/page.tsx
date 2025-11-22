@@ -28,7 +28,8 @@ export default function VelocityPage() {
     {
     name: "Jokester",
     description:
-    "Livestreaming comedy platform built exclusively for comedians.",
+      "A streaming platform built exclusively for comedians.",
+      blurb: "Jokester helps comedians maximize their revenue, own their audience, and grow their brand through pay-per-view specials and live shows.",
     image: "https://cdn.kycombinator.com/velocity/jokester.jpg",
     },
     {

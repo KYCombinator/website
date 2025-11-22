@@ -256,7 +256,7 @@ export default function VelocityPage() {
               <span className="font-semibold">Measured by traction.</span> Progress tracked weekly through customers and revenue.
             </div>
             <div className="rounded-xl border border-white/10 bg-white/5 p-6">
-              <span className="font-semibold">The winner.</span> The startup with the highest velocity will be eligible for a <span className="font-semibold">$10K MFN investment</span> and membership to <span className="font-semibold">The Block</span>.
+              <span className="font-semibold">The winner.</span> The startup with the highest velocity will be eligible for a <span className="font-semibold">$25K MFN investment</span> and membership to <span className="font-semibold">The Block</span>.
             </div>
           </div>
         </div>

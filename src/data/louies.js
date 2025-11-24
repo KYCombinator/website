@@ -4,7 +4,7 @@ export const awards = [
       category: "Individual",
       description:
         "Louisville’s very own favorite Founder! The Founder who does it all and represents Louisville.",
-      presentedBy: "Duffy Baker of JP Morgan",
+      presentedBy: "Duffy Baker of JPMorganChase",
       nominees: [
         "Akhil Nair",
         "Jack Manzella",
@@ -52,6 +52,7 @@ export const awards = [
         "Waleed Bahouth",
         "Nate Royal",
         "Ben Reno-Weber",
+        "Kahlil Garmon"
       ],
     },
     {
@@ -99,7 +100,7 @@ export const awards = [
       category: "Ecosystem Award",
       description:
         "For the person who knows everyone and makes intros faster than LinkedIn can suggest them. The connector who keeps Louisville's startup scene glued together.",
-      presentedBy: "",
+      presentedBy: "George Davis of LouCity & Racing Foundation",
       nominees: [
         "Jordan Clemons",
         "Elizabeth Rounsavall",
@@ -161,6 +162,7 @@ export const awards = [
         "Untitled",
         "DueGooder",
         "VSimple",
+        "LeapFrog"
       ],
     },
     {

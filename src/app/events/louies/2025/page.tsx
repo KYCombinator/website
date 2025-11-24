@@ -110,30 +110,36 @@ export default function Louies2025Page() {
                   <div className="overflow-hidden rounded-2xl border border-border shadow-lg bg-background">
                     <div className="overflow-x-auto">
                       <table className="min-w-full text-left">
-                        <thead className="bg-muted/50 border-b-2 border-border">
+                        <thead className="bg-gradient-to-r from-muted via-muted/90 to-muted border-b-2 border-primary/20">
                           <tr>
-                            <th className="px-5 py-4 md:px-8 md:py-5 font-bold text-foreground text-sm md:text-base uppercase tracking-wide">
+                            <th className="px-5 py-4 md:px-8 md:py-5 font-bold text-foreground text-sm md:text-base uppercase tracking-wider border-r border-border/30 first:border-l-0">
                               Award
                             </th>
-                            <th className="px-5 py-4 md:px-8 md:py-5 font-bold text-foreground text-sm md:text-base uppercase tracking-wide">
+                            <th className="px-5 py-4 md:px-8 md:py-5 font-bold text-foreground text-sm md:text-base uppercase tracking-wider border-r border-border/30">
                               Description
                             </th>
-                            <th className="px-5 py-4 md:px-8 md:py-5 font-bold text-foreground text-sm md:text-base uppercase tracking-wide whitespace-nowrap">
+                            <th className="px-5 py-4 md:px-8 md:py-5 font-bold text-foreground text-sm md:text-base uppercase tracking-wider whitespace-nowrap border-r border-border/30">
                               Presented By
                             </th>
-                            <th className="px-5 py-4 md:px-8 md:py-5 font-bold text-foreground text-sm md:text-base uppercase tracking-wide">
+                            <th className="px-5 py-4 md:px-8 md:py-5 font-bold text-foreground text-sm md:text-base uppercase tracking-wider">
                               Nominees
                             </th>
                           </tr>
                         </thead>
-                        <tbody className="divide-y divide-border/50">
-                          {categoryAwards.map((award) => (
+                        <tbody>
+                          {categoryAwards.map((award, index) => (
                             <tr 
                               key={award.name} 
-                              className="align-top transition-colors hover:bg-muted/30"
+                              className={`align-top transition-all duration-200 ${
+                                index < categoryAwards.length - 1 ? 'border-b border-primary-200' : ''
+                              } ${
+                                index % 2 === 0 
+                                  ? 'bg-background hover:bg-muted/40' 
+                                  : 'bg-muted/20 hover:bg-muted/50'
+                              }`}
                             >
-                              <td className="px-5 py-5 md:px-8 md:py-6">
-                                <span className="text-sm md:text-base font-semibold text-foreground leading-tight">
+                              <td className="px-5 py-5 md:px-8 md:py-6 border-r border-border/20">
+                                <span className="text-sm md:text-base font-bold text-foreground leading-tight">
                                   {award.name}
                                 </span>
                               </td>

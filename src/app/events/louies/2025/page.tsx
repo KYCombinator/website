@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { awards } from "@/data/louies";
 
 export const metadata: Metadata = {
   title: "The Louies 2025 | Louisville Startup Awards | KYX | Sponsored by JPMorgan Chase",
@@ -22,134 +23,6 @@ export const metadata: Metadata = {
 };
 
 export default function Louies2025Page() {
-  const awards = [
-    {
-      name: "Louisville’s Favorite Founder",
-      category: "Individual",
-      description:
-        "Louisville’s very own favorite Founder! The Founder who does it all and represents Louisville.",
-      presentedBy: "Duffy Baker of JP Morgan",
-    },
-    {
-      name: "Assistant to the Founder",
-      category: "Individual",
-      description:
-        "Not Assistant Founder or Co-Founder, let’s be clear—just the cofounder doing 80% of the work with 20% of the credit. The Dwight Schrute of the startup world.",
-      presentedBy: "Garrett French of Citation Labs",
-    },
-    {
-      name: "Idea Encore Award",
-      category: "Individual",
-      description:
-        "Why stop at one company when you can start four? This award celebrates the founder who lives in permanent \"New Venture Mode,\" generating ideas faster than the rest of us can buy domains.",
-      presentedBy: "Greg Langdon of the Louisville ecosystem community",
-    },
-    {
-      name: "Relentless Grit and Hustle Award (RGHA)",
-      category: "Individual",
-      description:
-        "For the founder who is absolutely, definitely building the next decacorn — by force of sheer stubbornness, caffeine, and delusional confidence alone.",
-      presentedBy: "Louisville Bats",
-    },
-    {
-      name: "Insomnia Award",
-      category: "Individual",
-      description:
-        "For the founder who seems to operate on pure adrenaline, bad coffee, and zero hours of sleep. This award honors the unstoppable night owl who’s always online, always building, and somehow always responding to Slack at 3:14 AM.",
-      presentedBy: "Steve Huey of TYP64",
-    },
-    {
-      name: "Gift of Gab Award",
-      category: "Individual",
-      description:
-        "For the founder who always has something to say—whether it's a pitch, a rant, a story, a tangent, or a motivational sidebar nobody asked for. This award honors the unstoppable conversationalist whose words fill every room… and occasionally the entire Slack channel.",
-      presentedBy: "Kevin Gibson of Founder45",
-    },
-    {
-      name: "Founder Therapist Award",
-      category: "Ecosystem Award",
-      description:
-        "For the ecosystem hero who has heard every meltdown, panic spiral, and existential startup crisis in Louisville. They provide therapy disguised as \"founder office hours.\"",
-      presentedBy: "Rachel Edenfield of Swell / KYX",
-    },
-    {
-      name: "Warm Intro Award",
-      category: "Ecosystem Award",
-      description:
-        "For the person who knows everyone and makes intros faster than LinkedIn can suggest them. The connector who keeps Louisville's startup scene glued together.",
-      presentedBy: "",
-    },
-    {
-      name: "Best Community Operator",
-      category: "Ecosystem Award",
-      description:
-        "For the person who does the invisible work that keeps the ecosystem alive: events, logistics, onboarding, DMs, spreadsheets, chaos control, and founder cat-herding.",
-      presentedBy: "Chelsea VanHook of Community Foundation Louisville",
-    },
-    {
-      name: "Louisville's Favorite Angel Investor",
-      category: "Ecosystem Award",
-      description:
-        "For the investor who believes early, invests early, and relentlessly supports founders — with money, advice, memes, or all three.",
-      presentedBy: "Nate Royal of DueGooder",
-    },
-    {
-      name: "Best Fundraise",
-      category: "Startup Award",
-      description:
-        "For the startup that did the impossible: raised meaningful money in Kentucky without selling a kidney, sacrificing a cofounder, or moving to SF.",
-      presentedBy: "Rron Thaci of Keyhorse Capital",
-    },
-    {
-      name: "Highest Velocity Startup",
-      category: "Startup Award",
-      description:
-        "For the team moving at Mach 10 — shipping fast, iterating faster, breaking things responsibly, and permanently living in \"just one more sprint\" mode.",
-      presentedBy: "Larry Horn of Amplify Louisville",
-    },
-    {
-      name: "MVP Award",
-      category: "Startup Award",
-      description:
-        "For the early-stage team that emphasized the \"M\" (minimum) in MVP (minimum viable product). Celebrating the team that executed in an hour rather than building perfection over a year.",
-      presentedBy: "Natalia Bishop of Story Louisville",
-    },
-    {
-      name: "SPAM Award",
-      category: "Startup Award",
-      description:
-        "For the startup whose growth strategy is \"send it to everyone.\" Cold emails, DMs, outreach, guerrilla tactics — if there's a channel, they've hit it.",
-      presentedBy: "Jack Crowdis of PayFwds / KYX",
-    },
-    {
-      name: "Exits in 2025",
-      category: "Recognition",
-      description:
-        "A salute to the startups that actually made it out. Whether IPO, acquisition, acqui-hire, or \"strategic liquidation,\" you still beat the odds.",
-      presentedBy: "Sara Blackmer of Solyco Capital",
-    },
-    {
-      name: "Startups that died in 2025",
-      category: "Recognition",
-      description:
-        "Honoring the fallen. They tried. They built. They learned. Fail fast and try again.",
-      presentedBy: "Dan Ross-Li of KYX",
-    },
-    {
-      name: "Future Founders",
-      category: "Recognition",
-      description:
-        "For those born in 2025, honoring the next generation! You're the future we're building for!",
-      presentedBy: "",
-    },
-    {
-      name: "Spouse of the Year Award",
-      category: "Recognition",
-      description:
-        "For the partners who tolerated the late nights, the stress rants, the pitch decks on the kitchen table, and the \"one more meeting\" that was actually three.",
-      presentedBy: "Zeeshan Bhatti of Solyco Capital / KYX",
-    },
-  ];
 
   const categories = Array.from(
     new Set(awards.map((award) => award.category))
@@ -248,6 +121,9 @@ export default function Louies2025Page() {
                             <th className="px-4 py-3 md:px-6 md:py-4 font-semibold text-foreground/90 text-xs md:text-sm whitespace-nowrap">
                               Presented By
                             </th>
+                            <th className="px-4 py-3 md:px-6 md:py-4 font-semibold text-foreground/90 text-xs md:text-sm">
+                              Nominees
+                            </th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-border">
@@ -271,6 +147,19 @@ export default function Louies2025Page() {
                                 ) : (
                                   <span className="italic text-muted-foreground">
                                     To be announced
+                                  </span>
+                                )}
+                              </td>
+                              <td className="px-4 py-4 md:px-6 md:py-5 text-xs md:text-sm text-foreground/80">
+                                {award.nominees && award.nominees.length > 0 ? (
+                                  <ul className="list-disc list-inside space-y-1">
+                                    {award.nominees.map((nominee, idx) => (
+                                      <li key={idx}>{nominee}</li>
+                                    ))}
+                                  </ul>
+                                ) : (
+                                  <span className="italic text-muted-foreground">
+                                    Nominations pending
                                   </span>
                                 )}
                               </td>

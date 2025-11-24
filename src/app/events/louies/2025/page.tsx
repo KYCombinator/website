@@ -107,58 +107,73 @@ export default function Louies2025Page() {
                       {category}
                     </h3>
                   </div>
-                  <div className="overflow-hidden rounded-2xl border border-border shadow-sm bg-background">
+                  <div className="overflow-hidden rounded-2xl border border-border shadow-lg bg-background">
                     <div className="overflow-x-auto">
-                      <table className="min-w-full text-left text-sm">
-                        <thead className="bg-muted border-b border-border">
+                      <table className="min-w-full text-left">
+                        <thead className="bg-muted/50 border-b-2 border-border">
                           <tr>
-                            <th className="px-4 py-3 md:px-6 md:py-4 font-semibold text-foreground/90 text-xs md:text-sm">
+                            <th className="px-5 py-4 md:px-8 md:py-5 font-bold text-foreground text-sm md:text-base uppercase tracking-wide">
                               Award
                             </th>
-                            <th className="px-4 py-3 md:px-6 md:py-4 font-semibold text-foreground/90 text-xs md:text-sm">
+                            <th className="px-5 py-4 md:px-8 md:py-5 font-bold text-foreground text-sm md:text-base uppercase tracking-wide">
                               Description
                             </th>
-                            <th className="px-4 py-3 md:px-6 md:py-4 font-semibold text-foreground/90 text-xs md:text-sm whitespace-nowrap">
+                            <th className="px-5 py-4 md:px-8 md:py-5 font-bold text-foreground text-sm md:text-base uppercase tracking-wide whitespace-nowrap">
                               Presented By
                             </th>
-                            <th className="px-4 py-3 md:px-6 md:py-4 font-semibold text-foreground/90 text-xs md:text-sm">
+                            <th className="px-5 py-4 md:px-8 md:py-5 font-bold text-foreground text-sm md:text-base uppercase tracking-wide">
                               Nominees
                             </th>
                           </tr>
                         </thead>
-                        <tbody className="divide-y divide-border">
+                        <tbody className="divide-y divide-border/50">
                           {categoryAwards.map((award) => (
-                            <tr key={award.name} className="align-top">
-                              <td className="px-4 py-4 md:px-6 md:py-5 text-sm font-medium text-foreground">
-                                {award.name}
+                            <tr 
+                              key={award.name} 
+                              className="align-top transition-colors hover:bg-muted/30"
+                            >
+                              <td className="px-5 py-5 md:px-8 md:py-6">
+                                <span className="text-sm md:text-base font-semibold text-foreground leading-tight">
+                                  {award.name}
+                                </span>
                               </td>
-                              <td className="px-4 py-4 md:px-6 md:py-5 text-xs md:text-sm text-foreground/90">
-                                {award.description ? (
-                                  award.description
-                                ) : (
-                                  <span className="italic text-muted-foreground">
-                                    Description coming soon.
-                                  </span>
-                                )}
+                              <td className="px-5 py-5 md:px-8 md:py-6 max-w-md">
+                                <p className="text-xs md:text-sm text-foreground/85 leading-relaxed">
+                                  {award.description ? (
+                                    award.description
+                                  ) : (
+                                    <span className="italic text-muted-foreground">
+                                      Description coming soon.
+                                    </span>
+                                  )}
+                                </p>
                               </td>
-                              <td className="px-4 py-4 md:px-6 md:py-5 text-xs md:text-sm text-foreground/80 whitespace-nowrap">
-                                {award.presentedBy ? (
-                                  <span>{award.presentedBy}</span>
-                                ) : (
-                                  <span className="italic text-muted-foreground">
-                                    To be announced
-                                  </span>
-                                )}
+                              <td className="px-5 py-5 md:px-8 md:py-6 whitespace-nowrap">
+                                <span className="text-xs md:text-sm text-foreground/80">
+                                  {award.presentedBy ? (
+                                    <span className="font-medium">{award.presentedBy}</span>
+                                  ) : (
+                                    <span className="italic text-muted-foreground">
+                                      To be announced
+                                    </span>
+                                  )}
+                                </span>
                               </td>
-                              <td className="px-4 py-4 md:px-6 md:py-5 text-xs md:text-sm text-foreground/80">
+                              <td className="px-5 py-5 md:px-8 md:py-6 min-w-[200px]">
                                 {award.nominees && award.nominees.length > 0 ? (
-                                  <ul className="list-disc list-inside space-y-1">
+                                  <ul className="list-none space-y-2">
                                     {award.nominees.map((nominee, idx) => (
-                                      <li key={idx}>{nominee}</li>
+                                      <li 
+                                        key={idx} 
+                                        className="text-xs md:text-sm text-foreground/85 flex items-start gap-2"
+                                      >
+                                        <span className="text-primary mt-1.5 flex-shrink-0">•</span>
+                                        <span className="leading-relaxed">{nominee}</span>
+                                      </li>
                                     ))}
                                   </ul>
                                 ) : (
-                                  <span className="italic text-muted-foreground">
+                                  <span className="italic text-muted-foreground text-xs md:text-sm">
                                     Nominations pending
                                   </span>
                                 )}

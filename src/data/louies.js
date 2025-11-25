@@ -24,7 +24,8 @@ export const awards = [
         "Lauren Edmonds / Pitch Please",
         "Evan Payne / Besti Co",
         "Ethan Havertape / DueGooder",
-        "Ashley Jansen / Revitalized"
+        "Ashley Jansen / Revitalized",
+        "Logan Burchett / Forecastr"
       ],
     },
     {
@@ -38,6 +39,7 @@ export const awards = [
         "Susan Olson",
         "Dan Ross-Li",
         "Nate Royal",
+        "Jonathan Vanderford"
       ],
     },
     {
@@ -65,6 +67,7 @@ export const awards = [
         "Stevens Bonhomme",
         "Maya Jamner",
         "Gobin Bastola",
+        "Vanessa Omeokachie"
       ],
     },
     {
@@ -212,7 +215,6 @@ export const awards = [
         "Honoring the fallen. They tried. They built. They learned. Fail fast and try again.",
       presentedBy: "Dan Ross-Li of KYX",
       nominees: [
-        "Echojobs??",
       ],
     },
     {

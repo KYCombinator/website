@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { awards } from "@/data/louies";
 
 export const metadata: Metadata = {
-  title: "The Louies 2025 | Louisville Startup Awards | KYX | Sponsored by JPMorgan Chase",
+  title: "The Louies 2025 | Louisville Startup Awards | KYX | Sponsored by JPMorganChase",
   description:
     "The ecosystem event of Louisville. An extremely local celebration of the founders, operators, and enablers who keep Louisville's startup scene moving. Nominations open for The Louies 2025.",
   authors: [{ name: "KYX Team", url: "https://kycombinator.com/about" }],
   openGraph: {
-    title: "The Louies 2025 | Louisville Startup Awards | KYX | Sponsored by JPMorgan Chase",
+    title: "The Louies 2025 | Louisville Startup Awards | KYX | Sponsored by JPMorganChase",
     description:
       "The ecosystem event of Louisville. An extremely local celebration of the founders, operators, and enablers who keep Louisville's startup scene moving.",
     type: "website",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Louies 2025 | Louisville Startup Awards | KYX | Sponsored by JPMorgan Chase",
+    title: "The Louies 2025 | Louisville Startup Awards | KYX | Sponsored by JPMorganChase",
     description:
       "The ecosystem event of Louisville. An extremely local celebration of the founders, operators, and enablers who keep Louisville's startup scene moving.",
     images: ["https://cdn.kycombinator.com/TheLouies2025.gif"],

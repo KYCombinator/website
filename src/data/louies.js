@@ -29,7 +29,7 @@ export const awards = [
       ],
     },
     {
-      name: "Idea Encore Award",
+      name: "Hey Check This Out Award",
       category: "Individual",
       description:
         "Why stop at one company when you can start four? This award celebrates the founder who lives in permanent \"New Venture Mode,\" generating ideas faster than the rest of us can buy domains.",
@@ -43,7 +43,7 @@ export const awards = [
       ],
     },
     {
-      name: "Relentless Grit and Hustle Award (RGHA)",
+      name: "The Grow Relentlessly, Iterate Tirelessly (GRIT) Award",
       category: "Individual",
       description:
         "For the founder who is absolutely, definitely building the next decacorn — by force of sheer stubbornness, caffeine, and delusional confidence alone.",
@@ -58,7 +58,7 @@ export const awards = [
       ],
     },
     {
-      name: "Insomnia Award",
+      name: "Up all Night Award",
       category: "Individual",
       description:
         "For the founder who seems to operate on pure adrenaline, bad coffee, and zero hours of sleep. This award honors the unstoppable night owl who’s always online, always building, and somehow always responding to Slack at 3:14 AM.",
@@ -140,7 +140,7 @@ export const awards = [
       ],
     },
     {
-      name: "Best Fundraise",
+      name: "Show me the Money Award",
       category: "Startup Award",
       description:
         "For the startup that did the impossible: raised meaningful money in Kentucky without selling a kidney, sacrificing a cofounder, or moving to SF.",
@@ -209,7 +209,7 @@ export const awards = [
       ],
     },
     {
-      name: "Startups that died in 2025",
+      name: "RIP Award - Startups that died in 2025",
       category: "Recognition",
       description:
         "Honoring the fallen. They tried. They built. They learned. Fail fast and try again.",

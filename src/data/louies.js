@@ -222,7 +222,7 @@ export const awards = [
       category: "Recognition",
       description:
         "For those born in 2025, honoring the next generation! You're the future we're building for!",
-      presentedBy: "",
+      presentedBy: "Janna Gottbrath of Story Louisville",
       nominees: [
         "Baby Crowdis",
       ],

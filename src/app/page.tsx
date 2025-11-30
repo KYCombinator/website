@@ -51,7 +51,7 @@ export default function Home() {
               </h2>
               <div className="text-center space-y-3">
                 <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-                  <span className="font-semibold text-white">December 4th, 2024</span>
+                  <span className="font-semibold text-white">December 4th, 2025</span>
                 </p>
                 <p className="text-base md:text-lg text-gray-400">
                   <span className="text-purple-400 font-semibold">5:00 PM</span> Networking •{" "}

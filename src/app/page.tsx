@@ -2,39 +2,56 @@ import Image from "next/image";
 import EventBanner from "./components/EventBanner";
 import VelocityHero from "./components/VelocityHero";
 import LouiesHero from "./components/LouiesHero";
+import CTASection from "./components/CTASection";
 
 export default function Home() {
   return (
     <div className="relative min-h-screen bg-background-900 text-white">
       <EventBanner />
       {/* Hero Section */}
-      <section className="relative min-h-[500px] flex items-center justify-center bg-background-900 text-white py-12 md:py-16">
-        <div className="container mx-auto px-4 text-center flex flex-col items-center justify-center">
-          <div className="mb-6">
+      <section className="relative min-h-[600px] flex items-center justify-center bg-gradient-to-br from-background-800/30 to-background-900/30 backdrop-blur-md text-white py-16 md:py-20">
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-600/10 via-gray-600/10 to-zinc-600/10" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-8">
             <Image
               src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.svg`}
               alt="KYX"
               width={360}
               height={123}
-              className="mx-auto w-auto h-auto max-h-[200px] md:max-h-[250px]"
+              className="mx-auto w-auto h-auto max-h-[200px] md:max-h-[280px] drop-shadow-[0_0_30px_rgba(168,85,247,0.5)]"
               priority
             />
           </div>
-          <h3 className="text-2xl md:text-3xl font-bold text-foreground-900">
+          <h3 className="text-3xl md:text-4xl font-bold text-center bg-gradient-to-r from-white via-slate-100 to-gray-100 bg-clip-text text-transparent">
             Louisville, KY
           </h3>
+          <p className="text-lg md:text-xl text-gray-300 text-center mt-6 leading-relaxed max-w-2xl mx-auto">
+            Building Kentucky into a regional startup powerhouse where ambitious founders can
+            start, scale, and stay.
+          </p>
         </div>
       </section>
 
       {/* Upcoming Events Section Header */}
-      <section className="relative bg-background-900 py-12 md:py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3">
-            Upcoming Events
-          </h2>
-          <p className="text-lg md:text-xl text-white/80">
-            December 4th @ Solyco Capital 5pm - 7:30pm
-          </p>
+      <section className="relative bg-background-900 py-16 md:py-20">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 via-pink-600/10 to-orange-600/10" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="relative bg-gradient-to-br from-background-800/50 to-background-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12 max-w-4xl mx-auto">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="h-1 w-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" />
+              <span className="text-sm font-semibold text-purple-400 uppercase tracking-wider">
+                Join Us
+              </span>
+              <div className="h-1 w-12 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full" />
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 text-center">
+              Upcoming Events
+            </h2>
+            <p className="text-lg md:text-xl text-gray-300 text-center leading-relaxed">
+              <span className="font-semibold text-white">December 4th</span> @ Solyco Capital{" "}
+              <span className="text-purple-400">5pm - 7:30pm</span>
+            </p>
+          </div>
         </div>
       </section>
 
@@ -43,6 +60,9 @@ export default function Home() {
 
       {/* The LOUIES Section */}
       <LouiesHero />
+
+      {/* Call to Action Section */}
+      <CTASection />
     </div>
   );
 }

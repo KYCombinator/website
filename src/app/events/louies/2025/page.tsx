@@ -211,22 +211,22 @@ function Nominations() {
             Nominations & Voting
           </h3>
           <p className="text-sm md:text-base text-foreground/80 mb-4">
-            Nominations for The Louies 2025 are open. Tell us who&apos;s out
+            Voting for The Louies 2025 is open. Tell us who&apos;s out
             here building, operating, enabling, and generally doing the most
             for Louisville&apos;s startup ecosystem.
           </p>
           <ul className="list-disc list-inside text-sm md:text-base text-foreground/80 space-y-1 mb-4">
-            <li>Nominate founders, operators, and ecosystem builders</li>
+            <li>Vote for founders, operators, and ecosystem builders</li>
             <li>Tell us why they deserve a Louie</li>
             <li>Help shape the slate for public voting</li>
           </ul>
           <a
-            href="https://form.kycombinator.com/to/b706b984-80b9-4247-bd1d-740cda1b8038"
+            href="https://form.kycombinator.com/to/cfb78019-6778-4603-995c-bc3644bb1577"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold bg-primary text-foreground-900 shadow-sm hover:bg-primary/90 transition"
           >
-            Submit a Nomination
+            Vote Here
           </a>
           <p className="mt-4 text-xs md:text-sm text-muted-foreground">
             Once nominations close, we&apos;ll publish finalists and open up

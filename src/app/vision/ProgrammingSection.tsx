@@ -1,23 +1,23 @@
 export default function ProgrammingSection() {
   const mainPrograms = [
-    { name: "Jan – KYX Internship Program", status: "new" },
-    { name: "Feb – HackKentucky Main", status: "active" },
+    { name: "Jan – KYX Internship Program", status: "new", tagline: "Working at one company is low agency" },
+    { name: "Feb – HackKentucky Main", status: "active", tagline: "Sleep is low agency" },
     { name: "Mar – Build n' Chill", status: "discontinued", note: "will be discontinued" },
-    { name: "April – Casino Night", status: "new" },
-    { name: "May – Accelerate", status: "new" },
-    { name: "Sept – HacktheTrack", status: "active", note: "partnership" },
-    { name: "Sept – Velocity", status: "active" },
-    { name: "Sept – Rally Innovation Conference", status: "active" },
-    { name: "Sept – HackKentucky – Fall Cincinnati", status: "new" },
-    { name: "Oct – Block Party", status: "active" },
+    { name: "April – Casino Night", status: "new", tagline: "Luck is low agency" },
+    { name: "May – Relocate", status: "new", tagline: "SF is low agency" },
+    { name: "Sept – HacktheTrack", status: "active", note: "partnership", tagline: "Spectating is low agency" },
+    { name: "Sept – Velocity", status: "active", tagline: "Pre-Revenue is low agency" },
+    { name: "Sept – Rally Innovation Conference", status: "active", tagline: "Linkedin is low agency" },
+    { name: "Sept – HackKentucky – Fall Cincinnati", status: "new", tagline: "Sleep is low agency" },
+    { name: "Oct – Block Party", status: "active", tagline: "Netflix & Chill is low agency" },
     { name: "Nov – HackKentucky Fall", status: "discontinued", note: "moving to September in Cincinnati" },
-    { name: "Dec – Velocity Demo Day / The LOUIES", status: "active" },
+    { name: "Dec – Velocity Demo Day / The LOUIES", status: "active", tagline: "Pre-Revenue is low agency" },
   ];
 
   const communityPrograms = [
-    { name: "Fire & Ice", status: "active" },
-    { name: "Vibe Code / Poker Night", status: "active" },
-    { name: "Speaker Series", status: "new" },
+    { name: "Fire & Ice", status: "active", tagline: "Comfort is low agency" },
+    { name: "Vibe Code / Poker Night", status: "active", tagline: "Loneliness is low agency" },
+    { name: "Speaker Series", status: "new", tagline: "Complacency is low agency" },
   ];
 
   const getStatusStyles = (status: string) => {
@@ -60,21 +60,28 @@ export default function ProgrammingSection() {
             >
               <div className={`flex-shrink-0 w-2 h-2 rounded-full ${styles.bullet} mt-2`} />
               <div className="flex-1">
-                <span className={`${styles.text} font-medium`}>
-                  {program.name}
+                <div className="flex items-center flex-wrap gap-2">
+                  <span className={`${styles.text} font-medium`}>
+                    {program.name}
+                  </span>
                   {program.note && (
-                    <span className="text-gray-500 text-sm ml-2">({program.note})</span>
+                    <span className="text-gray-500 text-sm">({program.note})</span>
                   )}
-                </span>
-                {program.status === "new" && (
-                  <span className="ml-2 px-2 py-0.5 text-xs font-semibold bg-green-500/20 text-green-400 rounded border border-green-500/30">
-                    NEW
-                  </span>
-                )}
-                {program.status === "discontinued" && (
-                  <span className="ml-2 px-2 py-0.5 text-xs font-semibold bg-red-500/20 text-red-400 rounded border border-red-500/30">
-                    DISCONTINUED
-                  </span>
+                  {program.status === "new" && (
+                    <span className="px-2 py-0.5 text-xs font-semibold bg-green-500/20 text-green-400 rounded border border-green-500/30">
+                      NEW
+                    </span>
+                  )}
+                  {program.status === "discontinued" && (
+                    <span className="px-2 py-0.5 text-xs font-semibold bg-red-500/20 text-red-400 rounded border border-red-500/30">
+                      DISCONTINUED
+                    </span>
+                  )}
+                </div>
+                {program.tagline && (
+                  <p className="text-gray-400 text-sm italic mt-1">
+                    {program.tagline}
+                  </p>
                 )}
               </div>
             </li>

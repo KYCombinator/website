@@ -40,40 +40,46 @@ export default function VelocityHero() {
     },
   ];
 
-  const glow = "drop-shadow-[0_0_20px_rgba(168,85,247,0.75)]";
-
   return (
-    <section className="relative bg-black min-h-[70vh] flex flex-col">
+    <section className="relative bg-[#0b0b10] min-h-[70vh] flex flex-col">
       {/* Horizontal Accordion - 6 parts */}
       <div className="w-full h-[70vh] flex">
         {/* First part: Title, Description, Button */}
         <motion.div
-          className="relative flex flex-col bg-gradient-to-br from-purple-900/20 to-black"
+          className="relative flex flex-col bg-[#0b0b10]"
           initial={false}
           animate={{
             flex: hoveredCompany === null ? 1.5 : 0.8,
           }}
           transition={{ duration: 0.4, ease: "easeInOut" }}
         >
-          {/* Shimmer border on the right */}
-          <div className="absolute right-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-purple-500 to-transparent animate-[shimmer-border_3s_ease-in-out_infinite] z-20" />
-          
+          {/* hairline border on the right */}
+          <div className="absolute right-0 top-0 bottom-0 w-px bg-white/[0.06] z-20" />
+
           <div className="flex-1 flex flex-col justify-center p-6 md:p-8 lg:p-12">
+            <motion.p
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.1, duration: 0.6 }}
+              className="text-[11px] font-medium uppercase tracking-[0.28em] text-zinc-400 mb-4"
+            >
+              Velocity Finale
+            </motion.p>
             <motion.h1
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.15, duration: 0.6 }}
-              className={`text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight ${glow} mb-4`}
+              className="text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-white mb-4"
             >
-              Velocity Finale
+              Five startups. Twelve weeks.
             </motion.h1>
             <motion.p
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-base md:text-lg lg:text-xl text-white/80 mb-6"
+              className="text-base md:text-lg text-zinc-400 mb-8 leading-relaxed"
             >
-              Watch 5 startups present their 12‑week journey. Part of the Velocity / The LOUIES - KYX 2025 Celebration.
+              Watch five startups present their 12‑week journey. Part of the Velocity / The LOUIES — KYX 2025 Celebration.
             </motion.p>
             <motion.div
               initial={{ y: 20, opacity: 0 }}
@@ -82,9 +88,17 @@ export default function VelocityHero() {
             >
               <Link
                 href="/events/velocityfinale"
-                className="inline-block rounded-2xl border border-white/20 bg-primary-500 px-6 py-3 font-semibold backdrop-blur transition hover:bg-primary-700 text-white"
+                className="group inline-flex items-center rounded-md bg-white px-5 py-2.5 text-sm font-medium text-zinc-900 transition-colors duration-200 hover:bg-zinc-200"
               >
-                Learn More
+                Learn more
+                <svg
+                  className="ml-1.5 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
               </Link>
             </motion.div>
           </div>
@@ -107,12 +121,10 @@ export default function VelocityHero() {
               zIndex: hoveredCompany === idx ? 30 : 10 + idx,
             }}
           >
-            {/* Shimmer border on the right */}
-            <div 
-              className="absolute right-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-purple-500 to-transparent animate-[shimmer-border_3s_ease-in-out_infinite] z-20" 
-              style={{ animationDelay: `${idx * 0.2}s` }} 
-            />
-            
+            {/* hairline border on the right */}
+            <div className="absolute right-0 top-0 bottom-0 w-px bg-white/[0.06] z-20" />
+
+
             {/* Image Container */}
             <div className="relative flex-1 overflow-hidden">
               <motion.img
@@ -132,12 +144,12 @@ export default function VelocityHero() {
               {/* Overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent" />
               
-              {/* Primary-900 filter overlay */}
+              {/* neutral dim overlay */}
               <motion.div
-                className="absolute inset-0 bg-primary-900"
+                className="absolute inset-0 bg-black"
                 initial={false}
                 animate={{
-                  opacity: hoveredCompany === idx ? 0.1 : 0.3,
+                  opacity: hoveredCompany === idx ? 0.05 : 0.4,
                 }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
               />
@@ -188,20 +200,6 @@ export default function VelocityHero() {
           </motion.div>
         ))}
       </div>
-
-      {/* keyframes */}
-      <style jsx global>{`
-        @keyframes shimmer-border {
-          0%, 100% {
-            opacity: 0.3;
-            box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
-          }
-          50% {
-            opacity: 1;
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.8), 0 0 30px rgba(168, 85, 247, 0.5);
-          }
-        }
-      `}</style>
     </section>
   );
 }

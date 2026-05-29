@@ -2,47 +2,63 @@ import Link from "next/link";
 
 export default function LouiesHero() {
   return (
-    <section 
-      className="relative h-[65vh] text-primary-foreground bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: 'url(https://cdn.kycombinator.com/TheLouies2025.png)' }}
+    <section
+      className="relative h-[68vh] min-h-[520px] overflow-hidden border-y border-white/[0.06] bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url(https://cdn.kycombinator.com/TheLouies2025.png)" }}
     >
-      <div className="absolute inset-0 bg-black/40" />
-      <div className="container mx-auto px-4 h-full flex items-center justify-center relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="uppercase tracking-[0.25em] text-xs md:text-sm mb-4 text-white">
+      {/* restrained overlay — single dark wash */}
+      <div className="absolute inset-0 bg-black/65" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"
+      />
+
+      <div className="container relative z-10 mx-auto flex h-full items-center justify-center px-4">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.28em] text-zinc-300">
             Louisville Startup Awards
           </p>
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-white">
+          <h1 className="mb-6 text-4xl font-semibold tracking-tight text-white md:text-6xl">
             The LOUIES 2025
           </h1>
-          <p className="text-base md:text-lg text-white/90 max-w-2xl mx-auto mb-6">
+          <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-zinc-300 md:text-lg">
             The ecosystem event of Louisville. An extremely local celebration of the founders,
-            operators, and enablers who keep Louisville&apos;s startup scene
-            moving.
+            operators, and enablers who keep Louisville&apos;s startup scene moving.
           </p>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 mb-6 text-white/90">
-            <div className="text-sm md:text-base">
-              <span className="font-semibold">5:00 PM</span> Networking
-            </div>
-            <div className="text-sm md:text-base">
-              <span className="font-semibold">5:45 PM</span> Velocity
-            </div>
-            <div className="text-sm md:text-base">
-              <span className="font-semibold">6:30 PM</span> The LOUIES
-            </div>
+
+          <div className="mb-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-zinc-300 md:text-base">
+            <span>
+              <span className="font-medium text-white">5:00 PM</span> Networking
+            </span>
+            <span aria-hidden className="text-zinc-500">·</span>
+            <span>
+              <span className="font-medium text-white">5:45 PM</span> Velocity
+            </span>
+            <span aria-hidden className="text-zinc-500">·</span>
+            <span>
+              <span className="font-medium text-white">6:30 PM</span> The LOUIES
+            </span>
           </div>
+
           <Link
             href="/events/louies/2025"
-            className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm md:text-base font-semibold bg-white text-primary shadow-sm hover:bg-white/90 transition"
+            className="group inline-flex items-center justify-center rounded-md bg-white px-5 py-2.5 text-sm font-medium text-zinc-900 transition-colors duration-200 hover:bg-zinc-200"
           >
-            Learn More
+            Learn more
+            <svg
+              className="ml-1.5 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
           </Link>
-          <p className="text-white/70 text-sm md:text-base mt-4">
-            Solyco Capital, 111 West Main Street, LOUIESville, KY
+          <p className="mt-5 text-sm text-zinc-400">
+            Solyco Capital · 111 West Main Street, Louisville, KY
           </p>
         </div>
       </div>
     </section>
   );
 }
-

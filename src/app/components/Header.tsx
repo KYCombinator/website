@@ -5,13 +5,25 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 
-export default function Header({children}: {children: React.ReactNode}) {
+const NAV_LINKS: { href: string; label: string }[] = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/vision", label: "Vision" },
+  { href: "/ourtype", label: "Our Type" },
+  { href: "/events", label: "Events" },
+  { href: "/slack", label: "Slack" },
+  { href: "/cinderblock", label: "The Block" },
+  { href: "/report", label: "Report" },
+  { href: "/faqs", label: "FAQs" },
+];
+
+export default function Header({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-background-900 border-b border-background-800 sticky w-full top-0 z-50 text-foreground-700">
+    <header className="sticky top-0 z-50 w-full border-b border-white/[0.06] bg-[#0b0b10] text-zinc-300">
       <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
@@ -20,7 +32,7 @@ export default function Header({children}: {children: React.ReactNode}) {
                 alt="KYCombinator"
                 width={220}
                 height={82}
-                className="h-14 w-auto"
+                className="h-12 w-auto"
                 priority
               />
             </Link>
@@ -29,115 +41,50 @@ export default function Header({children}: {children: React.ReactNode}) {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2"
+            className="rounded-md p-2 text-zinc-300 transition hover:bg-white/[0.04] hover:text-white md:hidden"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMenuOpen ? (
-              <X className="h-6 w-6" />
+              <X className="h-5 w-5" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu className="h-5 w-5" />
             )}
           </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center md:justify-start flex-1 pl-8">
-            <nav className="flex items-center gap-8 text-foreground-700 font-medium text-base whitespace-nowrap">
-              <Link
-                href="/"
-                className="hover:text-white"
-              >
-                home
-              </Link>
-              <Link
-                href="/about"
-                className="hover:text-white"
-              >
-                about
-              </Link>
-              <Link
-                href="/faqs"
-                className="hover:text-white"
-              >
-                faqs
-              </Link>
-              <Link
-                href="/ourtype"
-                className="hover:text-white"
-              >
-                our type
-              </Link>
-              <Link
-                href="/events"
-                className="hover:text-white"
-              >
-                events
-              </Link>
-              <Link
-                href="/cinderblock"
-                className="hover:text-white"
-              >
-                the block
-              </Link>
-              <Link
-                href="/report"
-                className="hover:text-white"
-              >
-                report
-              </Link>
-              
+          <div className="hidden flex-1 pl-10 md:flex md:items-center md:justify-start">
+            <nav className="flex items-center gap-8 whitespace-nowrap text-[13px] font-medium tracking-wide text-zinc-400">
+              {NAV_LINKS.map(({ href, label }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="relative py-1 transition-colors duration-200 hover:text-white"
+                >
+                  {label}
+                </Link>
+              ))}
             </nav>
           </div>
-          <div className="hidden md:flex md:items-center md:justify-end flex-1 pl-8">
+          <div className="hidden flex-1 justify-end pl-8 md:flex md:items-center">
             {children}
           </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 bg-white border-b z-50">
-            <div className="px-4 py-3 space-y-2 font-medium text-base text-foreground-700">
-              <Link
-                href="/"
-                className="block px-3 py-2  hover:text-purple-700"
-              >
-                home
-              </Link>
-              <Link
-                href="/#about"
-                className="block px-3 py-2  hover:text-purple-700"
-              >
-                about
-              </Link>
-              <Link
-                href="/#faqs"
-                className="block px-3 py-2 hover:text-purple-700"
-              >
-                faqs
-              </Link>
-              <Link
-                href="/type"
-                className="block px-3 py-2 hover:text-purple-700"
-              >
-                our type
-              </Link>
-              <Link
-                href="/#events"
-                className="block px-3 py-2 hover:text-purple-700"
-              >
-                events
-              </Link>
-              <Link
-                href="/cinderblock"
-                className="block px-3 py-2 hover:text-purple-700"
-              >
-                the block
-              </Link>
-              <Link
-                href="/report"
-                className="block px-3 py-2 hover:text-purple-700"
-              >
-                report
-              </Link>
-              {children}
+          <div className="absolute left-0 right-0 top-16 z-50 border-b border-white/[0.06] bg-[#0b0b10] md:hidden">
+            <div className="space-y-0.5 px-4 py-3 text-sm font-medium text-zinc-300">
+              {NAV_LINKS.map(({ href, label }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block rounded-md px-3 py-2.5 transition hover:bg-white/[0.04] hover:text-white"
+                >
+                  {label}
+                </Link>
+              ))}
+              <div className="px-3 pt-2">{children}</div>
             </div>
           </div>
         )}

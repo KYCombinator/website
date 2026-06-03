@@ -2,17 +2,29 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PrintButton from "./PrintButton";
 
+const WP_TITLE = "Lougistics — White Paper | KYX";
+const WP_DESC =
+  "Building on the one advantage no other city can move. A proposal to convert Louisville's fixed logistics advantage into a manufacturing-company-creation engine — and the middle-class jobs that come with it.";
+const WP_URL = `${process.env.NEXT_PUBLIC_SITE_URL || "https://kycombinator.com"}/lougistics/whitepaper`;
+const WP_IMAGE = `${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.png`;
+
 export const metadata: Metadata = {
-  title: "Lougistics — White Paper | KYX",
-  description:
-    "A proposal to convert Louisville's fixed logistics advantage into a manufacturing-company-creation engine — and the middle-class jobs that come with it.",
+  title: WP_TITLE,
+  description: WP_DESC,
+  alternates: { canonical: WP_URL },
   openGraph: {
-    title: "Lougistics — White Paper | KYX",
-    description:
-      "Building on the one advantage no other city can move. A proposal to convert Louisville's fixed logistics advantage into a manufacturing-company-creation engine.",
+    title: WP_TITLE,
+    description: WP_DESC,
     type: "article",
-    url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://kycombinator.com"}/lougistics/whitepaper`,
-    images: [`${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.png`],
+    siteName: "KYCombinator",
+    url: WP_URL,
+    images: [{ url: WP_IMAGE, alt: "Lougistics white paper — KYCombinator" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: WP_TITLE,
+    description: WP_DESC,
+    images: [WP_IMAGE],
   },
 };
 

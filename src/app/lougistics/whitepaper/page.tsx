@@ -477,9 +477,9 @@ export default function WhitePaperPage() {
 
           <H2>A founding coalition</H2>
           <p className={body}>
-            Louisville Metro and Louisville Forward, Greater Louisville Inc., the Riverport
-            Authority, one or more anchor corporate partners (UPS foremost among them), a
-            university partner, and a philanthropic lead.
+            Louisville Metro, One Louisville, the Riverport Authority, one or more anchor
+            corporate partners (UPS foremost among them), a university partner, a
+            philanthropic lead, and additional partners to be confirmed.
           </p>
 
           <H2>Core commitments</H2>

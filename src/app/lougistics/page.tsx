@@ -472,9 +472,9 @@ export default function LougisticsPage() {
             <li className="rounded-xl border border-white/[0.06] bg-white/[0.015] p-5">
               <p className="text-sm leading-relaxed text-zinc-300 md:text-base">
                 <strong className="font-semibold text-white">A founding coalition:</strong>{" "}
-                Louisville Metro / Louisville Forward, Greater Louisville Inc., the
-                Riverport Authority, anchor corporates (UPS et al.), a university partner,
-                and a philanthropic lead.
+                Louisville Metro, One Louisville, the Riverport Authority, anchor
+                corporates (UPS et al.), a university partner, a philanthropic lead, and
+                additional partners to be confirmed.
               </p>
             </li>
             <li className="rounded-xl border border-white/[0.06] bg-white/[0.015] p-5">

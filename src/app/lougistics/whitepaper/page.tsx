@@ -22,8 +22,10 @@ const TEAL = "#3A7CA5";
 const HEAD = "#2E74B5";
 const SUBHEAD = "#1F4D78";
 
-const docFont =
-  '"Calibri","Segoe UI","Helvetica Neue",system-ui,-apple-system,sans-serif';
+// Serif body for a printed-paper feel; sans for small caps labels.
+const serif =
+  'Georgia,"Iowan Old Style","Palatino Linotype",Palatino,Cambria,"Times New Roman",serif';
+const sans = '"Segoe UI","Helvetica Neue",system-ui,-apple-system,sans-serif';
 
 const CONTENTS = [
   { id: "executive-summary", label: "Executive summary" },
@@ -37,13 +39,16 @@ const CONTENTS = [
   { id: "figures", label: "A note on the figures" },
 ];
 
-const body = "mt-4 text-[15px] leading-[1.75] text-[#2b2b2b] md:text-[16px]";
+const body =
+  "mt-5 text-[16px] leading-[1.8] text-[#262626] [text-align:justify] [hyphens:auto] [text-justify:inter-word] md:text-[17px]";
+const listText =
+  "mt-5 list-disc space-y-2.5 pl-7 text-[16px] leading-[1.75] text-[#262626] md:text-[17px] marker:text-[#2E74B5]";
 
 function H1({ id, children }: { id: string; children: React.ReactNode }) {
   return (
     <h2
       id={id}
-      className="mb-1 mt-14 scroll-mt-8 border-b border-[#2E74B5]/25 pb-2 text-[22px] font-semibold tracking-tight md:text-[26px]"
+      className="mb-2 mt-16 scroll-mt-8 border-b border-[#2E74B5]/25 pb-2.5 text-[24px] font-bold tracking-tight md:text-[28px]"
       style={{ color: HEAD }}
     >
       {children}
@@ -53,7 +58,7 @@ function H1({ id, children }: { id: string; children: React.ReactNode }) {
 
 function H2({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="mt-8 text-[17px] font-semibold md:text-[19px]" style={{ color: SUBHEAD }}>
+    <h3 className="mt-9 text-[18px] font-bold md:text-[20px]" style={{ color: SUBHEAD }}>
       {children}
     </h3>
   );
@@ -62,8 +67,8 @@ function H2({ children }: { children: React.ReactNode }) {
 function Quote({ children }: { children: React.ReactNode }) {
   return (
     <blockquote
-      className="my-10 border-y py-6 text-center text-[19px] font-medium italic leading-snug md:text-[22px]"
-      style={{ color: NAVY, borderColor: `${NAVY}22` }}
+      className="mx-auto my-12 max-w-[44ch] border-y py-7 text-center text-[20px] font-medium italic leading-snug md:text-[23px]"
+      style={{ color: NAVY, borderColor: `${NAVY}26` }}
     >
       {children}
     </blockquote>
@@ -73,8 +78,8 @@ function Quote({ children }: { children: React.ReactNode }) {
 export default function WhitePaperPage() {
   return (
     <div
-      className="min-h-screen bg-[#dcdce1] px-0 py-0 text-[#2b2b2b] sm:px-6 sm:py-12 print:bg-white print:p-0"
-      style={{ fontFamily: docFont }}
+      className="min-h-screen bg-[#d8d8de] px-0 py-0 text-[#262626] sm:px-6 sm:py-14 print:bg-white print:p-0"
+      style={{ fontFamily: serif }}
     >
       {/* Toolbar (screen only) */}
       <div className="mx-auto mb-6 flex max-w-[820px] items-center justify-between px-4 print:hidden sm:px-0">
@@ -92,41 +97,53 @@ export default function WhitePaperPage() {
 
       {/* The paper sheet */}
       <article
-        className="mx-auto max-w-[820px] bg-white px-6 py-12 shadow-[0_12px_50px_rgba(15,20,40,0.18)] ring-1 ring-black/[0.06] sm:rounded-[2px] sm:px-14 sm:py-16 md:px-20 md:py-20 print:max-w-none print:shadow-none print:ring-0"
+        className="mx-auto max-w-[800px] bg-white px-7 py-14 shadow-[0_18px_60px_rgba(15,20,40,0.22)] ring-1 ring-black/[0.06] sm:rounded-[2px] sm:px-16 sm:py-20 md:px-24 md:py-24 print:max-w-none print:px-0 print:py-0 print:shadow-none print:ring-0"
       >
-        {/* Cover / masthead */}
-        <header className="border-b pb-10" style={{ borderColor: `${NAVY}1a` }}>
+        {/* Cover / masthead — centered title page */}
+        <header className="mb-4 text-center">
           <p
-            className="text-[12px] font-bold uppercase tracking-[0.32em]"
-            style={{ color: TEAL }}
+            className="text-[12px] font-bold uppercase tracking-[0.38em]"
+            style={{ color: TEAL, fontFamily: sans }}
           >
             KY Combinator
           </p>
+
+          <div
+            aria-hidden
+            className="mx-auto mt-8 h-px w-16"
+            style={{ backgroundColor: `${NAVY}33` }}
+          />
+
           <h1
-            className="mt-4 text-[52px] font-bold leading-none tracking-tight md:text-[72px]"
+            className="mt-8 text-[60px] font-bold leading-none tracking-tight md:text-[84px]"
             style={{ color: NAVY }}
           >
             Lougistics
           </h1>
-          <p className="mt-5 text-[19px] leading-snug text-[#595959] md:text-[22px]">
+          <p className="mx-auto mt-6 max-w-md text-[19px] italic leading-snug text-[#595959] md:text-[22px]">
             Building on the one advantage no other city can move.
           </p>
 
           <p
-            className="mx-auto mt-8 max-w-xl text-center text-[20px] font-bold leading-snug md:text-[24px]"
+            className="mx-auto mt-12 max-w-lg text-[22px] font-bold leading-snug md:text-[26px]"
             style={{ color: NAVY }}
           >
             Manufacturing makes the middle class.
           </p>
 
-          <p className="mx-auto mt-8 max-w-2xl text-[15px] leading-relaxed text-[#333] md:text-[16px]">
+          <p className="mx-auto mt-10 max-w-xl text-[16px] leading-relaxed text-[#404040] md:text-[17px]">
             A proposal to convert Louisville&apos;s fixed logistics advantage into a
             manufacturing-company-creation engine — and the middle-class jobs that come
             with it.
           </p>
 
-          <div className="mt-10 flex flex-col gap-1 border-t pt-6 text-[13px] text-[#595959]" style={{ borderColor: `${NAVY}14` }}>
-            <p className="font-bold uppercase tracking-[0.18em]">White Paper</p>
+          <div
+            className="mx-auto mt-14 flex max-w-md flex-col gap-1.5 border-t pt-7 text-[13px] text-[#595959]"
+            style={{ borderColor: `${NAVY}1f`, fontFamily: sans }}
+          >
+            <p className="font-bold uppercase tracking-[0.22em]" style={{ color: NAVY }}>
+              White Paper
+            </p>
             <p>Prepared for economic development and public-sector partners</p>
             <p>
               Draft for discussion ·{" "}
@@ -142,16 +159,23 @@ export default function WhitePaperPage() {
         </header>
 
         {/* Contents */}
-        <nav aria-label="Contents" className="mt-12 print:hidden">
-          <h2 className="text-[18px] font-semibold" style={{ color: SUBHEAD }}>
+        <nav
+          aria-label="Contents"
+          className="mt-16 border-t pt-12 print:hidden"
+          style={{ borderColor: `${NAVY}14`, fontFamily: sans }}
+        >
+          <h2
+            className="text-[13px] font-bold uppercase tracking-[0.24em]"
+            style={{ color: SUBHEAD }}
+          >
             Contents
           </h2>
-          <ol className="mt-4 space-y-2 text-[15px]">
+          <ol className="mt-5 space-y-2.5 text-[15px]">
             {CONTENTS.map((c) => (
               <li key={c.id}>
                 <a
                   href={`#${c.id}`}
-                  className="text-[#2b2b2b] underline-offset-2 transition-colors hover:text-[#0563C1] hover:underline"
+                  className="text-[#404040] underline-offset-2 transition-colors hover:text-[#0563C1] hover:underline"
                 >
                   {c.label}
                 </a>
@@ -164,10 +188,17 @@ export default function WhitePaperPage() {
         <section>
           <H1 id="executive-summary">Executive summary</H1>
           <p className={body}>
-            Every mid-size American city has been handed the same economic development
-            playbook: attract technology companies, train software engineers, build an
-            innovation district, and wait for a breakout. Louisville is being encouraged to
-            run that same race. It should not.
+            <span
+              className="float-left mr-3 mt-1.5 text-[58px] font-bold leading-[0.72]"
+              style={{ color: NAVY }}
+              aria-hidden
+            >
+              E
+            </span>
+            <span className="sr-only">E</span>very mid-size American city has been handed the
+            same economic development playbook: attract technology companies, train software
+            engineers, build an innovation district, and wait for a breakout. Louisville is
+            being encouraged to run that same race. It should not.
           </p>
           <p className={body}>
             The reason is simple. Software has no home. It can be written anywhere, by
@@ -210,7 +241,7 @@ export default function WhitePaperPage() {
             The problem for Louisville is structural, not a matter of effort or ambition.
             Software has no home, and that single fact undermines the whole strategy:
           </p>
-          <ul className="mt-4 list-disc space-y-2 pl-6 text-[15px] leading-[1.7] text-[#2b2b2b] md:text-[16px] marker:text-[#2E74B5]">
+          <ul className={listText}>
             <li>
               Talent is mobile and remote-friendly. The best engineers gravitate to where
               the most engineers — and the highest salaries — already are.
@@ -381,7 +412,7 @@ export default function WhitePaperPage() {
                 >
                   {i + 1}
                 </span>
-                <p className="text-[15px] leading-[1.7] text-[#2b2b2b] md:text-[16px]">
+                <p className="text-[16px] leading-[1.7] text-[#262626] md:text-[17px]">
                   <span className="font-semibold" style={{ color: SUBHEAD }}>
                     {h}
                   </span>{" "}
@@ -409,7 +440,7 @@ export default function WhitePaperPage() {
           <p className={body}>
             The most important discipline of this proposal is what it refuses to do.
           </p>
-          <ul className="mt-4 list-disc space-y-2 pl-6 text-[15px] leading-[1.7] text-[#2b2b2b] md:text-[16px] marker:text-[#2E74B5]">
+          <ul className={listText}>
             <li>It is not a generic innovation district.</li>
             <li>It is not a tech scene Louisville cannot win.</li>
             <li>It is not an attempt to be all things to all founders.</li>
@@ -440,7 +471,7 @@ export default function WhitePaperPage() {
           </p>
 
           <H2>Core commitments</H2>
-          <ul className="mt-4 list-disc space-y-3 pl-6 text-[15px] leading-[1.7] text-[#2b2b2b] md:text-[16px] marker:text-[#2E74B5]">
+          <ul className={`${listText} space-y-3`}>
             <li>
               A facility commitment — square footage and location, with a Riverport or
               FTZ-adjacent site the obvious candidate.{" "}

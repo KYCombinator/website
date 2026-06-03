@@ -105,7 +105,7 @@ export default function WhitePaperPage() {
             className="text-[12px] font-bold uppercase tracking-[0.38em]"
             style={{ color: TEAL, fontFamily: sans }}
           >
-            KY Combinator
+            KYCombinator
           </p>
 
           <div
@@ -524,7 +524,7 @@ export default function WhitePaperPage() {
             Lougistics
           </p>
           <p className="mt-1">
-            KY Combinator · Draft for discussion ·{" "}
+            KYCombinator · Draft for discussion ·{" "}
             <Link href="/lougistics" className="underline underline-offset-2 print:no-underline" style={{ color: "#0563C1" }}>
               kycombinator.com/lougistics
             </Link>

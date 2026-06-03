@@ -35,6 +35,14 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
+    # The ubuntu-latest runner ships a pre-installed Pulumi whose language host
+    # shadows SST's own bundled Pulumi on PATH, causing the deploy to fail with
+    # "flag provided but not defined: -root". Remove it so SST uses its bundled version.
+    - name: Remove conflicting pre-installed Pulumi
+      run: |
+        sudo rm -f /usr/local/bin/pulumi /usr/local/bin/pulumi-language-* /usr/local/bin/pulumi-analyzer-* || true
+        echo "Remaining pulumi on PATH:"; which -a pulumi || echo "none"
+
     - name: Deploy with SST
       run: |
         npx sst deploy --stage prod

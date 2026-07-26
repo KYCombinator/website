@@ -24,5 +24,11 @@ export default function SoftRefresh() {
     });
   }, [redirectPath, router]);
 
-  return <p className="text-center p-8">Refreshing session...</p>;
+  return (
+    <div className="flex min-h-[50vh] items-center justify-center px-5 py-24">
+      <p className="font-[family-name:var(--font-ibm-plex-mono)] text-[12px] uppercase tracking-[0.08em] text-[#7d766a]">
+        Refreshing session...
+      </p>
+    </div>
+  );
 }

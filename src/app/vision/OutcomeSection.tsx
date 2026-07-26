@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { Container, Eyebrow, SerifHeading } from "@/app/components/fm";
 
 interface OutcomeDefinition {
   title: string;
@@ -77,62 +78,10 @@ export default function OutcomeSection() {
   };
 
   const outcomeList = [
-    { 
-      key: "Jobs", 
-      colorClasses: {
-        bgExpanded: "bg-gradient-to-r from-blue-500/20 to-cyan-500/20",
-        bgNormal: "bg-gradient-to-r from-blue-500/10 to-cyan-500/10",
-        bgHover: "hover:from-blue-500/20 hover:to-cyan-500/20",
-        textExpanded: "text-blue-300",
-        textNormal: "text-blue-400",
-        textHover: "hover:text-blue-300",
-        borderExpanded: "border-blue-500/50",
-        borderNormal: "border-blue-500/30",
-        borderHover: "hover:border-blue-500/50",
-      }
-    },
-    { 
-      key: "Wealth", 
-      colorClasses: {
-        bgExpanded: "bg-gradient-to-r from-purple-500/20 to-pink-500/20",
-        bgNormal: "bg-gradient-to-r from-purple-500/10 to-pink-500/10",
-        bgHover: "hover:from-purple-500/20 hover:to-pink-500/20",
-        textExpanded: "text-purple-300",
-        textNormal: "text-purple-400",
-        textHover: "hover:text-purple-300",
-        borderExpanded: "border-purple-500/50",
-        borderNormal: "border-purple-500/30",
-        borderHover: "hover:border-purple-500/50",
-      }
-    },
-    { 
-      key: "Dynamism", 
-      colorClasses: {
-        bgExpanded: "bg-gradient-to-r from-indigo-500/20 to-violet-500/20",
-        bgNormal: "bg-gradient-to-r from-indigo-500/10 to-violet-500/10",
-        bgHover: "hover:from-indigo-500/20 hover:to-violet-500/20",
-        textExpanded: "text-indigo-300",
-        textNormal: "text-indigo-400",
-        textHover: "hover:text-indigo-300",
-        borderExpanded: "border-indigo-500/50",
-        borderNormal: "border-indigo-500/30",
-        borderHover: "hover:border-indigo-500/50",
-      }
-    },
-    { 
-      key: "Topophilia", 
-      colorClasses: {
-        bgExpanded: "bg-gradient-to-r from-violet-500/20 to-purple-500/20",
-        bgNormal: "bg-gradient-to-r from-violet-500/10 to-purple-500/10",
-        bgHover: "hover:from-violet-500/20 hover:to-purple-500/20",
-        textExpanded: "text-violet-300",
-        textNormal: "text-violet-400",
-        textHover: "hover:text-violet-300",
-        borderExpanded: "border-violet-500/50",
-        borderNormal: "border-violet-500/30",
-        borderHover: "hover:border-violet-500/50",
-      }
-    },
+    { key: "Jobs" },
+    { key: "Wealth" },
+    { key: "Dynamism" },
+    { key: "Topophilia" },
   ];
 
   const handleOutcomeClick = (key: string) => {
@@ -144,85 +93,60 @@ export default function OutcomeSection() {
   };
 
   return (
-    <div className="relative mb-16">
-      <div className="absolute inset-0 bg-gradient-to-r from-violet-600/10 via-indigo-600/10 to-purple-600/10 rounded-2xl blur-3xl" />
-      <div className="relative bg-gradient-to-br from-background-800/50 to-background-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="h-1 w-12 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-full" />
-          <span className="text-sm font-semibold text-violet-400 uppercase tracking-wider">
-            The Impact
-          </span>
-        </div>
-        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-          Outcome
-        </h2>
-        <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+    <section className="border-b border-[#16130f] bg-[#eae5da]">
+      <Container className="py-16 lg:py-[72px]">
+        <Eyebrow className="mb-4">The impact</Eyebrow>
+        <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+          Outcome.
+        </SerifHeading>
+        <p className="mt-6 max-w-[720px] text-[18px] leading-[1.6] text-[#4a443a] [text-wrap:pretty]">
           When we produce 10 real Series‑A startups, the downstream impact compounds:
         </p>
 
-        <div className="space-y-3 mb-8">
-          {outcomeList.map((item) => {
+        <div className="mt-8 flex flex-col">
+          {outcomeList.map((item, i, arr) => {
             const outcome = outcomes[item.key];
             const isExpanded = expandedOutcome === item.key;
-            const colors = item.colorClasses;
+            const n = String(i + 1).padStart(2, "0");
             return (
-              <button
+              <div
                 key={item.key}
-                onClick={() => handleOutcomeClick(item.key)}
-                className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-200 ${
-                  isExpanded
-                    ? `${colors.bgExpanded} ${colors.textExpanded} border ${colors.borderExpanded}`
-                    : `${colors.bgNormal} ${colors.textNormal} ${colors.bgHover} ${colors.textHover} border ${colors.borderNormal} ${colors.borderHover}`
-                } font-semibold`}
+                className={
+                  "border-t border-[#d8d2c5] " +
+                  (i === arr.length - 1 ? "border-b" : "")
+                }
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex-1">
-                    <div className={`text-lg font-bold mb-1 ${isExpanded ? colors.textExpanded : colors.textNormal}`}>
-                      {outcome.title}
-                    </div>
-                    <div className="text-sm text-gray-400 leading-relaxed">
-                      {outcome.summary}
-                    </div>
+                <button
+                  onClick={() => handleOutcomeClick(item.key)}
+                  aria-expanded={isExpanded}
+                  className="grid w-full grid-cols-[36px_minmax(0,1fr)_24px] items-baseline gap-x-4 gap-y-1 py-5 text-left sm:grid-cols-[44px_180px_minmax(0,1fr)_24px] sm:gap-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]"
+                >
+                  <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] text-[var(--kyx-purple)]">
+                    {n}
+                  </span>
+                  <span className="font-[family-name:var(--font-instrument-serif)] text-[26px] leading-none">
+                    {outcome.title}
+                  </span>
+                  <span className="col-span-2 text-[15px] leading-[1.6] text-[#4a443a] sm:col-span-1">
+                    {outcome.summary}
+                  </span>
+                  <span
+                    aria-hidden
+                    className="col-start-3 row-start-1 justify-self-end font-[family-name:var(--font-ibm-plex-mono)] text-[16px] text-[var(--kyx-purple)] sm:col-start-4"
+                  >
+                    {isExpanded ? "−" : "+"}
+                  </span>
+                </button>
+                {isExpanded && (
+                  <div className="max-w-[720px] space-y-4 pb-6 text-[15px] leading-[1.65] text-[#4a443a] sm:pl-[64px]">
+                    {outcome.content}
                   </div>
-                </div>
-              </button>
+                )}
+              </div>
             );
           })}
         </div>
-
-        {expandedOutcome && outcomes[expandedOutcome] && (
-          <div className="mt-6 pt-6 border-t border-white/10 animate-in fade-in slide-in-from-top-2 duration-300">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-2xl font-bold text-white">
-                {outcomes[expandedOutcome].title}
-              </h3>
-              <button
-                onClick={() => setExpandedOutcome(null)}
-                className="text-gray-400 hover:text-white transition-colors"
-                aria-label="Close"
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div className="text-gray-300 leading-relaxed space-y-4">
-              {outcomes[expandedOutcome].content}
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+      </Container>
+    </section>
   );
 }
-

@@ -1,26 +1,27 @@
-import Link from "next/link";
+import { Container, Eyebrow, SerifHeading, Button } from "@/app/components/fm";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center">
-      <div className="max-w-2xl mx-auto text-center px-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-          Oops! Did Someone Say Party?
-        </h1>
-        <p className="text-xl text-foreground mb-8">
+    <section>
+      <Container className="flex flex-col items-start gap-6 py-24 lg:py-32">
+        <Eyebrow>404 — wrong party</Eyebrow>
+        <SerifHeading
+          as="h1"
+          className="max-w-[720px] text-[40px] leading-[1.0] md:text-[56px]"
+        >
+          Oops! Did someone say party?
+        </SerifHeading>
+        <p className="max-w-[620px] text-[18px] leading-[1.6] text-[#4a443a] [text-wrap:pretty]">
           Well, this is awkward... Looks like you&apos;re trying to crash a
           party that doesn&apos;t exist! Did you time travel to the wrong year?
           Or maybe you&apos;ve had one too many Kentucky bourbons? Don&apos;t
-          worry, we won&apos;t tell anyone - let&apos;s get you to the right
+          worry, we won&apos;t tell anyone — let&apos;s get you to the right
           celebration! 🥃
         </p>
-        <Link
-          href="/louies/2025"
-          className="inline-block bg-primary text-white px-8 py-3 rounded-md font-semibold hover:bg-primary/80 transition"
-        >
-          Take Me to the Real Party! 🎉
-        </Link>
-      </div>
-    </div>
+        <Button href="/louies/2025" variant="primary">
+          Take me to the real party
+        </Button>
+      </Container>
+    </section>
   );
 }

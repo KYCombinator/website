@@ -1,3 +1,5 @@
+import { Container, Eyebrow, SerifHeading } from "@/app/components/fm";
+
 export default function NeedsSection() {
   const foundersNeeds = [
     {
@@ -45,92 +47,60 @@ export default function NeedsSection() {
     },
   ];
 
+  const NeedsColumn = ({
+    label,
+    heading,
+    needs,
+  }: {
+    label: string;
+    heading: string;
+    needs: { title: string; description: string }[];
+  }) => (
+    <div className="flex flex-col gap-4">
+      <Eyebrow>{label}</Eyebrow>
+      <SerifHeading as="h3" className="text-[26px] leading-none md:text-[30px]">
+        {heading}
+      </SerifHeading>
+      <div className="mt-1 flex flex-col">
+        {needs.map((need, i) => (
+          <div
+            key={need.title}
+            className={
+              "grid gap-1.5 border-t border-[#d8d2c5] py-5 " +
+              (i === needs.length - 1 ? "border-b" : "")
+            }
+          >
+            <h4 className="font-[family-name:var(--font-instrument-serif)] text-[22px] leading-none">
+              {need.title}
+            </h4>
+            <p className="text-[14px] leading-[1.6] text-[#4a443a] [text-wrap:pretty]">
+              {need.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
   return (
-    <div className="relative mb-16">
-      <div className="absolute inset-0 bg-gradient-to-r from-teal-600/10 via-cyan-600/10 to-blue-600/10 rounded-2xl blur-3xl" />
-      <div className="relative bg-gradient-to-br from-background-800/50 to-background-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="h-1 w-12 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full" />
-          <span className="text-sm font-semibold text-teal-400 uppercase tracking-wider">
-            The Requirements
-          </span>
-        </div>
-        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-          What&apos;s Needed
-        </h2>
-        <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+    <section className="border-b border-[#16130f] bg-[#eae5da]">
+      <Container className="py-16 lg:py-[72px]">
+        <Eyebrow className="mb-4">The requirements</Eyebrow>
+        <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+          What&apos;s needed.
+        </SerifHeading>
+        <p className="mt-6 max-w-[720px] text-[18px] leading-[1.6] text-[#4a443a] [text-wrap:pretty]">
           Producing 10 real Series‑A companies requires simultaneously supporting founders
           and startups with the right ingredients.
         </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Founders Need Section */}
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-emerald-600/5 via-teal-600/5 to-cyan-600/5 rounded-xl blur-xl" />
-            <div className="relative bg-gradient-to-br from-background-800/30 to-background-900/30 backdrop-blur-sm border border-emerald-500/20 rounded-xl p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="h-1 w-8 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full" />
-                <h3 className="text-2xl font-bold text-white">Founders Need</h3>
-              </div>
-              <ul className="space-y-4">
-                {foundersNeeds.map((need, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <div className="flex-shrink-0 w-2 h-2 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 mt-2" />
-                    <div>
-                      <strong className="text-emerald-400 font-bold text-lg block mb-1">
-                        {need.title}
-                      </strong>
-                      <p className="text-gray-300 leading-relaxed text-sm">
-                        {need.description}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Startups Need Section */}
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/5 via-blue-600/5 to-indigo-600/5 rounded-xl blur-xl" />
-            <div className="relative bg-gradient-to-br from-background-800/30 to-background-900/30 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="h-1 w-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full" />
-                <h3 className="text-2xl font-bold text-white">Startups Need</h3>
-              </div>
-              <ul className="space-y-4">
-                {startupsNeeds.map((need, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <div className="flex-shrink-0 w-2 h-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 mt-2" />
-                    <div>
-                      <strong className="text-cyan-400 font-bold text-lg block mb-1">
-                        {need.title}
-                      </strong>
-                      <p className="text-gray-300 leading-relaxed text-sm">
-                        {need.description}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <div className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+          <NeedsColumn label="Founders need" heading="For the founder." needs={foundersNeeds} />
+          <div className="lg:border-l lg:border-[#d3ccbd] lg:pl-16">
+            <NeedsColumn label="Startups need" heading="For the company." needs={startupsNeeds} />
           </div>
         </div>
-      </div>
-    </div>
+      </Container>
+    </section>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

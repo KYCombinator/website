@@ -1,107 +1,117 @@
+import { Container, PageHero, SerifHeading } from "@/app/components/fm";
+
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-white">
-      <main className="container mx-auto px-4 py-16 max-w-4xl">
-        <h1 className="text-4xl font-bold text-purple-700 mb-8">
-          Privacy Policy
-        </h1>
+    <>
+      <PageHero
+        eyebrow="Legal"
+        title="Privacy policy."
+        intro="How we collect, use, and protect the information you share with us."
+      />
 
-        <div className="prose prose-purple max-w-none">
-          <p className="text-gray-600 mb-8">
-            Last updated: {new Date().toLocaleDateString()}
-          </p>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              1. Information We Collect
-            </h2>
-            <p>
-              We collect information that you provide directly to us when using
-              our services, including:
+      <section>
+        <Container className="py-16 lg:py-20">
+          <div className="max-w-[720px] flex flex-col gap-6">
+            <p className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[#7d766a]">
+              Last updated: {new Date().toLocaleDateString()}
             </p>
-            <ul className="list-disc pl-6 mt-2">
-              <li>Name and contact information</li>
-              <li>Profile information</li>
-              <li>Communications and interactions within our community</li>
-              <li>
-                Information about your participation in events and programs
-              </li>
-            </ul>
-          </section>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              2. How We Use Your Information
-            </h2>
-            <p>We use the information we collect to:</p>
-            <ul className="list-disc pl-6 mt-2">
-              <li>Provide and improve our services</li>
-              <li>Communicate with you about events and updates</li>
-              <li>Facilitate community interactions</li>
-              <li>Analyze and improve our platform&apos;s performance</li>
-            </ul>
-          </section>
+            <div className="flex flex-col gap-3">
+              <SerifHeading as="h2" className="text-[24px] md:text-[28px] mt-4">
+                1. Information We Collect
+              </SerifHeading>
+              <p className="text-[15px] leading-[1.7] text-[#4a443a]">
+                We collect information that you provide directly to us when using
+                our services, including:
+              </p>
+              <ul className="list-disc pl-5 flex flex-col gap-1.5 text-[15px] leading-[1.7] text-[#4a443a] marker:text-[var(--kyx-purple)]">
+                <li>Name and contact information</li>
+                <li>Profile information</li>
+                <li>Communications and interactions within our community</li>
+                <li>
+                  Information about your participation in events and programs
+                </li>
+              </ul>
+            </div>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              3. Information Sharing
-            </h2>
-            <p>
-              We do not sell your personal information. We may share your
-              information with:
-            </p>
-            <ul className="list-disc pl-6 mt-2">
-              <li>Other community members (based on your privacy settings)</li>
-              <li>Service providers who assist in our operations</li>
-              <li>When required by law or to protect rights</li>
-            </ul>
-          </section>
+            <div className="flex flex-col gap-3">
+              <SerifHeading as="h2" className="text-[24px] md:text-[28px] mt-4">
+                2. How We Use Your Information
+              </SerifHeading>
+              <p className="text-[15px] leading-[1.7] text-[#4a443a]">
+                We use the information we collect to:
+              </p>
+              <ul className="list-disc pl-5 flex flex-col gap-1.5 text-[15px] leading-[1.7] text-[#4a443a] marker:text-[var(--kyx-purple)]">
+                <li>Provide and improve our services</li>
+                <li>Communicate with you about events and updates</li>
+                <li>Facilitate community interactions</li>
+                <li>Analyze and improve our platform&apos;s performance</li>
+              </ul>
+            </div>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              4. Data Security
-            </h2>
-            <p>
-              We implement reasonable security measures to protect your personal
-              information. However, no method of transmission over the Internet
-              is 100% secure.
-            </p>
-          </section>
+            <div className="flex flex-col gap-3">
+              <SerifHeading as="h2" className="text-[24px] md:text-[28px] mt-4">
+                3. Information Sharing
+              </SerifHeading>
+              <p className="text-[15px] leading-[1.7] text-[#4a443a]">
+                We do not sell your personal information. We may share your
+                information with:
+              </p>
+              <ul className="list-disc pl-5 flex flex-col gap-1.5 text-[15px] leading-[1.7] text-[#4a443a] marker:text-[var(--kyx-purple)]">
+                <li>Other community members (based on your privacy settings)</li>
+                <li>Service providers who assist in our operations</li>
+                <li>When required by law or to protect rights</li>
+              </ul>
+            </div>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              5. Your Rights
-            </h2>
-            <p>You have the right to:</p>
-            <ul className="list-disc pl-6 mt-2">
-              <li>Access your personal information</li>
-              <li>Correct inaccurate information</li>
-              <li>Request deletion of your information</li>
-              <li>Opt-out of certain data collection</li>
-            </ul>
-          </section>
+            <div className="flex flex-col gap-3">
+              <SerifHeading as="h2" className="text-[24px] md:text-[28px] mt-4">
+                4. Data Security
+              </SerifHeading>
+              <p className="text-[15px] leading-[1.7] text-[#4a443a]">
+                We implement reasonable security measures to protect your personal
+                information. However, no method of transmission over the Internet
+                is 100% secure.
+              </p>
+            </div>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              6. Changes to Privacy Policy
-            </h2>
-            <p>
-              We may update this privacy policy from time to time. We will
-              notify you of any changes by posting the new policy on this page.
-            </p>
-          </section>
+            <div className="flex flex-col gap-3">
+              <SerifHeading as="h2" className="text-[24px] md:text-[28px] mt-4">
+                5. Your Rights
+              </SerifHeading>
+              <p className="text-[15px] leading-[1.7] text-[#4a443a]">
+                You have the right to:
+              </p>
+              <ul className="list-disc pl-5 flex flex-col gap-1.5 text-[15px] leading-[1.7] text-[#4a443a] marker:text-[var(--kyx-purple)]">
+                <li>Access your personal information</li>
+                <li>Correct inaccurate information</li>
+                <li>Request deletion of your information</li>
+                <li>Opt-out of certain data collection</li>
+              </ul>
+            </div>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              7. Contact Us
-            </h2>
-            <p>
-              If you have any questions about this Privacy Policy, please
-              contact us.
-            </p>
-          </section>
-        </div>
-      </main>
-    </div>
+            <div className="flex flex-col gap-3">
+              <SerifHeading as="h2" className="text-[24px] md:text-[28px] mt-4">
+                6. Changes to Privacy Policy
+              </SerifHeading>
+              <p className="text-[15px] leading-[1.7] text-[#4a443a]">
+                We may update this privacy policy from time to time. We will
+                notify you of any changes by posting the new policy on this page.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <SerifHeading as="h2" className="text-[24px] md:text-[28px] mt-4">
+                7. Contact Us
+              </SerifHeading>
+              <p className="text-[15px] leading-[1.7] text-[#4a443a]">
+                If you have any questions about this Privacy Policy, please
+                contact us.
+              </p>
+            </div>
+          </div>
+        </Container>
+      </section>
+    </>
   );
 }

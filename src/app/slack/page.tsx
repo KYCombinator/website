@@ -1,5 +1,6 @@
-import Link from "next/link";
 import type { Metadata } from "next";
+import type React from "react";
+import { Container, PageHero, Eyebrow, SerifHeading, Button, TextLink } from "@/app/components/fm";
 
 export const metadata: Metadata = {
   title: "Slack | KYX",
@@ -43,160 +44,169 @@ const EVENT_EXAMPLES: Channel[] = [
   { name: "#event-velocity", description: "Velocity cohort — schedule, prep, demo day." },
 ];
 
+const WHAT_YOULL_FIND: [string, string][] = [
+  [
+    "Founders, building in public",
+    "Operators sharing the actual day-to-day — what's working, what's breaking, what they need next.",
+  ],
+  [
+    "A working network",
+    "Warm intros, hiring leads, customer references, and a low-friction way to ask for help.",
+  ],
+  [
+    "Signal on the ecosystem",
+    "Funding rounds, launches, events, and the people moving the Louisville scene forward.",
+  ],
+];
+
+const NORMS: [string, React.ReactNode][] = [
+  [
+    "Default to specific",
+    <>
+      Ask the concrete question. &ldquo;Anyone use Stripe Atlas for a Delaware
+      flip?&rdquo; beats &ldquo;Has anyone done this?&rdquo;
+    </>,
+  ],
+  [
+    "No drive-by sales",
+    <>Don&apos;t pitch the community to sell to it. Contribute first; ask later.</>,
+  ],
+  [
+    "Threads, not channel spam",
+    <>Reply in thread. Use the channel for the headline, not the back-and-forth.</>,
+  ],
+  [
+    "Start a channel when you need one",
+    <>
+      Building something? Spin up{" "}
+      <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[#16130f]">#v-yourcompany</span>.
+      Running an event?{" "}
+      <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[#16130f]">#event-yourevent</span>.
+    </>,
+  ],
+];
+
 function ChannelRow({ name, description }: Channel) {
   return (
-    <li className="flex flex-col gap-1 border-b border-white/[0.06] py-4 last:border-b-0 md:flex-row md:items-baseline md:gap-6">
-      <code className="shrink-0 font-mono text-sm font-medium text-white md:w-48">{name}</code>
-      <p className="text-sm leading-relaxed text-zinc-400">{description}</p>
+    <li className="flex flex-col gap-1 border-t border-[#d8d2c5] py-4 last:border-b md:flex-row md:items-baseline md:gap-6">
+      <code className="shrink-0 font-[family-name:var(--font-ibm-plex-mono)] text-[14px] font-medium text-[#16130f] md:w-48">
+        {name}
+      </code>
+      <p className="text-[15px] leading-relaxed text-[#4a443a]">{description}</p>
     </li>
   );
 }
 
 export default function SlackPage() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#0b0b10] text-zinc-100">
-      {/* very subtle top wash */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.04),transparent_55%)]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black_25%,transparent_75%)]"
-      />
+    <>
+      <PageHero
+        eyebrow="Community"
+        title="KYX on Slack."
+        intro="The KYX Slack is Louisville's founder community — a working channel for builders, operators, and the people who back them. Real-time intros, asks, wins, and the day-to-day of building in Kentucky."
+      >
+        <Button href={SLACK_INVITE} variant="primary">
+          Join the Slack
+        </Button>
+        <TextLink href="/events" className="self-center">
+          See upcoming events
+        </TextLink>
+      </PageHero>
 
-      <div className="container relative z-10 mx-auto max-w-4xl px-4 py-16 md:py-24">
-        {/* Header */}
-        <div className="mb-16 text-center">
-          <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.28em] text-zinc-400">
-            Community
-          </p>
-          <h1 className="text-4xl font-semibold tracking-tight text-white md:text-6xl">
-            KYX on Slack
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-zinc-400 md:text-lg">
-            The KYX Slack is Louisville&apos;s founder community — a working channel for
-            builders, operators, and the people who back them. Real-time intros, asks,
-            wins, and the day-to-day of building in Kentucky.
-          </p>
-
-          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link
-              href={SLACK_INVITE}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center justify-center rounded-md bg-white px-5 py-2.5 text-sm font-medium text-zinc-900 transition-colors duration-200 hover:bg-zinc-200"
-            >
-              Join the Slack
-              <svg
-                className="ml-1.5 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </Link>
-            <Link
-              href="/events"
-              className="inline-flex items-center justify-center rounded-md border border-white/10 px-5 py-2.5 text-sm font-medium text-zinc-200 transition-colors duration-200 hover:border-white/25 hover:bg-white/[0.03]"
-            >
-              See upcoming events
-            </Link>
+      {/* What you'll find */}
+      <section className="border-b border-[#16130f] bg-[#eae5da]">
+        <Container className="py-16 lg:py-[72px]">
+          <div className="flex flex-col gap-3">
+            <Eyebrow>Inside</Eyebrow>
+            <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+              What you&apos;ll find inside.
+            </SerifHeading>
           </div>
-        </div>
-
-        {/* What you'll find */}
-        <section className="mb-14 rounded-2xl border border-white/[0.06] bg-white/[0.015] p-8 md:p-10">
-          <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">
-            What you&apos;ll find inside
-          </h2>
-          <div className="mt-6 grid gap-6 md:grid-cols-3">
-            <div>
-              <h3 className="text-sm font-medium text-white">Founders, building in public</h3>
-              <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                Operators sharing the actual day-to-day — what&apos;s working, what&apos;s
-                breaking, what they need next.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-sm font-medium text-white">A working network</h3>
-              <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                Warm intros, hiring leads, customer references, and a low-friction way to
-                ask for help.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-sm font-medium text-white">Signal on the ecosystem</h3>
-              <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                Funding rounds, launches, events, and the people moving the Louisville
-                scene forward.
-              </p>
-            </div>
+          <div className="mt-10 grid gap-8 md:grid-cols-3">
+            {WHAT_YOULL_FIND.map(([title, body]) => (
+              <div key={title} className="flex flex-col gap-2 border-t border-[#d8d2c5] pt-5">
+                <h3 className="text-[16px] font-medium text-[#16130f]">{title}</h3>
+                <p className="text-[15px] leading-relaxed text-[#4a443a]">{body}</p>
+              </div>
+            ))}
           </div>
-        </section>
+        </Container>
+      </section>
 
-        {/* Channel conventions */}
-        <section className="mb-14">
-          <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">
-            Channel conventions
-          </h2>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400 md:text-base">
-            Channels follow a few simple prefixes so it&apos;s easy to skim the sidebar and
-            find what you care about.
-          </p>
+      {/* Channel conventions */}
+      <section className="border-b border-[#16130f]">
+        <Container className="py-16 lg:py-[72px]">
+          <div className="flex flex-col gap-3">
+            <Eyebrow>Conventions</Eyebrow>
+            <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+              Channel conventions.
+            </SerifHeading>
+            <p className="mt-1 max-w-2xl text-[15px] leading-relaxed text-[#4a443a] md:text-[16px]">
+              Channels follow a few simple prefixes so it&apos;s easy to skim the sidebar and
+              find what you care about.
+            </p>
+          </div>
 
-          {/* Prefix table */}
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
-            <div className="rounded-xl border border-white/[0.06] bg-white/[0.015] p-6">
-              <code className="font-mono text-base font-semibold text-white">#v-{`{company}`}</code>
-              <p className="mt-3 text-sm leading-relaxed text-zinc-400">
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            <div className="border border-[#d8d2c5] p-6">
+              <code className="font-[family-name:var(--font-ibm-plex-mono)] text-[16px] font-semibold text-[#16130f]">
+                #v-{`{company}`}
+              </code>
+              <p className="mt-3 text-[15px] leading-relaxed text-[#4a443a]">
                 Follow any company in the community. One channel per company, prefixed
-                with <span className="font-mono text-zinc-200">#v-</span>. Join the ones
+                with{" "}
+                <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[#16130f]">#v-</span>. Join the ones
                 you want updates from — leave the rest. Founders post product updates,
                 hires, asks, and the occasional win.
               </p>
-              <p className="mt-3 text-xs text-zinc-500">
+              <p className="mt-3 text-[12px] text-[#7d766a]">
                 Examples:{" "}
-                <span className="font-mono text-zinc-300">#v-jokester</span>,{" "}
-                <span className="font-mono text-zinc-300">#v-duegooder</span>,{" "}
-                <span className="font-mono text-zinc-300">#v-leapfrog</span>
+                <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[#57503f]">#v-jokester</span>,{" "}
+                <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[#57503f]">#v-duegooder</span>,{" "}
+                <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[#57503f]">#v-leapfrog</span>
               </p>
             </div>
 
-            <div className="rounded-xl border border-white/[0.06] bg-white/[0.015] p-6">
-              <code className="font-mono text-base font-semibold text-white">#event-{`{name}`}</code>
-              <p className="mt-3 text-sm leading-relaxed text-zinc-400">
+            <div className="border border-[#d8d2c5] p-6">
+              <code className="font-[family-name:var(--font-ibm-plex-mono)] text-[16px] font-semibold text-[#16130f]">
+                #event-{`{name}`}
+              </code>
+              <p className="mt-3 text-[15px] leading-relaxed text-[#4a443a]">
                 Coordination channels for KYX events. Logistics, RSVPs, day-of
                 announcements. Channels open ahead of an event and quiet down after.
               </p>
-              <p className="mt-3 text-xs text-zinc-500">
+              <p className="mt-3 text-[12px] text-[#7d766a]">
                 Examples:{" "}
-                <span className="font-mono text-zinc-300">#event-golf</span>,{" "}
-                <span className="font-mono text-zinc-300">#event-louies</span>,{" "}
-                <span className="font-mono text-zinc-300">#event-velocity</span>
+                <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[#57503f]">#event-golf</span>,{" "}
+                <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[#57503f]">#event-louies</span>,{" "}
+                <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[#57503f]">#event-velocity</span>
               </p>
             </div>
           </div>
-        </section>
+        </Container>
+      </section>
 
-        {/* Channel lists */}
-        <section className="mb-14 rounded-2xl border border-white/[0.06] bg-white/[0.015] p-8 md:p-10">
-          <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">
-            Where to start
-          </h2>
-          <p className="mt-3 text-sm leading-relaxed text-zinc-400 md:text-base">
-            A few core channels everyone joins by default.
-          </p>
-          <ul className="mt-6">
+      {/* Channel lists */}
+      <section className="border-b border-[#16130f] bg-[#eae5da]">
+        <Container className="py-16 lg:py-[72px]">
+          <div className="flex flex-col gap-3">
+            <Eyebrow>Where to start</Eyebrow>
+            <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+              Where to start.
+            </SerifHeading>
+            <p className="mt-1 text-[15px] leading-relaxed text-[#4a443a] md:text-[16px]">
+              A few core channels everyone joins by default.
+            </p>
+          </div>
+          <ul className="mt-8">
             {CORE_CHANNELS.map((c) => (
               <ChannelRow key={c.name} {...c} />
             ))}
           </ul>
 
-          <div className="mt-10 grid gap-10 md:grid-cols-2">
+          <div className="mt-12 grid gap-10 md:grid-cols-2">
             <div>
-              <h3 className="text-base font-semibold text-white">Follow a company</h3>
+              <h3 className="text-[16px] font-semibold text-[#16130f]">Follow a company</h3>
               <ul className="mt-4">
                 {COMPANY_EXAMPLES.map((c) => (
                   <ChannelRow key={c.name} {...c} />
@@ -204,7 +214,7 @@ export default function SlackPage() {
               </ul>
             </div>
             <div>
-              <h3 className="text-base font-semibold text-white">Event channels</h3>
+              <h3 className="text-[16px] font-semibold text-[#16130f]">Event channels</h3>
               <ul className="mt-4">
                 {EVENT_EXAMPLES.map((c) => (
                   <ChannelRow key={c.name} {...c} />
@@ -212,82 +222,55 @@ export default function SlackPage() {
               </ul>
             </div>
           </div>
-        </section>
+        </Container>
+      </section>
 
-        {/* Etiquette */}
-        <section className="mb-14">
-          <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">
-            A few norms
-          </h2>
-          <ul className="mt-6 space-y-4">
-            <li className="flex gap-4 rounded-xl border border-white/[0.06] bg-white/[0.015] p-5">
-              <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400" />
-              <div>
-                <h3 className="text-sm font-medium text-white">Default to specific</h3>
-                <p className="mt-1 text-sm leading-relaxed text-zinc-400">
-                  Ask the concrete question. &ldquo;Anyone use Stripe Atlas for a Delaware
-                  flip?&rdquo; beats &ldquo;Has anyone done this?&rdquo;
-                </p>
-              </div>
-            </li>
-            <li className="flex gap-4 rounded-xl border border-white/[0.06] bg-white/[0.015] p-5">
-              <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400" />
-              <div>
-                <h3 className="text-sm font-medium text-white">No drive-by sales</h3>
-                <p className="mt-1 text-sm leading-relaxed text-zinc-400">
-                  Don&apos;t pitch the community to sell to it. Contribute first; ask later.
-                </p>
-              </div>
-            </li>
-            <li className="flex gap-4 rounded-xl border border-white/[0.06] bg-white/[0.015] p-5">
-              <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400" />
-              <div>
-                <h3 className="text-sm font-medium text-white">Threads, not channel spam</h3>
-                <p className="mt-1 text-sm leading-relaxed text-zinc-400">
-                  Reply in thread. Use the channel for the headline, not the back-and-forth.
-                </p>
-              </div>
-            </li>
-            <li className="flex gap-4 rounded-xl border border-white/[0.06] bg-white/[0.015] p-5">
-              <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400" />
-              <div>
-                <h3 className="text-sm font-medium text-white">Start a channel when you need one</h3>
-                <p className="mt-1 text-sm leading-relaxed text-zinc-400">
-                  Building something? Spin up <span className="font-mono text-zinc-200">#v-yourcompany</span>.
-                  Running an event? <span className="font-mono text-zinc-200">#event-yourevent</span>.
-                </p>
-              </div>
-            </li>
+      {/* Etiquette */}
+      <section className="border-b border-[#16130f]">
+        <Container className="py-16 lg:py-[72px]">
+          <div className="flex flex-col gap-3">
+            <Eyebrow>Norms</Eyebrow>
+            <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+              A few norms.
+            </SerifHeading>
+          </div>
+          <ul className="mt-8 flex flex-col">
+            {NORMS.map(([title, body], i) => (
+              <li
+                key={title}
+                className={
+                  "grid gap-2 border-t border-[#d8d2c5] py-6 " +
+                  (i === NORMS.length - 1 ? "border-b" : "")
+                }
+              >
+                <h3 className="text-[16px] font-medium text-[#16130f]">{title}</h3>
+                <p className="max-w-[640px] text-[15px] leading-relaxed text-[#4a443a]">{body}</p>
+              </li>
+            ))}
           </ul>
-        </section>
+        </Container>
+      </section>
 
-        {/* Final CTA */}
-        <section className="rounded-2xl border border-white/[0.06] bg-white/[0.015] p-8 text-center md:p-12">
-          <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">
-            Ready to join?
-          </h2>
-          <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-zinc-400 md:text-base">
-            Post an intro in <span className="font-mono text-zinc-200">#introductions</span>{" "}
-            when you land, and follow a few company channels you&apos;re curious about.
-          </p>
-          <Link
-            href={SLACK_INVITE}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group mt-8 inline-flex items-center justify-center rounded-md bg-white px-5 py-2.5 text-sm font-medium text-zinc-900 transition-colors duration-200 hover:bg-zinc-200"
-          >
-            Join the Slack
-            <svg
-              className="ml-1.5 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </Link>
-        </section>
-      </div>
-    </div>
+      {/* Final CTA */}
+      <section className="bg-[#16130f] text-[#f4f1ea]">
+        <Container className="flex flex-col gap-6 py-16 lg:py-20">
+          <div className="flex flex-col gap-3">
+            <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+              Ready to join?
+            </SerifHeading>
+            <p className="max-w-xl text-[16px] leading-relaxed text-[#a5a094]">
+              Post an intro in{" "}
+              <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[#f4f1ea]">#introductions</span>{" "}
+              when you land, and follow a few company channels you&apos;re curious about.
+            </p>
+          </div>
+          <div>
+            <Button href={SLACK_INVITE} variant="primary">
+              Join the Slack
+            </Button>
+          </div>
+        </Container>
+      </section>
+    </>
   );
 }

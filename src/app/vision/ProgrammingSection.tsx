@@ -1,3 +1,5 @@
+import { Container, Eyebrow, SerifHeading } from "@/app/components/fm";
+
 export default function ProgrammingSection() {
   const mainPrograms = [
     { name: "Jan – KYX Internship Program", status: "new", tagline: "Working at one company is low agency" },
@@ -20,104 +22,93 @@ export default function ProgrammingSection() {
     { name: "Speaker Series", status: "new", tagline: "Complacency is low agency" },
   ];
 
-  const getStatusStyles = (status: string) => {
-    switch (status) {
-      case "discontinued":
-        return {
-          text: "text-red-400",
-          bg: "bg-red-500/10",
-          border: "border-red-500/30",
-          bullet: "bg-red-500",
-        };
-      case "new":
-        return {
-          text: "text-green-400",
-          bg: "bg-green-500/10",
-          border: "border-green-500/30",
-          bullet: "bg-green-500",
-        };
-      default:
-        return {
-          text: "text-gray-300",
-          bg: "bg-gray-500/5",
-          border: "border-gray-500/20",
-          bullet: "bg-gray-500",
-        };
-    }
-  };
+  type Program = { name: string; status: string; note?: string; tagline?: string };
 
-  const ProgramList = ({ programs, title, description }: { programs: typeof mainPrograms; title: string; description: string }) => (
-    <div className="mb-8">
-      <h3 className="text-2xl font-semibold mb-2 text-white">{title}</h3>
-      <p className="mb-4 text-gray-400 text-sm">{description}</p>
-      <ul className="space-y-2">
+  const ProgramList = ({
+    programs,
+    title,
+    description,
+  }: {
+    programs: Program[];
+    title: string;
+    description: string;
+  }) => (
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
+        <SerifHeading as="h3" className="text-[26px] leading-none md:text-[30px]">
+          {title}
+        </SerifHeading>
+        <p className="text-[14px] leading-[1.6] text-[#7d766a]">{description}</p>
+      </div>
+      <div className="mt-1 flex flex-col">
         {programs.map((program, index) => {
-          const styles = getStatusStyles(program.status);
+          const isDiscontinued = program.status === "discontinued";
           return (
-            <li
+            <div
               key={index}
-              className={`flex items-start gap-3 p-3 rounded-lg ${styles.bg} ${styles.border} border transition-all duration-200`}
+              className={
+                "grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4 gap-y-1 border-t border-[#d8d2c5] py-4 " +
+                (index === programs.length - 1 ? "border-b" : "")
+              }
             >
-              <div className={`flex-shrink-0 w-2 h-2 rounded-full ${styles.bullet} mt-2`} />
-              <div className="flex-1">
-                <div className="flex items-center flex-wrap gap-2">
-                  <span className={`${styles.text} font-medium`}>
-                    {program.name}
-                  </span>
-                  {program.note && (
-                    <span className="text-gray-500 text-sm">({program.note})</span>
-                  )}
-                  {program.status === "new" && (
-                    <span className="px-2 py-0.5 text-xs font-semibold bg-green-500/20 text-green-400 rounded border border-green-500/30">
-                      NEW
-                    </span>
-                  )}
-                  {program.status === "discontinued" && (
-                    <span className="px-2 py-0.5 text-xs font-semibold bg-red-500/20 text-red-400 rounded border border-red-500/30">
-                      DISCONTINUED
-                    </span>
-                  )}
-                </div>
-                {program.tagline && (
-                  <p className="text-gray-400 text-sm italic mt-1">
-                    {program.tagline}
-                  </p>
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                <span
+                  className={
+                    "font-[family-name:var(--font-ibm-plex-sans)] text-[16px] font-medium " +
+                    (isDiscontinued ? "text-[#7d766a] line-through" : "text-[#16130f]")
+                  }
+                >
+                  {program.name}
+                </span>
+                {program.note && (
+                  <span className="text-[13px] text-[#7d766a]">({program.note})</span>
                 )}
               </div>
-            </li>
+              {program.status === "new" && (
+                <span className="col-start-2 row-start-1 justify-self-end font-[family-name:var(--font-ibm-plex-mono)] text-[10px] uppercase tracking-[0.1em] text-[var(--kyx-purple)]">
+                  New
+                </span>
+              )}
+              {isDiscontinued && (
+                <span className="col-start-2 row-start-1 justify-self-end font-[family-name:var(--font-ibm-plex-mono)] text-[10px] uppercase tracking-[0.1em] text-[#7d766a]">
+                  Discontinued
+                </span>
+              )}
+              {program.tagline && (
+                <p className="col-span-2 font-[family-name:var(--font-ibm-plex-mono)] text-[12px] italic text-[#7d766a]">
+                  {program.tagline}
+                </p>
+              )}
+            </div>
           );
         })}
-      </ul>
+      </div>
     </div>
   );
 
   return (
-    <div className="relative mb-16">
-      <div className="absolute inset-0 bg-gradient-to-r from-orange-600/10 via-amber-600/10 to-yellow-600/10 rounded-2xl blur-3xl" />
-      <div className="relative bg-gradient-to-br from-background-800/50 to-background-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="h-1 w-12 bg-gradient-to-r from-primary-500 to-primary-900 rounded-full" />
-          <span className="text-sm font-semibold text-primary-400 uppercase tracking-wider">
-            Our Programs
-          </span>
+    <section className="border-b border-[#16130f]">
+      <Container className="py-16 lg:py-[72px]">
+        <Eyebrow className="mb-4">Our programs</Eyebrow>
+        <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+          KYX programming.
+        </SerifHeading>
+
+        <div className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+          <ProgramList
+            programs={mainPrograms}
+            title="Main programs"
+            description="These are headline events which are large initiatives for the community"
+          />
+          <div className="lg:border-l lg:border-[#d3ccbd] lg:pl-16">
+            <ProgramList
+              programs={communityPrograms}
+              title="Community programs"
+              description="These programs foster community engagement and culture"
+            />
+          </div>
         </div>
-        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-          KYX Programming
-        </h2>
-
-        <ProgramList
-          programs={mainPrograms}
-          title="Main Programs"
-          description="These are headline events which are large initiatives for the community"
-        />
-
-        <ProgramList
-          programs={communityPrograms}
-          title="Community Programs"
-          description="These programs foster community engagement and culture"
-        />
-      </div>
-    </div>
+      </Container>
+    </section>
   );
 }
-

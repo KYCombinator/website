@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { Container, PageHero, Eyebrow, SerifHeading, Button } from "@/app/components/fm";
 
 const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -27,7 +28,6 @@ const Carousel = () => {
           key={slide.src}
           className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${index === currentSlide ? "opacity-100" : "opacity-0"}`}
         >
-          <div className="absolute inset-0 bg-purple-900/50 mix-blend-multiply z-10" />
           <Image
             src={slide.src}
             alt={slide.alt}
@@ -41,308 +41,246 @@ const Carousel = () => {
   );
 };
 
+type Award = {
+  name: string;
+  presentedBy?: string;
+  winner?: string;
+  nominees: string[];
+};
+
+type AwardGroup = {
+  eyebrow: string;
+  heading: string;
+  awards: Award[];
+};
+
+const GROUPS: AwardGroup[] = [
+  {
+    eyebrow: "Founder Awards",
+    heading: "The founders.",
+    awards: [
+      {
+        name: "Louisville's Favorite Founder",
+        presentedBy: "Dan Ross-Li of KYCombinator",
+        winner: "Steven Plappert 🏆",
+        nominees: [
+          "Steven Plappert",
+          "Rachel Edenfield (2x)",
+          "Ace McGill",
+          "Garrett French (2x)",
+          "JK McKnight",
+          "Jocari Beattie",
+        ],
+      },
+      {
+        name: "Louisville's Favorite Co-Founder",
+        presentedBy: "Kevin Gibson of Rise Marketing",
+        winner: "Logan Burchett 🏆",
+        nominees: [
+          "Cherena Fox",
+          "Hannah Estes",
+          "Logan Burchett",
+          "Dan Robbins",
+          "Jim Higdon",
+        ],
+      },
+      {
+        name: "Louisville's Favorite Community Supporter",
+        presentedBy: "Justin Hogan of the Community Foundation",
+        winner: "Garrett French 🏆",
+        nominees: [
+          "Keionna Baker",
+          "Garrett French",
+          "Greg Langdon",
+          "Kevin Gibson (2x)",
+          "Gill Holland",
+          "Natalia Bishop",
+          "Steve Huey",
+        ],
+      },
+      {
+        name: "Most Improved Founder",
+        presentedBy: "Zeeshan Bhatti of Keyhorse",
+        winner: "Aaron Peabody 🏆",
+        nominees: [
+          "Steven Bonhomme",
+          "Aaron Peabody",
+          "Charley Miller",
+          "Dan Ross-Li",
+          "Anora Morton",
+        ],
+      },
+    ],
+  },
+  {
+    eyebrow: "Money Awards",
+    heading: "The money.",
+    awards: [
+      {
+        name: "Louisville's Favorite Angel Investor",
+        presentedBy: "Rachel Edenfield of Swell",
+        winner: "Gill Holland 🏆",
+        nominees: ["Garrett French", "Brook Smith", "Greg Langdon", "Gill Holland"],
+      },
+      {
+        name: "Best Fundraise",
+        presentedBy: "Kelby Price",
+        winner: "LullaFeed 🏆",
+        nominees: [
+          "SoFab",
+          "Swell",
+          "Brandjam",
+          "Forecastr (2x)",
+          "LullaFeed",
+          "ValuBuddy",
+        ],
+      },
+    ],
+  },
+  {
+    eyebrow: "Company Awards",
+    heading: "The companies.",
+    awards: [
+      {
+        name: "Best Startup Award",
+        presentedBy: "Natalia Bishop of Story",
+        winner: "RxLightning 🏆",
+        nominees: [
+          "Swell",
+          "ValuBuddy",
+          "RxLightning",
+          "Forecastr",
+          "Elixir Kombucha",
+        ],
+      },
+      {
+        name: "MVP Award - Best MVP",
+        presentedBy: "Presenter TBA",
+        winner: "The Nori Project 🏆",
+        nominees: ["Untitled Firm", "Scrub Step", "The Nori Project"],
+      },
+      {
+        name: "SPAM Award - Best E-mail Marketing",
+        presentedBy: "Garrett French of Citation Labs",
+        winner: "Xena Intelligence 🏆",
+        nominees: ["Xena Intelligence", "KYCombinator", "FeedCoyote"],
+      },
+    ],
+  },
+  {
+    eyebrow: "Closing Awards",
+    heading: "The rest.",
+    awards: [
+      {
+        name: "Startups that died in 2024",
+        nominees: ["Affinna", "GoWild / Holler Commerce", "WonderPet"],
+      },
+      {
+        name: "Spouse of the Year",
+        nominees: [
+          "Zach Sensing",
+          "Sana Nair",
+          "Erik Pina",
+          "Ameena Ruffin",
+          "Emily Plappert",
+          "Moriah Glady",
+        ],
+      },
+    ],
+  },
+];
+
 export default function Louies2024Page() {
   return (
-    <div className="min-h-screen bg-white">
-      <section className="relative h-[85vh] bg-[#6B46C1]">
-        <div className="absolute inset-0">
+    <>
+      <PageHero
+        eyebrow="Louisville Startup Awards"
+        title="The Louies 2024."
+        intro="Celebrating Louisville's most innovative founders & startups."
+      />
+
+      {/* Photo band */}
+      <section className="border-b border-[#16130f]">
+        <div className="relative h-[240px] w-full bg-[#eae5da] md:h-[340px] lg:h-[420px]">
           <Carousel />
         </div>
-
-        {/* Content overlay */}
-        <div className="container mx-auto px-4 h-full flex items-center justify-center relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              The Louies 2024
-            </h1>
-            <p className="text-xl text-white/90">
-              Celebrating Louisville&apos;s Most Innovative Founders & Startups
-            </p>
-          </div>
-        </div>
       </section>
 
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Awards and Nominees
-          </h2>
-
-          {/* Founder Awards */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold text-purple-700 mb-8">
-              Founder Awards
-            </h3>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Louisville's Favorite Founder */}
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">
-                  Louisville&apos;s Favorite Founder
-                </h4>
-                <p className="text-sm text-gray-600 italic mb-4">
-                  Presented by Dan Ross-Li of KYCombinator
-                </p>
-                <div className="mb-4">
-                  <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
-                    Winner: Steven Plappert 🏆
-                  </span>
-                </div>
-                <ul className="list-disc list-inside space-y-2 opacity-75">
-                  <li>Steven Plappert</li>
-                  <li>Rachel Edenfield (2x)</li>
-                  <li>Ace McGill</li>
-                  <li>Garrett French (2x)</li>
-                  <li>JK McKnight</li>
-                  <li>Jocari Beattie</li>
-                </ul>
-              </div>
-
-              {/* Louisville's Favorite Co-Founder */}
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">
-                  Louisville&apos;s Favorite Co-Founder
-                </h4>
-                <p className="text-sm text-gray-600 italic mb-4">
-                  Presented by Kevin Gibson of Rise Marketing
-                </p>
-                <div className="mb-4">
-                  <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
-                    Winner: Logan Burchett 🏆
-                  </span>
-                </div>
-                <ul className="list-disc list-inside space-y-2 opacity-75">
-                  <li>Cherena Fox</li>
-                  <li>Hannah Estes</li>
-                  <li>Logan Burchett</li>
-                  <li>Dan Robbins</li>
-                  <li>Jim Higdon</li>
-                </ul>
-              </div>
-
-              {/* Louisville's Favorite Community Supporter */}
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">
-                  Louisville&apos;s Favorite Community Supporter
-                </h4>
-                <p className="text-sm text-gray-600 italic mb-4">
-                  Presented by Justin Hogan of the Community Foundation
-                </p>
-                <div className="mb-4">
-                  <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
-                    Winner: Garrett French 🏆
-                  </span>
-                </div>
-                <ul className="list-disc list-inside space-y-2 opacity-75">
-                  <li>Keionna Baker</li>
-                  <li>Garrett French</li>
-                  <li>Greg Langdon</li>
-                  <li>Kevin Gibson (2x)</li>
-                  <li>Gill Holland</li>
-                  <li>Natalia Bishop</li>
-                  <li>Steve Huey</li>
-                </ul>
-              </div>
-
-              {/* Most Improved Founder */}
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">
-                  Most Improved Founder
-                </h4>
-                <p className="text-sm text-gray-600 italic mb-4">
-                  Presented by Zeeshan Bhatti of Keyhorse
-                </p>
-                <div className="mb-4">
-                  <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
-                    Winner: Aaron Peabody 🏆
-                  </span>
-                </div>
-                <ul className="list-disc list-inside space-y-2 opacity-75">
-                  <li>Steven Bonhomme</li>
-                  <li>Aaron Peabody</li>
-                  <li>Charley Miller</li>
-                  <li>Dan Ross-Li</li>
-                  <li>Anora Morton</li>
-                </ul>
-              </div>
+      {GROUPS.map((group, gi) => (
+        <section
+          key={group.heading}
+          className={"border-b border-[#16130f]" + (gi % 2 === 1 ? " bg-[#eae5da]" : "")}
+        >
+          <Container className="grid grid-cols-1 gap-8 py-16 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-14 lg:py-[72px]">
+            <div className="flex flex-col gap-3">
+              <Eyebrow>{group.eyebrow}</Eyebrow>
+              <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+                {group.heading}
+              </SerifHeading>
             </div>
-          </div>
-
-          {/* Money Awards */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold text-purple-700 mb-8">
-              Money Awards
-            </h3>
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Louisville's Favorite Angel Investor */}
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">
-                  Louisville&apos;s Favorite Angel Investor
-                </h4>
-                <p className="text-sm text-gray-600 italic mb-4">
-                  Presented by Rachel Edenfield of Swell
-                </p>
-                <div className="mb-4">
-                  <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
-                    Winner: Gill Holland 🏆
-                  </span>
+            <div className="flex flex-col">
+              {group.awards.map((award, i) => (
+                <div
+                  key={award.name}
+                  className={
+                    "grid gap-x-8 gap-y-3 border-t border-[#d8d2c5] py-6 md:grid-cols-[minmax(0,1fr)_240px] " +
+                    (i === group.awards.length - 1 ? "border-b" : "")
+                  }
+                >
+                  <div className="flex flex-col gap-2">
+                    <h3 className="font-[family-name:var(--font-ibm-plex-sans)] text-[18px] font-medium text-[#16130f]">
+                      {award.name}
+                    </h3>
+                    {award.presentedBy && (
+                      <p className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[#7d766a]">
+                        Presented by {award.presentedBy}
+                      </p>
+                    )}
+                    {award.winner && (
+                      <p className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[var(--kyx-purple)]">
+                        Winner — {award.winner}
+                      </p>
+                    )}
+                  </div>
+                  <ul className="flex flex-col gap-1.5">
+                    {award.nominees.map((nominee) => (
+                      <li
+                        key={nominee}
+                        className="flex items-start gap-2 text-[14px] leading-[1.5] text-[#57503f]"
+                      >
+                        <span className="mt-0.5 text-[var(--kyx-purple)]">·</span>
+                        <span>{nominee}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="list-disc list-inside space-y-2 opacity-75">
-                  <li>Garrett French</li>
-                  <li>Brook Smith</li>
-                  <li>Greg Langdon</li>
-                  <li>Gill Holland</li>
-                </ul>
-              </div>
-
-              {/* Best Fundraise */}
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">Best Fundraise</h4>
-                <p className="text-sm text-gray-600 italic mb-4">
-                  Presented by Kelby Price
-                </p>
-                <div className="mb-4">
-                  <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
-                    Winner: LullaFeed 🏆
-                  </span>
-                </div>
-                <ul className="list-disc list-inside space-y-2 opacity-75">
-                  <li>SoFab</li>
-                  <li>Swell</li>
-                  <li>Brandjam</li>
-                  <li>Forecastr (2x)</li>
-                  <li>LullaFeed</li>
-                  <li>ValuBuddy</li>
-                </ul>
-              </div>
+              ))}
             </div>
+          </Container>
+        </section>
+      ))}
+
+      {/* Call to Action */}
+      <section>
+        <Container className="flex flex-col items-start gap-6 py-16 lg:py-20">
+          <Eyebrow>Register &amp; vote</Eyebrow>
+          <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+            Be there.
+          </SerifHeading>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Button href="https://lu.ma/fb1728x3" external variant="primary">
+              Register now
+            </Button>
+            <Button
+              href="https://kycombinator.typeform.com/votelouies"
+              external
+              variant="outline"
+            >
+              Vote now
+            </Button>
           </div>
-
-          {/* Company Awards */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold text-purple-700 mb-8">
-              Company Awards
-            </h3>
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Best Startup Award */}
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">
-                  Best Startup Award
-                </h4>
-                <p className="text-sm text-gray-600 italic mb-4">
-                  Presented by Natalia Bishop of Story
-                </p>
-                <div className="mb-4">
-                  <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
-                    Winner: RxLightning 🏆
-                  </span>
-                </div>
-                <ul className="list-disc list-inside space-y-2 opacity-75">
-                  <li>Swell</li>
-                  <li>ValuBuddy</li>
-                  <li>RxLightning</li>
-                  <li>Forecastr</li>
-                  <li>Elixir Kombucha</li>
-                </ul>
-              </div>
-
-              {/* MVP Award */}
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">
-                  MVP Award - Best MVP
-                </h4>
-                <p className="text-sm text-gray-600 italic mb-4">
-                  Presenter TBA
-                </p>
-                <div className="mb-4">
-                  <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
-                    Winner: The Nori Project 🏆
-                  </span>
-                </div>
-                <ul className="list-disc list-inside space-y-2 opacity-75">
-                  <li>Untitled Firm</li>
-                  <li>Scrub Step</li>
-                  <li>The Nori Project</li>
-                </ul>
-              </div>
-
-              {/* SPAM Award */}
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">
-                  SPAM Award - Best E-mail Marketing
-                </h4>
-                <p className="text-sm text-gray-600 italic mb-4">
-                  Presented by Garrett French of Citation Labs
-                </p>
-                <div className="mb-4">
-                  <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
-                    Winner: Xena Intelligence 🏆
-                  </span>
-                </div>
-                <ul className="list-disc list-inside space-y-2 opacity-75">
-                  <li>Xena Intelligence</li>
-                  <li>KYCombinator</li>
-                  <li>FeedCoyote</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          {/* Closing Awards */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold text-purple-700 mb-8">
-              Closing Awards
-            </h3>
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Startups that died in 2024 */}
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">
-                  Startups that died in 2024
-                </h4>
-                <ul className="list-disc list-inside space-y-2">
-                  <li>Affinna</li>
-                  <li>GoWild / Holler Commerce</li>
-                  <li>WonderPet</li>
-                </ul>
-              </div>
-
-              {/* Spouse of the Year */}
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold mb-2">
-                  Spouse of the Year
-                </h4>
-                <ul className="list-disc list-inside space-y-2">
-                  <li>Zach Sensing</li>
-                  <li>Sana Nair</li>
-                  <li>Erik Pina</li>
-                  <li>Ameena Ruffin</li>
-                  <li>Emily Plappert</li>
-                  <li>Moriah Glady</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          {/* Call to Action */}
-          <div className="mt-16 text-center">
-            <h3 className="text-2xl font-bold mb-6">Register & Vote</h3>
-            <div className="space-y-4">
-              <a
-                href="https://lu.ma/fb1728x3"
-                className="inline-block bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition mr-4"
-              >
-                Register Now
-              </a>
-              <a
-                href="https://kycombinator.typeform.com/votelouies"
-                className="inline-block bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition"
-              >
-                Vote Now
-              </a>
-            </div>
-          </div>
-        </div>
+        </Container>
       </section>
-    </div>
+    </>
   );
 }

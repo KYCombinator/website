@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import React from 'react'
+import { Container, PageHero, Eyebrow, SerifHeading, Button } from "@/app/components/fm";
 
 export const metadata: Metadata = {
   title: "Cinderblock",
@@ -13,190 +14,192 @@ export const metadata: Metadata = {
   },
 }
 
+const APPLY_URL = "https://form.kycombinator.com/cinderblock";
+
+const FRAMEWORK: [string, string][] = [
+  [
+    "Selective Environment",
+    "Bringing together high-agency, ambitious builders and founders. Small group, intentionally curated.",
+  ],
+  [
+    "Execution-Focused",
+    "No panels or generic networking. The priority is on building — shipping products, acquiring customers, iterating quickly.",
+  ],
+  [
+    "Embedded Accountability",
+    "Regular checkpoints, shared workspaces, and transparent metrics. Progress is visible and measured.",
+  ],
+  [
+    "Alignment with Venture Studio Principles",
+    "Concentrated support and shared incentives. Not a wide portfolio spread thin — targeted resources for a small number of teams.",
+  ],
+];
+
+const GUIDELINES: [string, React.ReactNode][] = [
+  [
+    "1. Own Your Work",
+    "This space is a forge—not a daycare. You're here to build. Be accountable for your time, your energy, and your presence. Clean up after yourself. Show up prepared. Don't waste anyone's momentum.",
+  ],
+  [
+    "2. Respect the Grind",
+    "Everyone here is under pressure—pushing through unknowns, solving real problems. Respect the effort. Noise, distractions, and ego kill velocity. Keep calls in designated areas. Don't interrupt deep work. Don't pitch unsolicited.",
+  ],
+  [
+    "3. Default to Contribution",
+    "This isn't a services marketplace. Give before you ask. If you see someone stuck, offer help. If you've shipped something useful, share it. Your signal-to-noise ratio determines how valuable you are to the room.",
+  ],
+  [
+    "4. No Tourists",
+    "This isn't a hangout for “networkers” or “idea guys.” If you're not actively building or enabling others who are, this isn't the place for you. No clout-chasing. No empty posturing. Execution earns respect.",
+  ],
+  [
+    "5. Zero Tolerance for Bullshit",
+    "We do not tolerate harassment, discrimination, or exploitation—period.",
+  ],
+  [
+    "6. Confidentiality is Default",
+    "What happens in Cinderblock stays in Cinderblock. Don't share others' work, strategies, or data without explicit permission. We're not in the business of leaking decks or ideas.",
+  ],
+  [
+    "7. Leave It Better",
+    "Whether it's the space, the culture, or the conversation—leave it stronger than you found it. That's how we build something lasting.",
+  ],
+];
+
 const page = () => {
   return (
-    <section id="cinderblock" className="py-16 bg-background-900 min-h-screen">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          {/* Address at the top */}
-          <div className="mb-8 p-4 bg-background-800 rounded-lg border border-primary-500/20">
-            <p className="text-primary-400 font-medium text-lg">
-              1205 East Washington Street Suite 111<br />
-              Louisville, KY 40206
-            </p>
+    <>
+      <PageHero
+        eyebrow="Cinderblock"
+        title="A forge, not a daycare."
+        intro="Cinderblock is our initial prototype for building toward a Brickyard-style venture studio, located at 1205 East Washington Street Suite 111, Louisville, KY 40206."
+      >
+        <Button href={APPLY_URL} variant="primary">
+          Apply to Cinderblock
+        </Button>
+      </PageHero>
+
+      {/* Core Framework */}
+      <section className="border-b border-[#16130f]">
+        <Container className="grid grid-cols-1 gap-8 py-16 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-14 lg:py-[72px]">
+          <div className="flex flex-col gap-3">
+            <Eyebrow>The model</Eyebrow>
+            <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+              Core framework.
+            </SerifHeading>
           </div>
-          
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-500 mb-6">
-            Cinderblock
-          </h2>
-          <p className="text-foreground-800 text-lg mb-8">
-            Cinderblock is our initial prototype for building toward a Brickyard-style venture studio, located at 1205 East Washington Street Suite 111, Louisville, KY 40206.
+          <div className="flex flex-col">
+            {FRAMEWORK.map(([term, desc], i) => (
+              <div
+                key={term}
+                className={
+                  "grid gap-2 border-t border-[#d8d2c5] py-6 " +
+                  (i === FRAMEWORK.length - 1 ? "border-b" : "")
+                }
+              >
+                <h3 className="text-[18px] font-medium text-[#16130f]">{term}</h3>
+                <p className="max-w-[640px] text-[15px] leading-[1.65] text-[#4a443a]">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Learning Ground */}
+      <section className="border-b border-[#16130f] bg-[#eae5da]">
+        <Container className="flex flex-col gap-6 py-16 lg:py-[72px]">
+          <div className="flex flex-col gap-3">
+            <Eyebrow>Why it exists</Eyebrow>
+            <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+              Learning ground for a future studio.
+            </SerifHeading>
+          </div>
+          <p className="max-w-[640px] text-[18px] leading-[1.6] text-[#4a443a] [text-wrap:pretty]">
+            Testing what operational structures, mentorship, and investment mechanics work
+            best in this market. Goal is to refine before scaling into a full venture studio
+            model.
           </p>
-          
-          {/* Top Apply Button */}
-          <div className="mb-12">
-            <a
-              href="https://form.kycombinator.com/cinderblock"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-8 py-4 bg-primary-500 text-white font-semibold rounded-lg hover:bg-primary-600 transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-            >
-              <span className="mr-2">Apply to Cinderblock</span>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <div className="max-w-3xl mx-auto text-center mt-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-500 mb-6">
-            Core Framework
-          </h2>
-          <div className="text-left space-y-6">
-            <div>
-              <h3 className="text-xl font-semibold text-primary-500 mb-2">Selective Environment</h3>
-              <p className="text-foreground-800">
-                Bringing together high-agency, ambitious builders and founders. Small group, intentionally curated.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-primary-500 mb-2">Execution-Focused</h3>
-              <p className="text-foreground-800">
-                No panels or generic networking. The priority is on building — shipping products, acquiring customers, iterating quickly.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-primary-500 mb-2">Embedded Accountability</h3>
-              <p className="text-foreground-800">
-                Regular checkpoints, shared workspaces, and transparent metrics. Progress is visible and measured.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-primary-500 mb-2">Alignment with Venture Studio Principles</h3>
-              <p className="text-foreground-800">
-                Concentrated support and shared incentives. Not a wide portfolio spread thin — targeted resources for a small number of teams.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="max-w-3xl mx-auto text-center mt-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-500 mb-6">
-            Learning Ground for a Future Studio
-          </h2>
-          <p className="text-foreground-800 text-lg mb-8">
-            Testing what operational structures, mentorship, and investment mechanics work best in this market. Goal is to refine before scaling into a full venture studio model.
+          <p className="max-w-[640px] border-l-2 border-[var(--kyx-purple)] pl-5 text-[18px] leading-[1.6] text-[#57503f] [text-wrap:pretty]">
+            Cinderblock is how we validate our thesis on concentration and aligned incentives
+            — in a controlled, focused setting. It&apos;s the groundwork for systematically
+            identifying and accelerating the best local founders.
           </p>
-        </div>
+        </Container>
+      </section>
 
-        <div className="max-w-3xl mx-auto text-center mt-16">
-          <div className="bg-background-800 p-6 rounded-lg mb-8">
-            <p className="text-foreground-800 text-lg">
-              Cinderblock is how we validate our thesis on concentration and aligned incentives — in a controlled, focused setting. It&apos;s the groundwork for systematically identifying and accelerating the best local founders.
-            </p>
+      {/* Visit Us */}
+      <section className="border-b border-[#16130f]">
+        <Container className="flex flex-col gap-6 py-16 lg:py-[72px]">
+          <div className="flex flex-col gap-3">
+            <Eyebrow>Location</Eyebrow>
+            <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+              Visit us.
+            </SerifHeading>
           </div>
-        </div>
+          <p className="font-[family-name:var(--font-ibm-plex-mono)] text-[15px] uppercase tracking-[0.06em] text-[#16130f]">
+            1205 East Washington Street Suite 111
+            <br />
+            Louisville, KY 40206
+          </p>
+        </Container>
+      </section>
 
-        {/* Location Section */}
-        <div className="max-w-3xl mx-auto text-center mt-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-500 mb-6">
-            Visit Us
-          </h2>
-          <div className="bg-background-800 p-6 rounded-lg mb-8">
-            <p className="text-primary-400 font-semibold text-xl">
-              1205 East Washington Street Suite 111<br />
-              Louisville, KY 40206
-            </p>
+      {/* Community Guidelines */}
+      <section id="community-guidelines" className="border-b border-[#16130f] bg-[#eae5da]">
+        <Container className="grid grid-cols-1 gap-8 py-16 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-14 lg:py-[72px]">
+          <div className="flex flex-col gap-3">
+            <Eyebrow>House rules</Eyebrow>
+            <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+              Community guidelines.
+            </SerifHeading>
           </div>
-        </div>
-
-        <section id="community-guidelines" className="max-w-3xl mx-auto mt-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-500 mb-6 text-center">
-            Community Guidelines
-          </h2>
-          <div className="text-left space-y-6">
-            <p className="text-foreground-800 text-lg">
-              Welcome to Cinderblock. This space exists to help you build faster, think sharper, and go further—with others who are doing the same. To keep the atmosphere focused, intense, and collaborative, we expect all members to operate under the following principles:
+          <div className="flex flex-col gap-6">
+            <p className="max-w-[640px] text-[16px] leading-[1.65] text-[#4a443a]">
+              Welcome to Cinderblock. This space exists to help you build faster, think
+              sharper, and go further—with others who are doing the same. To keep the
+              atmosphere focused, intense, and collaborative, we expect all members to
+              operate under the following principles:
             </p>
 
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-xl font-semibold text-primary-500 mb-2">1. Own Your Work</h3>
-                <p className="text-foreground-800">
-                  This space is a forge—not a daycare. You&apos;re here to build. Be accountable for your time, your energy, and your presence. Clean up after yourself. Show up prepared. Don&apos;t waste anyone&apos;s momentum.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold text-primary-500 mb-2">2. Respect the Grind</h3>
-                <p className="text-foreground-800">
-                  Everyone here is under pressure—pushing through unknowns, solving real problems. Respect the effort. Noise, distractions, and ego kill velocity. Keep calls in designated areas. Don&apos;t interrupt deep work. Don&apos;t pitch unsolicited.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold text-primary-500 mb-2">3. Default to Contribution</h3>
-                <p className="text-foreground-800">
-                  This isn&apos;t a services marketplace. Give before you ask. If you see someone stuck, offer help. If you&apos;ve shipped something useful, share it. Your signal-to-noise ratio determines how valuable you are to the room.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold text-primary-500 mb-2">4. No Tourists</h3>
-                <p className="text-foreground-800">
-                  This isn&apos;t a hangout for &quot;networkers&quot; or &quot;idea guys.&quot; If you&apos;re not actively building or enabling others who are, this isn&apos;t the place for you. No clout-chasing. No empty posturing. Execution earns respect.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold text-primary-500 mb-2">5. Zero Tolerance for Bullshit</h3>
-                <p className="text-foreground-800">
-                  We do not tolerate harassment, discrimination, or exploitation—period.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold text-primary-500 mb-2">6. Confidentiality is Default</h3>
-                <p className="text-foreground-800">
-                  What happens in Cinderblock stays in Cinderblock. Don&apos;t share others&apos; work, strategies, or data without explicit permission. We&apos;re not in the business of leaking decks or ideas.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold text-primary-500 mb-2">7. Leave It Better</h3>
-                <p className="text-foreground-800">
-                  Whether it&apos;s the space, the culture, or the conversation—leave it stronger than you found it. That&apos;s how we build something lasting.
-                </p>
-              </div>
+            <div className="flex flex-col">
+              {GUIDELINES.map(([term, desc], i) => (
+                <div
+                  key={term}
+                  className={
+                    "grid gap-2 border-t border-[#d8d2c5] py-6 " +
+                    (i === GUIDELINES.length - 1 ? "border-b" : "")
+                  }
+                >
+                  <h3 className="text-[18px] font-medium text-[#16130f]">{term}</h3>
+                  <p className="max-w-[640px] text-[15px] leading-[1.65] text-[#4a443a]">{desc}</p>
+                </div>
+              ))}
             </div>
 
-            <div className="bg-background-800 p-6 rounded-lg mt-8">
-              <p className="text-foreground-800 font-semibold">
-                <strong>Violations of these guidelines may result in suspension or termination of your membership.</strong> This is a space for serious builders. If that&apos;s you—you&apos;re in the right place.
-              </p>
-            </div>
+            <p className="max-w-[640px] border-l-2 border-[var(--kyx-purple)] pl-5 text-[16px] leading-[1.65] text-[#16130f]">
+              <strong className="font-semibold">
+                Violations of these guidelines may result in suspension or termination of
+                your membership.
+              </strong>{" "}
+              This is a space for serious builders. If that&apos;s you—you&apos;re in the
+              right place.
+            </p>
           </div>
-        </section>
+        </Container>
+      </section>
 
-        {/* Bottom Apply Button */}
-        <div className="max-w-3xl mx-auto text-center mt-16">
-          <div className="mb-12">
-            <a
-              href="https://form.kycombinator.com/cinderblock"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-8 py-4 bg-primary-500 text-white font-semibold rounded-lg hover:bg-primary-600 transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-            >
-              <span className="mr-2">Apply to Cinderblock</span>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
+      {/* Bottom Apply */}
+      <section>
+        <Container className="flex flex-col items-start gap-6 py-16 lg:py-20">
+          <SerifHeading className="max-w-[640px] text-[32px] leading-none md:text-[40px]">
+            Ready to build?
+          </SerifHeading>
+          <Button href={APPLY_URL} variant="primary">
+            Apply to Cinderblock
+          </Button>
+        </Container>
+      </section>
+    </>
   )
 }
 

@@ -1,4 +1,4 @@
-import { AlertTriangle, Check } from "lucide-react";
+import { Container, PageHero, SerifHeading } from "@/app/components/fm";
 
 export default function RulesPage() {
   const rules = [
@@ -74,52 +74,49 @@ export default function RulesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">
-              Story Space Rules
-            </h1>
-            <p className="text-lg text-gray-600">
-              To create a safe, respectful, and productive environment for all
-              participants, please review and acknowledge the following rules
-              for staying on the Story premises. These rules are in place to
-              protect everyone and maintain a professional atmosphere.
-            </p>
-          </div>
+    <>
+      <PageHero
+        eyebrow="Legal"
+        title="Community rules."
+        intro="To create a safe, respectful, and productive environment for all participants, please review and acknowledge the following rules for staying on the Story premises. These rules are in place to protect everyone and maintain a professional atmosphere."
+      />
 
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <div className="space-y-6">
-              {rules.map((rule, index) => (
-                <div
-                  key={index}
-                  className="flex gap-4 p-4 bg-gray-50 rounded-lg"
+      <section>
+        <Container className="py-16 lg:py-20">
+          <div className="max-w-[720px] flex flex-col">
+            {rules.map((rule, index) => (
+              <div
+                key={index}
+                className={
+                  "grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-1.5 border-t border-[#d8d2c5] py-6 " +
+                  (index === rules.length - 1 ? "border-b" : "")
+                }
+              >
+                <span
+                  aria-hidden
+                  className="font-[family-name:var(--font-ibm-plex-mono)] text-[13px] tabular-nums text-[var(--kyx-purple)] pt-0.5"
                 >
-                  <div className="mt-1">
-                    <Check className="h-5 w-5 text-green-500" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      {rule.title}
-                    </h3>
-                    <p className="mt-1 text-gray-600">{rule.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h2 className="font-[family-name:var(--font-ibm-plex-sans)] text-[18px] font-medium text-[#16130f]">
+                  {rule.title}
+                </h2>
+                <p className="col-start-2 text-[15px] leading-[1.7] text-[#4a443a]">
+                  {rule.description}
+                </p>
+              </div>
+            ))}
 
-            <div className="mt-8 p-4 bg-yellow-50 rounded-lg flex gap-4">
-              <AlertTriangle className="h-6 w-6 text-yellow-600" />
-              <p className="text-yellow-700">
-                Violation of these rules may result in immediate removal from
-                the premises and potential ban from future events. We take these
-                rules seriously to ensure everyone&apos;s safety and comfort.
+            <div className="mt-8 border border-[#d8d2c5] border-l-4 border-l-[var(--kyx-purple)] p-5">
+              <p className="text-[15px] leading-[1.7] text-[#4a443a]">
+                Violation of these rules may result in immediate removal from the
+                premises and potential ban from future events. We take these rules
+                seriously to ensure everyone&apos;s safety and comfort.
               </p>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </Container>
+      </section>
+    </>
   );
 }

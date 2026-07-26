@@ -1,5 +1,6 @@
 import { Download } from "lucide-react";
 import Image from "next/image";
+import { Container, PageHero, Eyebrow } from "@/app/components/fm";
 
 const assets = [
   {
@@ -39,59 +40,65 @@ const assets = [
 
 export default function AssetsPage() {
   return (
-    <div className="min-h-screen bg-white">
-      <main className="container mx-auto px-4 py-16">
-        <h1 className="text-4xl font-bold text-purple-700 mb-8">
-          Brand Assets
-        </h1>
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-8">
-          <p className="text-sm text-yellow-800">
+    <>
+      <PageHero
+        eyebrow="Brand"
+        title="Brand assets."
+        intro="Logos and marks for using the KYCombinator brand. Download the files you need — please keep them intact and unmodified."
+      />
+
+      <section className="border-b border-[#16130f]">
+        <Container className="py-16 lg:py-[72px]">
+          <p className="mb-10 max-w-[720px] border-l-2 border-[var(--kyx-purple)] pl-5 text-[15px] leading-[1.65] text-[#4a443a]">
             These brand assets are provided for use in accordance with our brand
             guidelines. By downloading and using these assets, you agree to use
             them only for purposes related to KYCombinator and not to modify or
             alter them in any way. For questions about usage, please contact our
             team.
           </p>
-        </div>
 
-        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {assets.map((asset) => (
-            <div
-              key={asset.name}
-              className="bg-gray-50 rounded-lg p-4 shadow-sm"
-            >
-              <div className="aspect-square relative mb-2 bg-white rounded-lg overflow-hidden border border-gray-200">
-                <Image
-                  src={asset.previewUrl}
-                  alt={asset.name}
-                  fill
-                  className="object-contain p-2"
-                  style={{ backgroundColor: asset.backgroundColor }}
-                />
-              </div>
-
-              <h2 className="text-base font-semibold text-gray-800 mb-1">
-                {asset.name}
-              </h2>
-              <p className="text-sm text-gray-600 mb-2">{asset.description}</p>
-
-              <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
-                <span>{asset.dimensions}</span>
-                <span>{asset.format}</span>
-              </div>
-
-              <a
-                href={asset.downloadUrl}
-                download
-                className="flex items-center justify-center gap-1 bg-purple-700 text-white px-3 py-1.5 rounded-md hover:bg-purple-800 transition text-sm"
+          <Eyebrow className="mb-6">Downloads</Eyebrow>
+          <div className="grid gap-5 md:grid-cols-3 lg:grid-cols-4">
+            {assets.map((asset) => (
+              <div
+                key={asset.name}
+                className="flex flex-col border border-[#d8d2c5] p-4"
               >
-                <Download className="w-3 h-3" />
-                Download
-              </a>
-            </div>
-          ))}
-        </div>
-      </main>
-    </div>
+                <div className="relative mb-4 aspect-square overflow-hidden border border-[#d8d2c5] bg-white">
+                  <Image
+                    src={asset.previewUrl}
+                    alt={asset.name}
+                    fill
+                    className="object-contain p-2"
+                    style={{ backgroundColor: asset.backgroundColor }}
+                  />
+                </div>
+
+                <h2 className="mb-1 text-[15px] font-medium text-[#16130f]">
+                  {asset.name}
+                </h2>
+                <p className="mb-3 text-[14px] leading-[1.5] text-[#4a443a]">
+                  {asset.description}
+                </p>
+
+                <div className="mb-4 flex items-center justify-between font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[#7d766a]">
+                  <span>{asset.dimensions}</span>
+                  <span>{asset.format}</span>
+                </div>
+
+                <a
+                  href={asset.downloadUrl}
+                  download
+                  className="mt-auto inline-flex items-center justify-center gap-1.5 bg-[#16130f] px-4 py-3 font-[family-name:var(--font-ibm-plex-mono)] text-[12px] uppercase tracking-[0.08em] text-[#f4f1ea] transition-colors duration-150 hover:bg-[#2c2820] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]"
+                >
+                  <Download className="h-3.5 w-3.5" />
+                  Download
+                </a>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+    </>
   );
 }

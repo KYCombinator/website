@@ -1,5 +1,4 @@
-import React from "react";
-import Link from "next/link";
+import { Container, PageHero, Eyebrow, SerifHeading, TextLink } from "../components/fm";
 
 const tools = [
   {
@@ -20,36 +19,48 @@ const tools = [
 
 export default function StartupToolsPage() {
   return (
-    <div className="max-w-4xl mx-auto p-8">
-      <h1 className="text-4xl font-bold mb-6">Startup Tools We Recommend</h1>
-      <p className="text-gray-600 mb-8">
-        These are tools we use and love. Some links may be affiliate or partner links, which means
-        we might get a small benefit if you sign up — at no extra cost to you.
-      </p>
-      <div className="space-y-6">
-        {tools.map((tool) => (
-          <div
-            key={tool.name}
-            className="p-6 border rounded-lg shadow-sm hover:shadow-md transition"
-          >
-            <h2 className="text-2xl font-semibold mb-2">{tool.name}</h2>
-            <p className="text-gray-700 mb-3">{tool.description}</p>
-            <div className="mb-2">
-              <strong>What you get:</strong> <span className="text-gray-800">{tool.youGet}</span>
-            </div>
-            <div className="mb-4">
-              <strong>What KYX gets:</strong> <span className="text-gray-800">{tool.weGet}</span>
-            </div>
-            <Link
-              href={tool.url}
-              className="text-blue-600 hover:underline"
-              target="_blank"
+    <>
+      <PageHero
+        eyebrow="Startup tools"
+        title="Tools we use and love."
+        intro="Some links may be affiliate or partner links, which means we might get a small benefit if you sign up — at no extra cost to you."
+      />
+
+      <section className="border-b border-[#16130f]">
+        <Container className="grid grid-cols-1 gap-6 py-16 sm:grid-cols-2 lg:py-[72px]">
+          {tools.map((tool) => (
+            <div
+              key={tool.name}
+              className="flex flex-col gap-4 border border-[#d8d2c5] p-6"
             >
-              Visit {tool.name}
-            </Link>
-          </div>
-        ))}
-      </div>
-    </div>
+              <div className="flex flex-col gap-2">
+                <Eyebrow>Recommended</Eyebrow>
+                <SerifHeading as="h2" className="text-[28px] leading-none">
+                  {tool.name}
+                </SerifHeading>
+              </div>
+              <p className="text-[15px] leading-[1.6] text-[#4a443a]">{tool.description}</p>
+              <dl className="flex flex-col gap-3 border-t border-[#d8d2c5] pt-4">
+                <div className="grid gap-1">
+                  <dt className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[#7d766a]">
+                    What you get
+                  </dt>
+                  <dd className="text-[15px] leading-[1.6] text-[#4a443a]">{tool.youGet}</dd>
+                </div>
+                <div className="grid gap-1">
+                  <dt className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[#7d766a]">
+                    What KYX gets
+                  </dt>
+                  <dd className="text-[15px] leading-[1.6] text-[#4a443a]">{tool.weGet}</dd>
+                </div>
+              </dl>
+              <TextLink href={tool.url} external className="mt-1 self-start">
+                Visit {tool.name}
+              </TextLink>
+            </div>
+          ))}
+        </Container>
+      </section>
+    </>
   );
 }

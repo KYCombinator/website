@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { Container, Eyebrow, SerifHeading } from "@/app/components/fm";
 
 interface TermDefinition {
   term: string;
@@ -183,11 +184,11 @@ const MetricSection = () => {
         <button
           key={`term-${match.index}`}
           onClick={() => handleTermClick(match.key)}
-          className={`inline-block px-1.5 py-0.5 rounded transition-all duration-200 ${
+          className={`cursor-pointer border-b transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)] ${
             expandedTerm === match.key
-              ? "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-300 border border-cyan-500/50"
-              : "bg-gradient-to-r from-cyan-500/10 to-blue-500/10 text-cyan-400 hover:from-cyan-500/20 hover:to-blue-500/20 hover:text-cyan-300 border border-cyan-500/30 hover:border-cyan-500/50"
-          } font-semibold underline decoration-2 underline-offset-2 cursor-pointer`}
+              ? "border-[var(--kyx-purple)] text-[#16130f]"
+              : "border-[var(--kyx-purple)] text-[var(--kyx-purple)] hover:text-[#16130f]"
+          }`}
         >
           {match.term}
         </button>
@@ -205,37 +206,34 @@ const MetricSection = () => {
   };
 
   return (
-    <div className="relative mb-16">
-      <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/10 via-blue-600/10 to-indigo-600/10 rounded-2xl blur-3xl" />
-      <div className="relative bg-gradient-to-br from-background-800/50 to-background-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="h-1 w-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full" />
-          <span className="text-sm font-semibold text-cyan-400 uppercase tracking-wider">
-            Our Metric
-          </span>
-        </div>
-        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-          Metric
-        </h2>
-        <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+    <section className="border-b border-[#16130f] bg-[#eae5da]">
+      <Container className="py-16 lg:py-[72px]">
+        <Eyebrow className="mb-4">Our metric</Eyebrow>
+        <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+          Metric.
+        </SerifHeading>
+        <p className="mt-6 max-w-[720px] text-[20px] leading-[1.5] text-[#4a443a] md:text-[22px] [text-wrap:pretty]">
           {renderTextWithClickableTerms(
             "We're focused deliberately and unapologetically on 10 series‑A venture‑backable startups."
           )}
         </p>
+        <p className="mt-3 font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.1em] text-[#7d766a]">
+          Select a term for the definition
+        </p>
 
         {expandedTerm && definitions[expandedTerm] && (
-          <div className="mt-6 pt-6 border-t border-white/10 animate-in fade-in slide-in-from-top-2 duration-300">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-2xl font-bold text-white">
+          <div className="mt-8 border-t border-[#d8d2c5] pt-6">
+            <div className="mb-4 flex items-center justify-between gap-4">
+              <SerifHeading as="h3" className="text-[26px] leading-none">
                 {definitions[expandedTerm].term}
-              </h3>
+              </SerifHeading>
               <button
                 onClick={() => setExpandedTerm(null)}
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-[#7d766a] transition-colors duration-150 hover:text-[#16130f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]"
                 aria-label="Close"
               >
                 <svg
-                  className="w-6 h-6"
+                  className="h-6 w-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -249,13 +247,13 @@ const MetricSection = () => {
                 </svg>
               </button>
             </div>
-            <div className="text-gray-300 leading-relaxed space-y-4">
+            <div className="max-w-[720px] space-y-4 text-[15px] leading-[1.65] text-[#4a443a] [&_li]:leading-[1.6] [&_strong]:font-semibold [&_strong]:text-[#16130f] [&_ul]:ml-4 [&_ul]:list-inside [&_ul]:list-disc [&_ul]:space-y-2">
               {definitions[expandedTerm].content}
             </div>
           </div>
         )}
-      </div>
-    </div>
+      </Container>
+    </section>
   );
 };
 

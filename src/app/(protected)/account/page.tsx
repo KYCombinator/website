@@ -4,11 +4,11 @@ import jwt from "jsonwebtoken";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[1fr] items-center justify-items-center min-h-screen p-8">
-      <main className="flex flex-col gap-8 items-center max-w-md w-full">        
+    <section className="border-b border-[#16130f]">
+      <div className="mx-auto flex min-h-[50vh] max-w-[1120px] flex-col items-start justify-center gap-8 px-5 py-24 md:px-7 lg:px-10">
         <LoggedInMessage />
-      </main>
-    </div>
+      </div>
+    </section>
   );
 }
 
@@ -34,9 +34,17 @@ async function LoggedInMessage() {
   }
 
   return (
-    <div className="w-full space-y-4">
-      <h1 className="text-2xl font-bold text-center mb-6">Welcome</h1>
-      <p>You are logged in as {user?.email}.</p>
+    <div className="flex w-full flex-col gap-4">
+      <p className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.14em] text-[var(--kyx-purple)]">
+        Account
+      </p>
+      <h1 className="font-[family-name:var(--font-instrument-serif)] text-[44px] leading-[1.0] tracking-[-0.02em] md:text-[56px]">
+        Welcome.
+      </h1>
+      <p className="max-w-[620px] text-[16px] leading-[1.6] text-[#4a443a]">
+        You are logged in as{" "}
+        <strong className="font-semibold text-[#16130f]">{user?.email}</strong>.
+      </p>
     </div>
   );
 }

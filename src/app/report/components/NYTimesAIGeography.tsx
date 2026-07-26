@@ -1,30 +1,30 @@
 export default function NYTimesAIGeography() {
   return (
-    <div className="space-y-8">
-      <section className="bg-background-300 text-foreground-300 p-6 rounded-lg">
-        <h2 className="text-lg font-semibold mb-4">Sources & References</h2>
+    <div className="space-y-8 text-[#16130f]">
+      <section className="border border-[#d8d2c5] bg-[#eae5da] p-6">
+        <h2 className="mb-4 text-lg font-semibold">Sources &amp; References</h2>
         <ul className="space-y-2">
-          <li>
+          <li className="flex flex-wrap items-center gap-2">
             <a
               href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4874104"
-              className="text-blue-600 hover:underline flex items-center gap-2"
+              className="text-[var(--kyx-purple)] underline hover:opacity-70"
               target="_blank"
               rel="noopener noreferrer"
             >
               SSRN Research Paper
-              <a
-                href="/reports/ssrn-4874104.pdf"
-                download
-                className="text-sm text-purple-600 hover:text-purple-800"
-              >
-                (Download PDF)
-              </a>
+            </a>
+            <a
+              href="/reports/ssrn-4874104.pdf"
+              download
+              className="text-sm text-[#57503f] hover:opacity-70"
+            >
+              (Download PDF)
             </a>
           </li>
           <li>
             <a
               href="https://threadreaderapp.com/thread/1871946968148439260.html?utm_source=tldrnewsletter#google_vignette"
-              className="text-blue-600 hover:underline"
+              className="text-[var(--kyx-purple)] underline hover:opacity-70"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -34,7 +34,7 @@ export default function NYTimesAIGeography() {
           <li>
             <a
               href="https://www.nytimes.com/2024/12/26/technology/ai-economy-workers.html"
-              className="text-blue-600 hover:underline"
+              className="text-[var(--kyx-purple)] underline hover:opacity-70"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -45,8 +45,8 @@ export default function NYTimesAIGeography() {
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold mb-4">Overview</h2>
-        <p className="mb-4">
+        <h2 className="mb-4 text-2xl font-bold">Overview</h2>
+        <p className="mb-4 leading-[1.7] text-[#4a443a]">
           The New York Times analysis explores how artificial intelligence
           adoption could reshape America&apos;s economic geography, potentially
           benefiting midsize cities across the Midwest, Mid-Atlantic, and South
@@ -56,11 +56,11 @@ export default function NYTimesAIGeography() {
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold mb-4">
+        <h2 className="mb-4 text-2xl font-bold">
           Key Advantages of Midsize Cities
         </h2>
-        <div className="bg-background-300 text-foreground-300 p-6 rounded-lg">
-          <ul className="list-disc list-inside space-y-2">
+        <div className="border border-[#d8d2c5] bg-[#eae5da] p-6">
+          <ul className="list-inside list-disc space-y-2 text-[#4a443a]">
             <li>Educated workforce ready for AI adoption</li>
             <li>More affordable housing compared to major tech hubs</li>
             <li>Workers in industries less likely to be disrupted by AI</li>
@@ -70,33 +70,33 @@ export default function NYTimesAIGeography() {
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold mb-4">Case Study: Chattanooga</h2>
-        <div className="bg-background-300 text-foreground-300 p-6 rounded-lg">
-          <h3 className="text-xl font-semibold mb-3">Success Stories</h3>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="p-4 bg-white rounded shadow">
-              <h4 className="font-semibold mb-2">Truck Parking Club</h4>
-              <p className="text-gray-600">
+        <h2 className="mb-4 text-2xl font-bold">Case Study: Chattanooga</h2>
+        <div className="border border-[#d8d2c5] bg-[#eae5da] p-6">
+          <h3 className="mb-3 text-xl font-semibold">Success Stories</h3>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="border border-[#d8d2c5] bg-[#f4f1ea] p-4">
+              <h4 className="mb-2 font-semibold">Truck Parking Club</h4>
+              <p className="text-[#57503f]">
                 An &quot;Airbnb for truck parking&quot; startup demonstrating
                 innovative use of technology
               </p>
             </div>
-            <div className="p-4 bg-white rounded shadow">
-              <h4 className="font-semibold mb-2">Shappi</h4>
-              <p className="text-gray-600">
+            <div className="border border-[#d8d2c5] bg-[#f4f1ea] p-4">
+              <h4 className="mb-2 font-semibold">Shappi</h4>
+              <p className="text-[#57503f]">
                 A consumer goods shipping marketplace showing local tech
                 ecosystem growth
               </p>
             </div>
-            <div className="p-4 bg-white rounded shadow">
-              <h4 className="font-semibold mb-2">EPB</h4>
-              <p className="text-gray-600">
+            <div className="border border-[#d8d2c5] bg-[#f4f1ea] p-4">
+              <h4 className="mb-2 font-semibold">EPB</h4>
+              <p className="text-[#57503f]">
                 City-owned utility offering quantum network access
               </p>
             </div>
-            <div className="p-4 bg-white rounded shadow">
-              <h4 className="font-semibold mb-2">Municipal AI</h4>
-              <p className="text-gray-600">
+            <div className="border border-[#d8d2c5] bg-[#f4f1ea] p-4">
+              <h4 className="mb-2 font-semibold">Municipal AI</h4>
+              <p className="text-[#57503f]">
                 AI chatbot implementation for city services
               </p>
             </div>
@@ -105,8 +105,8 @@ export default function NYTimesAIGeography() {
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold mb-4">Broader Implications</h2>
-        <div className="prose max-w-none">
+        <h2 className="mb-4 text-2xl font-bold">Broader Implications</h2>
+        <div className="max-w-none leading-[1.7] text-[#4a443a]">
           <p>
             The spread of AI technology beyond traditional tech hubs represents
             a significant shift in America&apos;s economic landscape. This
@@ -118,7 +118,7 @@ export default function NYTimesAIGeography() {
             As AI adoption increases, midsize cities could leverage these
             technologies to:
           </p>
-          <ul className="mt-2">
+          <ul className="mt-2 list-inside list-disc space-y-1">
             <li>Increase local business productivity</li>
             <li>Attract remote workers and tech talent</li>
             <li>Develop specialized tech ecosystems</li>
@@ -127,9 +127,9 @@ export default function NYTimesAIGeography() {
         </div>
       </section>
 
-      <section className="bg-background-300 text-foreground-300 p-6 rounded-lg">
-        <h2 className="text-2xl font-bold mb-4">Looking Forward</h2>
-        <p>
+      <section className="border border-[#d8d2c5] bg-[#eae5da] p-6">
+        <h2 className="mb-4 text-2xl font-bold">Looking Forward</h2>
+        <p className="leading-[1.7] text-[#4a443a]">
           The research suggests that the geographic distribution of AI benefits
           could help create a more balanced national economy, with growth
           opportunities spread across multiple regions rather than concentrated

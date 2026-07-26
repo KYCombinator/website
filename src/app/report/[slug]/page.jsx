@@ -1,9 +1,8 @@
 export const dynamic = "force-dynamic";
 
 import { notFound } from "next/navigation";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 import { Download } from "lucide-react";
+import { Container, Button, SerifHeading } from "../../components/fm";
 import { reports, badges } from "../data"; // adjust path!
 import { reportComponents } from "../components";
 // Dynamic metadata
@@ -35,61 +34,66 @@ export default function ReportPage({ params }) {
     : null;
 
   return (
-    <main className="container py-12 px-4 sm:px-6 lg:px-8">
-      <div className="mb-8">
-        <div className="flex items-center gap-4 mb-4">
-          <div className="flex gap-2">
+    <Container className="py-16 lg:py-20">
+      <div className="mb-10 flex flex-col gap-4 border-b border-[#d8d2c5] pb-8">
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap gap-2">
             {report.badges.map((badge) => (
-              <Badge
+              <span
                 key={badge}
-                variant="outline"
-                className={`${badges[badge].color} shadow-sm`}
+                className="border border-[#d8d2c5] px-2 py-1 font-[family-name:var(--font-ibm-plex-mono)] text-[10px] uppercase tracking-[0.08em] text-[#57503f]"
               >
                 {badges[badge].label}
-              </Badge>
+              </span>
             ))}
           </div>
-          <span className="text-sm text-foreground-800">{report.date}</span>
+          <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[#7d766a]">
+            {report.date}
+          </span>
         </div>
-        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl mb-4 text-primary-500">
+        <SerifHeading
+          as="h1"
+          className="max-w-[900px] text-[36px] leading-[1.05] md:text-[48px]"
+        >
           {report.title}
-        </h1>
-        <p className="text-xl text-foreground-800">{report.description}</p>
+        </SerifHeading>
+        <p className="max-w-[720px] text-[18px] leading-[1.6] text-[#4a443a] [text-wrap:pretty]">
+          {report.description}
+        </p>
       </div>
 
       {report.status === "Coming Soon" ? (
-        <Card className="p-6 bg-muted">
-          <p className="text-center text-muted-foreground">
+        <div className="border border-[#d8d2c5] p-8">
+          <p className="text-center font-[family-name:var(--font-ibm-plex-mono)] text-[12px] uppercase tracking-[0.08em] text-[#7d766a]">
             This report is coming soon. Check back later!
           </p>
-        </Card>
+        </div>
       ) : (
         <>
           {report.file && (
-            <div className="mb-8">
-              <a
+            <div className="mb-10">
+              <Button
                 href={report.file}
-                download
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-purple-700 text-white rounded-md hover:bg-purple-800 transition"
+                variant="dark"
+                external
+                className="gap-2"
               >
-                <Download className="w-4 h-4" />
+                <Download className="h-4 w-4" />
                 Download Report
-              </a>
+              </Button>
             </div>
           )}
-          <div className="prose dark:prose-invert max-w-none text-foreground-800">
+          <div className="max-w-none">
             {ReportComponent ? (
               <ReportComponent />
             ) : (
-              <div className="text-center text-muted-foreground">
-                <p>Static content for this report will be added soon.</p>
-              </div>
+              <p className="text-center font-[family-name:var(--font-ibm-plex-mono)] text-[12px] uppercase tracking-[0.08em] text-[#7d766a]">
+                Static content for this report will be added soon.
+              </p>
             )}
-          </div> 
+          </div>
         </>
       )}
-    </main>
+    </Container>
   );
 }

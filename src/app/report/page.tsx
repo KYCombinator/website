@@ -1,112 +1,99 @@
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 import Link from "next/link";
+import { Container, PageHero, Eyebrow, SerifHeading } from "../components/fm";
 import { reports, badges } from "./data";
 
 export default function ReportsPage() {
   return (
-    <main className="py-12 px-4 sm:px-6 lg:px-8 bg-background-900 text-foreground-800">
-      <div className="mb-12">
-        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl mb-4 text-primary-500">
-          Reports & Analytics
-        </h1>
-        <p className="text-xl text-muted-foreground">
-          Data-driven insights into Kentucky&apos;s tech community
-        </p>
-        <p className="mt-4 text-sm italic text-muted-foreground bg-background-300 border border-gray-200 rounded-lg p-4 text-foreground-300">
-          All information provided is for educational and research purposes
-          only. Reports may contain copyrighted material used under fair use for
-          educational purposes.
-        </p>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
-        {reports.map((report) =>
-          report.status === "Coming Soon" ? (
-            <Card
-              key={report.title}
-              className="p-6 hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-white to-gray-50 border border-gray-200 hover:border-[#6B46C1]/20"
-            >
-              <div className="flex flex-col h-full">
-                <div className="mb-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex gap-2 flex-wrap">
+    <>
+      <PageHero
+        eyebrow="Reports"
+        title="Data on the ground."
+        intro="Data-driven insights into Kentucky's tech community."
+      />
+
+      <section className="border-b border-[#16130f]">
+        <Container className="flex flex-col gap-8 py-16 lg:py-[72px]">
+          <p className="max-w-[720px] border-l-2 border-[var(--kyx-purple)] pl-4 font-[family-name:var(--font-ibm-plex-mono)] text-[12px] leading-[1.7] uppercase tracking-[0.06em] text-[#7d766a]">
+            All information provided is for educational and research purposes
+            only. Reports may contain copyrighted material used under fair use
+            for educational purposes.
+          </p>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+            {reports.map((report) => {
+              const inner = (
+                <div className="flex h-full flex-col gap-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex flex-wrap gap-2">
                       {report.badges.map((badge) => (
-                        <Badge
+                        <span
                           key={badge}
-                          variant="outline"
-                          className={`${badges[badge].color} shadow-sm`}
+                          className="border border-[#d8d2c5] px-2 py-1 font-[family-name:var(--font-ibm-plex-mono)] text-[10px] uppercase tracking-[0.08em] text-[#57503f]"
                         >
                           {badges[badge].label}
-                        </Badge>
+                        </span>
                       ))}
                     </div>
-                    <span className="text-sm font-medium text-gray-500">
+                    <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[#7d766a]">
                       {report.date}
                     </span>
                   </div>
-                  <h2 className="text-xl font-semibold mb-3 text-gray-800">
-                    {report.title}
-                  </h2>
-                  <p className="text-gray-600">{report.description}</p>
-                </div>
-                <div className="mt-auto pt-4 border-t border-gray-100">
-                  <Badge
-                    variant="secondary"
-                    className="bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  <SerifHeading
+                    as="h2"
+                    className="text-[22px] leading-[1.1] text-[#16130f]"
                   >
-                    {report.status}
-                  </Badge>
-                </div>
-              </div>
-            </Card>
-          ) : (
-            <Link href={`/report/${report.slug}`} key={report.title}>
-              <Card className="p-6 hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-white to-gray-50 border border-gray-200 hover:border-[#6B46C1]/20 cursor-pointer">
-                <div className="flex flex-col h-full">
-                  <div className="mb-4">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex gap-2 flex-wrap">
-                        {report.badges.map((badge) => (
-                          <Badge
-                            key={badge}
-                            variant="outline"
-                            className={`${badges[badge].color} shadow-sm`}
-                          >
-                            {badges[badge].label}
-                          </Badge>
-                        ))}
-                      </div>
-                      <span className="text-sm font-medium text-gray-500">
-                        {report.date}
+                    {report.title}
+                  </SerifHeading>
+                  <p className="text-[15px] leading-[1.6] text-[#4a443a]">
+                    {report.description}
+                  </p>
+                  <div className="mt-auto border-t border-[#d8d2c5] pt-4">
+                    {report.status === "Coming Soon" ? (
+                      <span className="border border-[#d8d2c5] px-2 py-1 font-[family-name:var(--font-ibm-plex-mono)] text-[10px] uppercase tracking-[0.08em] text-[#7d766a]">
+                        Coming Soon
                       </span>
-                    </div>
-                    <h2 className="text-xl font-semibold mb-3 text-gray-800 group-hover:text-[#6B46C1] transition-colors">
-                      {report.title}
-                    </h2>
-                    <p className="text-gray-600">{report.description}</p>
-                  </div>
-                  <div className="mt-auto pt-4 border-t border-gray-100">
-                    <span className="inline-flex items-center text-[#6B46C1] font-medium">
-                      View Report
-                      <span className="ml-1">→</span>
-                    </span>
+                    ) : (
+                      <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[var(--kyx-purple)]">
+                        View Report →
+                      </span>
+                    )}
                   </div>
                 </div>
-              </Card>
-            </Link>
-          ),
-        )}
-      </div>
+              );
 
-      <div className="mt-12 p-8 border rounded-lg bg-background-300 border-foreground-300 shadow-sm">
-        <h2 className="text-2xl font-semibold mb-4 text-foreground-300">
-          Looking for Custom Reports?
-        </h2>
-        <p className="text-foreground-300 mb-4">
-          Need specific data or insights about Kentucky&apos;s tech ecosystem?
-          We&apos;re happy to help with custom analytics and reports.
-        </p>
-      </div>
-    </main>
+              const cardClass =
+                "flex flex-col gap-3 border border-[#d8d2c5] p-6 transition-colors duration-150 hover:border-[#16130f]";
+
+              return report.status === "Coming Soon" ? (
+                <div key={report.title} className={cardClass}>
+                  {inner}
+                </div>
+              ) : (
+                <Link
+                  key={report.title}
+                  href={`/report/${report.slug}`}
+                  className={cardClass}
+                >
+                  {inner}
+                </Link>
+              );
+            })}
+          </div>
+        </Container>
+      </section>
+
+      <section>
+        <Container className="flex flex-col gap-4 py-16 lg:py-20">
+          <Eyebrow>Custom work</Eyebrow>
+          <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+            Looking for custom reports?
+          </SerifHeading>
+          <p className="max-w-[640px] text-[17px] leading-[1.6] text-[#4a443a] [text-wrap:pretty]">
+            Need specific data or insights about Kentucky&apos;s tech ecosystem?
+            We&apos;re happy to help with custom analytics and reports.
+          </p>
+        </Container>
+      </section>
+    </>
   );
 }

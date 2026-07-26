@@ -1,0 +1,67 @@
+name: Deploy dev (dev.kycombinator.com)
+
+# Deploys the `dev` SST stage to https://dev.kycombinator.com.
+# Mirrors the production pipeline (ci.yml) but targets the dev stage and adds a
+# noindex header so staging never indexes alongside production.
+#
+# Triggers:
+#   - push to the redesign branch (auto-preview while iterating)
+#   - manual run from the Actions tab (workflow_dispatch)
+#
+# Requires the same GitHub secrets as production: AWS_ACCESS_KEY_ID,
+# AWS_SECRET_ACCESS_KEY, HOSTED_ZONE_ID, CERTIFICATE_ARN, NEXT_PUBLIC_CDN_URL,
+# APP_ID, JWT_SECRET. (CERTIFICATE_ARN is unused by the dev stage — SST
+# auto-provisions the dev subdomain cert — but is passed for parity.)
+
+on:
+  push:
+    branches: [ redesign/homepage-2a ]
+  workflow_dispatch:
+
+# Never run two dev deploys at once (they mutate the same stage/DNS).
+concurrency:
+  group: deploy-dev
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_CDN_URL: ${{ secrets.NEXT_PUBLIC_CDN_URL }}
+      HOSTED_ZONE_ID: ${{ secrets.HOSTED_ZONE_ID }}
+      CERTIFICATE_ARN: ${{ secrets.CERTIFICATE_ARN }}
+      NEXT_PUBLIC_APP_ID: ${{ secrets.APP_ID }}
+      NEXT_PUBLIC_JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      # Serve X-Robots-Tag: noindex, nofollow on the dev host (see next.config.js).
+      DEPLOY_NOINDEX: '1'
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install deps & build OpenNext
+      run: |
+        npm ci
+        npx open-next build
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    # The ubuntu-latest runner ships a pre-installed Pulumi whose language host
+    # shadows SST's own bundled Pulumi on PATH, causing the deploy to fail with
+    # "flag provided but not defined: -root". Remove it so SST uses its bundled version.
+    - name: Remove conflicting pre-installed Pulumi
+      run: |
+        sudo rm -f /usr/local/bin/pulumi /usr/local/bin/pulumi-language-* /usr/local/bin/pulumi-analyzer-* || true
+        echo "Remaining pulumi on PATH:"; which -a pulumi || echo "none"
+
+    - name: Deploy with SST
+      run: |
+        npx sst deploy --stage dev

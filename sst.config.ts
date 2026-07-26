@@ -15,6 +15,27 @@ export default $config({
     const hostedZoneId = process.env.HOSTED_ZONE_ID!;
     const certificateArn = process.env.CERTIFICATE_ARN!; // Must be in us-east-1 and include SAN for www.kycombinator.com
 
+    // Production owns the apex (kycombinator.com) + the www redirect. Every
+    // other stage is a subdomain preview: `dev` -> dev.kycombinator.com,
+    // `<stage>` -> <stage>.kycombinator.com. Non-prod stages let SST
+    // auto-provision and DNS-validate their own ACM cert via the hosted zone,
+    // and never touch the apex or www so they cannot collide with production.
+    const stage = $app.stage;
+    const isProd = stage === "prod" || stage === "production";
+
+    if (!isProd) {
+      // ── Non-prod preview (e.g. dev.kycombinator.com) ──────────────────
+      new sst.aws.Nextjs("Website", {
+        domain: {
+          name: `${stage}.kycombinator.com`,
+          dns: sst.aws.dns({ zone: hostedZoneId }),
+          // No `cert`: SST creates + DNS-validates an ACM cert (us-east-1)
+          // for this subdomain automatically using the hosted zone above.
+        },
+      });
+      return;
+    }
+
     // 1) Primary Next.js site on apex: kycombinator.com
     new sst.aws.Nextjs("Website", {
       domain: {

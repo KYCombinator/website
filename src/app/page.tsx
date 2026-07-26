@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import NewsletterForm from "./components/home/NewsletterForm";
+import EventShowcase from "./components/home/EventShowcase";
 import {
   APPLY_URL,
   SLACK_INVITE,
   GOAL_TOTAL,
   companiesOnBoard,
+  companies,
   scoreboardUpdatedAt,
   stats,
   buildersInRoom,
@@ -59,18 +61,40 @@ export default function Home() {
         {/* ── Progress tracker ─────────────────────────────────── */}
         <section className="flex flex-col gap-3 px-5 pb-11 md:px-7 lg:px-10">
           <div className="grid grid-cols-5 gap-2 md:grid-cols-10">
-            {Array.from({ length: GOAL_TOTAL }).map((_, i) => (
-              <div
-                key={i}
-                className={
-                  "h-11 md:h-14 " +
-                  (i < companiesOnBoard
-                    ? "bg-[var(--kyx-purple)]"
-                    : "border border-dashed border-[#c6bfae]")
-                }
-                aria-hidden
-              />
-            ))}
+            {Array.from({ length: GOAL_TOTAL }).map((_, i) => {
+              const filled = i < companiesOnBoard;
+              const company = filled ? companies[i] : undefined;
+              if (company) {
+                // Filled block with a named company: hover/focus reveals the
+                // name and links to the company.
+                return (
+                  <a
+                    key={i}
+                    href={company.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={company.name}
+                    className="group relative h-11 bg-[var(--kyx-purple)] transition-colors duration-150 hover:bg-[#4f29a6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)] md:h-14"
+                  >
+                    <span className="pointer-events-none absolute bottom-[calc(100%+8px)] left-1/2 z-10 -translate-x-1/2 whitespace-nowrap bg-[#16130f] px-2 py-1 font-[family-name:var(--font-ibm-plex-mono)] text-[10px] uppercase tracking-[0.08em] text-[#f4f1ea] opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100">
+                      {company.name}
+                    </span>
+                  </a>
+                );
+              }
+              return (
+                <div
+                  key={i}
+                  className={
+                    "h-11 md:h-14 " +
+                    (filled
+                      ? "bg-[var(--kyx-purple)]"
+                      : "border border-dashed border-[#c6bfae]")
+                  }
+                  aria-hidden
+                />
+              );
+            })}
           </div>
           <div className="flex flex-col gap-2 font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[#7d766a] sm:flex-row sm:justify-between">
             <span>
@@ -132,17 +156,8 @@ export default function Home() {
           </p>
         )}
 
-        {/* ── Photo band ───────────────────────────────────────── */}
-        {/* Awaiting real event photography (client is sending photos). Swap this
-            block for a responsive next/image with a wide HackKentucky / Cinderblock
-            shot and alt text before production — do not ship stock. */}
-        <section className="border-b border-[#16130f]">
-          <div className="flex h-[220px] items-center justify-center bg-[#eae5da] md:h-[300px] lg:h-[360px]">
-            <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.12em] text-[#7d766a]">
-              Event photography — coming soon
-            </span>
-          </div>
-        </section>
+        {/* ── Event showcase (carousel of events; photo collages) ── */}
+        <EventShowcase />
 
         {/* ── Cinderblock: what you actually get ───────────────── */}
         <section className="grid grid-cols-1 gap-10 border-b border-[#16130f] px-5 py-16 md:px-7 lg:grid-cols-[380px_minmax(0,1fr)] lg:gap-14 lg:px-10 lg:py-[72px]">

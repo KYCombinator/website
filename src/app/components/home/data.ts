@@ -8,6 +8,17 @@ export const GOAL_TOTAL = 10; // "Ten Series A companies out of Kentucky by 2030
 // on this being true — if the honest number today is 0 or 1, show that.
 export const companiesOnBoard = 3;
 
+export type Company = { name: string; url: string };
+
+// Companies "on the board", mapped left-to-right onto the filled tracker blocks.
+// Hovering (or focusing) a filled block reveals the name and links to the company.
+// ⚠️ Names inferred from the domains — correct if needed. A 3rd company is on the
+// board (companiesOnBoard = 3) but not yet named here; add it to light up block 3.
+export const companies: Company[] = [
+  { name: "Swell", url: "https://www.getswell.app/" },
+  { name: "DueGooder", url: "https://duegooder.com" },
+];
+
 // Shown in the tracker caption. Change when the board changes.
 export const scoreboardUpdatedAt = "July 2026";
 
@@ -26,6 +37,70 @@ export const stats: Stat[] = [
 
 // ⚠️ PLACEHOLDER — Slack member count, mirrored in the community band copy.
 export const buildersInRoom = "600+";
+
+export type EventPhoto = { src: string; alt: string };
+export type FeaturedEvent = {
+  title: string;
+  tagline: string; // one-line description
+  when: string; // when it usually happens
+  href: string;
+  photos: EventPhoto[];
+};
+
+// Events showcased in the homepage photo carousel. Each event's photos become
+// slides sharing that event's caption. Add more events (or more photos per
+// event) here — the carousel adapts. Drop new photos in /public/<event>/.
+export const featuredEvents: FeaturedEvent[] = [
+  {
+    title: "The Louies",
+    tagline: "The annual Louisville startup award show.",
+    when: "First Thursday of December",
+    href: "/events/louies/2025",
+    photos: [
+      { src: "/louies/louies1.jpg", alt: "The Louies — the room" },
+      { src: "/louies/louies2.jpg", alt: "The Louies — the celebration" },
+      { src: "/louies/louies3.jpg", alt: "The Louies — awards night" },
+    ],
+  },
+  {
+    title: "HackKentucky",
+    // ⚠️ tagline inferred — edit to taste.
+    tagline: "Kentucky's flagship hackathon.",
+    when: "September 11",
+    href: "https://www.hackkentucky.com",
+    // No photo asset in the repo yet — drop one in /public/hackkentucky/ and add
+    // it here (e.g. { src: "/hackkentucky/1.jpg", alt: "HackKentucky" }) to turn
+    // this into a photo slide. Until then it renders as a typographic slide.
+    photos: [],
+  },
+  {
+    title: "HackTheTrack",
+    // ⚠️ tagline inferred — edit to taste.
+    tagline: "A KYX hackathon.",
+    when: "September 11",
+    href: "https://www.hackkentucky.com",
+    photos: [],
+  },
+  {
+    title: "Rally Innovation Conference",
+    // ⚠️ tagline/when inferred — edit to taste; set the real Rally URL on href.
+    tagline: "Stay curious. Build fearlessly.",
+    when: "Annual",
+    href: "/events",
+    // Drop the Rally photos in /public/events/rally/ and list them here to make
+    // this a photo collage (multiple photos → collage grid automatically).
+    photos: [],
+  },
+  {
+    title: "Cinderblock",
+    tagline: "The working studio — heads down, in person.",
+    when: "Year-round",
+    href: "/cinderblock",
+    // Drop the Cinderblock photos in /public/events/cinderblock/ and list them
+    // here to make this a photo collage.
+    photos: [],
+  },
+];
 
 export type CalendarEvent = {
   month: string;

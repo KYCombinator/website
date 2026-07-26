@@ -8,9 +8,9 @@ const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
-    { src: "/louies/louies1.jpg", alt: "The Louies 2023 Event" },
-    { src: "/louies/louies2.jpg", alt: "The Louies 2023 Celebration" },
-    { src: "/louies/louies3.jpg", alt: "The Louies 2023 Awards" },
+    { src: "/events/louies/louies1.jpg", alt: "The Louies 2023 Event" },
+    { src: "/events/louies/louies2.jpg", alt: "The Louies 2023 Celebration" },
+    { src: "/events/louies/louies3.jpg", alt: "The Louies 2023 Awards" },
   ];
 
   useEffect(() => {

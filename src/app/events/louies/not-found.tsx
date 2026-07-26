@@ -18,7 +18,7 @@ export default function NotFound() {
           worry, we won&apos;t tell anyone — let&apos;s get you to the right
           celebration! 🥃
         </p>
-        <Button href="/louies/2025" variant="primary">
+        <Button href="/events/louies/2025" variant="primary">
           Take me to the real party
         </Button>
       </Container>

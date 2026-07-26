@@ -57,9 +57,10 @@ export const featuredEvents: FeaturedEvent[] = [
     when: "First Thursday of December",
     href: "/events/louies/2025",
     photos: [
-      { src: "/louies/louies1.jpg", alt: "The Louies — the room" },
-      { src: "/louies/louies2.jpg", alt: "The Louies — the celebration" },
-      { src: "/louies/louies3.jpg", alt: "The Louies — awards night" },
+      { src: "/events/louies/IMG_6972.jpg", alt: "The Louies — the room" },
+      { src: "/events/louies/IMG_6981.jpg", alt: "The Louies — the celebration" },
+      { src: "/events/louies/louies1.jpg", alt: "The Louies — awards night" },
+      { src: "/events/louies/louies2.jpg", alt: "The Louies — the crowd" },
     ],
   },
   {
@@ -68,14 +69,17 @@ export const featuredEvents: FeaturedEvent[] = [
     tagline: "Kentucky's flagship hackathon.",
     when: "September 11",
     href: "https://www.hackkentucky.com",
-    // No photo asset in the repo yet — drop one in /public/hackkentucky/ and add
-    // it here (e.g. { src: "/hackkentucky/1.jpg", alt: "HackKentucky" }) to turn
-    // this into a photo slide. Until then it renders as a typographic slide.
-    photos: [],
+    photos: [
+      { src: "/events/hackkentucky/IMG_1464.JPG", alt: "HackKentucky participants" },
+      { src: "/events/hackkentucky/IMG_1467.JPG", alt: "HackKentucky at work" },
+      { src: "/events/hackkentucky/IMG_1470.JPG", alt: "HackKentucky teams" },
+      { src: "/events/hackkentucky/IMG_1481.JPG", alt: "HackKentucky awards" },
+    ],
   },
   {
     title: "HackTheTrack",
-    // ⚠️ tagline inferred — edit to taste.
+    // ⚠️ tagline inferred — edit to taste. No photos added yet — drop files in
+    // /public/events/hackthetrack/ and list them here to make it a collage.
     tagline: "A KYX hackathon.",
     when: "September 11",
     href: "https://www.hackkentucky.com",
@@ -87,18 +91,22 @@ export const featuredEvents: FeaturedEvent[] = [
     tagline: "Stay curious. Build fearlessly.",
     when: "Annual",
     href: "/events",
-    // Drop the Rally photos in /public/events/rally/ and list them here to make
-    // this a photo collage (multiple photos → collage grid automatically).
-    photos: [],
+    photos: [
+      { src: "/events/rally/IMG_6460.jpg", alt: "Rally Innovation Conference" },
+      { src: "/events/rally/IMG_6482.PNG", alt: "Rally main stage" },
+      { src: "/events/rally/IMG_6483.PNG", alt: "Rally talk" },
+      { src: "/events/rally/IMG_6484.PNG", alt: "Rally audience" },
+    ],
   },
   {
     title: "Cinderblock",
     tagline: "The working studio — heads down, in person.",
     when: "Year-round",
     href: "/cinderblock",
-    // Drop the Cinderblock photos in /public/events/cinderblock/ and list them
-    // here to make this a photo collage.
-    photos: [],
+    photos: [
+      { src: "/events/cinderblock/IMG_6543.jpg", alt: "Cinderblock studio" },
+      { src: "/events/cinderblock/IMG_6648.jpg", alt: "Cinderblock founders at work" },
+    ],
   },
 ];
 

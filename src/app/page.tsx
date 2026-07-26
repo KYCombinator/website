@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { homeFontVars } from "./components/home/fonts";
-import HomeHeader from "./components/home/HomeHeader";
-import HomeFooter from "./components/home/HomeFooter";
 import NewsletterForm from "./components/home/NewsletterForm";
 import {
   APPLY_URL,
@@ -21,36 +18,12 @@ export const metadata: Metadata = {
     "Ten Series A companies out of Kentucky by 2030. Everything KYX does serves that number. Apply to Cinderblock.",
 };
 
-// One-edit brand accent. ⚠️ #5B2FBF was matched by eye — swap for the confirmed
-// KYX purple here and it propagates everywhere via var(--kyx-purple).
-const themeVars = {
-  "--kyx-purple": "#5B2FBF",
-} as React.CSSProperties;
-
 const remaining = Math.max(0, GOAL_TOTAL - companiesOnBoard);
 const hasPlaceholderStats = stats.some((s) => s.placeholder);
 
 export default function Home() {
   return (
-    <div
-      className={`${homeFontVars} min-h-screen bg-[#f4f1ea] font-[family-name:var(--font-ibm-plex-sans)] text-[#16130f] antialiased`}
-      style={themeVars}
-    >
-      {/* The homepage is a full-bleed redesign with its own light chrome, so it
-          suppresses the shared dark Header/Footer that the root layout renders
-          for every other route. These are the root layout's only direct
-          <header>/<footer> children of <body> — the homepage's own chrome is
-          nested a level deeper, so it is unaffected. Scoped to this page: the
-          tag unmounts on client navigation away, restoring chrome elsewhere. */}
-      <style
-        dangerouslySetInnerHTML={{
-          __html: "body>header,body>footer{display:none!important}",
-        }}
-      />
-
-      <HomeHeader />
-
-      <main className="mx-auto max-w-[1120px]">
+    <main className="mx-auto max-w-[1120px]">
         {/* ── Hero ─────────────────────────────────────────────── */}
         <section className="flex flex-col gap-7 px-5 pb-11 pt-14 md:px-7 md:pt-16 lg:gap-[30px] lg:px-10 lg:pt-[76px]">
           <p className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.14em] text-[var(--kyx-purple)]">
@@ -351,9 +324,6 @@ export default function Home() {
             <NewsletterForm />
           </div>
         </section>
-      </main>
-
-      <HomeFooter />
-    </div>
+    </main>
   );
 }

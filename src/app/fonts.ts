@@ -1,9 +1,8 @@
 import { Instrument_Serif, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 
-// Fonts for the redesigned homepage (Field Manual paper system).
-// Loaded only where these modules are imported (the homepage route), so the
-// rest of the site is unaffected. Each exposes a CSS variable consumed via
-// Tailwind arbitrary `font-[family-name:var(--font-*)]` utilities.
+// Site-wide fonts for the Field Manual paper system. Loaded once at the layout
+// level and exposed as CSS variables, consumed via Tailwind arbitrary
+// `font-[family-name:var(--font-*)]` utilities.
 
 export const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
@@ -26,7 +25,7 @@ export const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-ibm-plex-mono",
 });
 
-export const homeFontVars = [
+export const fontVariables = [
   instrumentSerif.variable,
   ibmPlexSans.variable,
   ibmPlexMono.variable,

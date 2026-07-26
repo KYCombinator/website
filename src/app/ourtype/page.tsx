@@ -1,120 +1,116 @@
-import { Metadata } from 'next'
-import React from 'react'
+import { Metadata } from "next";
+import { Container, PageHero, Eyebrow, SerifHeading, Button, TextLink } from "../components/fm";
 
 export const metadata: Metadata = {
   title: "Our Type",
   description: "Who we're looking for at KYX - high-agency builders and founders.",
   authors: [{ name: "KYX Team", url: "https://kycombinator.com/ourtype" }],
-  openGraph: {
-    images: [`${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.png`],
-  },
-  icons: {
-    icon: `${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.png`,
-  },
-}
+  openGraph: { images: [`${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.png`] },
+  icons: { icon: `${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.png` },
+};
 
-const page = () => {
+const TRAITS = [
+  "High agency",
+  "Surplus value",
+  "Work ethic",
+  "In person",
+  "Heads down",
+  "Hungry",
+  "Execution",
+];
+
+const OUR_TYPE: [string, string][] = [
+  ["High agency.", "Take action. No permission needed."],
+  ["Surplus value.", "You provide surplus value to the community. Give more than you take."],
+  ["Trust.", "You do what you say you'll do. You keep your word."],
+  ["Local commitment.", "You're committed to building in Louisville and growing the local ecosystem."],
+];
+
+const NOT_OUR_TYPE: [string, string][] = [
+  ["Idea people.", "We're not looking for people who just want to talk about ideas."],
+  ["Passive participants.", "This isn't a networking group."],
+  ["The gallery.", "Commentary from the sidelines is not welcome."],
+];
+
+export default function OurTypePage() {
   return (
-    <section id="ourtype" className="py-16 bg-background-900 min-h-screen">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-500 mb-6">
-            Our Type
-          </h2>
-          <p className="text-foreground-800 text-lg mb-8">
-            We&apos;re looking for high-agency builders and founders who are ready to execute at high velocity.
-          </p>
-          <p className="text-foreground-800 italic">
-            High Agency
-          </p>
-          <p className="text-foreground-800 italic">
-            Surplus Value
-          </p>
-          <p className="text-foreground-800 italic">
-            Work Ethic
-          </p>
-          <p className="text-foreground-800 italic">
-            In-Person
-          </p>
-          <p className="text-foreground-800 italic">
-            Heads Down
-          </p>
-          <p className="text-foreground-800 italic">
-            Hungry
-          </p>
-          <p className="text-foreground-800 italic">
-            Execution
-          </p>
-        </div>
+    <>
+      <PageHero
+        eyebrow="Our type"
+        title="Not for everyone."
+        intro="We're looking for high-agency builders and founders who are ready to execute at high velocity. If this sounds like you, we want to meet you."
+      >
+        <Button href="https://form.kycombinator.com/cinderblock" variant="primary">
+          Apply to Cinderblock
+        </Button>
+      </PageHero>
 
-        <div className="max-w-3xl mx-auto text-center mt-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-500 mb-6">
-            Who We&apos;re Looking For
-          </h2>
-          <div className="text-left space-y-6">
-            <div>
-              <h3 className="text-xl font-semibold text-primary-500 mb-2">High-Agency</h3>
-              <p className="text-foreground-800">
-                Take action. No permission needed.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-primary-500 mb-2">Surplus Value</h3>
-              <p className="text-foreground-800">
-                You provide surplus value to the community. Give more than you take.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-primary-500 mb-2">Trust</h3>
-              <p className="text-foreground-800">
-                You do what you say you&apos;ll do. You keep your word.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-primary-500 mb-2">Local Commitment</h3>
-              <p className="text-foreground-800">
-                You&apos;re committed to building in Louisville and growing the local ecosystem.
-              </p>
+      {/* Traits ledger */}
+      <section className="border-b border-[#16130f]">
+        <Container className="py-14 lg:py-16">
+          <Eyebrow className="mb-6">The filter</Eyebrow>
+          <div className="flex flex-wrap gap-x-3 gap-y-3 font-[family-name:var(--font-ibm-plex-mono)] text-[13px] uppercase tracking-[0.08em] text-[#57503f]">
+            {TRAITS.map((t, i) => (
+              <span key={t} className="flex items-center gap-3">
+                {i > 0 && <span className="text-[#c6bfae]">·</span>}
+                {t}
+              </span>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Our type / Not our type */}
+      <section className="border-b border-[#16130f] bg-[#eae5da]">
+        <Container className="grid grid-cols-1 gap-12 py-16 lg:grid-cols-2 lg:gap-16 lg:py-[72px]">
+          <div className="flex flex-col gap-[18px]">
+            <Eyebrow>Who we&apos;re looking for</Eyebrow>
+            <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+              Our type.
+            </SerifHeading>
+            <div className="mt-1 flex flex-col gap-3.5">
+              {OUR_TYPE.map(([lead, rest]) => (
+                <p key={lead} className="text-[16px] leading-[1.5]">
+                  <strong className="font-semibold text-[#16130f]">{lead}</strong>{" "}
+                  <span className="text-[#57503f]">{rest}</span>
+                </p>
+              ))}
             </div>
           </div>
-        </div>
-
-        <div className="max-w-3xl mx-auto text-center mt-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-500 mb-6">
-            What We&apos;re Not Looking For
-          </h2>
-          <div className="text-left space-y-6">
-            <div>
-              <h3 className="text-xl font-semibold text-primary-500 mb-2">Ideas</h3>
-              <p className="text-foreground-800">
-                We&apos;re not looking for people who just want to talk about ideas.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-primary-500 mb-2">Passive Participants</h3>
-              <p className="text-foreground-800">
-                This isn&apos;t a networking group. 
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-primary-500 mb-2">The Gallery</h3>
-              <p className="text-foreground-800">
-                Comments from the gallery are not welcome.
-              </p>
+          <div className="flex flex-col gap-[18px] text-[#7d766a] lg:border-l lg:border-[#d3ccbd] lg:pl-16">
+            <Eyebrow className="text-[#7d766a]">Not our type</Eyebrow>
+            <SerifHeading className="text-[32px] leading-none text-[#7d766a] md:text-[40px]">
+              Say it plainly.
+            </SerifHeading>
+            <div className="mt-1 flex flex-col gap-3.5">
+              {NOT_OUR_TYPE.map(([lead, rest]) => (
+                <p key={lead} className="text-[16px] leading-[1.5]">
+                  <strong className="font-semibold">{lead}</strong> {rest}
+                </p>
+              ))}
             </div>
           </div>
-        </div>
+        </Container>
+      </section>
 
-        <div className="max-w-3xl mx-auto text-center mt-16">
-          <div className="bg-background-800 p-6 rounded-lg mb-8">
-            <p className="text-foreground-800 text-lg">
-              If this sounds like you, we want to meet you. Show up to our events, build something impressive, and let&apos;s create the future of Louisville&apos;s startup ecosystem together.
-            </p>
+      {/* Closing */}
+      <section>
+        <Container className="flex flex-col items-start gap-6 py-16 lg:py-20">
+          <p className="max-w-[640px] text-[19px] leading-[1.6] text-[#4a443a] [text-wrap:pretty]">
+            If this sounds like you, we want to meet you. Show up to our events, build
+            something impressive, and let&apos;s create the future of Louisville&apos;s startup
+            ecosystem together.
+          </p>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Button href="https://form.kycombinator.com/cinderblock" variant="primary">
+              Apply to Cinderblock
+            </Button>
+            <TextLink href="/events" className="self-center">
+              See upcoming events
+            </TextLink>
           </div>
-        </div>
-      </div>
-    </section>
-  )
+        </Container>
+      </section>
+    </>
+  );
 }
-
-export default page

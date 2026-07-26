@@ -26,12 +26,15 @@ const Avatar = async () => {
   return (
     <>
       {user ? (
-        <div className="flex items-center gap-2">
-          <p>Welcome, {user.name}</p>
-        </div>
+        <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[13px] text-[#7d766a]">
+          Welcome, {user.name}
+        </span>
       ) : (
-        <Link href="https://auth.kycombinator.com?redirect=https://www.kycombinator.com">
-          <div className="btn btn-primary">Login</div>
+        <Link
+          href="https://auth.kycombinator.com?redirect=https://www.kycombinator.com"
+          className="font-[family-name:var(--font-ibm-plex-sans)] text-[13px] text-[#7d766a] transition-opacity duration-150 hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]"
+        >
+          Login
         </Link>
       )}
     </>

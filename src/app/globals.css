@@ -1,3 +1,9 @@
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
 @config "../../tailwind.config.js";
+
+/* Field Manual paper system — site-wide tokens. Swap --kyx-purple here to
+   re-skin the brand accent everywhere. */
+:root {
+  --kyx-purple: #5B2FBF;
+}

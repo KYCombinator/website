@@ -1,12 +1,10 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Cabin } from "next/font/google";
 import "./globals.css";
+import { fontVariables } from "./fonts";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Avatar from "./components/Avatar";
-
-const cabin = Cabin({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "This is KYX",
@@ -28,21 +26,20 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={fontVariables}>
       <head>
         <link
           rel="stylesheet"
           href={`${process.env.NEXT_PUBLIC_CDN_URL}/globals.css`}
         />
       </head>
-      <body className={cabin.className}>
+      <body className="min-h-screen bg-[#f4f1ea] font-[family-name:var(--font-ibm-plex-sans)] text-[#16130f] antialiased">
         <Header>
           <Avatar />
         </Header>

@@ -1,94 +1,99 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import Image from "next/image";
+import { APPLY_URL, HEADER_NAV } from "../site";
 
-const NAV_LINKS: { href: string; label: string }[] = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/vision", label: "Vision" },
-  { href: "/ourtype", label: "Our Type" },
-  { href: "/events", label: "Events" },
-  { href: "/slack", label: "Slack" },
-  { href: "/cinderblock", label: "The Block" },
-  { href: "/report", label: "Report" },
-  { href: "/faqs", label: "FAQs" },
-];
+const LOGO = `${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.svg`;
+
+function ApplyButton() {
+  return (
+    <a
+      href={APPLY_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center bg-[#16130f] px-4 py-2.5 font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[#f4f1ea] transition-colors duration-150 hover:bg-[#2c2820] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]"
+    >
+      Apply
+    </a>
+  );
+}
 
 export default function Header({ children }: { children: React.ReactNode }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/[0.06] bg-[#0b0b10] text-zinc-300">
-      <div className="container mx-auto px-6">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center">
-              <Image
-                src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.svg`}
-                alt="KYCombinator"
-                width={220}
-                height={82}
-                className="h-12 w-auto"
-                priority
-              />
+    <header className="sticky top-0 z-50 border-b border-[#16130f] bg-[#f4f1ea]">
+      <div className="mx-auto flex max-w-[1120px] items-center justify-between px-5 py-4 md:px-7 md:py-5 lg:px-10">
+        {/* Logo + wordmark */}
+        <Link href="/" className="flex items-baseline gap-2.5" aria-label="KYCombinator home">
+          <Image
+            src={LOGO}
+            alt="KYCombinator"
+            width={54}
+            height={27}
+            priority
+            className="block h-[27px] w-auto self-start [filter:brightness(0)]"
+          />
+          <span className="hidden font-[family-name:var(--font-ibm-plex-mono)] text-[10px] tracking-[0.1em] text-[#7d766a] sm:inline">
+            EST. LOUISVILLE
+          </span>
+        </Link>
+
+        {/* Desktop nav */}
+        <nav className="hidden items-center gap-7 font-[family-name:var(--font-ibm-plex-sans)] text-[14px] text-[#3e3930] lg:flex">
+          {HEADER_NAV.map(({ label, href }) => (
+            <Link
+              key={href}
+              href={href}
+              className="transition-opacity duration-150 hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]"
+            >
+              {label}
             </Link>
-          </div>
+          ))}
+        </nav>
 
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="rounded-md p-2 text-zinc-300 transition hover:bg-white/[0.04] hover:text-white md:hidden"
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          >
-            {isMenuOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </button>
-
-          {/* Desktop Navigation */}
-          <div className="hidden flex-1 pl-10 md:flex md:items-center md:justify-start">
-            <nav className="flex items-center gap-8 whitespace-nowrap text-[13px] font-medium tracking-wide text-zinc-400">
-              {NAV_LINKS.map(({ href, label }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className="relative py-1 transition-colors duration-200 hover:text-white"
-                >
-                  {label}
-                </Link>
-              ))}
-            </nav>
-          </div>
-          <div className="hidden flex-1 justify-end pl-8 md:flex md:items-center">
-            {children}
-          </div>
+        {/* Desktop right cluster: auth (Avatar) + Apply */}
+        <div className="hidden items-center gap-5 lg:flex">
+          {children}
+          <ApplyButton />
         </div>
 
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="absolute left-0 right-0 top-16 z-50 border-b border-white/[0.06] bg-[#0b0b10] md:hidden">
-            <div className="space-y-0.5 px-4 py-3 text-sm font-medium text-zinc-300">
-              {NAV_LINKS.map(({ href, label }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block rounded-md px-3 py-2.5 transition hover:bg-white/[0.04] hover:text-white"
-                >
-                  {label}
-                </Link>
-              ))}
-              <div className="px-3 pt-2">{children}</div>
-            </div>
-          </div>
-        )}
+        {/* Mobile cluster */}
+        <div className="flex items-center gap-3 lg:hidden">
+          <ApplyButton />
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            className="flex h-11 w-11 items-center justify-center text-[#16130f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile menu */}
+      {open && (
+        <nav className="mx-auto max-w-[1120px] border-t border-[#d8d2c5] bg-[#f4f1ea] px-5 py-2 md:px-7 lg:hidden">
+          {HEADER_NAV.map(({ label, href }) => (
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setOpen(false)}
+              className="flex min-h-[44px] items-center font-[family-name:var(--font-ibm-plex-sans)] text-[15px] text-[#3e3930] transition-opacity duration-150 hover:opacity-70"
+            >
+              {label}
+            </Link>
+          ))}
+          <div className="flex min-h-[44px] items-center font-[family-name:var(--font-ibm-plex-sans)] text-[15px] text-[#7d766a]">
+            {children}
+          </div>
+        </nav>
+      )}
     </header>
   );
 }

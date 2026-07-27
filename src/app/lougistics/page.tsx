@@ -320,12 +320,36 @@ export default function LougisticsPage() {
                 mHUB is a hardtech (physical-product) incubator that opened in 2017. It put
                 fabrication labs, a micro-factory for small production runs, technical
                 training, corporate partners, and an in-house investment fund under one
-                roof. The results are not theoretical: mHUB has supported 500+ startups that
+                roof. The results are not theoretical: mHUB has supported 600+ companies that
                 have collectively generated billions in economic activity, made dozens of
                 direct startup investments, and built its model on demand-driven cohorts —
                 corporate partners surface real problems on the front end, which become
                 pilot and investment opportunities on the back end.
               </p>
+            </div>
+
+            {/* mHUB, by the numbers */}
+            <div className="mt-4">
+              <p className="mb-3 font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.12em] text-[var(--kyx-purple)]">
+                mHUB, by the numbers · 10 years
+              </p>
+              <dl className="grid grid-cols-2 gap-px border border-[#d8d2c5] bg-[#d8d2c5] md:grid-cols-4">
+                {[
+                  ["10", "years running"],
+                  ["7,251", "jobs created"],
+                  ["$2.2B", "capital raised"],
+                  ["600+", "companies"],
+                ].map(([figure, label]) => (
+                  <div key={label} className="flex flex-col gap-1.5 bg-[#f4f1ea] p-5">
+                    <dd className="font-[family-name:var(--font-instrument-serif)] text-[38px] leading-none">
+                      {figure}
+                    </dd>
+                    <dt className="font-[family-name:var(--font-ibm-plex-mono)] text-[10px] uppercase tracking-[0.1em] text-[#7d766a]">
+                      {label}
+                    </dt>
+                  </div>
+                ))}
+              </dl>
             </div>
 
             <div className="mt-8 border border-[#d8d2c5] p-6 md:p-7">

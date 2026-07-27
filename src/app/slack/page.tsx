@@ -29,7 +29,7 @@ const PARTNERS: { name: string; href: string }[] = [
 
 type JoinStep = {
   term: string;
-  desc: string;
+  desc: React.ReactNode;
   action?: { label: string; href: string };
   partners?: { name: string; href: string }[];
 };
@@ -57,7 +57,16 @@ const JOIN_STEPS: JoinStep[] = [
   },
   {
     term: "Volunteer",
-    desc: "Our events run on the people who show up to run them. Help put on HackKentucky, the LOUIES, and more — say the word in Slack.",
+    desc: (
+      <>
+        Our events run on the people who show up to run them. Help put on
+        HackKentucky, the LOUIES, and more — say the word in{" "}
+        <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[#16130f]">
+          #volunteer
+        </span>{" "}
+        on Slack.
+      </>
+    ),
     action: { label: "Get involved", href: SLACK_INVITE },
   },
   {

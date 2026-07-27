@@ -21,6 +21,7 @@ export const FOOTER_NAV: FooterLink[] = [
   { label: "Vision", href: "/vision" },
   { label: "Events", href: "/events" },
   { label: "Report", href: "/report" },
+  { label: "Lougistics", href: "/lougistics" },
   { label: "HackKentucky", href: "https://www.hackkentucky.com", external: true },
   { label: "Blog", href: "https://kycombinator.beehiiv.com/", external: true },
   { label: "Assets", href: "/assets" },

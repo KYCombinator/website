@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Plane, Truck, TrainFront, Ship } from "lucide-react";
+import { Container, PageHero, Eyebrow, SerifHeading, Button } from "@/app/components/fm";
 
 export const metadata: Metadata = {
   title: "Lougistics | KYX",
@@ -16,24 +16,33 @@ export const metadata: Metadata = {
   },
 };
 
-const eyebrow =
-  "text-[11px] font-medium uppercase tracking-[0.28em] text-zinc-400";
-
-function Banner({ children }: { children: React.ReactNode }) {
+function Banner({
+  tone = "dark",
+  children,
+}: {
+  tone?: "dark" | "paper";
+  children: React.ReactNode;
+}) {
+  const dark = tone === "dark";
   return (
-    <section className="relative border-y border-white/[0.06] bg-white/[0.015] py-16 md:py-24">
-      <div className="container mx-auto px-4">
-        <p className="mx-auto max-w-4xl text-center text-3xl font-semibold leading-tight tracking-tight text-white md:text-5xl md:leading-[1.1]">
+    <section
+      className={
+        "border-b border-[#16130f] " +
+        (dark ? "bg-[#16130f] text-[#f4f1ea]" : "bg-[#eae5da]")
+      }
+    >
+      <Container className="py-16 md:py-24">
+        <SerifHeading className="mx-auto max-w-[900px] text-center text-[32px] leading-[1.05] md:text-[52px]">
           {children}
-        </p>
-      </div>
+        </SerifHeading>
+      </Container>
     </section>
   );
 }
 
 function PullQuote({ children }: { children: React.ReactNode }) {
   return (
-    <blockquote className="my-10 border-l-2 border-zinc-600 pl-6 text-xl font-medium leading-snug text-zinc-200 md:text-2xl">
+    <blockquote className="my-10 border-l-2 border-[var(--kyx-purple)] pl-6 text-[20px] leading-snug text-[#16130f] md:text-[24px]">
       {children}
     </blockquote>
   );
@@ -102,133 +111,102 @@ const REFUSALS = [
   "We are not trying to be all things to all founders.",
 ];
 
+const bodyText =
+  "text-[16px] leading-[1.7] text-[#4a443a] md:text-[17px]";
+
 export default function LougisticsPage() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#0b0b10] text-zinc-100">
+    <>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-white/[0.06] py-24 md:py-32">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.04),transparent_60%)]"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_80%)]"
-        />
-        <div className="container relative z-10 mx-auto px-4">
-          <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-            <span className={`mb-6 inline-flex items-center gap-2 ${eyebrow}`}>
-              <span className="h-px w-8 bg-zinc-700" />
-              Louisville, KY · A proposal
-              <span className="h-px w-8 bg-zinc-700" />
-            </span>
-            <h1 className="text-4xl font-semibold tracking-tight text-white md:text-6xl">
-              Lougistics
-            </h1>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-zinc-300 md:text-lg">
-              Every city is being told to build a tech scene. Louisville should not.
-              Louisville should build on the one set of advantages no rival city can
-              copy, relocate, or out-spend: it is the logistics center of North America.
-            </p>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-400 md:text-lg">
-              Lougistics turns that fixed, physical advantage into a
-              manufacturing-company-creation engine — and captures the middle-class jobs
-              that sit upstream of the warehouse.
-            </p>
+      <PageHero
+        eyebrow="Louisville, KY · A proposal"
+        title="Lougistics."
+        intro="Every city is being told to build a tech scene. Louisville should not. Louisville should build on the one set of advantages no rival city can copy, relocate, or out-spend: it is the logistics center of North America. Lougistics turns that fixed, physical advantage into a manufacturing-company-creation engine — and captures the middle-class jobs that sit upstream of the warehouse."
+      >
+        <Button href="/lougistics/whitepaper">Read the white paper</Button>
+      </PageHero>
 
-            <div className="mt-10">
-              <Link
-                href="/lougistics/whitepaper"
-                className="group inline-flex items-center justify-center rounded-md bg-white px-5 py-2.5 text-sm font-medium text-zinc-900 transition-colors duration-200 hover:bg-zinc-200"
-              >
-                Read the white paper
-                <svg
-                  className="ml-1.5 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </Link>
+      <Banner tone="dark">Manufacturing makes the middle class.</Banner>
+
+      {/* Section 1 — The landscape */}
+      <section className="border-b border-[#16130f]">
+        <Container className="py-16 lg:py-[72px]">
+          <div className="max-w-[720px]">
+            <Eyebrow className="mb-4">The landscape</Eyebrow>
+            <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+              The innovation race everyone is running
+            </SerifHeading>
+            <div className={`mt-6 space-y-5 ${bodyText}`}>
+              <p>
+                Every mid-size American city has the same economic development plan:
+                attract tech, train coders, build an &ldquo;innovation district,&rdquo;
+                hope for a unicorn. They are all running the same race — against each other
+                and against the established winners: the Bay Area, Austin, Seattle, Boston,
+                Raleigh.
+              </p>
+              <p>
+                Here is the problem with that race for Louisville:{" "}
+                <strong className="font-semibold text-[#16130f]">
+                  software has no home.
+                </strong>{" "}
+                It can be written anywhere, by anyone, for anyone. That is exactly what
+                makes a tech advantage so hard to hold:
+              </p>
             </div>
+
+            <ul className="mt-6 flex flex-col">
+              {[
+                "Talent is mobile and remote-friendly; the best engineers go where the most engineers and the highest salaries already are.",
+                "Capital is concentrated elsewhere and tends to pull its winners toward itself.",
+                "Even a local success is portable: a software company can scale to a billion dollars and relocate its center of gravity without leaving a crater where it used to be.",
+              ].map((item, i, arr) => (
+                <li
+                  key={item}
+                  className={
+                    "flex gap-4 border-t border-[#d8d2c5] py-4 text-[16px] leading-[1.7] text-[#4a443a] " +
+                    (i === arr.length - 1 ? "border-b" : "")
+                  }
+                >
+                  <span
+                    className="mt-2.5 h-1.5 w-1.5 shrink-0 bg-[var(--kyx-purple)]"
+                    aria-hidden
+                  />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className={`mt-6 space-y-5 ${bodyText}`}>
+              <p>
+                A city can spend a decade and a fortune nurturing a tech ecosystem and
+                watch the returns walk out the door the moment they mature.{" "}
+                <strong className="font-semibold text-[#16130f]">
+                  You can fund the seed and someone else harvests the tree.
+                </strong>
+              </p>
+              <p className="text-[#57503f]">
+                This is not a knock on technology or on the talented people building it
+                here. It is a sober read of where Louisville&apos;s durable leverage is —
+                and isn&apos;t.
+              </p>
+            </div>
+
+            <PullQuote>
+              Compete where you have an advantage, not where you wish you did.
+            </PullQuote>
           </div>
-        </div>
+        </Container>
       </section>
 
-      <Banner>Manufacturing makes the middle class.</Banner>
-
-      <div className="container mx-auto max-w-3xl px-4">
-        {/* Section 1 — The landscape */}
-        <section className="py-16 md:py-24">
-          <p className={eyebrow}>The landscape</p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-4xl">
-            The innovation race everyone is running
-          </h2>
-          <div className="mt-6 space-y-5 text-base leading-relaxed text-zinc-300 md:text-lg">
-            <p>
-              Every mid-size American city has the same economic development plan:
-              attract tech, train coders, build an &ldquo;innovation district,&rdquo;
-              hope for a unicorn. They are all running the same race — against each other
-              and against the established winners: the Bay Area, Austin, Seattle, Boston,
-              Raleigh.
-            </p>
-            <p>
-              Here is the problem with that race for Louisville:{" "}
-              <strong className="font-semibold text-white">software has no home.</strong>{" "}
-              It can be written anywhere, by anyone, for anyone. That is exactly what
-              makes a tech advantage so hard to hold:
-            </p>
-          </div>
-
-          <ul className="mt-6 space-y-4">
-            {[
-              "Talent is mobile and remote-friendly; the best engineers go where the most engineers and the highest salaries already are.",
-              "Capital is concentrated elsewhere and tends to pull its winners toward itself.",
-              "Even a local success is portable: a software company can scale to a billion dollars and relocate its center of gravity without leaving a crater where it used to be.",
-            ].map((item) => (
-              <li
-                key={item}
-                className="flex gap-4 rounded-xl border border-white/[0.06] bg-white/[0.015] p-5"
-              >
-                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400" />
-                <p className="text-sm leading-relaxed text-zinc-300 md:text-base">
-                  {item}
-                </p>
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-6 space-y-5 text-base leading-relaxed text-zinc-300 md:text-lg">
-            <p>
-              A city can spend a decade and a fortune nurturing a tech ecosystem and
-              watch the returns walk out the door the moment they mature.{" "}
-              <strong className="font-semibold text-white">
-                You can fund the seed and someone else harvests the tree.
-              </strong>
-            </p>
-            <p className="text-zinc-400">
-              This is not a knock on technology or on the talented people building it
-              here. It is a sober read of where Louisville&apos;s durable leverage is —
-              and isn&apos;t.
-            </p>
-          </div>
-
-          <PullQuote>
-            Compete where you have an advantage, not where you wish you did.
-          </PullQuote>
-        </section>
-      </div>
-
       {/* Section 2 — Build what can't leave (the heart) */}
-      <section className="border-y border-white/[0.06] bg-white/[0.01] py-16 md:py-24">
-        <div className="container mx-auto max-w-5xl px-4">
-          <div className="max-w-3xl">
-            <p className={eyebrow}>The immovable advantages</p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-5xl">
+      <section className="border-b border-[#16130f] bg-[#eae5da]">
+        <Container className="py-16 lg:py-[72px]">
+          <div className="max-w-[720px]">
+            <Eyebrow className="mb-4">The immovable advantages</Eyebrow>
+            <SerifHeading className="text-[32px] leading-none md:text-[40px]">
               Build what can&apos;t leave
-            </h2>
-            <p className="mt-6 text-base leading-relaxed text-zinc-300 md:text-lg">
+            </SerifHeading>
+            <p className={`mt-6 ${bodyText}`}>
               Louisville has advantages that are the opposite of software. They are
               physical, fixed, and cannot be picked up and moved. A rival city cannot
               copy them next year with a budget line item. This is the entire point.
@@ -239,275 +217,298 @@ export default function LougisticsPage() {
             {ADVANTAGES.map(({ icon: Icon, label, title, body, kicker }) => (
               <div
                 key={title}
-                className="flex flex-col rounded-2xl border border-white/[0.06] bg-white/[0.015] p-7"
+                className="flex flex-col border border-[#d8d2c5] p-6 md:p-7"
               >
                 <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.02]">
-                    <Icon className="h-5 w-5 text-zinc-200" aria-hidden />
+                  <span className="flex h-10 w-10 items-center justify-center border border-[#d8d2c5]">
+                    <Icon className="h-5 w-5 text-[#16130f]" aria-hidden />
                   </span>
-                  <span className={eyebrow}>{label}</span>
+                  <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.14em] text-[var(--kyx-purple)]">
+                    {label}
+                  </span>
                 </div>
-                <h3 className="mt-5 text-xl font-semibold text-white md:text-2xl">
+                <SerifHeading as="h3" className="mt-5 text-[24px] leading-none md:text-[28px]">
                   {title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-zinc-400 md:text-base">
+                </SerifHeading>
+                <p className="mt-3 text-[15px] leading-[1.7] text-[#4a443a] md:text-[16px]">
                   {body}
                 </p>
-                <p className="mt-4 border-t border-white/[0.06] pt-4 text-sm font-medium leading-relaxed text-zinc-200">
+                <p className="mt-4 border-t border-[#d8d2c5] pt-4 text-[15px] leading-[1.7] text-[#16130f]">
                   {kicker}
                 </p>
               </div>
             ))}
           </div>
 
-          <div className="mt-5 rounded-2xl border border-white/[0.06] bg-white/[0.015] p-7">
-            <p className={eyebrow}>The workforce</p>
-            <p className="mt-3 text-base leading-relaxed text-zinc-300 md:text-lg">
+          <div className="mt-5 border border-[#d8d2c5] p-6 md:p-7">
+            <Eyebrow className="mb-3">The workforce</Eyebrow>
+            <p className={bodyText}>
               This is a metro that already knows how to move and make physical things at
               scale. The human capital of logistics and manufacturing is here — not
               something we have to import.
             </p>
           </div>
 
-          <div className="mx-auto mt-12 max-w-3xl">
+          <div className="mt-12 max-w-[720px]">
             <PullQuote>
               You can open a coding bootcamp anywhere. That is precisely why tech
               doesn&apos;t stick. You cannot move a river, a rail hub, an interstate
               crossroads, or the largest air hub on the continent.{" "}
-              <span className="text-white">So build on those.</span>
+              <strong className="font-medium text-[#16130f]">So build on those.</strong>
             </PullQuote>
           </div>
-        </div>
+        </Container>
       </section>
 
-      <div className="container mx-auto max-w-3xl px-4">
-        {/* Section 3 — Manufacturing makes the middle class */}
-        <section className="py-16 md:py-24">
-          <p className={eyebrow}>Why manufacturing</p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-4xl">
-            Manufacturing makes the middle class
-          </h2>
-          <div className="mt-6 space-y-5 text-base leading-relaxed text-zinc-300 md:text-lg">
-            <p>
-              Why manufacturing, and not just more warehouses? Manufacturing built the
-              American middle class because it pays well without demanding a four-year
-              degree, and because each plant seeds a web of suppliers, maintainers, and
-              skilled trades around it. The wealth spreads.
-            </p>
-            <p>
-              Tech, by contrast, concentrates enormous returns in a small,
-              highly-credentialed group — wonderful for that group, thin comfort for
-              everyone else in the city.
-            </p>
-            <p>
-              For a place like Louisville,{" "}
-              <strong className="font-semibold text-white">
-                broad-based prosperity is the entire goal.
+      {/* Section 3 — Manufacturing makes the middle class */}
+      <section className="border-b border-[#16130f]">
+        <Container className="py-16 lg:py-[72px]">
+          <div className="max-w-[720px]">
+            <Eyebrow className="mb-4">Why manufacturing</Eyebrow>
+            <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+              Manufacturing makes the middle class
+            </SerifHeading>
+            <div className={`mt-6 space-y-5 ${bodyText}`}>
+              <p>
+                Why manufacturing, and not just more warehouses? Manufacturing built the
+                American middle class because it pays well without demanding a four-year
+                degree, and because each plant seeds a web of suppliers, maintainers, and
+                skilled trades around it. The wealth spreads.
+              </p>
+              <p>
+                Tech, by contrast, concentrates enormous returns in a small,
+                highly-credentialed group — wonderful for that group, thin comfort for
+                everyone else in the city.
+              </p>
+              <p>
+                For a place like Louisville,{" "}
+                <strong className="font-semibold text-[#16130f]">
+                  broad-based prosperity is the entire goal.
+                </strong>{" "}
+                The right question is not &ldquo;how do we create a few very rich
+                companies?&rdquo; but &ldquo;how do we create a lot of good jobs that
+                don&apos;t require a CS degree and don&apos;t leave?&rdquo;
+              </p>
+              <p>
+                Logistics-enabled manufacturing answers that. And it lets Louisville climb
+                the value chain: instead of competing for one more distribution center —
+                warehouse jobs at the bottom of the margin stack — Louisville can capture
+                the higher-wage jobs upstream of the warehouse: the people who design and
+                build the products that the logistics network then moves.
+              </p>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <Banner tone="paper">Manufacturing makes the middle class.</Banner>
+
+      {/* Section 4 — mHUB */}
+      <section className="border-b border-[#16130f]">
+        <Container className="py-16 lg:py-[72px]">
+          <div className="max-w-[720px]">
+            <Eyebrow className="mb-4">The proven model</Eyebrow>
+            <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+              mHUB
+            </SerifHeading>
+            <div className={`mt-6 space-y-5 ${bodyText}`}>
+              <p>
+                We are not inventing this from scratch. Chicago&apos;s mHUB is the proof of
+                concept.
+              </p>
+              <p>
+                mHUB is a hardtech (physical-product) incubator that opened in 2017. It put
+                fabrication labs, a micro-factory for small production runs, technical
+                training, corporate partners, and an in-house investment fund under one
+                roof. The results are not theoretical: mHUB has supported 500+ startups that
+                have collectively generated billions in economic activity, made dozens of
+                direct startup investments, and built its model on demand-driven cohorts —
+                corporate partners surface real problems on the front end, which become
+                pilot and investment opportunities on the back end.
+              </p>
+            </div>
+
+            <div className="mt-8 border border-[#d8d2c5] p-6 md:p-7">
+              <p className="text-[18px] leading-[1.6] text-[#16130f] md:text-[19px]">
+                The lesson from mHUB: co-locate the tools, the talent, the customers, and
+                the capital, and you manufacture companies, not just products.
+              </p>
+            </div>
+
+            <p className={`mt-6 ${bodyText}`}>
+              The lesson Louisville should{" "}
+              <em className="text-[#16130f]">adapt, not copy</em>: mHUB anchored itself to
+              Chicago&apos;s existing manufacturing density.{" "}
+              <strong className="font-semibold text-[#16130f]">
+                Louisville&apos;s anchor is different — it&apos;s logistics gravity.
               </strong>{" "}
-              The right question is not &ldquo;how do we create a few very rich
-              companies?&rdquo; but &ldquo;how do we create a lot of good jobs that
-              don&apos;t require a CS degree and don&apos;t leave?&rdquo;
-            </p>
-            <p>
-              Logistics-enabled manufacturing answers that. And it lets Louisville climb
-              the value chain: instead of competing for one more distribution center —
-              warehouse jobs at the bottom of the margin stack — Louisville can capture
-              the higher-wage jobs upstream of the warehouse: the people who design and
-              build the products that the logistics network then moves.
+              Same machine, different fuel.
             </p>
           </div>
-        </section>
-      </div>
-
-      <Banner>Manufacturing makes the middle class.</Banner>
-
-      <div className="container mx-auto max-w-3xl px-4">
-        {/* Section 4 — mHUB */}
-        <section className="py-16 md:py-24">
-          <p className={eyebrow}>The proven model</p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-4xl">
-            mHUB
-          </h2>
-          <div className="mt-6 space-y-5 text-base leading-relaxed text-zinc-300 md:text-lg">
-            <p>
-              We are not inventing this from scratch. Chicago&apos;s mHUB is the proof of
-              concept.
-            </p>
-            <p>
-              mHUB is a hardtech (physical-product) incubator that opened in 2017. It put
-              fabrication labs, a micro-factory for small production runs, technical
-              training, corporate partners, and an in-house investment fund under one
-              roof. The results are not theoretical: mHUB has supported 500+ startups that
-              have collectively generated billions in economic activity, made dozens of
-              direct startup investments, and built its model on demand-driven cohorts —
-              corporate partners surface real problems on the front end, which become
-              pilot and investment opportunities on the back end.
-            </p>
-          </div>
-
-          <div className="mt-8 rounded-2xl border border-white/[0.06] bg-white/[0.015] p-7">
-            <p className="text-base leading-relaxed text-zinc-200 md:text-lg">
-              The lesson from mHUB: co-locate the tools, the talent, the customers, and
-              the capital, and you manufacture companies, not just products.
-            </p>
-          </div>
-
-          <p className="mt-6 text-base leading-relaxed text-zinc-300 md:text-lg">
-            The lesson Louisville should{" "}
-            <em className="text-white">adapt, not copy</em>: mHUB anchored itself to
-            Chicago&apos;s existing manufacturing density.{" "}
-            <strong className="font-semibold text-white">
-              Louisville&apos;s anchor is different — it&apos;s logistics gravity.
-            </strong>{" "}
-            Same machine, different fuel.
-          </p>
-        </section>
-      </div>
+        </Container>
+      </section>
 
       {/* Section 5 — What Lougistics actually is */}
-      <section className="border-y border-white/[0.06] bg-white/[0.01] py-16 md:py-24">
-        <div className="container mx-auto max-w-3xl px-4">
-          <p className={eyebrow}>What it is</p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-5xl">
-            What Lougistics actually is
-          </h2>
-          <p className="mt-6 text-base leading-relaxed text-zinc-300 md:text-lg">
-            A single facility — mHUB started near 63,000 sq ft and expanded to 80,000 —
-            with four integrated layers.
-          </p>
+      <section className="border-b border-[#16130f] bg-[#eae5da]">
+        <Container className="py-16 lg:py-[72px]">
+          <div className="max-w-[760px]">
+            <Eyebrow className="mb-4">What it is</Eyebrow>
+            <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+              What Lougistics actually is
+            </SerifHeading>
+            <p className={`mt-6 ${bodyText}`}>
+              A single facility — mHUB started near 63,000 sq ft and expanded to 80,000 —
+              with four integrated layers.
+            </p>
+          </div>
 
-          <div className="mt-10 space-y-4">
-            {LAYERS.map(({ n, title, tag, body }) => (
+          <div className="mt-10 flex flex-col">
+            {LAYERS.map(({ n, title, tag, body }, i, arr) => (
               <div
                 key={n}
-                className="rounded-2xl border border-white/[0.06] bg-white/[0.015] p-7"
+                className={
+                  "grid grid-cols-[36px_minmax(0,1fr)] gap-x-4 gap-y-3 border-t border-[#d8d2c5] py-6 sm:grid-cols-[44px_minmax(0,1fr)] sm:gap-x-5 " +
+                  (i === arr.length - 1 ? "border-b" : "")
+                }
               >
-                <div className="flex items-baseline gap-4">
-                  <span className="font-mono text-sm font-medium text-zinc-500">
-                    {n}
-                  </span>
-                  <h3 className="text-xl font-semibold text-white md:text-2xl">
-                    {title}
-                  </h3>
+                <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] leading-[2] text-[var(--kyx-purple)]">
+                  {n}
+                </span>
+                <div className="flex flex-col gap-3">
+                  <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
+                    <SerifHeading as="h3" className="text-[24px] leading-none md:text-[28px]">
+                      {title}
+                    </SerifHeading>
+                    {tag && (
+                      <span className="border border-[#d8d2c5] px-2.5 py-1 font-[family-name:var(--font-ibm-plex-mono)] text-[10px] uppercase tracking-[0.14em] text-[var(--kyx-purple)]">
+                        {tag}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-[15px] leading-[1.7] text-[#4a443a] md:text-[16px]">
+                    {body}
+                  </p>
                 </div>
-                {tag && (
-                  <span className="mt-3 inline-block rounded-full border border-white/[0.08] bg-white/[0.02] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-zinc-300">
-                    {tag}
-                  </span>
-                )}
-                <p className="mt-3 text-sm leading-relaxed text-zinc-400 md:text-base">
-                  {body}
-                </p>
               </div>
             ))}
           </div>
 
-          <div className="mt-10 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-8 md:p-10">
-            <p className={eyebrow}>The promise to a founder</p>
-            <p className="mt-4 text-xl font-medium leading-snug text-white md:text-2xl">
+          <div className="mt-10 border border-[#16130f] p-8 md:p-10">
+            <Eyebrow className="mb-4">The promise to a founder</Eyebrow>
+            <p className="font-[family-name:var(--font-instrument-serif)] text-[24px] leading-snug tracking-[-0.02em] text-[#16130f] md:text-[30px]">
               Build your physical product in Louisville and ship it to two-thirds of the
               country overnight, with the latest cutoff in America — an advantage built
               into your company that your competitors in any other city simply cannot buy.
             </p>
           </div>
-        </div>
+        </Container>
       </section>
 
-      <div className="container mx-auto max-w-3xl px-4">
-        {/* Section 6 — Focus is the strategy */}
-        <section className="py-16 md:py-24">
-          <p className={eyebrow}>The discipline</p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-4xl">
-            Focus is the strategy
-          </h2>
-          <p className="mt-6 text-base leading-relaxed text-zinc-300 md:text-lg">
-            The most important discipline of this proposal is what it refuses to do.
-          </p>
+      {/* Section 6 — Focus is the strategy */}
+      <section className="border-b border-[#16130f]">
+        <Container className="py-16 lg:py-[72px]">
+          <div className="max-w-[720px]">
+            <Eyebrow className="mb-4">The discipline</Eyebrow>
+            <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+              Focus is the strategy
+            </SerifHeading>
+            <p className={`mt-6 ${bodyText}`}>
+              The most important discipline of this proposal is what it refuses to do.
+            </p>
 
-          <ul className="mt-8 space-y-3">
-            {REFUSALS.map((item) => (
-              <li
-                key={item}
-                className="flex items-center gap-4 rounded-xl border border-white/[0.06] bg-white/[0.015] p-5 text-base text-zinc-200 md:text-lg"
-              >
-                <span className="text-zinc-600" aria-hidden>
-                  ✕
-                </span>
-                {item}
-              </li>
-            ))}
-          </ul>
+            <ul className="mt-8 flex flex-col">
+              {REFUSALS.map((item, i, arr) => (
+                <li
+                  key={item}
+                  className={
+                    "flex items-baseline gap-4 border-t border-[#d8d2c5] py-4 text-[16px] leading-[1.6] text-[#16130f] md:text-[17px] " +
+                    (i === arr.length - 1 ? "border-b" : "")
+                  }
+                >
+                  <span
+                    className="font-[family-name:var(--font-ibm-plex-mono)] text-[13px] text-[var(--kyx-purple)]"
+                    aria-hidden
+                  >
+                    ✕
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
 
-          <p className="mt-8 text-base leading-relaxed text-zinc-300 md:text-lg">
-            We are doing one thing: turning the most durable logistics advantage in North
-            America into a manufacturing-company-creation engine that produces
-            middle-class jobs that can&apos;t be relocated. Everything in Lougistics
-            serves that single sentence.{" "}
-            <strong className="font-semibold text-white">
-              The focus is not a limitation; it is the reason it will work.
-            </strong>
-          </p>
-        </section>
-      </div>
+            <p className={`mt-8 ${bodyText}`}>
+              We are doing one thing: turning the most durable logistics advantage in North
+              America into a manufacturing-company-creation engine that produces
+              middle-class jobs that can&apos;t be relocated. Everything in Lougistics
+              serves that single sentence.{" "}
+              <strong className="font-semibold text-[#16130f]">
+                The focus is not a limitation; it is the reason it will work.
+              </strong>
+            </p>
+          </div>
+        </Container>
+      </section>
 
       {/* Section 7 — The ask (provisional) */}
-      <section className="border-t border-white/[0.06] bg-white/[0.01] py-16 md:py-24">
-        <div className="container mx-auto max-w-3xl px-4">
-          <div className="flex flex-wrap items-center gap-3">
-            <p className={eyebrow}>The ask</p>
-            <span className="rounded-full border border-amber-400/30 bg-amber-400/[0.06] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-amber-300/90">
-              Draft — figures provisional
-            </span>
-          </div>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-4xl">
-            Next steps
-          </h2>
-          <p className="mt-6 text-base leading-relaxed text-zinc-400 md:text-lg">
-            This section is provisional. The components below are candidates; specific
-            dollar figures and targets are placeholders until they are scoped and
-            confirmed.
-          </p>
+      <section className="border-b border-[#16130f]">
+        <Container className="py-16 lg:py-[72px]">
+          <div className="max-w-[720px]">
+            <div className="flex flex-wrap items-center gap-3">
+              <Eyebrow>The ask</Eyebrow>
+              <span className="border border-[var(--kyx-purple)]/40 px-3 py-1 font-[family-name:var(--font-ibm-plex-mono)] text-[10px] uppercase tracking-[0.14em] text-[var(--kyx-purple)]">
+                Draft — figures provisional
+              </span>
+            </div>
+            <SerifHeading className="mt-4 text-[32px] leading-none md:text-[40px]">
+              Next steps
+            </SerifHeading>
+            <p className={`mt-6 ${bodyText} text-[#57503f]`}>
+              This section is provisional. The components below are candidates; specific
+              dollar figures and targets are placeholders until they are scoped and
+              confirmed.
+            </p>
 
-          <ul className="mt-8 space-y-4">
-            <li className="rounded-xl border border-white/[0.06] bg-white/[0.015] p-5">
-              <p className="text-sm leading-relaxed text-zinc-300 md:text-base">
-                <strong className="font-semibold text-white">A founding coalition:</strong>{" "}
-                Louisville Metro, One Louisville, the Riverport Authority, anchor
-                corporates (UPS et al.), a university partner, a philanthropic lead, and
-                additional partners to be confirmed.
-              </p>
-            </li>
-            <li className="rounded-xl border border-white/[0.06] bg-white/[0.015] p-5">
-              <p className="text-sm leading-relaxed text-zinc-300 md:text-base">
-                <strong className="font-semibold text-white">A facility commitment:</strong>{" "}
-                square footage plus location — Riverport / FTZ-adjacent is the obvious
-                candidate.
-              </p>
-            </li>
-            <li className="rounded-xl border border-white/[0.06] bg-white/[0.015] p-5">
-              <p className="text-sm leading-relaxed text-zinc-300 md:text-base">
-                <strong className="font-semibold text-white">
-                  Seed capital and operating runway:
-                </strong>{" "}
-                <span className="rounded bg-white/[0.06] px-2 py-0.5 font-mono text-xs text-zinc-400">
-                  [$X over Y years — TBD]
-                </span>
-              </p>
-            </li>
-            <li className="rounded-xl border border-white/[0.06] bg-white/[0.015] p-5">
-              <p className="text-sm leading-relaxed text-zinc-300 md:text-base">
-                <strong className="font-semibold text-white">
-                  Year-3 / year-5 targets:
-                </strong>{" "}
-                <span className="rounded bg-white/[0.06] px-2 py-0.5 font-mono text-xs text-zinc-400">
-                  [# startups · # jobs · $ economic activity — TBD]
-                </span>{" "}
-                modeled off mHUB&apos;s actuals once sourced.
-              </p>
-            </li>
-          </ul>
-        </div>
+            <ul className="mt-8 flex flex-col gap-4">
+              <li className="border border-[#d8d2c5] p-5">
+                <p className="text-[15px] leading-[1.7] text-[#4a443a] md:text-[16px]">
+                  <strong className="font-semibold text-[#16130f]">A founding coalition:</strong>{" "}
+                  Louisville Metro, One Louisville, the Riverport Authority, anchor
+                  corporates (UPS et al.), a university partner, a philanthropic lead, and
+                  additional partners to be confirmed.
+                </p>
+              </li>
+              <li className="border border-[#d8d2c5] p-5">
+                <p className="text-[15px] leading-[1.7] text-[#4a443a] md:text-[16px]">
+                  <strong className="font-semibold text-[#16130f]">A facility commitment:</strong>{" "}
+                  square footage plus location — Riverport / FTZ-adjacent is the obvious
+                  candidate.
+                </p>
+              </li>
+              <li className="border border-[#d8d2c5] p-5">
+                <p className="text-[15px] leading-[1.7] text-[#4a443a] md:text-[16px]">
+                  <strong className="font-semibold text-[#16130f]">
+                    Seed capital and operating runway:
+                  </strong>{" "}
+                  <span className="bg-[#eae5da] px-2 py-0.5 font-[family-name:var(--font-ibm-plex-mono)] text-[12px] text-[#57503f]">
+                    [$X over Y years — TBD]
+                  </span>
+                </p>
+              </li>
+              <li className="border border-[#d8d2c5] p-5">
+                <p className="text-[15px] leading-[1.7] text-[#4a443a] md:text-[16px]">
+                  <strong className="font-semibold text-[#16130f]">
+                    Year-3 / year-5 targets:
+                  </strong>{" "}
+                  <span className="bg-[#eae5da] px-2 py-0.5 font-[family-name:var(--font-ibm-plex-mono)] text-[12px] text-[#57503f]">
+                    [# startups · # jobs · $ economic activity — TBD]
+                  </span>{" "}
+                  modeled off mHUB&apos;s actuals once sourced.
+                </p>
+              </li>
+            </ul>
+          </div>
+        </Container>
       </section>
-    </div>
+    </>
   );
 }

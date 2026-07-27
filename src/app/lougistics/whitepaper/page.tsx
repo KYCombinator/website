@@ -28,17 +28,6 @@ export const metadata: Metadata = {
   },
 };
 
-// Palette lifted from the source Word document
-const NAVY = "#1B2A4A";
-const TEAL = "#3A7CA5";
-const HEAD = "#2E74B5";
-const SUBHEAD = "#1F4D78";
-
-// Serif body for a printed-paper feel; sans for small caps labels.
-const serif =
-  'Georgia,"Iowan Old Style","Palatino Linotype",Palatino,Cambria,"Times New Roman",serif';
-const sans = '"Segoe UI","Helvetica Neue",system-ui,-apple-system,sans-serif';
-
 const CONTENTS = [
   { id: "executive-summary", label: "Executive summary" },
   { id: "landscape", label: "1.  The landscape: the race everyone is running" },
@@ -52,16 +41,18 @@ const CONTENTS = [
 ];
 
 const body =
-  "mt-5 text-[16px] leading-[1.8] text-[#262626] [text-align:justify] [hyphens:auto] [text-justify:inter-word] md:text-[17px]";
+  "mt-5 text-[16px] leading-[1.8] text-[#4a443a] [text-align:justify] [hyphens:auto] [text-justify:inter-word] md:text-[17px]";
 const listText =
-  "mt-5 list-disc space-y-2.5 pl-7 text-[16px] leading-[1.75] text-[#262626] md:text-[17px] marker:text-[#2E74B5]";
+  "mt-5 list-disc space-y-2.5 pl-7 text-[16px] leading-[1.75] text-[#4a443a] md:text-[17px] marker:text-[var(--kyx-purple)]";
+
+const mono =
+  "font-[family-name:var(--font-ibm-plex-mono)]";
 
 function H1({ id, children }: { id: string; children: React.ReactNode }) {
   return (
     <h2
       id={id}
-      className="mb-2 mt-16 scroll-mt-8 border-b border-[#2E74B5]/25 pb-2.5 text-[24px] font-bold tracking-tight md:text-[28px]"
-      style={{ color: HEAD }}
+      className="mb-2 mt-16 scroll-mt-8 border-b border-[#d8d2c5] pb-2.5 font-[family-name:var(--font-instrument-serif)] text-[28px] leading-none tracking-[-0.02em] text-[#16130f] md:text-[34px]"
     >
       {children}
     </h2>
@@ -70,7 +61,7 @@ function H1({ id, children }: { id: string; children: React.ReactNode }) {
 
 function H2({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="mt-9 text-[18px] font-bold md:text-[20px]" style={{ color: SUBHEAD }}>
+    <h3 className="mt-9 font-[family-name:var(--font-instrument-serif)] text-[22px] leading-none tracking-[-0.02em] text-[#16130f] md:text-[26px]">
       {children}
     </h3>
   );
@@ -78,10 +69,7 @@ function H2({ children }: { children: React.ReactNode }) {
 
 function Quote({ children }: { children: React.ReactNode }) {
   return (
-    <blockquote
-      className="mx-auto my-12 max-w-[44ch] border-y py-7 text-center text-[20px] font-medium italic leading-snug md:text-[23px]"
-      style={{ color: NAVY, borderColor: `${NAVY}26` }}
-    >
+    <blockquote className="mx-auto my-12 max-w-[44ch] border-y border-[#d8d2c5] py-7 text-center font-[family-name:var(--font-instrument-serif)] text-[24px] leading-snug tracking-[-0.02em] text-[#16130f] md:text-[30px]">
       {children}
     </blockquote>
   );
@@ -89,15 +77,12 @@ function Quote({ children }: { children: React.ReactNode }) {
 
 export default function WhitePaperPage() {
   return (
-    <div
-      className="min-h-screen bg-[#d8d8de] px-0 py-0 text-[#262626] sm:px-6 sm:py-14 print:bg-white print:p-0"
-      style={{ fontFamily: serif }}
-    >
+    <div className="px-0 py-0 sm:px-6 sm:py-14 print:p-0">
       {/* Toolbar (screen only) */}
-      <div className="mx-auto mb-6 flex max-w-[820px] items-center justify-between px-4 print:hidden sm:px-0">
+      <div className="mx-auto mb-6 flex max-w-[820px] items-center justify-between px-5 print:hidden sm:px-0">
         <Link
           href="/lougistics"
-          className="group inline-flex items-center text-sm font-medium text-[#1B2A4A]/70 transition-colors hover:text-[#1B2A4A]"
+          className={`group inline-flex items-center ${mono} text-[11px] uppercase tracking-[0.08em] text-[#57503f] transition-colors hover:text-[#16130f]`}
         >
           <svg className="mr-1.5 h-4 w-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
@@ -108,61 +93,42 @@ export default function WhitePaperPage() {
       </div>
 
       {/* The paper sheet */}
-      <article
-        className="mx-auto max-w-[800px] bg-white px-7 py-14 shadow-[0_18px_60px_rgba(15,20,40,0.22)] ring-1 ring-black/[0.06] sm:rounded-[2px] sm:px-16 sm:py-20 md:px-24 md:py-24 print:max-w-none print:px-0 print:py-0 print:shadow-none print:ring-0"
-      >
+      <article className="mx-auto max-w-[820px] px-5 py-14 sm:px-7 sm:py-16 md:px-10 md:py-20 print:max-w-none print:px-0 print:py-0">
         {/* Cover / masthead — centered title page */}
         <header className="mb-4 text-center">
-          <p
-            className="text-[12px] font-bold uppercase tracking-[0.38em]"
-            style={{ color: TEAL, fontFamily: sans }}
-          >
+          <p className={`${mono} text-[11px] font-medium uppercase tracking-[0.24em] text-[var(--kyx-purple)]`}>
             KYCombinator
           </p>
 
-          <div
-            aria-hidden
-            className="mx-auto mt-8 h-px w-16"
-            style={{ backgroundColor: `${NAVY}33` }}
-          />
+          <div aria-hidden className="mx-auto mt-8 h-px w-16 bg-[#d8d2c5]" />
 
-          <h1
-            className="mt-8 text-[60px] font-bold leading-none tracking-tight md:text-[84px]"
-            style={{ color: NAVY }}
-          >
+          <h1 className="mt-8 font-[family-name:var(--font-instrument-serif)] text-[60px] font-normal leading-none tracking-[-0.02em] text-[#16130f] md:text-[84px]">
             Lougistics
           </h1>
-          <p className="mx-auto mt-6 max-w-md text-[19px] italic leading-snug text-[#595959] md:text-[22px]">
+          <p className="mx-auto mt-6 max-w-md font-[family-name:var(--font-instrument-serif)] text-[22px] italic leading-snug text-[#57503f] md:text-[26px]">
             Building on the one advantage no other city can move.
           </p>
 
-          <p
-            className="mx-auto mt-12 max-w-lg text-[22px] font-bold leading-snug md:text-[26px]"
-            style={{ color: NAVY }}
-          >
+          <p className="mx-auto mt-12 max-w-lg font-[family-name:var(--font-instrument-serif)] text-[26px] leading-snug tracking-[-0.02em] text-[#16130f] md:text-[32px]">
             Manufacturing makes the middle class.
           </p>
 
-          <p className="mx-auto mt-10 max-w-xl text-[16px] leading-relaxed text-[#404040] md:text-[17px]">
+          <p className="mx-auto mt-10 max-w-xl text-[16px] leading-relaxed text-[#4a443a] md:text-[17px]">
             A proposal to convert Louisville&apos;s fixed logistics advantage into a
             manufacturing-company-creation engine — and the middle-class jobs that come
             with it.
           </p>
 
-          <div
-            className="mx-auto mt-14 flex max-w-md flex-col gap-1.5 border-t pt-7 text-[13px] text-[#595959]"
-            style={{ borderColor: `${NAVY}1f`, fontFamily: sans }}
-          >
-            <p className="font-bold uppercase tracking-[0.22em]" style={{ color: NAVY }}>
+          <div className={`mx-auto mt-14 flex max-w-md flex-col gap-1.5 border-t border-[#d8d2c5] pt-7 ${mono} text-[12px] uppercase tracking-[0.08em] text-[#7d766a]`}>
+            <p className="font-medium tracking-[0.14em] text-[#16130f]">
               White Paper
             </p>
-            <p>Prepared for economic development and public-sector partners</p>
-            <p>
+            <p className="normal-case tracking-normal">Prepared for economic development and public-sector partners</p>
+            <p className="normal-case tracking-normal">
               Draft for discussion ·{" "}
               <Link
                 href="/lougistics"
-                className="underline underline-offset-2 hover:text-[#0563C1]"
-                style={{ color: "#0563C1" }}
+                className="border-b border-[var(--kyx-purple)] pb-0.5 text-[#16130f] transition-opacity hover:opacity-70"
               >
                 kycombinator.com/lougistics
               </Link>
@@ -173,21 +139,17 @@ export default function WhitePaperPage() {
         {/* Contents */}
         <nav
           aria-label="Contents"
-          className="mt-16 border-t pt-12 print:hidden"
-          style={{ borderColor: `${NAVY}14`, fontFamily: sans }}
+          className="mt-16 border-t border-[#d8d2c5] pt-12 print:hidden"
         >
-          <h2
-            className="text-[13px] font-bold uppercase tracking-[0.24em]"
-            style={{ color: SUBHEAD }}
-          >
+          <h2 className={`${mono} text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--kyx-purple)]`}>
             Contents
           </h2>
-          <ol className="mt-5 space-y-2.5 text-[15px]">
+          <ol className="mt-5 space-y-2.5 text-[15px] text-[#4a443a]">
             {CONTENTS.map((c) => (
               <li key={c.id}>
                 <a
                   href={`#${c.id}`}
-                  className="text-[#404040] underline-offset-2 transition-colors hover:text-[#0563C1] hover:underline"
+                  className="underline-offset-2 transition-colors hover:text-[#16130f] hover:underline hover:decoration-[var(--kyx-purple)]"
                 >
                   {c.label}
                 </a>
@@ -201,8 +163,7 @@ export default function WhitePaperPage() {
           <H1 id="executive-summary">Executive summary</H1>
           <p className={body}>
             <span
-              className="float-left mr-3 mt-1.5 text-[58px] font-bold leading-[0.72]"
-              style={{ color: NAVY }}
+              className="float-left mr-3 mt-1.5 font-[family-name:var(--font-instrument-serif)] text-[58px] leading-[0.72] text-[#16130f]"
               aria-hidden
             >
               E
@@ -398,7 +359,7 @@ export default function WhitePaperPage() {
             expanded to 80,000 — offering four integrated layers:
           </p>
 
-          <ol className="mt-5 space-y-5">
+          <ol className="mt-6 flex flex-col">
             {[
               {
                 h: "Shared fabrication and micro-factory.",
@@ -416,29 +377,26 @@ export default function WhitePaperPage() {
                 h: "A small seed fund.",
                 b: "A Louisville analog to mHUB Ventures: pre-seed checks for modest equity, capitalized by a coalition of public, corporate, and philanthropic money.",
               },
-            ].map(({ h, b }, i) => (
-              <li key={h} className="flex gap-4">
-                <span
-                  className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[13px] font-bold text-white"
-                  style={{ backgroundColor: NAVY }}
-                >
-                  {i + 1}
+            ].map(({ h, b }, i, arr) => (
+              <li
+                key={h}
+                className={
+                  "grid grid-cols-[32px_minmax(0,1fr)] gap-4 border-t border-[#d8d2c5] py-5 " +
+                  (i === arr.length - 1 ? "border-b" : "")
+                }
+              >
+                <span className={`mt-1 ${mono} text-[11px] text-[var(--kyx-purple)]`}>
+                  {String(i + 1).padStart(2, "0")}
                 </span>
-                <p className="text-[16px] leading-[1.7] text-[#262626] md:text-[17px]">
-                  <span className="font-semibold" style={{ color: SUBHEAD }}>
-                    {h}
-                  </span>{" "}
-                  {b}
+                <p className="text-[16px] leading-[1.7] text-[#4a443a] md:text-[17px]">
+                  <span className="font-semibold text-[#16130f]">{h}</span> {b}
                 </p>
               </li>
             ))}
           </ol>
 
-          <div
-            className="mt-10 border-l-4 bg-[#1B2A4A]/[0.04] p-6 md:p-7"
-            style={{ borderColor: NAVY }}
-          >
-            <p className="text-[15px] font-medium leading-relaxed md:text-[17px]" style={{ color: NAVY }}>
+          <div className="mt-10 border-l-2 border-[var(--kyx-purple)] pl-6">
+            <p className="text-[18px] leading-[1.6] text-[#16130f] md:text-[20px]">
               Build your physical product in Louisville and ship it to two-thirds of the
               country overnight, with the latest cutoff in America — an advantage built into
               your company that competitors in any other city simply cannot buy.
@@ -469,7 +427,7 @@ export default function WhitePaperPage() {
         {/* 7. The ask */}
         <section>
           <H1 id="the-ask">7.&ensp;The ask and next steps</H1>
-          <p className="mt-4 text-[14px] italic leading-relaxed text-[#595959] md:text-[15px]">
+          <p className="mt-4 text-[14px] italic leading-relaxed text-[#7d766a] md:text-[15px]">
             This section is provisional. The figures and commitments below are placeholders
             to be confirmed before this paper is finalized; they are included to show the
             shape of the request, not its final magnitude.
@@ -487,20 +445,20 @@ export default function WhitePaperPage() {
             <li>
               A facility commitment — square footage and location, with a Riverport or
               FTZ-adjacent site the obvious candidate.{" "}
-              <span className="rounded bg-[#1B2A4A]/[0.06] px-1.5 py-0.5 font-mono text-[12px] text-[#595959]">
+              <span className={`bg-[#eae5da] px-2 py-0.5 ${mono} text-[12px] text-[#57503f]`}>
                 [To be scoped]
               </span>
             </li>
             <li>
               Seed capital for the fund and operating runway.{" "}
-              <span className="rounded bg-[#1B2A4A]/[0.06] px-1.5 py-0.5 font-mono text-[12px] text-[#595959]">
+              <span className={`bg-[#eae5da] px-2 py-0.5 ${mono} text-[12px] text-[#57503f]`}>
                 [$X over Y years — to be confirmed]
               </span>
             </li>
             <li>
               A year-three and year-five outcome target — number of startups, jobs created,
               and economic activity generated — modeled on mHUB&apos;s documented results.{" "}
-              <span className="rounded bg-[#1B2A4A]/[0.06] px-1.5 py-0.5 font-mono text-[12px] text-[#595959]">
+              <span className={`bg-[#eae5da] px-2 py-0.5 ${mono} text-[12px] text-[#57503f]`}>
                 [To be modeled from primary sources]
               </span>
             </li>
@@ -517,7 +475,7 @@ export default function WhitePaperPage() {
         {/* Note on figures */}
         <section>
           <H1 id="figures">A note on the figures</H1>
-          <p className="mt-4 text-[14px] leading-[1.7] text-[#595959] md:text-[15px]">
+          <p className="mt-4 text-[14px] leading-[1.7] text-[#57503f] md:text-[15px]">
             The quantitative claims in this paper — Worldport&apos;s scale and daily
             volumes, the share of the U.S. population within a day&apos;s drive, the
             interstate, rail, and river assets, Foreign-Trade Zone #29, and mHUB&apos;s
@@ -531,23 +489,23 @@ export default function WhitePaperPage() {
         </section>
 
         {/* Footer */}
-        <footer className="mt-16 border-t pt-6 text-[13px] text-[#595959]" style={{ borderColor: `${NAVY}14` }}>
-          <p className="font-bold uppercase tracking-[0.18em]" style={{ color: NAVY }}>
+        <footer className={`mt-16 border-t border-[#d8d2c5] pt-6 ${mono} text-[11px] uppercase tracking-[0.08em] text-[#7d766a]`}>
+          <p className="font-medium tracking-[0.14em] text-[#16130f]">
             Lougistics
           </p>
-          <p className="mt-1">
+          <p className="mt-1 normal-case tracking-normal text-[13px]">
             KYCombinator · Draft for discussion ·{" "}
-            <Link href="/lougistics" className="underline underline-offset-2 print:no-underline" style={{ color: "#0563C1" }}>
+            <Link href="/lougistics" className="border-b border-[var(--kyx-purple)] pb-0.5 text-[#16130f] transition-opacity hover:opacity-70 print:no-underline">
               kycombinator.com/lougistics
             </Link>
           </p>
         </footer>
       </article>
 
-      <div className="mx-auto mt-8 max-w-[820px] px-4 print:hidden sm:px-0">
+      <div className="mx-auto mt-8 max-w-[820px] px-5 print:hidden sm:px-0">
         <Link
           href="/lougistics"
-          className="group inline-flex items-center text-sm font-medium text-[#1B2A4A]/70 transition-colors hover:text-[#1B2A4A]"
+          className={`group inline-flex items-center ${mono} text-[11px] uppercase tracking-[0.08em] text-[#57503f] transition-colors hover:text-[#16130f]`}
         >
           <svg className="mr-1.5 h-4 w-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M11 17l-5-5m0 0l5-5m-5 5h12" />

@@ -8,7 +8,6 @@ import WhyStartupsSection from "./WhyStartupsSection";
 import OutcomeSection from "./OutcomeSection";
 import StrategySection from "./StrategySection";
 import NeedsSection from "./NeedsSection";
-import ProgrammingSection from "./ProgrammingSection";
 import InvolvementSection from "./InvolvementSection";
 import SummarySection from "./SummarySection";
 
@@ -21,7 +20,6 @@ export default function VisionPage() {
       <OutcomeSection />
       <StrategySection />
       <NeedsSection />
-      <ProgrammingSection />
       <InvolvementSection />
       <SummarySection />
     </>

@@ -71,7 +71,7 @@ const page = () => {
     <>
       <PageHero
         eyebrow="Cinderblock"
-        title="A forge, not a daycare."
+        title="A forge for startups."
         intro="Cinderblock is our initial prototype for building toward a Brickyard-style venture studio, located at 1205 East Washington Street Suite 111, Louisville, KY 40206."
       >
         <Button href={APPLY_URL} variant="primary">

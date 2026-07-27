@@ -112,8 +112,8 @@ export type CalendarEvent = {
 // Source these from the events CMS when one exists; hard-coded here to the 2026
 // program calendar. Discontinued programs are intentionally omitted.
 export const calendar: CalendarEvent[] = [
-  { month: "FEB", name: "HackKentucky", tagline: "Sleep is low agency.", action: "Register", href: "https://www.hackkentucky.com" },
   { month: "APR", name: "Casino Night", tagline: "Luck is low agency.", action: "Register", href: "/events" },
+  { month: "SEP", name: "HackKentucky", tagline: "Sleep is low agency.", action: "Register", href: "https://www.hackkentucky.com" },
   { month: "SEP", name: "Velocity", tagline: "Pre-revenue is low agency.", action: "Apply", href: "/events/velocity" },
   { month: "OCT", name: "Block Party", tagline: "Netflix & chill is low agency.", action: "Register", href: "/events" },
   { month: "DEC", name: "The LOUIES", tagline: "Hiding is low agency.", action: "Attend", href: "/events/louies/2025" },

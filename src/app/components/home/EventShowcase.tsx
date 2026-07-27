@@ -68,6 +68,10 @@ function Slide({ event, active }: { event: FeaturedEvent; active: boolean }) {
                   className="object-cover"
                   priority={active && i === 0}
                   loading={active && i !== 0 ? "eager" : undefined}
+                  // Photos are pre-sized (<=1600px, ~150-400KB); serve them
+                  // directly from the CDN instead of the on-demand optimizer,
+                  // which was intermittently failing to render collage cells.
+                  unoptimized
                 />
               </div>
             ))}

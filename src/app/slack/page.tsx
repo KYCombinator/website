@@ -18,6 +18,54 @@ export const metadata: Metadata = {
 
 const SLACK_INVITE =
   "https://join.slack.com/t/kycombinator/shared_invite/zt-2viueybdu-QNv80gAKk~sJZ9paWebGVQ";
+const NEWSLETTER_URL = "https://kycombinator.beehiiv.com/";
+const APPLY_URL = "https://form.kycombinator.com/cinderblock";
+
+// ⚠️ Partner-org URLs inferred — confirm/correct these.
+const PARTNERS: { name: string; href: string }[] = [
+  { name: "Amplify", href: "https://www.amplifystartups.com" },
+  { name: "Startup Week Louisville", href: "https://www.startupweeklouisville.com" },
+];
+
+type JoinStep = {
+  term: string;
+  desc: string;
+  action?: { label: string; href: string };
+  partners?: { name: string; href: string }[];
+};
+
+const JOIN_STEPS: JoinStep[] = [
+  {
+    term: "Start with the letter",
+    desc: "The weekly newsletter — events, programs, and who's shipping what. The lowest-commitment way to plug in and see what's happening.",
+    action: { label: "Subscribe", href: NEWSLETTER_URL },
+  },
+  {
+    term: "Join the Slack",
+    desc: "Louisville's founder community — a working channel for builders, operators, and the people who back them. Real-time intros, asks, wins, and the day-to-day of building in Kentucky.",
+    action: { label: "Join Slack", href: SLACK_INVITE },
+  },
+  {
+    term: "Show up to events",
+    desc: "HackKentucky, Velocity, Casino Night, the LOUIES. Vote with your feet — the fastest way to meet the room in person.",
+    action: { label: "See events", href: "/events" },
+  },
+  {
+    term: "Apply to Cinderblock",
+    desc: "When you're building in earnest, apply for a desk in the room — a small, selective studio of founders shipping side by side.",
+    action: { label: "Apply", href: APPLY_URL },
+  },
+  {
+    term: "Volunteer",
+    desc: "Our events run on the people who show up to run them. Help put on HackKentucky, the LOUIES, and more — say the word in Slack.",
+    action: { label: "Get involved", href: SLACK_INVITE },
+  },
+  {
+    term: "Spread the word",
+    desc: "Support the wider Louisville ecosystem — the organizations building alongside us. Show up to their things too.",
+    partners: PARTNERS,
+  },
+];
 
 type Channel = {
   name: string;
@@ -102,16 +150,58 @@ export default function SlackPage() {
     <>
       <PageHero
         eyebrow="Community"
-        title="KYX on Slack."
-        intro="The KYX Slack is Louisville's founder community — a working channel for builders, operators, and the people who back them. Real-time intros, asks, wins, and the day-to-day of building in Kentucky."
+        title="Join the community."
+        intro="There's no single door. Start with the weekly letter, jump into Slack, show up to an event — then go as deep as you want. Here's how, step by step."
       >
         <Button href={SLACK_INVITE} variant="primary">
           Join the Slack
         </Button>
-        <TextLink href="/events" className="self-center">
-          See upcoming events
+        <TextLink href={NEWSLETTER_URL} className="self-center">
+          Subscribe to the newsletter
         </TextLink>
       </PageHero>
+
+      {/* How to join — the ladder */}
+      <section className="border-b border-[#16130f]">
+        <Container className="py-16 lg:py-[72px]">
+          <div className="flex flex-col gap-3">
+            <Eyebrow>Ways in</Eyebrow>
+            <SerifHeading className="text-[32px] leading-none md:text-[40px]">
+              How to join.
+            </SerifHeading>
+            <p className="mt-1 max-w-2xl text-[15px] leading-relaxed text-[#4a443a] md:text-[16px]">
+              Start at the top and go as deep as you want — from the weekly letter to a
+              desk in the room.
+            </p>
+          </div>
+          <div className="mt-10 flex flex-col">
+            {JOIN_STEPS.map((step, i) => (
+              <div
+                key={step.term}
+                className="grid grid-cols-1 gap-x-5 gap-y-2 border-t border-[#d8d2c5] py-6 last:border-b sm:grid-cols-[44px_220px_minmax(0,1fr)_auto] sm:items-baseline sm:gap-6"
+              >
+                <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] text-[var(--kyx-purple)]">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="font-[family-name:var(--font-instrument-serif)] text-[24px] leading-none md:text-[26px]">
+                  {step.term}
+                </span>
+                <p className="text-[15px] leading-[1.6] text-[#4a443a]">{step.desc}</p>
+                <div className="flex flex-col gap-1.5 sm:items-end">
+                  {step.action && (
+                    <TextLink href={step.action.href}>{step.action.label} →</TextLink>
+                  )}
+                  {step.partners?.map((p) => (
+                    <TextLink key={p.name} href={p.href}>
+                      {p.name} →
+                    </TextLink>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
 
       {/* What you'll find */}
       <section className="border-b border-[#16130f] bg-[#eae5da]">

@@ -70,20 +70,11 @@ export const featuredEvents: FeaturedEvent[] = [
     when: "September 11",
     href: "https://www.hackkentucky.com",
     photos: [
-      { src: "/events/hackkentucky/IMG_1464.JPG", alt: "HackKentucky participants" },
-      { src: "/events/hackkentucky/IMG_1467.JPG", alt: "HackKentucky at work" },
-      { src: "/events/hackkentucky/IMG_1470.JPG", alt: "HackKentucky teams" },
-      { src: "/events/hackkentucky/IMG_1481.JPG", alt: "HackKentucky awards" },
+      { src: "/events/hackkentucky/IMG_1464.jpg", alt: "HackKentucky participants" },
+      { src: "/events/hackkentucky/IMG_1467.jpg", alt: "HackKentucky at work" },
+      { src: "/events/hackkentucky/IMG_1470.jpg", alt: "HackKentucky teams" },
+      { src: "/events/hackkentucky/IMG_1481.jpg", alt: "HackKentucky awards" },
     ],
-  },
-  {
-    title: "HackTheTrack",
-    // ⚠️ tagline inferred — edit to taste. No photos added yet — drop files in
-    // /public/events/hackthetrack/ and list them here to make it a collage.
-    tagline: "A KYX hackathon.",
-    when: "September 11",
-    href: "https://www.hackkentucky.com",
-    photos: [],
   },
   {
     title: "Rally Innovation Conference",
@@ -93,9 +84,9 @@ export const featuredEvents: FeaturedEvent[] = [
     href: "/events",
     photos: [
       { src: "/events/rally/IMG_6460.jpg", alt: "Rally Innovation Conference" },
-      { src: "/events/rally/IMG_6482.PNG", alt: "Rally main stage" },
-      { src: "/events/rally/IMG_6483.PNG", alt: "Rally talk" },
-      { src: "/events/rally/IMG_6484.PNG", alt: "Rally audience" },
+      { src: "/events/rally/IMG_6482.jpg", alt: "Rally main stage" },
+      { src: "/events/rally/IMG_6483.jpg", alt: "Rally talk" },
+      { src: "/events/rally/IMG_6484.jpg", alt: "Rally audience" },
     ],
   },
   {

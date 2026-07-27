@@ -67,6 +67,7 @@ function Slide({ event, active }: { event: FeaturedEvent; active: boolean }) {
                   sizes="(max-width: 1120px) 50vw, 560px"
                   className="object-cover"
                   priority={active && i === 0}
+                  loading={active && i !== 0 ? "eager" : undefined}
                 />
               </div>
             ))}

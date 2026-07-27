@@ -65,8 +65,8 @@ export default function Home() {
               const filled = i < companiesOnBoard;
               const company = filled ? companies[i] : undefined;
               if (company) {
-                // Filled block with a named company: hover/focus reveals the
-                // name and links to the company.
+                // Filled block with a named company: hover/focus overlays the
+                // company name on the block and links to the company site.
                 return (
                   <a
                     key={i}
@@ -74,9 +74,10 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={company.name}
-                    className="group relative h-11 bg-[var(--kyx-purple)] transition-colors duration-150 hover:bg-[#4f29a6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)] md:h-14"
+                    title={company.name}
+                    className="group relative h-11 bg-[var(--kyx-purple)] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)] md:h-14"
                   >
-                    <span className="pointer-events-none absolute bottom-[calc(100%+8px)] left-1/2 z-10 -translate-x-1/2 whitespace-nowrap bg-[#16130f] px-2 py-1 font-[family-name:var(--font-ibm-plex-mono)] text-[10px] uppercase tracking-[0.08em] text-[#f4f1ea] opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100">
+                    <span className="absolute inset-0 flex items-center justify-center bg-[#16130f]/85 px-1 text-center font-[family-name:var(--font-ibm-plex-mono)] text-[10px] font-medium uppercase leading-tight tracking-[0.04em] text-[#f4f1ea] opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100">
                       {company.name}
                     </span>
                   </a>

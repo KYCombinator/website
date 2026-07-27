@@ -4,20 +4,20 @@
 
 export const GOAL_TOTAL = 10; // "Ten Series A companies out of Kentucky by 2030."
 
-// ⚠️ Confirm the real count before launch. The scoreboard's credibility depends
-// on this being true — if the honest number today is 0 or 1, show that.
-export const companiesOnBoard = 3;
-
 export type Company = { name: string; url: string };
 
 // Companies "on the board", mapped left-to-right onto the filled tracker blocks.
-// Hovering (or focusing) a filled block reveals the name and links to the company.
-// ⚠️ Names inferred from the domains — correct if needed. A 3rd company is on the
-// board (companiesOnBoard = 3) but not yet named here; add it to light up block 3.
+// Each filled block overlays the company name on hover/focus and links to its
+// site. ⚠️ Names inferred from the domains — correct if needed. Add a company
+// here and the board count + caption update automatically.
 export const companies: Company[] = [
   { name: "Swell", url: "https://www.getswell.app/" },
   { name: "DueGooder", url: "https://duegooder.com" },
 ];
+
+// Filled-block count is derived from the named companies, so the scoreboard can
+// never claim more than it can show.
+export const companiesOnBoard = companies.length;
 
 // Shown in the tracker caption. Change when the board changes.
 export const scoreboardUpdatedAt = "July 2026";
@@ -28,15 +28,15 @@ export type Stat = {
   placeholder?: boolean;
 };
 
-// ⚠️ All three figures are PLACEHOLDERS — replace with real numbers before deploy.
+// builders + companies are confirmed; event attendees still a placeholder.
 export const stats: Stat[] = [
-  { figure: "600+", label: ["builders", "in the room"], placeholder: true }, // Slack roster
-  { figure: "18", label: ["companies", "started here"], placeholder: true },
-  { figure: "1,200+", label: ["event", "attendees"], placeholder: true }, // cumulative HackKentucky + events
+  { figure: "26", label: ["builders", "in the room"] },
+  { figure: "13", label: ["companies", "started here"] },
+  { figure: "1,200+", label: ["event", "attendees"], placeholder: true }, // ⚠️ cumulative HackKentucky + events — confirm
 ];
 
-// ⚠️ PLACEHOLDER — Slack member count, mirrored in the community band copy.
-export const buildersInRoom = "600+";
+// Builder count, mirrored in the community band copy.
+export const buildersInRoom = "26";
 
 export type EventPhoto = { src: string; alt: string };
 export type FeaturedEvent = {
@@ -112,13 +112,11 @@ export type CalendarEvent = {
 // Source these from the events CMS when one exists; hard-coded here to the 2026
 // program calendar. Discontinued programs are intentionally omitted.
 export const calendar: CalendarEvent[] = [
-  { month: "JAN", name: "Internship Program", tagline: "Working at one company is low agency.", action: "Apply", href: "/events" },
   { month: "FEB", name: "HackKentucky", tagline: "Sleep is low agency.", action: "Register", href: "https://www.hackkentucky.com" },
   { month: "APR", name: "Casino Night", tagline: "Luck is low agency.", action: "Register", href: "/events" },
-  { month: "MAY", name: "Relocate", tagline: "SF is low agency.", action: "Details", href: "/events" },
   { month: "SEP", name: "Velocity", tagline: "Pre-revenue is low agency.", action: "Apply", href: "/events/velocity" },
   { month: "OCT", name: "Block Party", tagline: "Netflix & chill is low agency.", action: "Register", href: "/events" },
-  { month: "DEC", name: "Demo Day / The LOUIES", tagline: "Hiding is low agency.", action: "Attend", href: "/events/louies/2025" },
+  { month: "DEC", name: "The LOUIES", tagline: "Hiding is low agency.", action: "Attend", href: "/events/louies/2025" },
 ];
 
 // External destinations reused across sections.

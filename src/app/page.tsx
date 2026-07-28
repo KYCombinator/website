@@ -39,14 +39,12 @@ export default function Home() {
               room — all pointed at getting Kentucky founders to a real Series A.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
-              <a
+              <Link
                 href={APPLY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center bg-[var(--kyx-purple)] px-6 py-4 font-[family-name:var(--font-ibm-plex-mono)] text-[12px] uppercase tracking-[0.08em] text-[#f9f7f2] transition-colors duration-150 hover:bg-[#4f29a6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]"
               >
                 Apply to Cinderblock
-              </a>
+              </Link>
               <Link
                 href="/vision"
                 className="inline-flex items-center justify-center border border-[#cec7b8] px-6 py-4 font-[family-name:var(--font-ibm-plex-mono)] text-[12px] uppercase tracking-[0.08em] text-[#16130f] transition-colors duration-150 hover:border-[#16130f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]"
@@ -167,14 +165,12 @@ export default function Home() {
               of founders shipping in the same place at the same time. Execution
               over panels.
             </p>
-            <a
+            <Link
               href={APPLY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
               className="mt-1.5 inline-flex items-center self-start bg-[#16130f] px-[22px] py-[15px] font-[family-name:var(--font-ibm-plex-mono)] text-[12px] uppercase tracking-[0.08em] text-[#f4f1ea] transition-colors duration-150 hover:bg-[#2c2820] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]"
             >
               Apply →
-            </a>
+            </Link>
           </div>
           <div className="flex flex-col">
             {[

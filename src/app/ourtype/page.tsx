@@ -40,7 +40,7 @@ export default function OurTypePage() {
         title="Not for everyone."
         intro="We're looking for high-agency builders and founders who are ready to execute at high velocity. If this sounds like you, we want to meet you."
       >
-        <Button href="https://form.kycombinator.com/cinderblock" variant="primary">
+        <Button href="/cinderblock/apply" variant="primary">
           Apply to Cinderblock
         </Button>
       </PageHero>
@@ -102,7 +102,7 @@ export default function OurTypePage() {
             ecosystem together.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button href="https://form.kycombinator.com/cinderblock" variant="primary">
+            <Button href="/cinderblock/apply" variant="primary">
               Apply to Cinderblock
             </Button>
             <TextLink href="/events" className="self-center">

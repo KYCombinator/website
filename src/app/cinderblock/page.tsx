@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
 }
 
-const APPLY_URL = "https://form.kycombinator.com/cinderblock";
+const APPLY_URL = "/cinderblock/apply";
 
 const FRAMEWORK: [string, string][] = [
   [

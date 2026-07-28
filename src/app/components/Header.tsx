@@ -10,14 +10,12 @@ const LOGO = `${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.svg`;
 
 function ApplyButton() {
   return (
-    <a
+    <Link
       href={APPLY_URL}
-      target="_blank"
-      rel="noopener noreferrer"
       className="inline-flex items-center bg-[#16130f] px-4 py-2.5 font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[#f4f1ea] transition-colors duration-150 hover:bg-[#2c2820] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]"
     >
       Apply
-    </a>
+    </Link>
   );
 }
 

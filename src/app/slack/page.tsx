@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 const SLACK_INVITE =
   "https://join.slack.com/t/kycombinator/shared_invite/zt-2viueybdu-QNv80gAKk~sJZ9paWebGVQ";
 const NEWSLETTER_URL = "https://kycombinator.beehiiv.com/";
-const APPLY_URL = "https://form.kycombinator.com/cinderblock";
+const APPLY_URL = "/cinderblock/apply";
 
 // ⚠️ Partner-org URLs inferred — confirm/correct these.
 const PARTNERS: { name: string; href: string }[] = [

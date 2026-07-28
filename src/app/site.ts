@@ -1,7 +1,7 @@
 // Shared site-chrome constants (nav, external links) used by the Header and
 // Footer. Kept separate so the chrome doesn't reach into feature folders.
 
-export const APPLY_URL = "https://form.kycombinator.com/cinderblock";
+export const APPLY_URL = "/cinderblock/apply";
 export const LOGIN_URL =
   "https://auth.kycombinator.com?redirect=https://www.kycombinator.com";
 export const SLACK_INVITE =
@@ -20,6 +20,7 @@ export type FooterLink = { label: string; href: string; external?: boolean };
 export const FOOTER_NAV: FooterLink[] = [
   { label: "Vision", href: "/vision" },
   { label: "Events", href: "/events" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Report", href: "/report" },
   { label: "Lougistics", href: "/lougistics" },
   { label: "HackKentucky", href: "https://www.hackkentucky.com", external: true },

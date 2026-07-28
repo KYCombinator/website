@@ -289,11 +289,16 @@ export async function setApplicationStatus(
 
 // ── Users ───────────────────────────────────────────────────────────────────
 export type UserRole = "member" | "admin";
+export type Onboarding = { slack?: boolean; newsletter?: boolean; event?: boolean };
 export type UserRecord = {
   email: string;
   name: string;
   role: UserRole;
   createdAt: string;
+  company?: string;
+  photoUrl?: string;
+  bookingLink?: string;
+  onboarding?: Onboarding;
 };
 
 const BOOTSTRAP_ADMIN = (process.env.ADMIN_EMAIL || "dan@kycombinator.com").toLowerCase();
@@ -326,6 +331,7 @@ export async function putUser(input: {
   const email = input.email.trim().toLowerCase();
   const existing = await getUser(email);
   const record: UserRecord = {
+    ...(existing || {}),
     email,
     name: input.name.trim(),
     role: input.role === "admin" ? "admin" : "member",
@@ -333,6 +339,38 @@ export async function putUser(input: {
   };
   await doc().send(
     new PutCommand({ TableName: TABLE, Item: { pk: "USER", sk: email, ...record } })
+  );
+  return record;
+}
+
+// Self-service profile update (a member editing their own record). Only the
+// provided fields change; role and createdAt are preserved. Works for the
+// bootstrap admin too (creates a record on first save).
+export async function updateUserProfile(
+  email: string,
+  patch: {
+    name?: string;
+    company?: string;
+    bookingLink?: string;
+    photoUrl?: string;
+    onboarding?: Onboarding;
+  }
+): Promise<UserRecord> {
+  const e = email.trim().toLowerCase();
+  const existing = await getUser(e);
+  const role = existing?.role ?? (await getUserRole(e)) ?? "member";
+  const record: UserRecord = {
+    email: e,
+    role,
+    createdAt: existing?.createdAt ?? new Date().toISOString(),
+    name: patch.name !== undefined ? patch.name.trim() : existing?.name ?? e.split("@")[0],
+    company: patch.company !== undefined ? patch.company : existing?.company,
+    photoUrl: patch.photoUrl !== undefined ? patch.photoUrl : existing?.photoUrl,
+    bookingLink: patch.bookingLink !== undefined ? patch.bookingLink : existing?.bookingLink,
+    onboarding: patch.onboarding !== undefined ? patch.onboarding : existing?.onboarding,
+  };
+  await doc().send(
+    new PutCommand({ TableName: TABLE, Item: { pk: "USER", sk: e, ...record } })
   );
   return record;
 }

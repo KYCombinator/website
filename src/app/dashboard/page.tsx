@@ -4,7 +4,10 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Container, Eyebrow, SerifHeading } from "@/app/components/fm";
 import { SESSION_COOKIE, verifySession } from "@/lib/adminAuth";
+import { getUser } from "@/lib/gallery";
 import LogoutButton from "./LogoutButton";
+import ProfileForm from "./ProfileForm";
+import Checklist from "./Checklist";
 
 export const dynamic = "force-dynamic";
 
@@ -24,7 +27,15 @@ export default async function DashboardPage() {
   const session = verifySession(store.get(SESSION_COOKIE)?.value);
   if (!session) redirect("/login?redirect=/dashboard");
 
-  const name = session.email.split("@")[0];
+  const user = await getUser(session.email);
+  const profile = {
+    name: user?.name || session.email.split("@")[0],
+    company: user?.company || "",
+    bookingLink: user?.bookingLink || "",
+    photoUrl: user?.photoUrl || "",
+  };
+  const onboarding = user?.onboarding || {};
+  const name = profile.name;
 
   return (
     <>
@@ -73,6 +84,30 @@ export default async function DashboardPage() {
           </Container>
         </section>
       )}
+
+      {/* Profile + checklist */}
+      <section className="border-b border-[#16130f]">
+        <Container className="grid grid-cols-1 gap-12 py-16 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-16 lg:py-[72px]">
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-2">
+              <Eyebrow>Your profile</Eyebrow>
+              <SerifHeading className="text-[28px] leading-none md:text-[34px]">
+                Your details.
+              </SerifHeading>
+            </div>
+            <ProfileForm profile={profile} />
+          </div>
+          <div className="flex flex-col gap-6 lg:border-l lg:border-[#d3ccbd] lg:pl-16">
+            <div className="flex flex-col gap-2">
+              <Eyebrow>Get set up</Eyebrow>
+              <SerifHeading className="text-[28px] leading-none md:text-[34px]">
+                Checklist.
+              </SerifHeading>
+            </div>
+            <Checklist onboarding={onboarding} />
+          </div>
+        </Container>
+      </section>
 
       <section>
         <Container className="py-16 lg:py-[72px]">

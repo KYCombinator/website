@@ -119,6 +119,6 @@ export const calendar: CalendarEvent[] = [
 
 // External destinations reused across sections.
 export const APPLY_URL = "/cinderblock/apply";
-export const LOGIN_URL = "https://auth.kycombinator.com?redirect=https://www.kycombinator.com";
+export const LOGIN_URL = "/login";
 export const SLACK_INVITE =
   "https://join.slack.com/t/kycombinator/shared_invite/zt-2viueybdu-QNv80gAKk~sJZ9paWebGVQ";

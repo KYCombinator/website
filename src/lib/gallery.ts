@@ -343,14 +343,23 @@ export async function deleteUser(email: string): Promise<void> {
   );
 }
 
-// Who may access the admin portal: the bootstrap admin (ADMIN_EMAIL) always,
-// plus any user record with role "admin".
-export async function isAdminUser(email: string): Promise<boolean> {
+// Role for an email: the bootstrap admin (ADMIN_EMAIL) is always "admin"; any
+// other email resolves to its user record's role, or null if not a user.
+export async function getUserRole(email: string): Promise<UserRole | null> {
   const e = String(email || "").trim().toLowerCase();
-  if (!e) return false;
-  if (e === BOOTSTRAP_ADMIN) return true;
+  if (!e) return null;
+  if (e === BOOTSTRAP_ADMIN) return "admin";
   const u = await getUser(e);
-  return u?.role === "admin";
+  return u?.role ?? null;
+}
+
+// Anyone with a role (a user record, or the bootstrap admin) may sign in.
+export async function isKnownUser(email: string): Promise<boolean> {
+  return (await getUserRole(email)) !== null;
+}
+
+export async function isAdminUser(email: string): Promise<boolean> {
+  return (await getUserRole(email)) === "admin";
 }
 
 // ── S3 upload ───────────────────────────────────────────────────────────────

@@ -1,11 +1,6 @@
 import { NextResponse } from "next/server";
-import { adminAuthConfigured } from "@/lib/adminAuth";
-import {
-  createLoginCode,
-  checkLoginRateLimit,
-  recordLoginFailure,
-  isAdminUser,
-} from "@/lib/gallery";
+import { authConfigured } from "@/lib/adminAuth";
+import { createLoginCode, checkLoginRateLimit, recordLoginFailure, isKnownUser } from "@/lib/gallery";
 import { sendLoginCode } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
@@ -15,14 +10,11 @@ function clientIp(request: Request) {
   return xff.split(",")[0].trim() || "unknown";
 }
 
-// Emails a 6-digit sign-in code to the allowlisted admin address. Rate-limited.
-// Always responds generically so it can't be used to probe the admin email.
+// Emails a 6-digit sign-in code to a known user. Rate-limited; always responds
+// generically so it can't be used to probe who has an account.
 export async function POST(request: Request) {
-  if (!adminAuthConfigured()) {
-    return NextResponse.json(
-      { error: "Admin login is not configured on this environment." },
-      { status: 501 }
-    );
+  if (!authConfigured()) {
+    return NextResponse.json({ error: "Login is not configured on this environment." }, { status: 501 });
   }
 
   const ip = clientIp(request);
@@ -42,7 +34,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  if (await isAdminUser(email)) {
+  if (await isKnownUser(email)) {
     try {
       const code = await createLoginCode(email);
       await sendLoginCode(email.trim().toLowerCase(), code);
@@ -51,7 +43,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Could not send the code. Try again." }, { status: 502 });
     }
   } else {
-    // Unknown email: count it against the rate limit, respond generically.
     await recordLoginFailure(ip);
   }
 

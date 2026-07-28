@@ -1,43 +1,31 @@
-'use server'
-
 import { cookies } from "next/headers";
-import jwt from "jsonwebtoken";
 import Link from "next/link";
-import { AuthUser } from "@hzzhsoftware/types-auth";
+import { SESSION_COOKIE, verifySession } from "@/lib/adminAuth";
 
+// Header auth widget: shows the signed-in member (→ dashboard) or a Login link
+// that goes to our own email-code sign-in (no external SSO).
 const Avatar = async () => {
-  const cookieStore = await cookies();
-  const token = cookieStore.get(`hzzh.${process.env.NEXT_PUBLIC_APP_ID}.token`)?.value;
+  const store = await cookies();
+  const session = verifySession(store.get(SESSION_COOKIE)?.value);
 
-  let user: AuthUser | null = null;
-
-  if (token) {
-    const decoded = jwt.decode(token) as AuthUser | null;
-    if (decoded) {
-      user = {
-        id: decoded?.id,
-        email: decoded?.email,
-        name: decoded?.name,
-        picture: decoded?.picture,
-      };
-    }
+  if (session) {
+    return (
+      <Link
+        href="/dashboard"
+        className="font-[family-name:var(--font-ibm-plex-sans)] text-[13px] text-[#7d766a] transition-opacity duration-150 hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]"
+      >
+        {session.email.split("@")[0]}
+      </Link>
+    );
   }
 
   return (
-    <>
-      {user ? (
-        <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[13px] text-[#7d766a]">
-          Welcome, {user.name}
-        </span>
-      ) : (
-        <Link
-          href="https://auth.kycombinator.com?redirect=https://www.kycombinator.com"
-          className="font-[family-name:var(--font-ibm-plex-sans)] text-[13px] text-[#7d766a] transition-opacity duration-150 hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]"
-        >
-          Login
-        </Link>
-      )}
-    </>
+    <Link
+      href="/login"
+      className="font-[family-name:var(--font-ibm-plex-sans)] text-[13px] text-[#7d766a] transition-opacity duration-150 hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]"
+    >
+      Login
+    </Link>
   );
 };
 

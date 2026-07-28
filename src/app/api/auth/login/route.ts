@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
-import { ADMIN_COOKIE, adminAuthConfigured, signAdminToken } from "@/lib/adminAuth";
+import { SESSION_COOKIE, authConfigured, signSession } from "@/lib/adminAuth";
 import {
   verifyLoginCode,
+  getUserRole,
   checkLoginRateLimit,
   recordLoginFailure,
   clearLoginFailures,
-  isAdminUser,
 } from "@/lib/gallery";
 
 export const dynamic = "force-dynamic";
@@ -15,13 +15,10 @@ function clientIp(request: Request) {
   return xff.split(",")[0].trim() || "unknown";
 }
 
-// Verifies the emailed 6-digit code and issues the admin session cookie.
+// Verifies the emailed code and issues the session cookie (carrying the role).
 export async function POST(request: Request) {
-  if (!adminAuthConfigured()) {
-    return NextResponse.json(
-      { error: "Admin login is not configured on this environment." },
-      { status: 501 }
-    );
+  if (!authConfigured()) {
+    return NextResponse.json({ error: "Login is not configured on this environment." }, { status: 501 });
   }
 
   const ip = clientIp(request);
@@ -43,18 +40,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  const ok =
-    /^\d{6}$/.test(code) &&
-    (await isAdminUser(email)) &&
-    (await verifyLoginCode(email, code));
-  if (!ok) {
+  const role = /^\d{6}$/.test(code) ? await getUserRole(email) : null;
+  const ok = role !== null && (await verifyLoginCode(email, code));
+  if (!ok || role === null) {
     await recordLoginFailure(ip);
     return NextResponse.json({ error: "Invalid or expired code." }, { status: 401 });
   }
 
   await clearLoginFailures(ip);
-  const res = NextResponse.json({ ok: true });
-  res.cookies.set(ADMIN_COOKIE, signAdminToken(email), {
+  const res = NextResponse.json({ ok: true, role });
+  res.cookies.set(SESSION_COOKIE, signSession(email, role), {
     httpOnly: true,
     secure: true,
     sameSite: "lax",

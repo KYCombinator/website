@@ -8,13 +8,13 @@ const field =
 const labelCls =
   "font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.1em] text-[#57503f]";
 
-export default function AdminLoginPage() {
+export default function LoginPage() {
   const router = useRouter();
   const params = useSearchParams();
-  const redirect = params.get("redirect") || "/admin";
+  const redirect = params.get("redirect") || "/dashboard";
 
   const [step, setStep] = useState<"email" | "code">("email");
-  const [email, setEmail] = useState("dan@kycombinator.com");
+  const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -27,14 +27,14 @@ export default function AdminLoginPage() {
     setError("");
     setNote("");
     try {
-      const res = await fetch("/api/admin/request-code", {
+      const res = await fetch("/api/auth/request-code", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
       if (res.ok) {
         setStep("code");
-        setNote(`If ${email} is an admin, a 6-digit code is on its way. Check your email.`);
+        setNote(`If ${email} has an account, a 6-digit code is on its way. Check your email.`);
       } else {
         const d = await res.json().catch(() => ({}));
         setError(d?.error || "Could not send a code.");
@@ -51,13 +51,13 @@ export default function AdminLoginPage() {
     setBusy(true);
     setError("");
     try {
-      const res = await fetch("/api/admin/login", {
+      const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, code }),
       });
       if (res.ok) {
-        router.replace(redirect.startsWith("/") ? redirect : "/admin");
+        router.replace(redirect.startsWith("/") ? redirect : "/dashboard");
         router.refresh();
         return;
       }
@@ -73,20 +73,24 @@ export default function AdminLoginPage() {
   return (
     <main className="mx-auto flex min-h-[70vh] max-w-[420px] flex-col justify-center px-5 py-16">
       <p className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.14em] text-[var(--kyx-purple)]">
-        KYX Admin
+        KYX
       </p>
       <h1 className="mt-3 font-[family-name:var(--font-instrument-serif)] text-[40px] leading-none tracking-[-0.02em]">
         Sign in.
       </h1>
+      <p className="mt-3 text-[15px] leading-[1.5] text-[#4a443a]">
+        We&apos;ll email you a 6-digit code — no password needed.
+      </p>
 
       {step === "email" ? (
         <form onSubmit={requestCode} noValidate className="mt-8 flex flex-col gap-4">
           <label className="flex flex-col gap-1.5">
-            <span className={labelCls}>Admin email</span>
+            <span className={labelCls}>Email</span>
             <input
               className={field}
               type="email"
               autoComplete="username"
+              autoFocus
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -98,7 +102,7 @@ export default function AdminLoginPage() {
           )}
           <button
             type="submit"
-            disabled={busy}
+            disabled={busy || !email}
             className="mt-2 inline-flex items-center justify-center bg-[#16130f] px-6 py-4 font-[family-name:var(--font-ibm-plex-mono)] text-[12px] uppercase tracking-[0.08em] text-[#f4f1ea] transition-colors duration-150 hover:bg-[#2c2820] disabled:opacity-60"
           >
             {busy ? "Sending…" : "Email me a code"}

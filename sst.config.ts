@@ -23,27 +23,52 @@ export default $config({
     const stage = $app.stage;
     const isProd = stage === "prod" || stage === "production";
 
-    if (!isProd) {
-      // ── Non-prod preview (e.g. dev.kycombinator.com) ──────────────────
-      new sst.aws.Nextjs("Website", {
-        domain: {
+    // ── Shared app resources (both stages) ──────────────────────────────
+    // Event/gallery photo files. Public-read (approved photos are meant to be
+    // seen); object keys are random UUIDs so pending uploads aren't guessable,
+    // and only the authed admin surfaces pending items.
+    const photos = new sst.aws.Bucket("EventPhotos", { public: true });
+    // Single table for events, photo submissions, and Cinderblock applications.
+    const table = new sst.aws.Dynamo("Gallery", {
+      fields: { pk: "string", sk: "string", gsi1pk: "string", gsi1sk: "string" },
+      primaryIndex: { hashKey: "pk", rangeKey: "sk" },
+      globalIndexes: { StatusIndex: { hashKey: "gsi1pk", rangeKey: "gsi1sk" } },
+    });
+
+    const domain = isProd
+      ? {
+          name: "kycombinator.com",
+          dns: sst.aws.dns({ zone: hostedZoneId }),
+          cert: certificateArn,
+        }
+      : {
+          // Non-prod preview: <stage>.kycombinator.com with an auto-provisioned,
+          // DNS-validated ACM cert via the hosted zone.
           name: `${stage}.kycombinator.com`,
           dns: sst.aws.dns({ zone: hostedZoneId }),
-          // No `cert`: SST creates + DNS-validates an ACM cert (us-east-1)
-          // for this subdomain automatically using the hosted zone above.
-        },
-      });
-      return;
-    }
+        };
 
-    // 1) Primary Next.js site on apex: kycombinator.com
     new sst.aws.Nextjs("Website", {
-      domain: {
-        name: "kycombinator.com",
-        dns: sst.aws.dns({ zone: hostedZoneId }),
-        cert: certificateArn,
+      domain,
+      link: [photos, table],
+      // Send submission notifications via SES (domain already verified).
+      permissions: [
+        { actions: ["ses:SendEmail", "ses:SendRawEmail"], resources: ["*"] },
+      ],
+      environment: {
+        GALLERY_TABLE: table.name,
+        PHOTOS_BUCKET: photos.name,
+        PHOTOS_REGION: "us-east-1",
+        ADMIN_EMAIL: process.env.ADMIN_EMAIL ?? "dan@kycombinator.com",
+        ADMIN_PASSCODE: process.env.ADMIN_PASSCODE ?? "",
+        ADMIN_JWT_SECRET: process.env.ADMIN_JWT_SECRET ?? "",
+        ORGANIZERS_EMAIL: process.env.ORGANIZERS_EMAIL ?? "organizers@kycombinator.com",
+        EMAIL_FROM: process.env.EMAIL_FROM ?? "noreply@kycombinator.com",
       },
     });
+
+    // The apex + www redirect belong to production only.
+    if (!isProd) return;
 
     // 2) CloudFront Function to redirect www -> apex while preserving path + query
     const redirectFn = new aws.cloudfront.Function("RedirectWWW", {

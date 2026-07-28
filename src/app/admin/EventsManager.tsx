@@ -26,6 +26,7 @@ type Draft = {
   tagline: string;
   when: string;
   month: string;
+  action: string;
   href: string;
   order: string;
   published: boolean;
@@ -36,6 +37,7 @@ const emptyDraft: Draft = {
   tagline: "",
   when: "",
   month: "",
+  action: "",
   href: "/events",
   order: "",
   published: true,
@@ -48,6 +50,7 @@ function toDraft(e: EventRecord): Draft {
     tagline: e.tagline,
     when: e.when,
     month: e.month,
+    action: e.action,
     href: e.href,
     order: String(e.order ?? ""),
     published: e.published,
@@ -83,6 +86,7 @@ export default function EventsManager({ events }: { events: EventRecord[] }) {
           tagline: draft.tagline,
           when: draft.when,
           month: draft.month,
+          action: draft.action,
           href: draft.href,
           order: draft.order.trim() === "" ? undefined : Number(draft.order),
           published: draft.published,
@@ -161,10 +165,14 @@ export default function EventsManager({ events }: { events: EventRecord[] }) {
               <span className={labelCls}>Tagline</span>
               <textarea className={`${fieldCls} min-h-[80px] resize-y`} value={draft.tagline} onChange={set("tagline")} />
             </label>
-            <div className="grid gap-5 sm:grid-cols-3">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               <label className="flex flex-col gap-1.5">
                 <span className={labelCls}>Month</span>
                 <input className={fieldCls} value={draft.month} onChange={set("month")} placeholder="JAN" />
+              </label>
+              <label className="flex flex-col gap-1.5">
+                <span className={labelCls}>Action</span>
+                <input className={fieldCls} value={draft.action} onChange={set("action")} placeholder="Register" />
               </label>
               <label className="flex flex-col gap-1.5">
                 <span className={labelCls}>Order</span>
@@ -198,7 +206,7 @@ export default function EventsManager({ events }: { events: EventRecord[] }) {
           <table className="w-full border-collapse text-left text-[14px]">
             <thead>
               <tr className="border-b border-[#d8d2c5]">
-                {["Name", "When", "Month", "Order", "Published", ""].map((h, i) => (
+                {["Name", "When", "Month", "Action", "Order", "Published", ""].map((h, i) => (
                   <th key={i} className={`${metaCls} px-4 py-3`}>
                     {h}
                   </th>
@@ -211,6 +219,7 @@ export default function EventsManager({ events }: { events: EventRecord[] }) {
                   <td className="px-4 py-3 text-[#16130f]">{e.name}</td>
                   <td className="px-4 py-3 text-[#4a443a]">{e.when}</td>
                   <td className="px-4 py-3 text-[#4a443a]">{e.month}</td>
+                  <td className="px-4 py-3 text-[#4a443a]">{e.action}</td>
                   <td className="px-4 py-3 text-[#4a443a]">{e.order}</td>
                   <td className="px-4 py-3 text-[#4a443a]">{e.published ? "yes" : "no"}</td>
                   <td className="px-4 py-3">

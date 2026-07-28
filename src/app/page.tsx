@@ -11,8 +11,12 @@ import {
   scoreboardUpdatedAt,
   stats,
   buildersInRoom,
-  calendar,
+  featuredEvents as staticEvents,
+  calendar as staticCalendar,
+  type FeaturedEvent,
+  type CalendarEvent,
 } from "./components/home/data";
+import { listEvents, listApprovedPhotos, galleryConfigured } from "@/lib/gallery";
 
 export const metadata: Metadata = {
   title: "KYX — Kentucky's startup engine",
@@ -20,9 +24,60 @@ export const metadata: Metadata = {
     "Ten Series A companies out of Kentucky by 2030. Everything KYX does serves that number. Apply to Cinderblock.",
 };
 
-const remaining = Math.max(0, GOAL_TOTAL - companiesOnBoard);
+// Homepage re-renders (ISR) so admin-managed events/photos flow through without
+// a deploy, while staying fast and cached.
+export const revalidate = 60;
 
-export default function Home() {
+const remaining = Math.max(0, GOAL_TOTAL - companiesOnBoard);
+const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+
+// Reads events + approved photos from the database and shapes them for the
+// carousel and calendar. Falls back to the curated static data if the DB isn't
+// configured, is empty, or errors — so the homepage can never render empty.
+async function getHomeEvents(): Promise<{
+  showcase: FeaturedEvent[];
+  calendar: CalendarEvent[];
+}> {
+  if (!galleryConfigured()) return { showcase: staticEvents, calendar: staticCalendar };
+  try {
+    const [events, photos] = await Promise.all([listEvents(), listApprovedPhotos()]);
+    const pub = events.filter((e) => e.published);
+    if (pub.length === 0) return { showcase: staticEvents, calendar: staticCalendar };
+
+    const byEvent: Record<string, typeof photos> = {};
+    for (const p of photos) (byEvent[p.eventId] ||= []).push(p);
+
+    const showcase: FeaturedEvent[] = pub.map((e) => ({
+      title: e.name,
+      tagline: e.tagline,
+      when: e.when,
+      href: e.href,
+      photos: (byEvent[e.id] || []).map((p) => ({ src: p.url, alt: e.name })),
+    }));
+
+    const calendar: CalendarEvent[] = pub
+      .filter((e) => e.month && MONTHS.includes(e.month))
+      .sort((a, b) => MONTHS.indexOf(a.month) - MONTHS.indexOf(b.month))
+      .map((e) => ({
+        month: e.month,
+        name: e.name,
+        tagline: e.tagline,
+        action: e.action || "Details",
+        href: e.href,
+      }));
+
+    return {
+      showcase,
+      calendar: calendar.length ? calendar : staticCalendar,
+    };
+  } catch (err) {
+    console.error("home events load failed:", err);
+    return { showcase: staticEvents, calendar: staticCalendar };
+  }
+}
+
+export default async function Home() {
+  const { showcase, calendar } = await getHomeEvents();
   return (
     <main className="mx-auto max-w-[1120px]">
         {/* ── Hero ─────────────────────────────────────────────── */}
@@ -149,7 +204,7 @@ export default function Home() {
           ))}
         </section>
         {/* ── Event showcase (carousel of events; photo collages) ── */}
-        <EventShowcase />
+        <EventShowcase events={showcase} />
 
         {/* ── Cinderblock: what you actually get ───────────────── */}
         <section className="grid grid-cols-1 gap-10 border-b border-[#16130f] px-5 py-16 md:px-7 lg:grid-cols-[380px_minmax(0,1fr)] lg:gap-14 lg:px-10 lg:py-[72px]">

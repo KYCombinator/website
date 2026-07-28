@@ -22,6 +22,7 @@ export async function POST(request: Request) {
     tagline: clip(body?.tagline, 300),
     when: clip(body?.when, 120),
     month: clip(body?.month, 12).toUpperCase(),
+    action: clip(body?.action, 40),
     href: clip(body?.href, 500) || "/events",
     order: Number.isFinite(body?.order) ? Number(body.order) : undefined,
     published: body?.published === undefined ? undefined : !!body.published,

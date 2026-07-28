@@ -1,15 +1,11 @@
 import { NextResponse } from "next/server";
-import {
-  ADMIN_COOKIE,
-  adminAuthConfigured,
-  isAdminEmail,
-  signAdminToken,
-} from "@/lib/adminAuth";
+import { ADMIN_COOKIE, adminAuthConfigured, signAdminToken } from "@/lib/adminAuth";
 import {
   verifyLoginCode,
   checkLoginRateLimit,
   recordLoginFailure,
   clearLoginFailures,
+  isAdminUser,
 } from "@/lib/gallery";
 
 export const dynamic = "force-dynamic";
@@ -47,7 +43,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  const ok = isAdminEmail(email) && /^\d{6}$/.test(code) && (await verifyLoginCode(email, code));
+  const ok =
+    /^\d{6}$/.test(code) &&
+    (await isAdminUser(email)) &&
+    (await verifyLoginCode(email, code));
   if (!ok) {
     await recordLoginFailure(ip);
     return NextResponse.json({ error: "Invalid or expired code." }, { status: 401 });
@@ -55,7 +54,7 @@ export async function POST(request: Request) {
 
   await clearLoginFailures(ip);
   const res = NextResponse.json({ ok: true });
-  res.cookies.set(ADMIN_COOKIE, signAdminToken(), {
+  res.cookies.set(ADMIN_COOKIE, signAdminToken(email), {
     httpOnly: true,
     secure: true,
     sameSite: "lax",

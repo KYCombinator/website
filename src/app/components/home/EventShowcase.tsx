@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { featuredEvents, type FeaturedEvent } from "./data";
+import { type FeaturedEvent } from "./data";
 
 // Homepage event showcase: a carousel that cycles through KYX events. Each event
 // with photos renders as a collage grid; events whose photos aren't in the repo
@@ -92,8 +92,7 @@ function Slide({ event, active }: { event: FeaturedEvent; active: boolean }) {
   );
 }
 
-export default function EventShowcase() {
-  const events = featuredEvents;
+export default function EventShowcase({ events }: { events: FeaturedEvent[] }) {
   const n = events.length;
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);

@@ -4,16 +4,19 @@ import {
   listPendingPhotos,
   listEvents,
   listApplications,
+  listUsers,
   galleryConfigured,
   type PhotoRecord,
   type EventRecord,
   type ApplicationRecord,
+  type UserRecord,
 } from "@/lib/gallery";
 import { Container, Eyebrow, SerifHeading } from "../components/fm";
 import AdminHeader from "./AdminHeader";
 import PhotoQueue from "./PhotoQueue";
 import EventsManager from "./EventsManager";
 import Applications from "./Applications";
+import UsersManager from "./UsersManager";
 
 export default async function AdminPage() {
   if (!galleryConfigured()) {
@@ -32,11 +35,17 @@ export default async function AdminPage() {
     );
   }
 
-  const [pending, events, applications]: [
+  const [pending, events, applications, users]: [
     PhotoRecord[],
     EventRecord[],
     ApplicationRecord[],
-  ] = await Promise.all([listPendingPhotos(), listEvents(), listApplications()]);
+    UserRecord[],
+  ] = await Promise.all([
+    listPendingPhotos(),
+    listEvents(),
+    listApplications(),
+    listUsers(),
+  ]);
 
   const eventNames: Record<string, string> = {};
   for (const e of events) eventNames[e.id] = e.name;
@@ -61,6 +70,12 @@ export default async function AdminPage() {
         <Eyebrow>Applications · {applications.length}</Eyebrow>
         <SerifHeading className="mb-6 mt-2 text-[32px] leading-none">Applications.</SerifHeading>
         <Applications items={applications} />
+      </Container>
+
+      <Container className="py-10">
+        <Eyebrow>Users · {users.length}</Eyebrow>
+        <SerifHeading className="mb-6 mt-2 text-[32px] leading-none">Users.</SerifHeading>
+        <UsersManager users={users} />
       </Container>
     </main>
   );

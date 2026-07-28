@@ -14,12 +14,12 @@ export function adminAuthConfigured() {
   return SECRET.length > 0;
 }
 
-export function isAdminEmail(email: string): boolean {
-  return String(email || "").trim().toLowerCase() === ADMIN_EMAIL;
-}
-
-export function signAdminToken(): string {
-  return jwt.sign({ role: "admin", email: ADMIN_EMAIL }, SECRET, { expiresIn: "7d" });
+export function signAdminToken(email?: string): string {
+  return jwt.sign(
+    { role: "admin", email: (email || ADMIN_EMAIL).toLowerCase() },
+    SECRET,
+    { expiresIn: "7d" }
+  );
 }
 
 export function verifyAdminToken(token: string | undefined | null): boolean {

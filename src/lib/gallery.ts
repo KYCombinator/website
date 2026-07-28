@@ -47,7 +47,8 @@ export type EventRecord = {
   name: string;
   tagline: string;
   when: string;
-  month: string;
+  month: string; // calendar month, e.g. "SEP" (blank = not on the calendar)
+  action: string; // calendar action label, e.g. "Register"
   href: string;
   order: number;
   published: boolean;
@@ -104,6 +105,7 @@ export async function putEvent(
     tagline: input.tagline ?? existing?.tagline ?? "",
     when: input.when ?? existing?.when ?? "",
     month: input.month ?? existing?.month ?? "",
+    action: input.action ?? existing?.action ?? "",
     href: input.href ?? existing?.href ?? "/events",
     order: input.order ?? existing?.order ?? Date.now(),
     published: input.published ?? existing?.published ?? true,
@@ -164,6 +166,36 @@ export async function createPhoto(input: {
     })
   );
   return record;
+}
+
+// Seed a pre-approved curated photo (e.g. the site's own event photos) so the
+// homepage carousel has content before any community submissions.
+export async function createApprovedPhoto(input: {
+  eventId: string;
+  url: string;
+  submitterName: string;
+}): Promise<void> {
+  const id = randomUUID();
+  const createdAt = new Date().toISOString();
+  await doc().send(
+    new PutCommand({
+      TableName: TABLE,
+      Item: {
+        pk: "PHOTO",
+        sk: id,
+        gsi1pk: "PHOTO#approved",
+        gsi1sk: createdAt,
+        id,
+        eventId: input.eventId,
+        key: "",
+        url: input.url,
+        submitterName: input.submitterName,
+        submitterEmail: "",
+        status: "approved",
+        createdAt,
+      },
+    })
+  );
 }
 
 async function photosByStatus(status: PhotoStatus): Promise<PhotoRecord[]> {
@@ -253,6 +285,72 @@ export async function setApplicationStatus(
       ExpressionAttributeValues: { ":s": status, ":g": `APP#${status}` },
     })
   );
+}
+
+// ── Users ───────────────────────────────────────────────────────────────────
+export type UserRole = "member" | "admin";
+export type UserRecord = {
+  email: string;
+  name: string;
+  role: UserRole;
+  createdAt: string;
+};
+
+const BOOTSTRAP_ADMIN = (process.env.ADMIN_EMAIL || "dan@kycombinator.com").toLowerCase();
+
+export async function listUsers(): Promise<UserRecord[]> {
+  const r = await doc().send(
+    new QueryCommand({
+      TableName: TABLE,
+      KeyConditionExpression: "pk = :pk",
+      ExpressionAttributeValues: { ":pk": "USER" },
+    })
+  );
+  return ((r.Items || []) as UserRecord[]).sort((a, b) =>
+    a.email.localeCompare(b.email)
+  );
+}
+
+export async function getUser(email: string): Promise<UserRecord | null> {
+  const r = await doc().send(
+    new GetCommand({ TableName: TABLE, Key: { pk: "USER", sk: email.toLowerCase() } })
+  );
+  return (r.Item as UserRecord) || null;
+}
+
+export async function putUser(input: {
+  email: string;
+  name: string;
+  role: UserRole;
+}): Promise<UserRecord> {
+  const email = input.email.trim().toLowerCase();
+  const existing = await getUser(email);
+  const record: UserRecord = {
+    email,
+    name: input.name.trim(),
+    role: input.role === "admin" ? "admin" : "member",
+    createdAt: existing?.createdAt ?? new Date().toISOString(),
+  };
+  await doc().send(
+    new PutCommand({ TableName: TABLE, Item: { pk: "USER", sk: email, ...record } })
+  );
+  return record;
+}
+
+export async function deleteUser(email: string): Promise<void> {
+  await doc().send(
+    new DeleteCommand({ TableName: TABLE, Key: { pk: "USER", sk: email.toLowerCase() } })
+  );
+}
+
+// Who may access the admin portal: the bootstrap admin (ADMIN_EMAIL) always,
+// plus any user record with role "admin".
+export async function isAdminUser(email: string): Promise<boolean> {
+  const e = String(email || "").trim().toLowerCase();
+  if (!e) return false;
+  if (e === BOOTSTRAP_ADMIN) return true;
+  const u = await getUser(e);
+  return u?.role === "admin";
 }
 
 // ── S3 upload ───────────────────────────────────────────────────────────────

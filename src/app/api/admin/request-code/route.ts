@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
-import { adminAuthConfigured, isAdminEmail } from "@/lib/adminAuth";
-import { createLoginCode, checkLoginRateLimit, recordLoginFailure } from "@/lib/gallery";
+import { adminAuthConfigured } from "@/lib/adminAuth";
+import {
+  createLoginCode,
+  checkLoginRateLimit,
+  recordLoginFailure,
+  isAdminUser,
+} from "@/lib/gallery";
 import { sendLoginCode } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
@@ -37,7 +42,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  if (isAdminEmail(email)) {
+  if (await isAdminUser(email)) {
     try {
       const code = await createLoginCode(email);
       await sendLoginCode(email.trim().toLowerCase(), code);

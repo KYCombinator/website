@@ -400,6 +400,16 @@ export async function isAdminUser(email: string): Promise<boolean> {
   return (await getUserRole(email)) === "admin";
 }
 
+// Return the role for an email, auto-creating a member account if this is a
+// brand-new user (self-signup on first sign-in).
+export async function ensureUserRole(email: string): Promise<UserRole> {
+  const existing = await getUserRole(email);
+  if (existing) return existing;
+  const e = email.trim().toLowerCase();
+  await putUser({ email: e, name: e.split("@")[0], role: "member" });
+  return "member";
+}
+
 // ── S3 upload ───────────────────────────────────────────────────────────────
 export async function putPhotoObject(
   body: Buffer,

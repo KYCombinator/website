@@ -2,13 +2,15 @@ import { NextResponse } from "next/server";
 import { SESSION_COOKIE, authConfigured, signSession } from "@/lib/adminAuth";
 import {
   verifyLoginCode,
-  getUserRole,
+  ensureUserRole,
   checkLoginRateLimit,
   recordLoginFailure,
   clearLoginFailures,
 } from "@/lib/gallery";
 
 export const dynamic = "force-dynamic";
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function clientIp(request: Request) {
   const xff = request.headers.get("x-forwarded-for") || "";
@@ -40,13 +42,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  const role = /^\d{6}$/.test(code) ? await getUserRole(email) : null;
-  const ok = role !== null && (await verifyLoginCode(email, code));
-  if (!ok || role === null) {
+  const codeOk =
+    EMAIL_RE.test(email) &&
+    /^\d{6}$/.test(code) &&
+    (await verifyLoginCode(email, code));
+  if (!codeOk) {
     await recordLoginFailure(ip);
     return NextResponse.json({ error: "Invalid or expired code." }, { status: 401 });
   }
 
+  // New email → an account is created (as a member) on first sign-in.
+  const role = await ensureUserRole(email);
   await clearLoginFailures(ip);
   const res = NextResponse.json({ ok: true, role });
   res.cookies.set(SESSION_COOKIE, signSession(email, role), {

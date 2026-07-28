@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
 import { authConfigured } from "@/lib/adminAuth";
-import { createLoginCode, checkLoginRateLimit, recordLoginFailure, isKnownUser } from "@/lib/gallery";
+import { createLoginCode, checkLoginRateLimit, recordLoginFailure } from "@/lib/gallery";
 import { sendLoginCode } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function clientIp(request: Request) {
   const xff = request.headers.get("x-forwarded-for") || "";
@@ -34,7 +36,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  if (await isKnownUser(email)) {
+  // Any valid email gets a code — a brand-new email creates an account on
+  // first sign-in (self-signup). Invalid formats just count against the limit.
+  if (EMAIL_RE.test(email)) {
     try {
       const code = await createLoginCode(email);
       await sendLoginCode(email.trim().toLowerCase(), code);

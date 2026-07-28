@@ -34,7 +34,7 @@ export default function LoginPage() {
       });
       if (res.ok) {
         setStep("code");
-        setNote(`If ${email} has an account, a 6-digit code is on its way. Check your email.`);
+        setNote(`A 6-digit code is on its way to ${email}. Check your email.`);
       } else {
         const d = await res.json().catch(() => ({}));
         setError(d?.error || "Could not send a code.");
@@ -79,7 +79,8 @@ export default function LoginPage() {
         Sign in.
       </h1>
       <p className="mt-3 text-[15px] leading-[1.5] text-[#4a443a]">
-        We&apos;ll email you a 6-digit code — no password needed.
+        We&apos;ll email you a 6-digit code — no password. New here? Signing in
+        creates your account.
       </p>
 
       {step === "email" ? (

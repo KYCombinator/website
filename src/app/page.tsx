@@ -21,7 +21,6 @@ export const metadata: Metadata = {
 };
 
 const remaining = Math.max(0, GOAL_TOTAL - companiesOnBoard);
-const hasPlaceholderStats = stats.some((s) => s.placeholder);
 
 export default function Home() {
   return (
@@ -151,12 +150,6 @@ export default function Home() {
             </div>
           ))}
         </section>
-        {hasPlaceholderStats && (
-          <p className="px-5 pt-2 font-[family-name:var(--font-ibm-plex-mono)] text-[10px] uppercase tracking-[0.08em] text-[var(--kyx-purple)] md:px-7 lg:px-10">
-            Figures pending confirmation
-          </p>
-        )}
-
         {/* ── Event showcase (carousel of events; photo collages) ── */}
         <EventShowcase />
 

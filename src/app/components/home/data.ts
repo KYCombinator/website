@@ -28,11 +28,10 @@ export type Stat = {
   placeholder?: boolean;
 };
 
-// builders + companies are confirmed; event attendees still a placeholder.
 export const stats: Stat[] = [
   { figure: "26", label: ["builders", "in the room"] },
   { figure: "13", label: ["companies", "started here"] },
-  { figure: "1,200+", label: ["event", "attendees"], placeholder: true }, // ⚠️ cumulative HackKentucky + events — confirm
+  { figure: "1,200+", label: ["event", "attendees"] },
 ];
 
 // Builder count, mirrored in the community band copy.
@@ -112,10 +111,9 @@ export type CalendarEvent = {
 // Source these from the events CMS when one exists; hard-coded here to the 2026
 // program calendar. Discontinued programs are intentionally omitted.
 export const calendar: CalendarEvent[] = [
-  { month: "APR", name: "Casino Night", tagline: "Luck is low agency.", action: "Register", href: "/events" },
-  { month: "SEP", name: "HackKentucky", tagline: "Sleep is low agency.", action: "Register", href: "https://www.hackkentucky.com" },
-  { month: "SEP", name: "Velocity", tagline: "Pre-revenue is low agency.", action: "Apply", href: "/events/velocity" },
-  { month: "OCT", name: "Block Party", tagline: "Netflix & chill is low agency.", action: "Register", href: "/events" },
+  { month: "SEP", name: "HackKentucky", tagline: "Sleep is low agency.", action: "Register", href: "https://luma.com/hy24ycd1" },
+  { month: "OCT", name: "Block Party", tagline: "Netflix & chill is low agency.", action: "Register", href: "https://luma.com/3ggtx98x" },
+  // ⚠️ The LOUIES Luma link is TBD — points at the LOUIES page for now.
   { month: "DEC", name: "The LOUIES", tagline: "Hiding is low agency.", action: "Attend", href: "/events/louies/2025" },
 ];
 

@@ -32,8 +32,7 @@ jobs:
       CERTIFICATE_ARN: ${{ secrets.CERTIFICATE_ARN }}
       NEXT_PUBLIC_APP_ID: ${{ secrets.APP_ID }}
       NEXT_PUBLIC_JWT_SECRET: ${{ secrets.JWT_SECRET }}
-      # Admin portal auth (set these repo secrets). Empty => admin login disabled.
-      ADMIN_PASSCODE: ${{ secrets.ADMIN_PASSCODE }}
+      # Admin portal session key (set this repo secret). Empty => admin login disabled.
       ADMIN_JWT_SECRET: ${{ secrets.ADMIN_JWT_SECRET }}
       # Serve X-Robots-Tag: noindex, nofollow on the dev host (see next.config.js).
       DEPLOY_NOINDEX: '1'

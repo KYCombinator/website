@@ -20,8 +20,12 @@ export async function middleware(req: NextRequest) {
 
   // ── Admin portal ──────────────────────────────────────────────────────────
   if (pathname.startsWith('/admin') || pathname.startsWith('/api/admin')) {
-    // The login page + login endpoint are public.
-    if (pathname === '/admin/login' || pathname === '/api/admin/login') {
+    // The login page + pre-auth endpoints (request a code, verify a code) are public.
+    if (
+      pathname === '/admin/login' ||
+      pathname === '/api/admin/login' ||
+      pathname === '/api/admin/request-code'
+    ) {
       return NextResponse.next();
     }
     const token = req.cookies.get(ADMIN_COOKIE)?.value;

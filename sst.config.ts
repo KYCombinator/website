@@ -60,7 +60,6 @@ export default $config({
         PHOTOS_BUCKET: photos.name,
         PHOTOS_REGION: "us-east-1",
         ADMIN_EMAIL: process.env.ADMIN_EMAIL ?? "dan@kycombinator.com",
-        ADMIN_PASSCODE: process.env.ADMIN_PASSCODE ?? "",
         ADMIN_JWT_SECRET: process.env.ADMIN_JWT_SECRET ?? "",
         ORGANIZERS_EMAIL: process.env.ORGANIZERS_EMAIL ?? "organizers@kycombinator.com",
         EMAIL_FROM: process.env.EMAIL_FROM ?? "noreply@kycombinator.com",

@@ -15,6 +15,26 @@ function ses() {
   return _ses;
 }
 
+// Send an admin login code. Unlike notifyOrganizers, failures here must
+// propagate so the login route can tell the user the code couldn't be sent.
+export async function sendLoginCode(toEmail: string, code: string): Promise<void> {
+  await ses().send(
+    new SendEmailCommand({
+      Source: FROM,
+      Destination: { ToAddresses: [toEmail] },
+      Message: {
+        Subject: { Data: "Your KYX admin sign-in code", Charset: "UTF-8" },
+        Body: {
+          Text: {
+            Data: `Your KYX admin code is ${code}\n\nIt expires in 10 minutes. If you didn't request it, ignore this email.`,
+            Charset: "UTF-8",
+          },
+        },
+      },
+    })
+  );
+}
+
 export async function notifyOrganizers(subject: string, body: string): Promise<void> {
   try {
     await ses().send(

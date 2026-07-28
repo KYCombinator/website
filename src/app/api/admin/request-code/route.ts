@@ -1,16 +1,7 @@
 import { NextResponse } from "next/server";
-import {
-  ADMIN_COOKIE,
-  adminAuthConfigured,
-  isAdminEmail,
-  signAdminToken,
-} from "@/lib/adminAuth";
-import {
-  verifyLoginCode,
-  checkLoginRateLimit,
-  recordLoginFailure,
-  clearLoginFailures,
-} from "@/lib/gallery";
+import { adminAuthConfigured, isAdminEmail } from "@/lib/adminAuth";
+import { createLoginCode, checkLoginRateLimit, recordLoginFailure } from "@/lib/gallery";
+import { sendLoginCode } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +10,8 @@ function clientIp(request: Request) {
   return xff.split(",")[0].trim() || "unknown";
 }
 
-// Verifies the emailed 6-digit code and issues the admin session cookie.
+// Emails a 6-digit sign-in code to the allowlisted admin address. Rate-limited.
+// Always responds generically so it can't be used to probe the admin email.
 export async function POST(request: Request) {
   if (!adminAuthConfigured()) {
     return NextResponse.json(
@@ -38,29 +30,25 @@ export async function POST(request: Request) {
   }
 
   let email = "";
-  let code = "";
   try {
     const body = await request.json();
     email = String(body?.email || "");
-    code = String(body?.code || "").trim();
   } catch {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  const ok = isAdminEmail(email) && /^\d{6}$/.test(code) && (await verifyLoginCode(email, code));
-  if (!ok) {
+  if (isAdminEmail(email)) {
+    try {
+      const code = await createLoginCode(email);
+      await sendLoginCode(email.trim().toLowerCase(), code);
+    } catch (err) {
+      console.error("sendLoginCode failed:", err);
+      return NextResponse.json({ error: "Could not send the code. Try again." }, { status: 502 });
+    }
+  } else {
+    // Unknown email: count it against the rate limit, respond generically.
     await recordLoginFailure(ip);
-    return NextResponse.json({ error: "Invalid or expired code." }, { status: 401 });
   }
 
-  await clearLoginFailures(ip);
-  const res = NextResponse.json({ ok: true });
-  res.cookies.set(ADMIN_COOKIE, signAdminToken(), {
-    httpOnly: true,
-    secure: true,
-    sameSite: "lax",
-    path: "/",
-    maxAge: 60 * 60 * 24 * 7,
-  });
-  return res;
+  return NextResponse.json({ ok: true });
 }

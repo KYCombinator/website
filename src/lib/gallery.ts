@@ -1,4 +1,4 @@
-import { randomUUID } from "crypto";
+import { randomUUID, randomInt, createHash } from "crypto";
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import {
   DynamoDBDocumentClient,
@@ -356,4 +356,59 @@ export async function clearLoginFailures(ip: string): Promise<void> {
   await doc().send(
     new DeleteCommand({ TableName: TABLE, Key: { pk: "RL", sk: ip } })
   );
+}
+
+// ── Email login codes (OTP) ─────────────────────────────────────────────────
+const OTP_TTL_SEC = 600; // 10 min
+const OTP_MAX_ATTEMPTS = 5;
+
+function hashCode(email: string, code: string) {
+  return createHash("sha256").update(`${email.toLowerCase()}:${code}`).digest("hex");
+}
+
+// Generate a 6-digit code, store its hash (with expiry), and return the plaintext
+// so the caller can email it. Overwrites any outstanding code for the email.
+export async function createLoginCode(email: string): Promise<string> {
+  const code = String(randomInt(0, 1_000_000)).padStart(6, "0");
+  const now = Math.floor(Date.now() / 1000);
+  await doc().send(
+    new PutCommand({
+      TableName: TABLE,
+      Item: {
+        pk: "OTP",
+        sk: email.toLowerCase(),
+        codeHash: hashCode(email, code),
+        expiresAt: now + OTP_TTL_SEC,
+        attempts: 0,
+      },
+    })
+  );
+  return code;
+}
+
+// Verify a submitted code: must exist, be unexpired, under the attempt cap, and
+// match. Consumes (deletes) the code on success.
+export async function verifyLoginCode(email: string, code: string): Promise<boolean> {
+  const key = { pk: "OTP", sk: email.toLowerCase() };
+  const r = await doc().send(new GetCommand({ TableName: TABLE, Key: key }));
+  const item = r.Item as
+    | { codeHash?: string; expiresAt?: number; attempts?: number }
+    | undefined;
+  const now = Math.floor(Date.now() / 1000);
+  if (!item || !item.codeHash || (item.expiresAt ?? 0) < now) return false;
+  if ((item.attempts ?? 0) >= OTP_MAX_ATTEMPTS) return false;
+
+  if (item.codeHash === hashCode(email, code)) {
+    await doc().send(new DeleteCommand({ TableName: TABLE, Key: key }));
+    return true;
+  }
+  await doc().send(
+    new UpdateCommand({
+      TableName: TABLE,
+      Key: key,
+      UpdateExpression: "SET attempts = if_not_exists(attempts, :z) + :one",
+      ExpressionAttributeValues: { ":z": 0, ":one": 1 },
+    })
+  );
+  return false;
 }

@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+
+const RESEND_SECONDS = 30;
 
 const field =
   "w-full border border-[#cec7b8] bg-transparent px-4 py-3 text-[15px] text-[#16130f] outline-none focus:border-[#16130f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]";
@@ -17,15 +19,20 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [busy, setBusy] = useState(false);
+  const [resending, setResending] = useState(false);
   const [error, setError] = useState("");
   const [note, setNote] = useState("");
+  const [resendIn, setResendIn] = useState(0);
 
-  async function requestCode(e: React.FormEvent) {
-    e.preventDefault();
-    if (busy) return;
-    setBusy(true);
+  // Count the resend cooldown down to zero (setTimeout re-scheduled per tick).
+  useEffect(() => {
+    if (resendIn <= 0) return;
+    const id = setTimeout(() => setResendIn((s) => Math.max(0, s - 1)), 1000);
+    return () => clearTimeout(id);
+  }, [resendIn]);
+
+  async function sendCode(): Promise<boolean> {
     setError("");
-    setNote("");
     try {
       const res = await fetch("/api/auth/request-code", {
         method: "POST",
@@ -33,16 +40,34 @@ export default function LoginPage() {
         body: JSON.stringify({ email }),
       });
       if (res.ok) {
-        setStep("code");
-        setNote(`A 6-digit code is on its way to ${email}. Check your email.`);
-      } else {
-        const d = await res.json().catch(() => ({}));
-        setError(d?.error || "Could not send a code.");
+        setResendIn(RESEND_SECONDS);
+        return true;
       }
+      const d = await res.json().catch(() => ({}));
+      setError(d?.error || "Could not send a code.");
     } catch {
       setError("Could not send a code. Try again.");
     }
+    return false;
+  }
+
+  async function requestCode(e: React.FormEvent) {
+    e.preventDefault();
+    if (busy) return;
+    setBusy(true);
+    setNote("");
+    if (await sendCode()) {
+      setStep("code");
+      setNote(`A 6-digit code is on its way to ${email}. Check your email.`);
+    }
     setBusy(false);
+  }
+
+  async function resend() {
+    if (resending || resendIn > 0) return;
+    setResending(true);
+    if (await sendCode()) setNote(`A new code is on its way to ${email}.`);
+    setResending(false);
   }
 
   async function signIn(e: React.FormEvent) {
@@ -136,18 +161,33 @@ export default function LoginPage() {
           >
             {busy ? "Verifying…" : "Sign in"}
           </button>
-          <button
-            type="button"
-            onClick={() => {
-              setStep("email");
-              setCode("");
-              setError("");
-              setNote("");
-            }}
-            className="self-start font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[#7d766a] underline-offset-2 hover:underline"
-          >
-            ← Use a different email
-          </button>
+          <div className="flex items-center justify-between gap-3">
+            <button
+              type="button"
+              onClick={resend}
+              disabled={resendIn > 0 || resending}
+              className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[var(--kyx-purple)] underline-offset-2 hover:underline disabled:text-[#a39c8d] disabled:no-underline"
+            >
+              {resending
+                ? "Sending…"
+                : resendIn > 0
+                  ? `Resend in ${resendIn}s`
+                  : "Resend code"}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setStep("email");
+                setCode("");
+                setError("");
+                setNote("");
+                setResendIn(0);
+              }}
+              className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[#7d766a] underline-offset-2 hover:underline"
+            >
+              ← Use a different email
+            </button>
+          </div>
         </form>
       )}
     </main>

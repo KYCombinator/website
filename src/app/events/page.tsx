@@ -140,8 +140,20 @@ export default async function EventsPage() {
         />
       ))}
 
+      {/* Empty state — no series created yet */}
+      {events.length === 0 && (
+        <section className="border-b border-[#16130f]">
+          <Container className="py-14 lg:py-[72px]">
+            <p className="max-w-[640px] text-[19px] leading-[1.6] text-[#4a443a] [text-wrap:pretty]">
+              Our event lineup is being set up. In the meantime, the live calendar below
+              has everything that&apos;s currently on the books.
+            </p>
+          </Container>
+        </section>
+      )}
+
       {/* Contribute a photo */}
-      {configured && (
+      {events.length > 0 && (
         <section className="border-b border-[#16130f]">
           <Container className="flex flex-col gap-8 py-14 lg:py-[72px]">
             <div className="flex flex-col gap-3">

@@ -19,7 +19,6 @@ export type FooterLink = { label: string; href: string; external?: boolean };
 export const FOOTER_NAV: FooterLink[] = [
   { label: "Vision", href: "/vision" },
   { label: "Events", href: "/events" },
-  { label: "Gallery", href: "/gallery" },
   { label: "Report", href: "/report" },
   { label: "Lougistics", href: "/lougistics" },
   { label: "HackKentucky", href: "https://www.hackkentucky.com", external: true },

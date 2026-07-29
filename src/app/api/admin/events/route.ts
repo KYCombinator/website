@@ -21,9 +21,10 @@ export async function POST(request: Request) {
     name,
     tagline: clip(body?.tagline, 300),
     when: clip(body?.when, 120),
+    nextDate: clip(body?.nextDate, 120),
     month: clip(body?.month, 12).toUpperCase(),
     action: clip(body?.action, 40),
-    href: clip(body?.href, 500) || "/events",
+    href: clip(body?.href, 500), // blank = next event is TBD (no link)
     order: Number.isFinite(body?.order) ? Number(body.order) : undefined,
     published: body?.published === undefined ? undefined : !!body.published,
   });

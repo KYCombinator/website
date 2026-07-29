@@ -46,10 +46,11 @@ export type EventRecord = {
   id: string;
   name: string;
   tagline: string;
-  when: string;
+  when: string; // when it usually happens, e.g. "First Thursday of December"
+  nextDate: string; // next occurrence, e.g. "December 3, 2026" (blank = TBD)
   month: string; // calendar month, e.g. "SEP" (blank = not on the calendar)
   action: string; // calendar action label, e.g. "Register"
-  href: string;
+  href: string; // link to the next event (blank = TBD, no link)
   order: number;
   published: boolean;
   createdAt: string;
@@ -104,9 +105,10 @@ export async function putEvent(
     name: input.name,
     tagline: input.tagline ?? existing?.tagline ?? "",
     when: input.when ?? existing?.when ?? "",
+    nextDate: input.nextDate ?? existing?.nextDate ?? "",
     month: input.month ?? existing?.month ?? "",
     action: input.action ?? existing?.action ?? "",
-    href: input.href ?? existing?.href ?? "/events",
+    href: input.href ?? existing?.href ?? "",
     order: input.order ?? existing?.order ?? Date.now(),
     published: input.published ?? existing?.published ?? true,
     createdAt: existing?.createdAt ?? new Date().toISOString(),

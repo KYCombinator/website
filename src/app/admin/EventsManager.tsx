@@ -25,6 +25,7 @@ type Draft = {
   name: string;
   tagline: string;
   when: string;
+  nextDate: string;
   month: string;
   action: string;
   href: string;
@@ -36,9 +37,10 @@ const emptyDraft: Draft = {
   name: "",
   tagline: "",
   when: "",
+  nextDate: "",
   month: "",
   action: "",
-  href: "/events",
+  href: "",
   order: "",
   published: true,
 };
@@ -49,6 +51,7 @@ function toDraft(e: EventRecord): Draft {
     name: e.name,
     tagline: e.tagline,
     when: e.when,
+    nextDate: e.nextDate ?? "",
     month: e.month,
     action: e.action,
     href: e.href,
@@ -85,6 +88,7 @@ export default function EventsManager({ events }: { events: EventRecord[] }) {
           name: draft.name,
           tagline: draft.tagline,
           when: draft.when,
+          nextDate: draft.nextDate,
           month: draft.month,
           action: draft.action,
           href: draft.href,
@@ -154,33 +158,39 @@ export default function EventsManager({ events }: { events: EventRecord[] }) {
             <div className="grid gap-5 sm:grid-cols-2">
               <label className="flex flex-col gap-1.5">
                 <span className={labelCls}>Name *</span>
-                <input className={fieldCls} value={draft.name} onChange={set("name")} />
+                <input className={fieldCls} value={draft.name} onChange={set("name")} placeholder="HackKentucky" />
               </label>
               <label className="flex flex-col gap-1.5">
-                <span className={labelCls}>When</span>
-                <input className={fieldCls} value={draft.when} onChange={set("when")} />
+                <span className={labelCls}>When it usually is</span>
+                <input className={fieldCls} value={draft.when} onChange={set("when")} placeholder="First Thursday of December" />
               </label>
             </div>
             <label className="flex flex-col gap-1.5">
               <span className={labelCls}>Tagline</span>
               <textarea className={`${fieldCls} min-h-[80px] resize-y`} value={draft.tagline} onChange={set("tagline")} />
             </label>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-5 sm:grid-cols-2">
               <label className="flex flex-col gap-1.5">
-                <span className={labelCls}>Month</span>
-                <input className={fieldCls} value={draft.month} onChange={set("month")} placeholder="JAN" />
+                <span className={labelCls}>Next event date</span>
+                <input className={fieldCls} value={draft.nextDate} onChange={set("nextDate")} placeholder="December 3, 2026 — or leave blank for TBD" />
               </label>
               <label className="flex flex-col gap-1.5">
-                <span className={labelCls}>Action</span>
+                <span className={labelCls}>Next event link</span>
+                <input className={fieldCls} value={draft.href} onChange={set("href")} placeholder="https://luma.com/… — leave blank if TBD" />
+              </label>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              <label className="flex flex-col gap-1.5">
+                <span className={labelCls}>Calendar month</span>
+                <input className={fieldCls} value={draft.month} onChange={set("month")} placeholder="DEC" />
+              </label>
+              <label className="flex flex-col gap-1.5">
+                <span className={labelCls}>Link label</span>
                 <input className={fieldCls} value={draft.action} onChange={set("action")} placeholder="Register" />
               </label>
               <label className="flex flex-col gap-1.5">
                 <span className={labelCls}>Order</span>
                 <input className={fieldCls} value={draft.order} onChange={set("order")} type="number" inputMode="numeric" />
-              </label>
-              <label className="flex flex-col gap-1.5">
-                <span className={labelCls}>Href</span>
-                <input className={fieldCls} value={draft.href} onChange={set("href")} placeholder="/events" />
               </label>
             </div>
             <label className="flex items-center gap-2">
@@ -206,7 +216,7 @@ export default function EventsManager({ events }: { events: EventRecord[] }) {
           <table className="w-full border-collapse text-left text-[14px]">
             <thead>
               <tr className="border-b border-[#d8d2c5]">
-                {["Name", "When", "Month", "Action", "Order", "Published", ""].map((h, i) => (
+                {["Name", "When", "Next", "Link", "Month", "Order", "Pub.", ""].map((h, i) => (
                   <th key={i} className={`${metaCls} px-4 py-3`}>
                     {h}
                   </th>
@@ -218,8 +228,9 @@ export default function EventsManager({ events }: { events: EventRecord[] }) {
                 <tr key={e.id} className="border-b border-[#d8d2c5] align-top last:border-b-0">
                   <td className="px-4 py-3 text-[#16130f]">{e.name}</td>
                   <td className="px-4 py-3 text-[#4a443a]">{e.when}</td>
+                  <td className="px-4 py-3 text-[#4a443a]">{e.nextDate || "TBD"}</td>
+                  <td className="px-4 py-3 text-[#4a443a]">{e.href ? "yes" : "—"}</td>
                   <td className="px-4 py-3 text-[#4a443a]">{e.month}</td>
-                  <td className="px-4 py-3 text-[#4a443a]">{e.action}</td>
                   <td className="px-4 py-3 text-[#4a443a]">{e.order}</td>
                   <td className="px-4 py-3 text-[#4a443a]">{e.published ? "yes" : "no"}</td>
                   <td className="px-4 py-3">

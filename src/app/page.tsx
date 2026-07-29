@@ -51,7 +51,8 @@ async function getHomeEvents(): Promise<{
       title: e.name,
       tagline: e.tagline,
       when: e.when,
-      href: e.href,
+      // Empty href = next event is TBD; point the carousel link at the events hub.
+      href: e.href || "/events",
       photos: (byEvent[e.id] || []).map((p) => ({ src: p.url, alt: e.name })),
     }));
 
@@ -63,7 +64,7 @@ async function getHomeEvents(): Promise<{
         name: e.name,
         tagline: e.tagline,
         action: e.action || "Details",
-        href: e.href,
+        href: e.href || "/events",
       }));
 
     return {

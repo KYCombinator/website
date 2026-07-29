@@ -4,10 +4,11 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Container, Eyebrow, SerifHeading } from "@/app/components/fm";
 import { SESSION_COOKIE, verifySession } from "@/lib/adminAuth";
-import { getUser } from "@/lib/gallery";
+import { getUser, listEvents, galleryConfigured } from "@/lib/gallery";
 import LogoutButton from "./LogoutButton";
 import ProfileForm from "./ProfileForm";
 import Checklist from "./Checklist";
+import ContributePhotos from "./ContributePhotos";
 
 export const dynamic = "force-dynamic";
 
@@ -16,8 +17,7 @@ export const metadata: Metadata = {
 };
 
 const LINKS = [
-  { label: "Photo gallery", desc: "Browse event photos and submit your own.", href: "/gallery" },
-  { label: "Events", desc: "What's coming up on the KYX calendar.", href: "/events" },
+  { label: "Events", desc: "Event photos and what's coming up on the KYX calendar.", href: "/events" },
   { label: "The community", desc: "Join Slack and see how to get involved.", href: "/slack" },
   { label: "Apply to Cinderblock", desc: "A desk in the room for high-agency builders.", href: "/cinderblock/apply" },
 ];
@@ -36,6 +36,10 @@ export default async function DashboardPage() {
   };
   const onboarding = user?.onboarding || {};
   const name = profile.name;
+
+  const events = galleryConfigured()
+    ? (await listEvents()).filter((e) => e.published).map((e) => ({ id: e.id, name: e.name }))
+    : [];
 
   return (
     <>
@@ -108,6 +112,26 @@ export default async function DashboardPage() {
           </div>
         </Container>
       </section>
+
+      {/* Contribute event photos */}
+      {events.length > 0 && (
+        <section className="border-b border-[#16130f]">
+          <Container className="grid grid-cols-1 gap-8 py-16 lg:grid-cols-[minmax(0,1fr)_460px] lg:gap-16 lg:py-[72px]">
+            <div className="flex flex-col gap-3">
+              <Eyebrow>Contribute</Eyebrow>
+              <SerifHeading className="text-[28px] leading-none md:text-[34px]">
+                Add event photos.
+              </SerifHeading>
+              <p className="max-w-[440px] text-[15px] leading-[1.6] text-[#4a443a] [text-wrap:pretty]">
+                Have shots from a KYX event? Pick the event and upload — they&apos;re
+                credited to you and appear on the events page once approved. You can add
+                several at once.
+              </p>
+            </div>
+            <ContributePhotos events={events} submitterName={name} />
+          </Container>
+        </section>
+      )}
 
       <section>
         <Container className="py-16 lg:py-[72px]">

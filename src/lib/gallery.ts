@@ -8,7 +8,7 @@ import {
   UpdateCommand,
   DeleteCommand,
 } from "@aws-sdk/lib-dynamodb";
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 // Server-only data layer for the events gallery, photo submissions, and
@@ -218,6 +218,45 @@ export function listApprovedPhotos() {
 }
 export function listPendingPhotos() {
   return photosByStatus("pending");
+}
+
+// Every photo regardless of status (newest first). Used by the admin per-event
+// photo manager, which needs to show approved, pending, and rejected together.
+export async function listAllPhotos(): Promise<PhotoRecord[]> {
+  const r = await doc().send(
+    new QueryCommand({
+      TableName: TABLE,
+      KeyConditionExpression: "pk = :pk",
+      ExpressionAttributeValues: { ":pk": "PHOTO" },
+    })
+  );
+  return ((r.Items || []) as PhotoRecord[]).sort((a, b) =>
+    b.createdAt.localeCompare(a.createdAt)
+  );
+}
+
+export async function getPhoto(id: string): Promise<PhotoRecord | null> {
+  const r = await doc().send(
+    new GetCommand({ TableName: TABLE, Key: { pk: "PHOTO", sk: id } })
+  );
+  return (r.Item as PhotoRecord) || null;
+}
+
+// Permanently remove a photo: the S3 object (for community uploads, which have
+// a key) then the DynamoDB record. Curated seed photos have no key, so only the
+// record is removed.
+export async function deletePhoto(id: string): Promise<void> {
+  const photo = await getPhoto(id);
+  if (photo?.key) {
+    try {
+      await s3().send(new DeleteObjectCommand({ Bucket: BUCKET, Key: photo.key }));
+    } catch (err) {
+      console.error("deletePhoto: S3 object delete failed:", err);
+    }
+  }
+  await doc().send(
+    new DeleteCommand({ TableName: TABLE, Key: { pk: "PHOTO", sk: id } })
+  );
 }
 
 export async function setPhotoStatus(

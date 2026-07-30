@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import {
-  listPendingPhotos,
+  listAllPhotos,
   listEvents,
   listApplications,
   listUsers,
@@ -35,20 +35,26 @@ export default async function AdminPage() {
     );
   }
 
-  const [pending, events, applications, users]: [
+  const [allPhotos, events, applications, users]: [
     PhotoRecord[],
     EventRecord[],
     ApplicationRecord[],
     UserRecord[],
   ] = await Promise.all([
-    listPendingPhotos(),
+    listAllPhotos(),
     listEvents(),
     listApplications(),
     listUsers(),
   ]);
 
+  const pending = allPhotos.filter((p) => p.status === "pending");
+
   const eventNames: Record<string, string> = {};
   for (const e of events) eventNames[e.id] = e.name;
+
+  // All photos grouped by event, for the per-event photo manager.
+  const photosByEvent: Record<string, PhotoRecord[]> = {};
+  for (const p of allPhotos) (photosByEvent[p.eventId] ||= []).push(p);
 
   return (
     <main>
@@ -63,7 +69,7 @@ export default async function AdminPage() {
       <Container className="py-10">
         <Eyebrow>Events · {events.length}</Eyebrow>
         <SerifHeading className="mb-6 mt-2 text-[32px] leading-none">Events.</SerifHeading>
-        <EventsManager events={events} />
+        <EventsManager events={events} photosByEvent={photosByEvent} />
       </Container>
 
       <Container className="py-10">

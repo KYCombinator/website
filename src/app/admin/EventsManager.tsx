@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import type { EventRecord } from "@/lib/gallery";
+import type { EventRecord, PhotoRecord } from "@/lib/gallery";
+import EventPhotosPanel from "./EventPhotosPanel";
 
 const fieldCls =
   "w-full border border-[#cec7b8] bg-transparent px-4 py-3 text-[15px] text-[#16130f] outline-none placeholder:text-[#a39c8d] focus:border-[#16130f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]";
@@ -60,10 +61,19 @@ function toDraft(e: EventRecord): Draft {
   };
 }
 
-export default function EventsManager({ events }: { events: EventRecord[] }) {
+export default function EventsManager({
+  events,
+  photosByEvent,
+}: {
+  events: EventRecord[];
+  photosByEvent: Record<string, PhotoRecord[]>;
+}) {
   const router = useRouter();
   const [draft, setDraft] = useState<Draft | null>(null);
+  const [photosFor, setPhotosFor] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+
+  const photosEvent = photosFor ? events.find((e) => e.id === photosFor) : null;
 
   const set =
     (k: keyof Draft) =>
@@ -209,6 +219,14 @@ export default function EventsManager({ events }: { events: EventRecord[] }) {
         </div>
       )}
 
+      {photosEvent && (
+        <EventPhotosPanel
+          eventName={photosEvent.name}
+          photos={photosByEvent[photosEvent.id] ?? []}
+          onClose={() => setPhotosFor(null)}
+        />
+      )}
+
       {events.length === 0 ? (
         <p className="text-[15px] text-[#4a443a]">No events yet.</p>
       ) : (
@@ -234,9 +252,17 @@ export default function EventsManager({ events }: { events: EventRecord[] }) {
                   <td className="px-4 py-3 text-[#4a443a]">{e.order}</td>
                   <td className="px-4 py-3 text-[#4a443a]">{e.published ? "yes" : "no"}</td>
                   <td className="px-4 py-3">
-                    <div className="flex gap-2">
+                    <div className="flex flex-wrap gap-2">
                       <button type="button" className={darkBtn} disabled={busy} onClick={() => setDraft(toDraft(e))}>
                         Edit
+                      </button>
+                      <button
+                        type="button"
+                        className={outlineBtn}
+                        disabled={busy}
+                        onClick={() => setPhotosFor((cur) => (cur === e.id ? null : e.id))}
+                      >
+                        Photos ({photosByEvent[e.id]?.length ?? 0})
                       </button>
                       <button type="button" className={destructiveBtn} disabled={busy} onClick={() => remove(e.id)}>
                         Delete

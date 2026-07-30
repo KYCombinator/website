@@ -1,0 +1,86 @@
+import type { Metadata } from "next";
+import { Container, PageHero, Eyebrow, SerifHeading } from "@/app/components/fm";
+import { listUsers, galleryConfigured, type UserRecord } from "@/lib/gallery";
+
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Directory | KYX",
+  description: "The people in the KYX network.",
+};
+
+function initialOf(u: UserRecord) {
+  return (u.name || u.email || "?").trim().charAt(0).toUpperCase();
+}
+
+export default async function DirectoryPage() {
+  const users: UserRecord[] = galleryConfigured() ? await listUsers() : [];
+  // Everyone with a name shows up; sort by name.
+  const people = users
+    .filter((u) => (u.name || "").trim().length > 0)
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  return (
+    <>
+      <PageHero
+        eyebrow="Directory"
+        title="The network."
+        intro="The people in the room. Find someone, see what they're building, and book time with them."
+      />
+
+      <section>
+        <Container className="py-14 lg:py-[72px]">
+          {people.length === 0 ? (
+            <p className="max-w-[640px] text-[19px] leading-[1.6] text-[#4a443a] [text-wrap:pretty]">
+              No one to show yet. As members fill out their profiles, they&apos;ll appear here.
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {people.map((u) => (
+                <div key={u.email} className="flex flex-col gap-4 border border-[#d8d2c5] p-5">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden border border-[#d8d2c5] bg-[#eae5da]">
+                      {u.photoUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={u.photoUrl} alt="" className="h-full w-full object-cover" />
+                      ) : (
+                        <span className="font-[family-name:var(--font-instrument-serif)] text-[22px] leading-none text-[#57503f]">
+                          {initialOf(u)}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex min-w-0 flex-col">
+                      <span className="truncate font-[family-name:var(--font-instrument-serif)] text-[22px] leading-tight text-[#16130f]">
+                        {u.name}
+                      </span>
+                      {u.company && (
+                        <span className="truncate text-[14px] text-[#7d766a]">{u.company}</span>
+                      )}
+                    </div>
+                  </div>
+
+                  {u.cinderblock && (
+                    <span className="w-fit border border-[var(--kyx-purple)] px-2 py-0.5 font-[family-name:var(--font-ibm-plex-mono)] text-[10px] uppercase tracking-[0.1em] text-[var(--kyx-purple)]">
+                      Cinderblock
+                    </span>
+                  )}
+
+                  {u.bookingLink && (
+                    <a
+                      href={u.bookingLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-auto inline-flex w-fit border-b border-[var(--kyx-purple)] pb-0.5 font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[#16130f] transition-opacity duration-150 hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]"
+                    >
+                      Book time →
+                    </a>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </Container>
+      </section>
+    </>
+  );
+}

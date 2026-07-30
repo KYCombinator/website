@@ -8,6 +8,8 @@ export const config = {
     '/api/admin/:path*',
     '/dashboard',
     '/dashboard/:path*',
+    '/directory',
+    '/directory/:path*',
     '/api/member/:path*',
     '/account',
     '/account/:path*',

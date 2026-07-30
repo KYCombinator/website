@@ -340,6 +340,7 @@ export type UserRecord = {
   photoUrl?: string;
   bookingLink?: string;
   onboarding?: Onboarding;
+  cinderblock?: boolean; // admin-managed: is this person a Cinderblock member?
 };
 
 const BOOTSTRAP_ADMIN = (process.env.ADMIN_EMAIL || "dan@kycombinator.com").toLowerCase();
@@ -368,6 +369,7 @@ export async function putUser(input: {
   email: string;
   name: string;
   role: UserRole;
+  cinderblock?: boolean;
 }): Promise<UserRecord> {
   const email = input.email.trim().toLowerCase();
   const existing = await getUser(email);
@@ -377,6 +379,7 @@ export async function putUser(input: {
     name: input.name.trim(),
     role: input.role === "admin" ? "admin" : "member",
     createdAt: existing?.createdAt ?? new Date().toISOString(),
+    cinderblock: input.cinderblock ?? existing?.cinderblock ?? false,
   };
   await doc().send(
     new PutCommand({ TableName: TABLE, Item: { pk: "USER", sk: email, ...record } })
@@ -409,6 +412,7 @@ export async function updateUserProfile(
     photoUrl: patch.photoUrl !== undefined ? patch.photoUrl : existing?.photoUrl,
     bookingLink: patch.bookingLink !== undefined ? patch.bookingLink : existing?.bookingLink,
     onboarding: patch.onboarding !== undefined ? patch.onboarding : existing?.onboarding,
+    cinderblock: existing?.cinderblock, // admin-managed only; preserved across self-edits
   };
   await doc().send(
     new PutCommand({ TableName: TABLE, Item: { pk: "USER", sk: e, ...record } })

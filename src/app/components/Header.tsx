@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { APPLY_URL, HEADER_NAV } from "../site";
+import AccountMenu, { type Account } from "./AccountMenu";
 
 const LOGO = `${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.svg`;
 
@@ -19,7 +20,25 @@ function ApplyButton() {
   );
 }
 
-export default function Header({ children }: { children: React.ReactNode }) {
+function LoginLink({ onClick }: { onClick?: () => void }) {
+  return (
+    <Link
+      href="/login"
+      onClick={onClick}
+      className="font-[family-name:var(--font-ibm-plex-sans)] text-[13px] text-[#7d766a] transition-opacity duration-150 hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]"
+    >
+      Login
+    </Link>
+  );
+}
+
+export default function Header({
+  account,
+  showApply,
+}: {
+  account: Account | null;
+  showApply: boolean;
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -53,15 +72,16 @@ export default function Header({ children }: { children: React.ReactNode }) {
           ))}
         </nav>
 
-        {/* Desktop right cluster: auth (Avatar) + Apply */}
+        {/* Desktop right cluster: account (menu / login) + Apply */}
         <div className="hidden items-center gap-5 lg:flex">
-          {children}
-          <ApplyButton />
+          {account ? <AccountMenu account={account} /> : <LoginLink />}
+          {showApply && <ApplyButton />}
         </div>
 
         {/* Mobile cluster */}
         <div className="flex items-center gap-3 lg:hidden">
-          <ApplyButton />
+          {account && <AccountMenu account={account} />}
+          {showApply && <ApplyButton />}
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
@@ -87,9 +107,11 @@ export default function Header({ children }: { children: React.ReactNode }) {
               {label}
             </Link>
           ))}
-          <div className="flex min-h-[44px] items-center font-[family-name:var(--font-ibm-plex-sans)] text-[15px] text-[#7d766a]">
-            {children}
-          </div>
+          {!account && (
+            <div className="flex min-h-[44px] items-center">
+              <LoginLink onClick={() => setOpen(false)} />
+            </div>
+          )}
         </nav>
       )}
     </header>

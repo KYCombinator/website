@@ -1,10 +1,13 @@
 import type React from "react";
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import "./globals.css";
 import { fontVariables } from "./fonts";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Avatar from "./components/Avatar";
+import { SESSION_COOKIE, verifySession } from "@/lib/adminAuth";
+import { getUser, galleryConfigured } from "@/lib/gallery";
+import type { Account } from "./components/AccountMenu";
 
 export const metadata: Metadata = {
   title: "This is KYX",
@@ -26,11 +29,28 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Resolve the header's auth state once per request. The Apply button is
+  // hidden for signed-in Cinderblock members (they're already in the room).
+  const store = await cookies();
+  const session = verifySession(store.get(SESSION_COOKIE)?.value);
+  let account: Account | null = null;
+  let showApply = true;
+  if (session) {
+    const user = galleryConfigured() ? await getUser(session.email) : null;
+    account = {
+      name: user?.name || session.email.split("@")[0],
+      email: session.email,
+      photoUrl: user?.photoUrl || "",
+      isAdmin: session.role === "admin",
+    };
+    showApply = !user?.cinderblock;
+  }
+
   return (
     <html lang="en" className={fontVariables}>
       <head>
@@ -40,9 +60,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-[#f4f1ea] font-[family-name:var(--font-ibm-plex-sans)] text-[#16130f] antialiased">
-        <Header>
-          <Avatar />
-        </Header>
+        <Header account={account} showApply={showApply} />
         {children}
         <Footer />
       </body>

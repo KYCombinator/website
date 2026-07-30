@@ -81,6 +81,28 @@ export default function UsersManager({ users }: { users: UserRecord[] }) {
     }
   }
 
+  async function toggleCinderblock(u: UserRecord) {
+    if (busy) return;
+    setBusy(true);
+    try {
+      const res = await fetch("/api/admin/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: u.email,
+          name: u.name,
+          role: u.role,
+          cinderblock: !u.cinderblock,
+        }),
+      });
+      if (res.ok) router.refresh();
+    } catch {
+      // ignore
+    } finally {
+      setBusy(false);
+    }
+  }
+
   async function remove(email: string) {
     if (busy) return;
     if (!window.confirm(`Delete ${email}? This cannot be undone.`)) return;
@@ -147,7 +169,7 @@ export default function UsersManager({ users }: { users: UserRecord[] }) {
           <table className="w-full border-collapse text-left text-[14px]">
             <thead>
               <tr className="border-b border-[#d8d2c5]">
-                {["Email", "Name", "Role", ""].map((h, i) => (
+                {["Email", "Name", "Role", "Cinderblock", ""].map((h, i) => (
                   <th key={i} className={`${metaCls} px-4 py-3`}>
                     {h}
                   </th>
@@ -161,6 +183,23 @@ export default function UsersManager({ users }: { users: UserRecord[] }) {
                   <td className="px-4 py-3 text-[#4a443a]">{u.name}</td>
                   <td className="px-4 py-3">
                     <RolePill role={u.role} />
+                  </td>
+                  <td className="px-4 py-3">
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={() => toggleCinderblock(u)}
+                      aria-pressed={!!u.cinderblock}
+                      title="Toggle Cinderblock membership"
+                      className={
+                        "inline-flex items-center gap-2 border px-2.5 py-1 font-[family-name:var(--font-ibm-plex-mono)] text-[10px] uppercase tracking-[0.1em] transition-colors duration-150 disabled:opacity-60 " +
+                        (u.cinderblock
+                          ? "border-[var(--kyx-purple)] bg-[var(--kyx-purple)] text-[#f9f7f2] hover:bg-[#4f29a6]"
+                          : "border-[#cec7b8] text-[#8a8272] hover:border-[#16130f]")
+                      }
+                    >
+                      {u.cinderblock ? "Member ✓" : "Not a member"}
+                    </button>
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex gap-2">

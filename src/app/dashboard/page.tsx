@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 };
 
 const LINKS = [
+  { label: "Directory", desc: "Find people in the network and book time with them.", href: "/directory" },
   { label: "Events", desc: "Event photos and what's coming up on the KYX calendar.", href: "/events" },
   { label: "The community", desc: "Join Slack and see how to get involved.", href: "/slack" },
   { label: "Apply to Cinderblock", desc: "A desk in the room for high-agency builders.", href: "/cinderblock/apply" },

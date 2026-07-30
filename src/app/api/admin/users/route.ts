@@ -17,13 +17,14 @@ export async function POST(request: Request) {
   const email = String(body?.email || "").trim().toLowerCase();
   const name = String(body?.name || "").trim().slice(0, 120);
   const role = String(body?.role || "member") as UserRole;
+  const cinderblock = body?.cinderblock === undefined ? undefined : !!body.cinderblock;
   if (!EMAIL_RE.test(email)) {
     return NextResponse.json({ error: "Enter a valid email." }, { status: 400 });
   }
   if (!ROLES.includes(role)) {
     return NextResponse.json({ error: "Invalid role." }, { status: 400 });
   }
-  const user = await putUser({ email, name, role });
+  const user = await putUser({ email, name, role, cinderblock });
   return NextResponse.json({ ok: true, user });
 }
 

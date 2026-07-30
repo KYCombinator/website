@@ -4,11 +4,13 @@ import {
   listAllPhotos,
   listEvents,
   listApplications,
+  listIdeas,
   listUsers,
   galleryConfigured,
   type PhotoRecord,
   type EventRecord,
   type ApplicationRecord,
+  type IdeaRecord,
   type UserRecord,
 } from "@/lib/gallery";
 import { Container, Eyebrow, SerifHeading } from "../components/fm";
@@ -16,6 +18,7 @@ import AdminHeader from "./AdminHeader";
 import PhotoQueue from "./PhotoQueue";
 import EventsManager from "./EventsManager";
 import Applications from "./Applications";
+import IdeasManager from "./IdeasManager";
 import UsersManager from "./UsersManager";
 
 export default async function AdminPage() {
@@ -35,15 +38,17 @@ export default async function AdminPage() {
     );
   }
 
-  const [allPhotos, events, applications, users]: [
+  const [allPhotos, events, applications, ideas, users]: [
     PhotoRecord[],
     EventRecord[],
     ApplicationRecord[],
+    IdeaRecord[],
     UserRecord[],
   ] = await Promise.all([
     listAllPhotos(),
     listEvents(),
     listApplications(),
+    listIdeas(),
     listUsers(),
   ]);
 
@@ -76,6 +81,12 @@ export default async function AdminPage() {
         <Eyebrow>Applications · {applications.length}</Eyebrow>
         <SerifHeading className="mb-6 mt-2 text-[32px] leading-none">Applications.</SerifHeading>
         <Applications items={applications} />
+      </Container>
+
+      <Container className="py-10">
+        <Eyebrow>Vibe Code Night ideas · {ideas.length}</Eyebrow>
+        <SerifHeading className="mb-6 mt-2 text-[32px] leading-none">Challenge ideas.</SerifHeading>
+        <IdeasManager items={ideas} />
       </Container>
 
       <Container className="py-10">

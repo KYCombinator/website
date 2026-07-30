@@ -328,6 +328,66 @@ export async function setApplicationStatus(
   );
 }
 
+// ── Vibe Code Night challenge ideas ─────────────────────────────────────────
+export type IdeaStatus = "new" | "approved" | "rejected";
+export type IdeaRecord = {
+  id: string;
+  idea: string; // "What is your challenge idea?"
+  twist: string; // "Any useful constraints, ingredients, or twists?"
+  submitterEmail: string; // captured from the session when signed in, else ""
+  status: IdeaStatus;
+  createdAt: string;
+};
+
+export async function createIdea(input: {
+  idea: string;
+  twist: string;
+  submitterEmail?: string;
+}): Promise<IdeaRecord> {
+  const id = randomUUID();
+  const createdAt = new Date().toISOString();
+  const record: IdeaRecord = {
+    id,
+    idea: input.idea,
+    twist: input.twist,
+    submitterEmail: input.submitterEmail ?? "",
+    status: "new",
+    createdAt,
+  };
+  await doc().send(
+    new PutCommand({
+      TableName: TABLE,
+      Item: { pk: "IDEA", sk: id, gsi1pk: "IDEA#new", gsi1sk: createdAt, ...record },
+    })
+  );
+  return record;
+}
+
+export async function listIdeas(): Promise<IdeaRecord[]> {
+  const r = await doc().send(
+    new QueryCommand({
+      TableName: TABLE,
+      KeyConditionExpression: "pk = :pk",
+      ExpressionAttributeValues: { ":pk": "IDEA" },
+    })
+  );
+  return ((r.Items || []) as IdeaRecord[]).sort((a, b) =>
+    b.createdAt.localeCompare(a.createdAt)
+  );
+}
+
+export async function setIdeaStatus(id: string, status: IdeaStatus): Promise<void> {
+  await doc().send(
+    new UpdateCommand({
+      TableName: TABLE,
+      Key: { pk: "IDEA", sk: id },
+      UpdateExpression: "SET #s = :s, gsi1pk = :g",
+      ExpressionAttributeNames: { "#s": "status" },
+      ExpressionAttributeValues: { ":s": status, ":g": `IDEA#${status}` },
+    })
+  );
+}
+
 // ── Users ───────────────────────────────────────────────────────────────────
 export type UserRole = "member" | "admin";
 export type Onboarding = { slack?: boolean; newsletter?: boolean; event?: boolean };

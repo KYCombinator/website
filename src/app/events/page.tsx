@@ -10,6 +10,7 @@ import {
   type PhotoRecord,
 } from "@/lib/gallery";
 import EventPhotoUpload from "./EventPhotoUpload";
+import EventPhotoGrid from "./EventPhotoGrid";
 
 export const dynamic = "force-dynamic";
 
@@ -43,22 +44,21 @@ function EventSection({
   const external = isExternal(event.href);
   return (
     <section className={"border-b border-[#16130f]" + (shaded ? " bg-[#eae5da]" : "")}>
-      <Container className="flex flex-col gap-8 py-14 lg:py-[72px]">
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-end lg:gap-12">
-          <div className="flex flex-col gap-3">
-            {event.when && <Eyebrow>{event.when}</Eyebrow>}
-            <SerifHeading className="text-[32px] leading-none md:text-[44px]">
-              {event.name}
-            </SerifHeading>
-            {event.tagline && (
-              <p className="max-w-[560px] text-[17px] leading-[1.6] text-[#4a443a] [text-wrap:pretty]">
-                {event.tagline}
-              </p>
-            )}
-          </div>
+      <Container className="grid gap-8 py-12 lg:grid-cols-[300px_minmax(0,1fr)] lg:items-start lg:gap-12 lg:py-16">
+        {/* Left column: event identity, next event, and the uploader */}
+        <div className="flex flex-col gap-4">
+          {event.when && <Eyebrow>{event.when}</Eyebrow>}
+          <SerifHeading className="text-[30px] leading-none md:text-[38px]">
+            {event.name}
+          </SerifHeading>
+          {event.tagline && (
+            <p className="text-[16px] leading-[1.55] text-[#4a443a] [text-wrap:pretty]">
+              {event.tagline}
+            </p>
+          )}
 
           {/* Next event */}
-          <div className="flex flex-col gap-2 border-t border-[#d8d2c5] pt-5 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+          <div className="flex flex-col gap-2 border-t border-[#d8d2c5] pt-4">
             <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[10px] uppercase tracking-[0.12em] text-[#7d766a]">
               Next event
             </span>
@@ -80,34 +80,18 @@ function EventSection({
               </span>
             )}
           </div>
+
+          <EventPhotoUpload
+            eventId={event.id}
+            eventName={event.name}
+            signedIn={signedIn}
+          />
         </div>
 
-        {photos.length > 0 && (
-          <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
-            {photos.map((photo) => (
-              <figure key={photo.id} className="border border-[#d8d2c5]">
-                <div className="aspect-[4/3] overflow-hidden bg-[#e2ddd1]">
-                  {/* External public S3 URLs — plain <img>, not next/image. */}
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={photo.url}
-                    alt={event.name}
-                    loading="lazy"
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <figcaption className="border-t border-[#d8d2c5] px-2 py-1.5 font-[family-name:var(--font-ibm-plex-mono)] text-[10px] text-[#7d766a]">
-                  Photo by {photo.submitterName}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        )}
-
-        <EventPhotoUpload
-          eventId={event.id}
+        {/* Right column: photo grid + lightbox */}
+        <EventPhotoGrid
           eventName={event.name}
-          signedIn={signedIn}
+          photos={photos.map((p) => ({ id: p.id, url: p.url, submitterName: p.submitterName }))}
         />
       </Container>
     </section>

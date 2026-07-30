@@ -331,6 +331,9 @@ export async function setApplicationStatus(
 // ── Users ───────────────────────────────────────────────────────────────────
 export type UserRole = "member" | "admin";
 export type Onboarding = { slack?: boolean; newsletter?: boolean; event?: boolean };
+// A free-form list entry: a description with an optional link. Used for
+// "what I'm working on" and "what I need help with".
+export type ProfileItem = { text: string; url?: string };
 export type UserRecord = {
   email: string;
   name: string;
@@ -341,6 +344,8 @@ export type UserRecord = {
   bookingLink?: string;
   onboarding?: Onboarding;
   cinderblock?: boolean; // admin-managed: is this person a Cinderblock member?
+  working?: ProfileItem[]; // what they're working on
+  needs?: ProfileItem[]; // what they need help with
 };
 
 const BOOTSTRAP_ADMIN = (process.env.ADMIN_EMAIL || "dan@kycombinator.com").toLowerCase();
@@ -398,6 +403,8 @@ export async function updateUserProfile(
     bookingLink?: string;
     photoUrl?: string;
     onboarding?: Onboarding;
+    working?: ProfileItem[];
+    needs?: ProfileItem[];
   }
 ): Promise<UserRecord> {
   const e = email.trim().toLowerCase();
@@ -413,6 +420,8 @@ export async function updateUserProfile(
     bookingLink: patch.bookingLink !== undefined ? patch.bookingLink : existing?.bookingLink,
     onboarding: patch.onboarding !== undefined ? patch.onboarding : existing?.onboarding,
     cinderblock: existing?.cinderblock, // admin-managed only; preserved across self-edits
+    working: patch.working !== undefined ? patch.working : existing?.working,
+    needs: patch.needs !== undefined ? patch.needs : existing?.needs,
   };
   await doc().send(
     new PutCommand({ TableName: TABLE, Item: { pk: "USER", sk: e, ...record } })

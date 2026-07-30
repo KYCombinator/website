@@ -34,6 +34,8 @@ export default async function DashboardPage() {
     company: user?.company || "",
     bookingLink: user?.bookingLink || "",
     photoUrl: user?.photoUrl || "",
+    working: user?.working || [],
+    needs: user?.needs || [],
   };
   const onboarding = user?.onboarding || {};
   const name = profile.name;

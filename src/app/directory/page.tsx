@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Container, PageHero, Eyebrow, SerifHeading } from "@/app/components/fm";
-import { listUsers, galleryConfigured, type UserRecord } from "@/lib/gallery";
+import { listUsers, galleryConfigured, type UserRecord, type ProfileItem } from "@/lib/gallery";
 
 export const dynamic = "force-dynamic";
 
@@ -11,6 +11,36 @@ export const metadata: Metadata = {
 
 function initialOf(u: UserRecord) {
   return (u.name || u.email || "?").trim().charAt(0).toUpperCase();
+}
+
+// A labeled list of profile items; each renders as a link when it has a url.
+function ItemList({ label, items }: { label: string; items: ProfileItem[] }) {
+  if (!items || items.length === 0) return null;
+  return (
+    <div className="flex flex-col gap-1.5">
+      <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[10px] uppercase tracking-[0.1em] text-[#7d766a]">
+        {label}
+      </span>
+      <ul className="flex flex-col gap-1">
+        {items.map((it, i) => (
+          <li key={i} className="text-[14px] leading-[1.45] text-[#4a443a]">
+            {it.url ? (
+              <a
+                href={it.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border-b border-[#c6bfae] transition-colors duration-150 hover:border-[var(--kyx-purple)]"
+              >
+                {it.text} ↗
+              </a>
+            ) : (
+              it.text
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export default async function DirectoryPage() {
@@ -64,6 +94,9 @@ export default async function DirectoryPage() {
                       Cinderblock
                     </span>
                   )}
+
+                  <ItemList label="Working on" items={u.working ?? []} />
+                  <ItemList label="Needs help with" items={u.needs ?? []} />
 
                   {u.bookingLink && (
                     <a

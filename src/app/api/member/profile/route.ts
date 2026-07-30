@@ -6,11 +6,29 @@ import {
   isValidPhotoKey,
   photoUrlForKey,
   type Onboarding,
+  type ProfileItem,
 } from "@/lib/gallery";
 
 export const dynamic = "force-dynamic";
 
 const clip = (v: unknown, n: number) => String(v ?? "").trim().slice(0, n);
+
+const MAX_ITEMS = 20;
+
+// Normalize a free-form list ({text, url}[]): trim, drop entries with no text,
+// keep only http(s) urls, and cap the count.
+function cleanItems(v: unknown): ProfileItem[] {
+  if (!Array.isArray(v)) return [];
+  const out: ProfileItem[] = [];
+  for (const raw of v) {
+    const text = clip((raw as any)?.text, 280);
+    if (!text) continue;
+    const url = clip((raw as any)?.url, 500);
+    out.push(url && /^https?:\/\//i.test(url) ? { text, url } : { text });
+    if (out.length >= MAX_ITEMS) break;
+  }
+  return out;
+}
 
 // Update the signed-in user's own profile (name, company, booking link, photo)
 // and onboarding checklist. Gated by middleware; the email comes from the
@@ -35,7 +53,12 @@ export async function POST(request: Request) {
     bookingLink?: string;
     photoUrl?: string;
     onboarding?: Onboarding;
+    working?: ProfileItem[];
+    needs?: ProfileItem[];
   } = {};
+
+  if (body?.working !== undefined) patch.working = cleanItems(body.working);
+  if (body?.needs !== undefined) patch.needs = cleanItems(body.needs);
 
   if (body?.name !== undefined) patch.name = clip(body.name, 120);
   if (body?.company !== undefined) patch.company = clip(body.company, 160);

@@ -5,7 +5,6 @@ import { SESSION_COOKIE, verifySession } from "@/lib/adminAuth";
 import {
   listEvents,
   listApprovedPhotos,
-  getUser,
   galleryConfigured,
   type EventRecord,
   type PhotoRecord,
@@ -34,13 +33,11 @@ function EventSection({
   photos,
   shaded,
   signedIn,
-  submitterName,
 }: {
   event: EventRecord;
   photos: PhotoRecord[];
   shaded: boolean;
   signedIn: boolean;
-  submitterName: string;
 }) {
   const hasLink = !!event.href && event.href !== "/events";
   const external = isExternal(event.href);
@@ -111,7 +108,6 @@ function EventSection({
           eventId={event.id}
           eventName={event.name}
           signedIn={signedIn}
-          submitterName={submitterName}
         />
       </Container>
     </section>
@@ -125,16 +121,11 @@ export default async function EventsPage() {
     : [];
   const photos: PhotoRecord[] = configured ? await listApprovedPhotos() : [];
 
-  // Resolve the viewer's session so photo uploads can be login-gated and
-  // attributed automatically (no name/email typing).
+  // Resolve the viewer's session so photo uploads can be login-gated (the
+  // upload API attributes each photo from the session server-side).
   const store = await cookies();
   const session = verifySession(store.get(SESSION_COOKIE)?.value);
   const signedIn = !!session;
-  let submitterName = "";
-  if (session) {
-    const user = configured ? await getUser(session.email) : null;
-    submitterName = user?.name || session.email.split("@")[0];
-  }
 
   const photosByEvent = new Map<string, PhotoRecord[]>();
   for (const photo of photos) {
@@ -163,7 +154,6 @@ export default async function EventsPage() {
           photos={photosByEvent.get(event.id) ?? []}
           shaded={i % 2 === 1}
           signedIn={signedIn}
-          submitterName={submitterName}
         />
       ))}
 

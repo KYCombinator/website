@@ -26,12 +26,10 @@ export default function EventPhotoUpload({
   eventId,
   eventName,
   signedIn,
-  submitterName,
 }: {
   eventId: string;
   eventName: string;
   signedIn: boolean;
-  submitterName: string;
 }) {
   const [open, setOpen] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
@@ -149,7 +147,6 @@ export default function EventPhotoUpload({
         <button type="button" className={outlineBtn} onClick={() => setOpen(true)}>
           + Add a photo
         </button>
-        <span className={monoNote}>Credited to {submitterName}</span>
       </div>
     );
   }
@@ -169,8 +166,8 @@ export default function EventPhotoUpload({
         />
         <span className={monoNote}>
           {files.length > 0
-            ? `${files.length} selected · credited to ${submitterName} · reviewed before appearing`
-            : `JPEG, PNG, or WebP — up to 15 MB each. Credited to ${submitterName}.`}
+            ? `${files.length} selected · reviewed before appearing`
+            : "JPEG, PNG, or WebP — up to 15 MB each."}
         </span>
       </div>
 

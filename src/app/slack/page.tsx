@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import type React from "react";
+import { cookies } from "next/headers";
 import { Container, PageHero, Eyebrow, SerifHeading, Button, TextLink } from "@/app/components/fm";
+import { SESSION_COOKIE, verifySession } from "@/lib/adminAuth";
+import { getUser, galleryConfigured } from "@/lib/gallery";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Slack | KYX",
@@ -27,11 +32,17 @@ const PARTNERS: { name: string; href: string }[] = [
   { name: "Startup Week Louisville", href: "https://www.startupweeklouisville.com" },
 ];
 
+// `complete` maps a step to a completion source so a signed-in member sees
+// "Done" instead of the call-to-action once they've taken that step:
+//   newsletter/slack/event → the dashboard onboarding checklist
+//   cinderblock            → the admin-managed Cinderblock membership flag
+type CompleteKey = "newsletter" | "slack" | "event" | "cinderblock";
 type JoinStep = {
   term: string;
   desc: React.ReactNode;
   action?: { label: string; href: string };
   partners?: { name: string; href: string }[];
+  complete?: CompleteKey;
 };
 
 const JOIN_STEPS: JoinStep[] = [
@@ -39,21 +50,25 @@ const JOIN_STEPS: JoinStep[] = [
     term: "Start with the letter",
     desc: "The weekly newsletter — events, programs, and who's shipping what. The lowest-commitment way to plug in and see what's happening.",
     action: { label: "Subscribe", href: NEWSLETTER_URL },
+    complete: "newsletter",
   },
   {
     term: "Join the Slack",
     desc: "Louisville's founder community — a working channel for builders, operators, and the people who back them. Real-time intros, asks, wins, and the day-to-day of building in Kentucky.",
     action: { label: "Join Slack", href: SLACK_INVITE },
+    complete: "slack",
   },
   {
     term: "Show up to events",
     desc: "HackKentucky, Velocity, Casino Night, the LOUIES. Vote with your feet — the fastest way to meet the room in person.",
     action: { label: "See events", href: "/events" },
+    complete: "event",
   },
   {
     term: "Apply to Cinderblock",
     desc: "When you're building in earnest, apply for a desk in the room — a small, selective studio of founders shipping side by side.",
     action: { label: "Apply", href: APPLY_URL },
+    complete: "cinderblock",
   },
   {
     term: "Volunteer",
@@ -154,7 +169,28 @@ function ChannelRow({ name, description }: Channel) {
   );
 }
 
-export default function SlackPage() {
+export default async function SlackPage() {
+  // Reflect the signed-in member's progress on each step.
+  const store = await cookies();
+  const session = verifySession(store.get(SESSION_COOKIE)?.value);
+  const signedIn = !!session;
+  let done: Record<CompleteKey, boolean> = {
+    newsletter: false,
+    slack: false,
+    event: false,
+    cinderblock: false,
+  };
+  if (session && galleryConfigured()) {
+    const user = await getUser(session.email);
+    const o = user?.onboarding || {};
+    done = {
+      newsletter: !!o.newsletter,
+      slack: !!o.slack,
+      event: !!o.event,
+      cinderblock: !!user?.cinderblock,
+    };
+  }
+
   return (
     <>
       <PageHero
@@ -197,8 +233,16 @@ export default function SlackPage() {
                 </span>
                 <p className="text-[15px] leading-[1.6] text-[#4a443a]">{step.desc}</p>
                 <div className="flex flex-col gap-1.5 sm:items-end">
-                  {step.action && (
-                    <TextLink href={step.action.href}>{step.action.label} →</TextLink>
+                  {signedIn && step.complete && done[step.complete] ? (
+                    <span className="inline-flex items-center gap-1.5 font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[var(--kyx-purple)]">
+                      ✓ {step.complete === "cinderblock" ? "Member" : "Done"}
+                    </span>
+                  ) : (
+                    <>
+                      {step.action && (
+                        <TextLink href={step.action.href}>{step.action.label} →</TextLink>
+                      )}
+                    </>
                   )}
                   {step.partners?.map((p) => (
                     <TextLink key={p.name} href={p.href}>

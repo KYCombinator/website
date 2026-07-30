@@ -24,7 +24,7 @@ export default function WaiverPage() {
                 <span className="font-medium text-[#16130f]">
                   RELEASE AND HOLD HARMLESS
                 </span>{" "}
-                KYC / Story / HackKentucky, its officers, employees, volunteers,
+                KYX / The KYCombinator Project Inc., a Kentucky-based 501(c)(3), its officers, employees, volunteers,
                 sponsors, and agents (&quot;Releasees&quot;) from any and all
                 claims, injuries, damages, losses or expenses I may suffer,{" "}
                 <span className="font-medium text-[#16130f]">
@@ -48,12 +48,12 @@ export default function WaiverPage() {
               </SerifHeading>
 
               <p className="text-[15px] leading-[1.7] text-[#4a443a]">
-                By attending and/or submitting media to KYC / Story /
-                HackKentucky I agree to the following:
+                By attending and/or submitting media to KYX / The KYCombinator
+                Project Inc., a Kentucky-based 501(c)(3), I agree to the following:
               </p>
 
               <p className="text-[15px] leading-[1.7] text-[#4a443a]">
-                I authorize KYC / Story / HackKentucky to use, reproduce, and
+                I authorize KYX / The KYCombinator Project Inc., a Kentucky-based 501(c)(3) to use, reproduce, and
                 distribute any media (photos, videos, or audio) captured of me
                 at the event or submitted by me. This includes, but is not
                 limited to, promotional, educational, social media, print, or
@@ -65,7 +65,7 @@ export default function WaiverPage() {
 
             {/* Electronic Signature Notice */}
             <p className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[#7d766a] border-t border-[#d8d2c5] pt-6">
-              This waiver was last updated on March 1st, 2025 at 12:00 PM EST.
+              This waiver was last updated on July 29th, 2026 at 12:00 PM EST.
             </p>
           </div>
         </Container>

@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { Container, PageHero, Eyebrow, SerifHeading, Button, TextLink } from "@/app/components/fm";
+import { SESSION_COOKIE, verifySession } from "@/lib/adminAuth";
 import {
   listEvents,
   listApprovedPhotos,
+  getUser,
   galleryConfigured,
   type EventRecord,
   type PhotoRecord,
 } from "@/lib/gallery";
-import AddPhoto from "./AddPhoto";
+import EventPhotoUpload from "./EventPhotoUpload";
 
 export const dynamic = "force-dynamic";
 
@@ -30,10 +33,14 @@ function EventSection({
   event,
   photos,
   shaded,
+  signedIn,
+  submitterName,
 }: {
   event: EventRecord;
   photos: PhotoRecord[];
   shaded: boolean;
+  signedIn: boolean;
+  submitterName: string;
 }) {
   const hasLink = !!event.href && event.href !== "/events";
   const external = isExternal(event.href);
@@ -99,6 +106,13 @@ function EventSection({
             ))}
           </div>
         )}
+
+        <EventPhotoUpload
+          eventId={event.id}
+          eventName={event.name}
+          signedIn={signedIn}
+          submitterName={submitterName}
+        />
       </Container>
     </section>
   );
@@ -110,6 +124,17 @@ export default async function EventsPage() {
     ? (await listEvents()).filter((e) => e.published)
     : [];
   const photos: PhotoRecord[] = configured ? await listApprovedPhotos() : [];
+
+  // Resolve the viewer's session so photo uploads can be login-gated and
+  // attributed automatically (no name/email typing).
+  const store = await cookies();
+  const session = verifySession(store.get(SESSION_COOKIE)?.value);
+  const signedIn = !!session;
+  let submitterName = "";
+  if (session) {
+    const user = configured ? await getUser(session.email) : null;
+    submitterName = user?.name || session.email.split("@")[0];
+  }
 
   const photosByEvent = new Map<string, PhotoRecord[]>();
   for (const photo of photos) {
@@ -137,6 +162,8 @@ export default async function EventsPage() {
           event={event}
           photos={photosByEvent.get(event.id) ?? []}
           shaded={i % 2 === 1}
+          signedIn={signedIn}
+          submitterName={submitterName}
         />
       ))}
 
@@ -148,25 +175,6 @@ export default async function EventsPage() {
               Our event lineup is being set up. In the meantime, the live calendar below
               has everything that&apos;s currently on the books.
             </p>
-          </Container>
-        </section>
-      )}
-
-      {/* Contribute a photo */}
-      {events.length > 0 && (
-        <section className="border-b border-[#16130f]">
-          <Container className="flex flex-col gap-8 py-14 lg:py-[72px]">
-            <div className="flex flex-col gap-3">
-              <Eyebrow>Contribute</Eyebrow>
-              <SerifHeading className="text-[28px] leading-none md:text-[36px]">
-                Add a photo.
-              </SerifHeading>
-              <p className="max-w-[560px] text-[15px] leading-[1.6] text-[#4a443a]">
-                Were you in the room? Share a shot. Pick the event, add your name for
-                attribution — submissions are reviewed before they appear here.
-              </p>
-            </div>
-            <AddPhoto events={events.map((e) => ({ id: e.id, name: e.name }))} />
           </Container>
         </section>
       )}

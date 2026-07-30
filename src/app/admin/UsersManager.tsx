@@ -44,10 +44,28 @@ function RolePill({ role }: { role: UserRole }) {
   );
 }
 
+const filterFieldCls =
+  "border border-[#cec7b8] bg-transparent px-3 py-2 text-[14px] text-[#16130f] outline-none placeholder:text-[#a39c8d] focus:border-[#16130f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]";
+
 export default function UsersManager({ users }: { users: UserRecord[] }) {
   const router = useRouter();
   const [draft, setDraft] = useState<Draft | null>(null);
   const [busy, setBusy] = useState(false);
+
+  // Search + filters (client-side over the loaded list).
+  const [query, setQuery] = useState("");
+  const [roleFilter, setRoleFilter] = useState<"all" | UserRole>("all");
+  const [cbFilter, setCbFilter] = useState<"all" | "yes" | "no">("all");
+
+  const q = query.trim().toLowerCase();
+  const filtered = users.filter((u) => {
+    if (roleFilter !== "all" && u.role !== roleFilter) return false;
+    if (cbFilter === "yes" && !u.cinderblock) return false;
+    if (cbFilter === "no" && u.cinderblock) return false;
+    if (q && !`${u.name} ${u.email}`.toLowerCase().includes(q)) return false;
+    return true;
+  });
+  const filtersActive = q !== "" || roleFilter !== "all" || cbFilter !== "all";
 
   const set =
     (k: keyof Draft) =>
@@ -165,6 +183,60 @@ export default function UsersManager({ users }: { users: UserRecord[] }) {
       {users.length === 0 ? (
         <p className="text-[15px] text-[#4a443a]">No users yet.</p>
       ) : (
+        <>
+          {/* Search + filters */}
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-wrap items-center gap-2">
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search name or email…"
+                aria-label="Search users"
+                className={`${filterFieldCls} w-full sm:w-64`}
+              />
+              <select
+                value={roleFilter}
+                onChange={(e) => setRoleFilter(e.target.value as "all" | UserRole)}
+                aria-label="Filter by role"
+                className={filterFieldCls}
+              >
+                <option value="all">All roles</option>
+                <option value="member">Member</option>
+                <option value="admin">Admin</option>
+              </select>
+              <select
+                value={cbFilter}
+                onChange={(e) => setCbFilter(e.target.value as "all" | "yes" | "no")}
+                aria-label="Filter by Cinderblock membership"
+                className={filterFieldCls}
+              >
+                <option value="all">All Cinderblock</option>
+                <option value="yes">Cinderblock members</option>
+                <option value="no">Not members</option>
+              </select>
+              {filtersActive && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setQuery("");
+                    setRoleFilter("all");
+                    setCbFilter("all");
+                  }}
+                  className={outlineBtn}
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+            <span className={metaCls}>
+              {filtered.length} of {users.length}
+            </span>
+          </div>
+
+          {filtered.length === 0 ? (
+            <p className="text-[15px] text-[#4a443a]">No users match your search.</p>
+          ) : (
         <div className="overflow-x-auto border border-[#d8d2c5]">
           <table className="w-full border-collapse text-left text-[14px]">
             <thead>
@@ -177,7 +249,7 @@ export default function UsersManager({ users }: { users: UserRecord[] }) {
               </tr>
             </thead>
             <tbody>
-              {users.map((u) => (
+              {filtered.map((u) => (
                 <tr key={u.email} className="border-b border-[#d8d2c5] align-top last:border-b-0">
                   <td className="px-4 py-3 text-[#16130f]">{u.email}</td>
                   <td className="px-4 py-3 text-[#4a443a]">{u.name}</td>
@@ -213,6 +285,8 @@ export default function UsersManager({ users }: { users: UserRecord[] }) {
             </tbody>
           </table>
         </div>
+          )}
+        </>
       )}
     </div>
   );

@@ -51,6 +51,11 @@ export default $config({
     new sst.aws.Nextjs("Website", {
       domain,
       link: [photos, table],
+      // The whole app (incl. the passwordless login-code endpoints) runs on one
+      // OpenNext server Lambda. Bump its memory above the 1024 MB default — more
+      // memory means proportionally more vCPU, so requests execute faster and
+      // cold-start init is quicker.
+      server: { memory: "2048 MB" },
       // Send submission notifications via SES (domain already verified).
       permissions: [
         { actions: ["ses:SendEmail", "ses:SendRawEmail"], resources: ["*"] },

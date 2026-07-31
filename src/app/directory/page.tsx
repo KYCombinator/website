@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { Container, PageHero, Eyebrow, SerifHeading } from "@/app/components/fm";
-import { listUsers, galleryConfigured, type UserRecord, type ProfileItem } from "@/lib/gallery";
+import { SESSION_COOKIE, verifySession } from "@/lib/adminAuth";
+import {
+  listUsers,
+  listOutgoingAccess,
+  galleryConfigured,
+  type UserRecord,
+  type ProfileItem,
+} from "@/lib/gallery";
+import BookingAccessButton, { type AccessState } from "./BookingAccessButton";
 
 export const dynamic = "force-dynamic";
 
@@ -50,12 +59,26 @@ export default async function DirectoryPage() {
     .filter((u) => (u.name || "").trim().length > 0)
     .sort((a, b) => a.name.localeCompare(b.name));
 
+  // The viewer's access status per person (self / approved / pending / none).
+  const store = await cookies();
+  const session = verifySession(store.get(SESSION_COOKIE)?.value);
+  const viewer = session?.email.toLowerCase() ?? "";
+  const statusByTarget = new Map<string, "pending" | "approved" | "denied">();
+  if (viewer && galleryConfigured()) {
+    for (const a of await listOutgoingAccess(viewer)) statusByTarget.set(a.target, a.status);
+  }
+  const accessFor = (email: string): AccessState => {
+    const e = email.toLowerCase();
+    if (e === viewer) return "self";
+    return statusByTarget.get(e) === "approved" ? "approved" : statusByTarget.get(e) === "pending" ? "pending" : "none";
+  };
+
   return (
     <>
       <PageHero
         eyebrow="Directory"
         title="The network."
-        intro="The people in the room. Find someone, see what they're building, and book time with them."
+        intro="The people in the room. Find someone, see what they're building, and request time with them."
       />
 
       <section>
@@ -98,16 +121,19 @@ export default async function DirectoryPage() {
                   <ItemList label="Working on" items={u.working ?? []} />
                   <ItemList label="Needs help with" items={u.needs ?? []} />
 
-                  {u.bookingLink && (
-                    <a
-                      href={u.bookingLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-auto inline-flex w-fit border-b border-[var(--kyx-purple)] pb-0.5 font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[#16130f] transition-opacity duration-150 hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]"
-                    >
-                      Book time →
-                    </a>
-                  )}
+                  {(() => {
+                    const state = accessFor(u.email);
+                    const reveal = state === "self" || state === "approved";
+                    return (
+                      <BookingAccessButton
+                        targetEmail={u.email}
+                        targetName={u.name}
+                        hasBooking={!!u.bookingLink}
+                        initialState={state}
+                        bookingUrl={reveal ? u.bookingLink : undefined}
+                      />
+                    );
+                  })()}
                 </div>
               ))}
             </div>

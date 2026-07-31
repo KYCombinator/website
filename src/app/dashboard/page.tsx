@@ -4,11 +4,12 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Container, Eyebrow, SerifHeading } from "@/app/components/fm";
 import { SESSION_COOKIE, verifySession } from "@/lib/adminAuth";
-import { getUser, listEvents, galleryConfigured } from "@/lib/gallery";
+import { getUser, listEvents, listIncomingAccess, galleryConfigured } from "@/lib/gallery";
 import LogoutButton from "./LogoutButton";
 import ProfileForm from "./ProfileForm";
 import Checklist from "./Checklist";
 import ContributePhotos from "./ContributePhotos";
+import BookingRequests, { type Requester } from "./BookingRequests";
 
 export const dynamic = "force-dynamic";
 
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 const LINKS = [
-  { label: "Directory", desc: "Find people in the network and book time with them.", href: "/directory" },
+  { label: "Directory", desc: "Find people in the network and request time with them.", href: "/directory" },
   { label: "Events", desc: "Event photos and what's coming up on the KYX calendar.", href: "/events" },
   { label: "The community", desc: "Join Slack and see how to get involved.", href: "/slack" },
   { label: "Apply to Cinderblock", desc: "A desk in the room for high-agency builders.", href: "/cinderblock/apply" },
@@ -43,6 +44,21 @@ export default async function DashboardPage() {
   const events = galleryConfigured()
     ? (await listEvents()).filter((e) => e.published).map((e) => ({ id: e.id, name: e.name }))
     : [];
+
+  // Incoming booking-link access requests (to approve/deny) + who currently has
+  // access. Only relevant once the member has a booking link to protect.
+  let pendingReqs: Requester[] = [];
+  let approvedReqs: Requester[] = [];
+  if (galleryConfigured() && profile.bookingLink) {
+    const incoming = await listIncomingAccess(session.email);
+    const nameFor = async (email: string) => (await getUser(email))?.name || email.split("@")[0];
+    pendingReqs = await Promise.all(
+      incoming.filter((a) => a.status === "pending").map(async (a) => ({ email: a.requester, name: await nameFor(a.requester) }))
+    );
+    approvedReqs = await Promise.all(
+      incoming.filter((a) => a.status === "approved").map(async (a) => ({ email: a.requester, name: await nameFor(a.requester) }))
+    );
+  }
 
   return (
     <>
@@ -115,6 +131,25 @@ export default async function DashboardPage() {
           </div>
         </Container>
       </section>
+
+      {/* Booking-link access requests */}
+      {profile.bookingLink && (
+        <section className="border-b border-[#16130f]">
+          <Container className="grid grid-cols-1 gap-8 py-16 lg:grid-cols-[minmax(0,1fr)_460px] lg:gap-16 lg:py-[72px]">
+            <div className="flex flex-col gap-3">
+              <Eyebrow>Booking access</Eyebrow>
+              <SerifHeading className="text-[28px] leading-none md:text-[34px]">
+                Who can book you.
+              </SerifHeading>
+              <p className="max-w-[440px] text-[15px] leading-[1.6] text-[#4a443a] [text-wrap:pretty]">
+                Your booking link is private. Members ask for access from the directory —
+                approve the ones you want, and revoke access anytime.
+              </p>
+            </div>
+            <BookingRequests pending={pendingReqs} approved={approvedReqs} />
+          </Container>
+        </section>
+      )}
 
       {/* Contribute event photos */}
       {events.length > 0 && (

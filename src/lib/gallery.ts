@@ -453,6 +453,105 @@ export async function setBountyStatus(id: string, status: BountyStatus): Promise
   );
 }
 
+// ── Booking-link access (request → approve) ─────────────────────────────────
+// A member must request access to see another member's booking link; the owner
+// approves it. One record per (requester → target):
+//   pk="ACCESS"  sk="<requester>#<target>"  gsi1pk="ACCESS#TO#<target>"
+// Outgoing (a requester's own requests) is read by sk begins_with "<requester>#";
+// incoming (requests to a target) is read via the StatusIndex GSI.
+export type AccessStatus = "pending" | "approved" | "denied";
+export type BookingAccess = {
+  requester: string;
+  target: string;
+  status: AccessStatus;
+  createdAt: string;
+  updatedAt?: string;
+};
+
+const accessSk = (requester: string, target: string) =>
+  `${requester.trim().toLowerCase()}#${target.trim().toLowerCase()}`;
+
+export async function getBookingAccess(
+  requester: string,
+  target: string
+): Promise<BookingAccess | null> {
+  const r = await doc().send(
+    new GetCommand({ TableName: TABLE, Key: { pk: "ACCESS", sk: accessSk(requester, target) } })
+  );
+  return (r.Item as BookingAccess) || null;
+}
+
+// Create (or re-open) a pending request. A standing approval is left untouched.
+export async function requestBookingAccess(
+  requester: string,
+  target: string
+): Promise<BookingAccess> {
+  const rq = requester.trim().toLowerCase();
+  const tg = target.trim().toLowerCase();
+  const existing = await getBookingAccess(rq, tg);
+  if (existing && existing.status === "approved") return existing;
+  const createdAt = existing?.createdAt ?? new Date().toISOString();
+  const record: BookingAccess = {
+    requester: rq,
+    target: tg,
+    status: "pending",
+    createdAt,
+    updatedAt: new Date().toISOString(),
+  };
+  await doc().send(
+    new PutCommand({
+      TableName: TABLE,
+      Item: { pk: "ACCESS", sk: accessSk(rq, tg), gsi1pk: `ACCESS#TO#${tg}`, gsi1sk: createdAt, ...record },
+    })
+  );
+  return record;
+}
+
+// The target approves or denies a requester (identity enforced by the caller).
+export async function respondBookingAccess(
+  target: string,
+  requester: string,
+  approve: boolean
+): Promise<void> {
+  await doc().send(
+    new UpdateCommand({
+      TableName: TABLE,
+      Key: { pk: "ACCESS", sk: accessSk(requester, target) },
+      UpdateExpression: "SET #s = :s, updatedAt = :u",
+      ExpressionAttributeNames: { "#s": "status" },
+      ExpressionAttributeValues: { ":s": approve ? "approved" : "denied", ":u": new Date().toISOString() },
+    })
+  );
+}
+
+// Requests made BY a requester (for the directory: their status per person).
+export async function listOutgoingAccess(requester: string): Promise<BookingAccess[]> {
+  const rq = requester.trim().toLowerCase();
+  const r = await doc().send(
+    new QueryCommand({
+      TableName: TABLE,
+      KeyConditionExpression: "pk = :pk AND begins_with(sk, :p)",
+      ExpressionAttributeValues: { ":pk": "ACCESS", ":p": `${rq}#` },
+    })
+  );
+  return (r.Items || []) as BookingAccess[];
+}
+
+// Requests made TO a target (for their dashboard: who wants access).
+export async function listIncomingAccess(target: string): Promise<BookingAccess[]> {
+  const tg = target.trim().toLowerCase();
+  const r = await doc().send(
+    new QueryCommand({
+      TableName: TABLE,
+      IndexName: "StatusIndex",
+      KeyConditionExpression: "gsi1pk = :g",
+      ExpressionAttributeValues: { ":g": `ACCESS#TO#${tg}` },
+      ScanIndexForward: false,
+    })
+  );
+  return (r.Items || []) as BookingAccess[];
+}
+
 // ── Users ───────────────────────────────────────────────────────────────────
 export type UserRole = "member" | "admin";
 export type Onboarding = { slack?: boolean; newsletter?: boolean; event?: boolean };

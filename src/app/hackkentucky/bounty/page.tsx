@@ -56,7 +56,7 @@ export default async function SubmitBountyPage() {
                 Creating a bounty takes an account — we&apos;ll email you a 6-digit code, no
                 password. New here? Signing in creates your account.
               </p>
-              <Button href="/login?redirect=/bounties/submit" variant="primary">
+              <Button href="/login?redirect=/hackkentucky/bounty" variant="primary">
                 Log in to continue
               </Button>
             </div>

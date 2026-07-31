@@ -83,7 +83,7 @@ function EventSection({
 
           {event.bounties && (
             <div className="border-t border-[#d8d2c5] pt-4">
-              <TextLink href="/bounties/submit">Submit a bounty →</TextLink>
+              <TextLink href="/hackkentucky/bounty">Submit a bounty →</TextLink>
             </div>
           )}
 

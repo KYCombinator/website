@@ -64,14 +64,22 @@ export default function BountiesManager({ items }: { items: BountyRecord[] }) {
         return (
           <div key={b.id} className="border border-[#d8d2c5] p-6">
             <div className="flex flex-wrap items-start justify-between gap-3">
-              <div className="flex flex-col gap-1">
-                <p className="font-[family-name:var(--font-instrument-serif)] text-[24px] leading-none text-[#16130f]">
-                  {b.title}
-                </p>
-                <p className={metaCls}>
-                  {b.sponsor ? `${b.sponsor} · ` : ""}
-                  {b.submitterName} · {b.submitterEmail} · {fmtDate(b.createdAt)}
-                </p>
+              <div className="flex items-start gap-3">
+                {b.logoUrl && (
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden border border-[#d8d2c5] bg-[#f4f1ea]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={b.logoUrl} alt="" className="h-full w-full object-contain" />
+                  </div>
+                )}
+                <div className="flex flex-col gap-1">
+                  <p className="font-[family-name:var(--font-instrument-serif)] text-[24px] leading-none text-[#16130f]">
+                    {b.title}
+                  </p>
+                  <p className={metaCls}>
+                    {b.sponsor ? `${b.sponsor} · ` : ""}
+                    {b.submitterName} · {b.submitterEmail} · {fmtDate(b.createdAt)}
+                  </p>
+                </div>
               </div>
               <StatusPill status={b.status} />
             </div>

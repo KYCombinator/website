@@ -1,8 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 type Status = "idle" | "submitting" | "success" | "error";
+
+const ACCEPT = ["image/jpeg", "image/png", "image/webp"];
+const MAX_BYTES = 15 * 1024 * 1024;
 
 const fieldCls =
   "w-full border border-[#cec7b8] bg-transparent px-4 py-3 text-[15px] text-[#16130f] outline-none placeholder:text-[#a39c8d] focus:border-[#16130f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]";
@@ -20,6 +23,9 @@ export default function BountyForm() {
   });
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
+  const [logo, setLogo] = useState<File | null>(null);
+  const [logoPreview, setLogoPreview] = useState("");
+  const logoRef = useRef<HTMLInputElement>(null);
 
   const set =
     (k: keyof typeof form) =>
@@ -31,6 +37,32 @@ export default function BountyForm() {
     setMessage(m);
   }
 
+  function pickLogo(e: React.ChangeEvent<HTMLInputElement>) {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    if (!ACCEPT.includes(f.type)) return fail("Logo must be JPEG, PNG, or WebP.");
+    if (f.size > MAX_BYTES) return fail("Logo must be under 15 MB.");
+    setLogo(f);
+    setLogoPreview(URL.createObjectURL(f));
+    if (status === "error") {
+      setStatus("idle");
+      setMessage("");
+    }
+  }
+
+  async function uploadLogo(f: File): Promise<string> {
+    const r = await fetch("/api/gallery/upload-url", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contentType: f.type }),
+    });
+    if (!r.ok) throw new Error("upload-url");
+    const { key, uploadUrl } = await r.json();
+    const put = await fetch(uploadUrl, { method: "PUT", body: f, headers: { "Content-Type": f.type } });
+    if (!put.ok) throw new Error("s3");
+    return key;
+  }
+
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (status === "submitting") return;
@@ -40,14 +72,19 @@ export default function BountyForm() {
     setStatus("submitting");
     setMessage("");
     try {
+      const payload: Record<string, unknown> = { ...form };
+      if (logo) payload.logoKey = await uploadLogo(logo);
       const res = await fetch("/api/member/bounty", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
       if (res.ok) {
         setStatus("success");
         setForm({ sponsor: "", title: "", build: "", prize: "", judging: "", links: "" });
+        setLogo(null);
+        setLogoPreview("");
+        if (logoRef.current) logoRef.current.value = "";
       } else {
         const d = await res.json().catch(() => ({}));
         fail(d?.error || "Could not submit. Try again.");
@@ -90,6 +127,28 @@ export default function BountyForm() {
           <input className={fieldCls} value={form.title} onChange={set("title")} />
         </label>
       </div>
+      <div className="flex flex-col gap-1.5">
+        <span className={labelCls}>Sponsor logo (optional)</span>
+        <div className="flex flex-wrap items-center gap-4">
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden border border-[#d8d2c5] bg-[#eae5da]">
+            {logoPreview ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={logoPreview} alt="" className="h-full w-full object-contain" />
+            ) : (
+              <span className="font-[family-name:var(--font-ibm-plex-mono)] text-[10px] uppercase text-[#a39c8d]">Logo</span>
+            )}
+          </div>
+          <input ref={logoRef} type="file" accept={ACCEPT.join(",")} onChange={pickLogo} className="hidden" />
+          <button
+            type="button"
+            onClick={() => logoRef.current?.click()}
+            className="inline-flex items-center border border-[#cec7b8] px-4 py-2.5 font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[#16130f] transition-colors duration-150 hover:border-[#16130f]"
+          >
+            {logoPreview ? "Change logo" : "Upload logo"}
+          </button>
+        </div>
+      </div>
+
       <label className="flex flex-col gap-1.5">
         <span className={labelCls}>What should hackers build? *</span>
         <textarea className={`${fieldCls} min-h-[140px] resize-y`} value={form.build} onChange={set("build")} />

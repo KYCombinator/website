@@ -198,12 +198,24 @@ export default async function SlackPage() {
         title="Join the community."
         intro="There's no single door. Start with the weekly letter, jump into Slack, show up to an event — then go as deep as you want. Here's how, step by step."
       >
-        <Button href={SLACK_INVITE} variant="primary">
-          Join the Slack
-        </Button>
-        <TextLink href={NEWSLETTER_URL} className="self-center">
-          Subscribe to the newsletter
-        </TextLink>
+        {signedIn && done.slack && done.newsletter ? (
+          <p className="font-[family-name:var(--font-ibm-plex-mono)] text-[12px] uppercase tracking-[0.08em] text-[var(--kyx-purple)]">
+            ✓ You&apos;re all set — you&apos;re in Slack and on the list.
+          </p>
+        ) : (
+          <>
+            {!(signedIn && done.slack) && (
+              <Button href={SLACK_INVITE} variant="primary">
+                Join the Slack
+              </Button>
+            )}
+            {!(signedIn && done.newsletter) && (
+              <TextLink href={NEWSLETTER_URL} className="self-center">
+                Subscribe to the newsletter
+              </TextLink>
+            )}
+          </>
+        )}
       </PageHero>
 
       {/* How to join — the ladder */}

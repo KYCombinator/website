@@ -1,7 +1,13 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { SESSION_COOKIE, verifySession } from "@/lib/adminAuth";
-import { createBounty, getUser, galleryConfigured } from "@/lib/gallery";
+import {
+  createBounty,
+  getUser,
+  isValidPhotoKey,
+  photoUrlForKey,
+  galleryConfigured,
+} from "@/lib/gallery";
 import { notifyOrganizers } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
@@ -34,6 +40,12 @@ export async function POST(request: Request) {
   if (!title) return NextResponse.json({ error: "Give the bounty a title." }, { status: 400 });
   if (!build) return NextResponse.json({ error: "Describe what to build." }, { status: 400 });
 
+  // Optional sponsor logo (already uploaded to S3 via the presigned URL).
+  const logoKey = String(body?.logoKey || "");
+  if (logoKey && !isValidPhotoKey(logoKey)) {
+    return NextResponse.json({ error: "Invalid logo." }, { status: 400 });
+  }
+
   const user = await getUser(session.email);
   const submitterName = (user?.name || session.email.split("@")[0]).slice(0, 120);
 
@@ -44,6 +56,7 @@ export async function POST(request: Request) {
     prize: clip(body?.prize, 400),
     judging: clip(body?.judging, 2000),
     links: clip(body?.links, 1000),
+    logoUrl: logoKey ? photoUrlForKey(logoKey) : undefined,
     submitterName,
     submitterEmail: session.email,
   });

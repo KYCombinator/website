@@ -400,6 +400,7 @@ export type BountyRecord = {
   prize: string;
   judging: string; // how to win
   links: string;
+  logoUrl?: string; // optional sponsor logo
   submitterName: string;
   submitterEmail: string; // from the session (bounties require login)
   status: BountyStatus;
@@ -413,6 +414,7 @@ export async function createBounty(input: {
   prize: string;
   judging: string;
   links: string;
+  logoUrl?: string;
   submitterName: string;
   submitterEmail: string;
 }): Promise<BountyRecord> {

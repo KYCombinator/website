@@ -36,7 +36,7 @@ const GROUPS: Group[] = [
     eyebrow: "Organization",
     heading: "The org.",
     items: [
-      { q: "Legal status", a: "We're an all-volunteer, pending 501(c)(3) nonprofit organization — no paid staff, no dues — focused on building Louisville's startup ecosystem through education, community building, and direct support for founders." },
+      { q: "Legal status", a: "We're an all-volunteer 501(c)(3) nonprofit organization — no paid staff, no dues — focused on building Louisville's startup ecosystem through education, community building, and direct support for founders." },
       { q: "Location", a: "Based in Louisville, Kentucky. We're committed to building the local ecosystem and creating opportunities for founders and builders in our community." },
       { q: "Mission alignment", a: "As a 501(c)(3), our focus is on founders learning, growing, and building successful companies." },
     ],

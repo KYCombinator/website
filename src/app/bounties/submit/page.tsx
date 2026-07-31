@@ -22,7 +22,10 @@ export default async function SubmitBountyPage() {
         title="Submit a bounty."
         intro="Sponsor a challenge for KYX hackers to take on — set the brief, the prize, and how to win. We review every bounty before it goes live."
       >
-        <TextLink href="/events">← All events</TextLink>
+        <TextLink href="https://hackkentucky.com/sponsor/bounty">Learn more about bounties →</TextLink>
+        <TextLink href="/events" className="self-center">
+          ← All events
+        </TextLink>
       </PageHero>
 
       <section>

@@ -23,11 +23,11 @@ export default function NotFound() {
             as="h1"
             className="max-w-[820px] text-[52px] leading-[0.95] md:text-[76px] lg:text-[92px]"
           >
-            Off the map.
+            Nothing&apos;s here&hellip;
           </SerifHeading>
           <p className="max-w-[560px] text-[18px] leading-[1.6] text-[#4a443a] [text-wrap:pretty] md:text-[19px]">
-            This page doesn&apos;t exist — or it moved. No dead ends here; pick a way back
-            in below.
+            &hellip; maybe you&apos;re in Ohio. This page doesn&apos;t exist (or it moved) —
+            here&apos;s the way back to Kentucky.
           </p>
           <div className="mt-2 flex flex-col gap-3 sm:flex-row">
             <Button href="/" variant="primary">

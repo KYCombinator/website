@@ -81,6 +81,12 @@ function EventSection({
             )}
           </div>
 
+          {event.bounties && (
+            <div className="border-t border-[#d8d2c5] pt-4">
+              <TextLink href="/bounties/submit">Submit a bounty →</TextLink>
+            </div>
+          )}
+
           <EventPhotoUpload
             eventId={event.id}
             eventName={event.name}

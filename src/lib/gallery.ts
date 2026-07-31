@@ -54,6 +54,7 @@ export type EventRecord = {
   order: number;
   published: boolean;
   createdAt: string;
+  bounties?: boolean; // show a "Submit a bounty" link on this event's section
 };
 
 export type PhotoRecord = {
@@ -112,6 +113,7 @@ export async function putEvent(
     order: input.order ?? existing?.order ?? Date.now(),
     published: input.published ?? existing?.published ?? true,
     createdAt: existing?.createdAt ?? new Date().toISOString(),
+    bounties: input.bounties ?? existing?.bounties ?? false,
   };
   await doc().send(
     new PutCommand({
@@ -384,6 +386,69 @@ export async function setIdeaStatus(id: string, status: IdeaStatus): Promise<voi
       UpdateExpression: "SET #s = :s, gsi1pk = :g",
       ExpressionAttributeNames: { "#s": "status" },
       ExpressionAttributeValues: { ":s": status, ":g": `IDEA#${status}` },
+    })
+  );
+}
+
+// ── Bounties (sponsor challenges, e.g. HackKentucky) ─────────────────────────
+export type BountyStatus = "new" | "approved" | "rejected";
+export type BountyRecord = {
+  id: string;
+  sponsor: string;
+  title: string;
+  build: string; // what should hackers build
+  prize: string;
+  judging: string; // how to win
+  links: string;
+  submitterName: string;
+  submitterEmail: string; // from the session (bounties require login)
+  status: BountyStatus;
+  createdAt: string;
+};
+
+export async function createBounty(input: {
+  sponsor: string;
+  title: string;
+  build: string;
+  prize: string;
+  judging: string;
+  links: string;
+  submitterName: string;
+  submitterEmail: string;
+}): Promise<BountyRecord> {
+  const id = randomUUID();
+  const createdAt = new Date().toISOString();
+  const record: BountyRecord = { id, status: "new", createdAt, ...input };
+  await doc().send(
+    new PutCommand({
+      TableName: TABLE,
+      Item: { pk: "BOUNTY", sk: id, gsi1pk: "BOUNTY#new", gsi1sk: createdAt, ...record },
+    })
+  );
+  return record;
+}
+
+export async function listBounties(): Promise<BountyRecord[]> {
+  const r = await doc().send(
+    new QueryCommand({
+      TableName: TABLE,
+      KeyConditionExpression: "pk = :pk",
+      ExpressionAttributeValues: { ":pk": "BOUNTY" },
+    })
+  );
+  return ((r.Items || []) as BountyRecord[]).sort((a, b) =>
+    b.createdAt.localeCompare(a.createdAt)
+  );
+}
+
+export async function setBountyStatus(id: string, status: BountyStatus): Promise<void> {
+  await doc().send(
+    new UpdateCommand({
+      TableName: TABLE,
+      Key: { pk: "BOUNTY", sk: id },
+      UpdateExpression: "SET #s = :s, gsi1pk = :g",
+      ExpressionAttributeNames: { "#s": "status" },
+      ExpressionAttributeValues: { ":s": status, ":g": `BOUNTY#${status}` },
     })
   );
 }

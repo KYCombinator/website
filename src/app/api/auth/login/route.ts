@@ -3,10 +3,12 @@ import { SESSION_COOKIE, authConfigured, signSession } from "@/lib/adminAuth";
 import {
   verifyLoginCode,
   ensureUserRole,
+  isKnownUser,
   checkLoginRateLimit,
   recordLoginFailure,
   clearLoginFailures,
 } from "@/lib/gallery";
+import { sendWelcome } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -51,8 +53,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid or expired code." }, { status: 401 });
   }
 
-  // New email → an account is created (as a member) on first sign-in.
+  // New email → an account is created (as a member) on first sign-in. Detect
+  // that here (before creating it) so brand-new members get a welcome email.
+  const isNew = !(await isKnownUser(email));
   const role = await ensureUserRole(email);
+  if (isNew) await sendWelcome(email.trim().toLowerCase());
   await clearLoginFailures(ip);
   const res = NextResponse.json({ ok: true, role });
   res.cookies.set(SESSION_COOKIE, signSession(email, role), {

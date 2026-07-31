@@ -27,6 +27,7 @@ export async function POST(request: Request) {
     href: clip(body?.href, 500), // blank = next event is TBD (no link)
     order: Number.isFinite(body?.order) ? Number(body.order) : undefined,
     published: body?.published === undefined ? undefined : !!body.published,
+    bounties: body?.bounties === undefined ? undefined : !!body.bounties,
   });
   return NextResponse.json({ ok: true, event });
 }

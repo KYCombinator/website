@@ -36,7 +36,7 @@ export default function Footer() {
               className="block h-[23px] w-auto self-start [filter:brightness(0)]"
             />
             <span>1205 East Washington St, Suite 111 · Louisville, KY 40206</span>
-            <span>The KYCombinator Project Inc. · Kentucky-based 501(c)(3) nonprofit</span>
+            <span>The KYCombinator Project Inc. · An all-volunteer, Kentucky-based 501(c)(3) nonprofit</span>
           </div>
 
           {/* Nav links */}

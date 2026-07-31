@@ -372,6 +372,9 @@ export default async function Home() {
               {buildersInRoom} builders, real-time. Or take the weekly letter —
               events, programs, and who&apos;s shipping what.
             </p>
+            <p className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[#7d7565]">
+              KYX is an all-volunteer 501(c)(3) nonprofit — no dues, no paywalls.
+            </p>
           </div>
           <div className="flex flex-col gap-3">
             <a

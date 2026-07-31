@@ -5,12 +5,14 @@ import {
   listEvents,
   listApplications,
   listIdeas,
+  listBounties,
   listUsers,
   galleryConfigured,
   type PhotoRecord,
   type EventRecord,
   type ApplicationRecord,
   type IdeaRecord,
+  type BountyRecord,
   type UserRecord,
 } from "@/lib/gallery";
 import { Container, Eyebrow, SerifHeading } from "../components/fm";
@@ -19,6 +21,7 @@ import PhotoQueue from "./PhotoQueue";
 import EventsManager from "./EventsManager";
 import Applications from "./Applications";
 import IdeasManager from "./IdeasManager";
+import BountiesManager from "./BountiesManager";
 import UsersManager from "./UsersManager";
 
 export default async function AdminPage() {
@@ -38,17 +41,19 @@ export default async function AdminPage() {
     );
   }
 
-  const [allPhotos, events, applications, ideas, users]: [
+  const [allPhotos, events, applications, ideas, bounties, users]: [
     PhotoRecord[],
     EventRecord[],
     ApplicationRecord[],
     IdeaRecord[],
+    BountyRecord[],
     UserRecord[],
   ] = await Promise.all([
     listAllPhotos(),
     listEvents(),
     listApplications(),
     listIdeas(),
+    listBounties(),
     listUsers(),
   ]);
 
@@ -87,6 +92,12 @@ export default async function AdminPage() {
         <Eyebrow>Vibe Code Night ideas · {ideas.length}</Eyebrow>
         <SerifHeading className="mb-6 mt-2 text-[32px] leading-none">Challenge ideas.</SerifHeading>
         <IdeasManager items={ideas} />
+      </Container>
+
+      <Container className="py-10">
+        <Eyebrow>Bounties · {bounties.length}</Eyebrow>
+        <SerifHeading className="mb-6 mt-2 text-[32px] leading-none">Bounties.</SerifHeading>
+        <BountiesManager items={bounties} />
       </Container>
 
       <Container className="py-10">

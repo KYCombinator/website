@@ -32,6 +32,7 @@ type Draft = {
   href: string;
   order: string;
   published: boolean;
+  bounties: boolean;
 };
 
 const emptyDraft: Draft = {
@@ -44,6 +45,7 @@ const emptyDraft: Draft = {
   href: "",
   order: "",
   published: true,
+  bounties: false,
 };
 
 function toDraft(e: EventRecord): Draft {
@@ -58,6 +60,7 @@ function toDraft(e: EventRecord): Draft {
     href: e.href,
     order: String(e.order ?? ""),
     published: e.published,
+    bounties: !!e.bounties,
   };
 }
 
@@ -104,6 +107,7 @@ export default function EventsManager({
           href: draft.href,
           order: draft.order.trim() === "" ? undefined : Number(draft.order),
           published: draft.published,
+          bounties: draft.bounties,
         }),
       });
       if (res.ok) {
@@ -203,10 +207,16 @@ export default function EventsManager({
                 <input className={fieldCls} value={draft.order} onChange={set("order")} type="number" inputMode="numeric" />
               </label>
             </div>
-            <label className="flex items-center gap-2">
-              <input type="checkbox" checked={draft.published} onChange={set("published")} className="h-4 w-4 accent-[var(--kyx-purple)]" />
-              <span className={labelCls}>Published</span>
-            </label>
+            <div className="flex flex-wrap gap-6">
+              <label className="flex items-center gap-2">
+                <input type="checkbox" checked={draft.published} onChange={set("published")} className="h-4 w-4 accent-[var(--kyx-purple)]" />
+                <span className={labelCls}>Published</span>
+              </label>
+              <label className="flex items-center gap-2">
+                <input type="checkbox" checked={draft.bounties} onChange={set("bounties")} className="h-4 w-4 accent-[var(--kyx-purple)]" />
+                <span className={labelCls}>Show &ldquo;Submit a bounty&rdquo; link</span>
+              </label>
+            </div>
             <div className="flex gap-2">
               <button type="button" className={primaryBtn} disabled={busy} onClick={save}>
                 {busy ? "Saving…" : "Save"}

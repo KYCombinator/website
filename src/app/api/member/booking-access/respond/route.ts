@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { SESSION_COOKIE, verifySession } from "@/lib/adminAuth";
-import { respondBookingAccess, getBookingAccess, galleryConfigured } from "@/lib/gallery";
+import { respondBookingAccess, getBookingAccess, getUser, galleryConfigured } from "@/lib/gallery";
+import { sendMemberEmail } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -36,5 +37,21 @@ export async function POST(request: Request) {
   }
 
   await respondBookingAccess(session.email, requester, action === "approve");
+
+  // Let the requester know the decision.
+  const owner = await getUser(session.email);
+  const ownerName = owner?.name || session.email.split("@")[0];
+  if (action === "approve") {
+    const link = owner?.bookingLink;
+    await sendMemberEmail(requester, `${ownerName} approved your booking request`, "You're approved", [
+      `${ownerName} approved your request to book time.`,
+      link ? `Book here: ${link}` : "You can now see their booking link in the KYX directory: https://kycombinator.com/directory",
+    ]);
+  } else {
+    await sendMemberEmail(requester, `Update on your booking request`, "Booking request update", [
+      `${ownerName} isn't able to share their booking link right now.`,
+    ]);
+  }
+
   return NextResponse.json({ ok: true });
 }

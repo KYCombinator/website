@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { setApplicationStatus, type AppStatus } from "@/lib/gallery";
+import { setApplicationStatus, getApplication, type AppStatus } from "@/lib/gallery";
+import { sendStatusUpdate } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -18,6 +19,10 @@ export async function POST(request: Request) {
   if (!id || !STATUSES.includes(status)) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
+  const app = await getApplication(id);
   await setApplicationStatus(id, status);
+  if (app?.email) {
+    await sendStatusUpdate(app.email, app.name, "Cinderblock application", status);
+  }
   return NextResponse.json({ ok: true });
 }

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { setPhotoStatus, deletePhoto, type PhotoStatus } from "@/lib/gallery";
+import { setPhotoStatus, deletePhoto, getPhoto, type PhotoStatus } from "@/lib/gallery";
+import { sendStatusUpdate } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -24,7 +25,11 @@ export async function POST(request: Request) {
   if (!id || !status) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
+  const photo = await getPhoto(id);
   await setPhotoStatus(id, status);
+  if (photo?.submitterEmail) {
+    await sendStatusUpdate(photo.submitterEmail, photo.submitterName, "photo", status);
+  }
   return NextResponse.json({ ok: true });
 }
 

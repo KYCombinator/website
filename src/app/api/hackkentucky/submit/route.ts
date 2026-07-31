@@ -7,7 +7,7 @@ import {
   type HkKind,
   type HkField,
 } from "@/lib/gallery";
-import { notify, HACKKENTUCKY_EMAIL } from "@/lib/email";
+import { notify, sendSubmissionReceipt, HACKKENTUCKY_EMAIL } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -68,6 +68,7 @@ export async function POST(request: Request) {
     `${name} (${email}) submitted the ${kind} form.\n\n${detail || "(no extra fields)"}\n\n` +
       `Review in the admin dashboard: https://kycombinator.com/admin\n\nSubmission id: ${rec.id}`
   );
+  await sendSubmissionReceipt(email, name, `HackKentucky ${kind} submission`);
 
   return NextResponse.json({ ok: true });
 }

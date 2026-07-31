@@ -9,7 +9,7 @@ import {
   photoUrlForKey,
   galleryConfigured,
 } from "@/lib/gallery";
-import { notifyOrganizers } from "@/lib/email";
+import { notifyOrganizers, sendSubmissionReceipt } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -73,6 +73,11 @@ export async function POST(request: Request) {
     `${submitterName} (${session.email}) submitted ${keys.length} photo${keys.length > 1 ? "s" : ""} ` +
       `for "${event.name}" from their member dashboard.\n\n` +
       `Review in the admin dashboard: https://kycombinator.com/admin`
+  );
+  await sendSubmissionReceipt(
+    session.email,
+    submitterName,
+    keys.length > 1 ? "photos" : "photo"
   );
 
   return NextResponse.json({ ok: true, count: keys.length });

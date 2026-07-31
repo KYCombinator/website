@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { SESSION_COOKIE, verifySession } from "@/lib/adminAuth";
 import { requestBookingAccess, getUser, galleryConfigured } from "@/lib/gallery";
+import { sendMemberEmail } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -42,5 +43,16 @@ export async function POST(request: Request) {
   }
 
   const access = await requestBookingAccess(session.email, target);
+
+  // Notify the owner (only on a fresh pending request, not a standing approval).
+  if (access.status === "pending") {
+    const requester = await getUser(session.email);
+    const requesterName = requester?.name || session.email.split("@")[0];
+    await sendMemberEmail(target, "Someone wants to book time with you", "New booking request", [
+      `${requesterName} (${session.email}) asked for access to your booking link.`,
+      "Approve or deny it on your dashboard: https://kycombinator.com/dashboard",
+    ]);
+  }
+
   return NextResponse.json({ ok: true, status: access.status });
 }

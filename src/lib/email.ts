@@ -139,6 +139,97 @@ export async function notifyOrganizers(subject: string, body: string): Promise<v
   return notify(TO, subject, body);
 }
 
+const MONO = "'IBM Plex Mono','SFMono-Regular',Consolas,'Courier New',monospace";
+const SANS = "'IBM Plex Sans',-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif";
+
+// Branded, member-facing email (Field Manual look). `paragraphs` are plain text.
+// Fire-and-forget: a failure never breaks the action that triggered it.
+export async function sendMemberEmail(
+  to: string,
+  subject: string,
+  heading: string,
+  paragraphs: string[]
+): Promise<void> {
+  if (!to) return;
+  const body = paragraphs
+    .map(
+      (p) =>
+        `<div style="font-family:${SANS};font-size:15px;line-height:1.6;color:#4a443a;margin:0 0 14px;">${p}</div>`
+    )
+    .join("");
+  const html = `<!doctype html>
+<html><body style="margin:0;padding:0;background:#f4f1ea;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f1ea;">
+    <tr><td align="center" style="padding:40px 16px;">
+      <table role="presentation" width="480" cellpadding="0" cellspacing="0" style="width:480px;max-width:100%;">
+        <tr><td style="padding:0 4px 18px;">
+          <span style="font-family:${MONO};font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#5B2FBF;">KYCombinator</span>
+        </td></tr>
+        <tr><td style="background:#ffffff;border:1px solid #16130f;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td style="padding:36px 32px;">
+            <div style="font-family:${SANS};font-size:22px;font-weight:600;color:#16130f;margin:0 0 14px;">${heading}</div>
+            ${body}
+          </td></tr></table>
+        </td></tr>
+        <tr><td style="padding:18px 4px 0;">
+          <span style="font-family:${MONO};font-size:11px;letter-spacing:0.5px;color:#a39c8d;">KYX &middot; an all-volunteer 501(c)(3) nonprofit &middot; Louisville, KY</span>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>`;
+  const text = `${heading}\n\n${paragraphs.join("\n\n")}`;
+  try {
+    await ses().send(
+      new SendEmailCommand({
+        Source: FROM,
+        Destination: { ToAddresses: [to] },
+        Message: {
+          Subject: { Data: subject, Charset: "UTF-8" },
+          Body: { Html: { Data: html, Charset: "UTF-8" }, Text: { Data: text, Charset: "UTF-8" } },
+        },
+      })
+    );
+  } catch (err) {
+    console.error("sendMemberEmail failed:", err);
+  }
+}
+
+// Confirmation to a submitter that we received their submission.
+export async function sendSubmissionReceipt(to: string, name: string, thing: string): Promise<void> {
+  const first = (name || "").trim().split(/\s+/)[0] || "there";
+  await sendMemberEmail(to, `We got your ${thing}`, `Thanks, ${first} — we got it.`, [
+    `Your ${thing} came through. We review every submission and will follow up if it's a fit.`,
+    `Reply to this email if you need to add anything.`,
+  ]);
+}
+
+// Notify a submitter of an approve/reject (or "reviewed") decision. No-op for
+// non-decision statuses (new / pending / archived) so we don't over-email.
+export async function sendStatusUpdate(
+  to: string,
+  name: string,
+  thing: string,
+  status: string
+): Promise<void> {
+  const first = (name || "").trim().split(/\s+/)[0] || "there";
+  let subject = "";
+  let lead = "";
+  if (status === "approved") {
+    subject = `Your ${thing} is approved`;
+    lead = `Good news, ${first} — your ${thing} has been approved.`;
+  } else if (status === "rejected") {
+    subject = `Update on your ${thing}`;
+    lead = `Thanks for the ${thing}, ${first}. After review we won't be moving forward this time — but we'd genuinely love to see you again.`;
+  } else if (status === "reviewed") {
+    subject = `We've reviewed your ${thing}`;
+    lead = `Thanks, ${first} — we've reviewed your ${thing} and will be in touch if there's a fit.`;
+  } else {
+    return; // new / pending / archived → no email
+  }
+  await sendMemberEmail(to, subject, subject, [lead, "Questions? Just reply to this email."]);
+}
+
 // Fire-and-forget plain-text notification to an arbitrary recipient. Failures
 // are swallowed so they never break a user submission.
 export async function notify(to: string, subject: string, body: string): Promise<void> {

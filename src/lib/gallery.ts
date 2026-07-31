@@ -316,6 +316,11 @@ export async function listApplications(): Promise<ApplicationRecord[]> {
   );
 }
 
+export async function getApplication(id: string): Promise<ApplicationRecord | null> {
+  const r = await doc().send(new GetCommand({ TableName: TABLE, Key: { pk: "APP", sk: id } }));
+  return (r.Item as ApplicationRecord) || null;
+}
+
 export async function setApplicationStatus(
   id: string,
   status: AppStatus
@@ -380,6 +385,11 @@ export async function listIdeas(): Promise<IdeaRecord[]> {
   );
 }
 
+export async function getIdea(id: string): Promise<IdeaRecord | null> {
+  const r = await doc().send(new GetCommand({ TableName: TABLE, Key: { pk: "IDEA", sk: id } }));
+  return (r.Item as IdeaRecord) || null;
+}
+
 export async function setIdeaStatus(id: string, status: IdeaStatus): Promise<void> {
   await doc().send(
     new UpdateCommand({
@@ -440,6 +450,11 @@ export async function listHkIntakes(): Promise<HkIntakeRecord[]> {
   return ((r.Items || []) as HkIntakeRecord[]).sort((a, b) =>
     b.createdAt.localeCompare(a.createdAt)
   );
+}
+
+export async function getHkIntake(id: string): Promise<HkIntakeRecord | null> {
+  const r = await doc().send(new GetCommand({ TableName: TABLE, Key: { pk: "HK", sk: id } }));
+  return (r.Item as HkIntakeRecord) || null;
 }
 
 export async function setHkIntakeStatus(id: string, status: HkStatus): Promise<void> {

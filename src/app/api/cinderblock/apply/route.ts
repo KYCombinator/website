@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { createApplication, galleryConfigured } from "@/lib/gallery";
-import { notifyOrganizers } from "@/lib/email";
+import { notifyOrganizers, sendSubmissionReceipt } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -39,6 +39,7 @@ export async function POST(request: Request) {
       `Building:\n${building}\n\nLinks: ${links || "—"}\n\n` +
       `Review in the admin dashboard: https://kycombinator.com/admin\n\nApplication id: ${app.id}`
   );
+  await sendSubmissionReceipt(email, name, "Cinderblock application");
 
   return NextResponse.json({ ok: true });
 }

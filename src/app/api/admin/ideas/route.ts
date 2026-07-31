@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { setIdeaStatus, type IdeaStatus } from "@/lib/gallery";
+import { setIdeaStatus, getIdea, type IdeaStatus } from "@/lib/gallery";
+import { sendStatusUpdate } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -18,6 +19,10 @@ export async function POST(request: Request) {
   if (!id || !STATUSES.includes(status)) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
+  const idea = await getIdea(id);
   await setIdeaStatus(id, status);
+  if (idea?.submitterEmail) {
+    await sendStatusUpdate(idea.submitterEmail, "", "Vibe Code Night idea", status);
+  }
   return NextResponse.json({ ok: true });
 }

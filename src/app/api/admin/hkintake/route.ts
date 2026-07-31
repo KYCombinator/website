@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { setHkIntakeStatus, type HkStatus } from "@/lib/gallery";
+import { setHkIntakeStatus, getHkIntake, type HkStatus } from "@/lib/gallery";
+import { sendStatusUpdate } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +20,10 @@ export async function POST(request: Request) {
   if (!id || !STATUSES.includes(status)) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
+  const rec = await getHkIntake(id);
   await setHkIntakeStatus(id, status);
+  if (rec?.email) {
+    await sendStatusUpdate(rec.email, rec.name, `HackKentucky ${rec.kind} submission`, status);
+  }
   return NextResponse.json({ ok: true });
 }

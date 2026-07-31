@@ -4,6 +4,8 @@ import { useState } from "react";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const fieldCls =
   "w-full border border-[#cec7b8] bg-transparent px-4 py-3 text-[15px] text-[#16130f] outline-none placeholder:text-[#a39c8d] focus:border-[#16130f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]";
 const labelCls =
@@ -12,6 +14,8 @@ const labelCls =
 export default function IdeaForm() {
   const [idea, setIdea] = useState("");
   const [twist, setTwist] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
 
@@ -24,6 +28,7 @@ export default function IdeaForm() {
     e.preventDefault();
     if (status === "submitting") return;
     if (!idea.trim()) return fail("Add your challenge idea.");
+    if (!EMAIL_RE.test(email.trim())) return fail("A valid email is required.");
 
     setStatus("submitting");
     setMessage("");
@@ -31,12 +36,14 @@ export default function IdeaForm() {
       const res = await fetch("/api/ideas/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ idea: idea.trim(), twist: twist.trim() }),
+        body: JSON.stringify({ idea: idea.trim(), twist: twist.trim(), name: name.trim(), email: email.trim() }),
       });
       if (res.ok) {
         setStatus("success");
         setIdea("");
         setTwist("");
+        setName("");
+        setEmail("");
       } else {
         const d = await res.json().catch(() => ({}));
         fail(d?.error || "Could not submit. Try again.");
@@ -87,6 +94,16 @@ export default function IdeaForm() {
           placeholder="Optional — a required API, a time limit, a theme…"
         />
       </label>
+      <div className="grid gap-5 sm:grid-cols-2">
+        <label className="flex flex-col gap-1.5">
+          <span className={labelCls}>Your name</span>
+          <input className={fieldCls} value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" />
+        </label>
+        <label className="flex flex-col gap-1.5">
+          <span className={labelCls}>Email *</span>
+          <input className={fieldCls} value={email} onChange={(e) => setEmail(e.target.value)} type="email" autoComplete="email" />
+        </label>
+      </div>
 
       {status === "error" && (
         <p className="font-[family-name:var(--font-ibm-plex-mono)] text-[12px] text-[#b3261e]" role="alert">

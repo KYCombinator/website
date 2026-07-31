@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
-import { setBountyStatus, type BountyStatus } from "@/lib/gallery";
+import { setHkIntakeStatus, type HkStatus } from "@/lib/gallery";
 
 export const dynamic = "force-dynamic";
 
-const STATUSES: BountyStatus[] = ["new", "approved", "rejected"];
+const STATUSES: HkStatus[] = ["new", "approved", "rejected"];
 
-// Approve / reject a bounty. Gated by middleware (admin session).
+// Approve / reject a HackKentucky get-involved submission. Gated by middleware
+// (admin session).
 export async function POST(request: Request) {
   let body: any;
   try {
@@ -14,10 +15,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
   const id = String(body?.id || "");
-  const status = String(body?.status || "") as BountyStatus;
+  const status = String(body?.status || "") as HkStatus;
   if (!id || !STATUSES.includes(status)) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
-  await setBountyStatus(id, status);
+  await setHkIntakeStatus(id, status);
   return NextResponse.json({ ok: true });
 }

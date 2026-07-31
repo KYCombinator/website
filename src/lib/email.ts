@@ -8,6 +8,7 @@ import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 const REGION = process.env.PHOTOS_REGION || "us-east-1";
 const FROM = process.env.EMAIL_FROM || "noreply@kycombinator.com";
 const TO = process.env.ORGANIZERS_EMAIL || "organizers@kycombinator.com";
+export const HACKKENTUCKY_EMAIL = process.env.HACKKENTUCKY_EMAIL || "hackkentucky@kycombinator.com";
 
 let _ses: SESClient | null = null;
 function ses() {
@@ -135,11 +136,17 @@ export async function sendWelcome(toEmail: string): Promise<void> {
 }
 
 export async function notifyOrganizers(subject: string, body: string): Promise<void> {
+  return notify(TO, subject, body);
+}
+
+// Fire-and-forget plain-text notification to an arbitrary recipient. Failures
+// are swallowed so they never break a user submission.
+export async function notify(to: string, subject: string, body: string): Promise<void> {
   try {
     await ses().send(
       new SendEmailCommand({
         Source: FROM,
-        Destination: { ToAddresses: [TO] },
+        Destination: { ToAddresses: [to] },
         Message: {
           Subject: { Data: subject, Charset: "UTF-8" },
           Body: { Text: { Data: body, Charset: "UTF-8" } },
@@ -147,6 +154,6 @@ export async function notifyOrganizers(subject: string, body: string): Promise<v
       })
     );
   } catch (err) {
-    console.error("notifyOrganizers failed:", err);
+    console.error("notify failed:", err);
   }
 }

@@ -5,14 +5,14 @@ import {
   listEvents,
   listApplications,
   listIdeas,
-  listBounties,
+  listHkIntakes,
   listUsers,
   galleryConfigured,
   type PhotoRecord,
   type EventRecord,
   type ApplicationRecord,
   type IdeaRecord,
-  type BountyRecord,
+  type HkIntakeRecord,
   type UserRecord,
 } from "@/lib/gallery";
 import { Container, Eyebrow, SerifHeading } from "../components/fm";
@@ -21,7 +21,7 @@ import PhotoQueue from "./PhotoQueue";
 import EventsManager from "./EventsManager";
 import Applications from "./Applications";
 import IdeasManager from "./IdeasManager";
-import BountiesManager from "./BountiesManager";
+import HkIntakeManager from "./HkIntakeManager";
 import UsersManager from "./UsersManager";
 
 export default async function AdminPage() {
@@ -41,19 +41,19 @@ export default async function AdminPage() {
     );
   }
 
-  const [allPhotos, events, applications, ideas, bounties, users]: [
+  const [allPhotos, events, applications, ideas, hkintakes, users]: [
     PhotoRecord[],
     EventRecord[],
     ApplicationRecord[],
     IdeaRecord[],
-    BountyRecord[],
+    HkIntakeRecord[],
     UserRecord[],
   ] = await Promise.all([
     listAllPhotos(),
     listEvents(),
     listApplications(),
     listIdeas(),
-    listBounties(),
+    listHkIntakes(),
     listUsers(),
   ]);
 
@@ -95,9 +95,9 @@ export default async function AdminPage() {
       </Container>
 
       <Container className="py-10">
-        <Eyebrow>Bounties · {bounties.length}</Eyebrow>
-        <SerifHeading className="mb-6 mt-2 text-[32px] leading-none">Bounties.</SerifHeading>
-        <BountiesManager items={bounties} />
+        <Eyebrow>HackKentucky get-involved · {hkintakes.length}</Eyebrow>
+        <SerifHeading className="mb-6 mt-2 text-[32px] leading-none">HackKentucky intake.</SerifHeading>
+        <HkIntakeManager items={hkintakes} />
       </Container>
 
       <Container className="py-10">

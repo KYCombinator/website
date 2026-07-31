@@ -3,7 +3,7 @@ import { setSubmissionTags, type TaggableKind } from "@/lib/gallery";
 
 export const dynamic = "force-dynamic";
 
-const KINDS: TaggableKind[] = ["application", "idea", "bounty"];
+const KINDS: TaggableKind[] = ["application", "idea", "hkintake"];
 const MAX_TAGS = 20;
 
 // Set the tags on a submission (application / idea / bounty). Gated by

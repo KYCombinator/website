@@ -77,6 +77,7 @@ export type ApplicationRecord = {
   links: string;
   status: AppStatus;
   createdAt: string;
+  tags?: string[];
 };
 
 export function galleryConfigured() {
@@ -339,6 +340,7 @@ export type IdeaRecord = {
   submitterEmail: string; // captured from the session when signed in, else ""
   status: IdeaStatus;
   createdAt: string;
+  tags?: string[];
 };
 
 export async function createIdea(input: {
@@ -405,7 +407,29 @@ export type BountyRecord = {
   submitterEmail: string; // from the session (bounties require login)
   status: BountyStatus;
   createdAt: string;
+  tags?: string[];
 };
+
+// ── Submission tags (admin labels + filtering across intake types) ───────────
+const TAG_PK: Record<string, string> = { application: "APP", idea: "IDEA", bounty: "BOUNTY" };
+export type TaggableKind = "application" | "idea" | "bounty";
+
+export async function setSubmissionTags(
+  kind: TaggableKind,
+  id: string,
+  tags: string[]
+): Promise<void> {
+  const pk = TAG_PK[kind];
+  if (!pk) throw new Error("Unknown submission kind.");
+  await doc().send(
+    new UpdateCommand({
+      TableName: TABLE,
+      Key: { pk, sk: id },
+      UpdateExpression: "SET tags = :t",
+      ExpressionAttributeValues: { ":t": tags },
+    })
+  );
+}
 
 export async function createBounty(input: {
   sponsor: string;

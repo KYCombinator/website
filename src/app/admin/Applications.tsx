@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { ApplicationRecord, AppStatus } from "@/lib/gallery";
+import TagEditor from "./TagEditor";
+import TagFilterBar from "./TagFilterBar";
 
 const metaCls =
   "font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.08em] text-[#57503f]";
@@ -39,6 +41,13 @@ function StatusPill({ status }: { status: AppStatus }) {
 export default function Applications({ items }: { items: ApplicationRecord[] }) {
   const router = useRouter();
   const [busy, setBusy] = useState<string | null>(null);
+  const [selected, setSelected] = useState<string[]>([]);
+
+  const allTags = [...new Set(items.flatMap((a) => a.tags ?? []))].sort();
+  const filtered =
+    selected.length === 0 ? items : items.filter((a) => (a.tags ?? []).some((t) => selected.includes(t)));
+  const toggleTag = (t: string) =>
+    setSelected((s) => (s.includes(t) ? s.filter((x) => x !== t) : [...s, t]));
 
   async function setStatus(id: string, status: AppStatus) {
     if (busy) return;
@@ -62,8 +71,10 @@ export default function Applications({ items }: { items: ApplicationRecord[] }) 
   }
 
   return (
-    <div className="flex flex-col gap-5">
-      {items.map((a) => {
+    <div className="flex flex-col">
+      <TagFilterBar all={allTags} selected={selected} onToggle={toggleTag} onClear={() => setSelected([])} count={filtered.length} total={items.length} />
+      <div className="flex flex-col gap-5">
+      {filtered.map((a) => {
         const pending = busy === a.id;
         return (
           <div key={a.id} className="border border-[#d8d2c5] p-6">
@@ -126,9 +137,12 @@ export default function Applications({ items }: { items: ApplicationRecord[] }) 
                 );
               })}
             </div>
+
+            <TagEditor kind="application" id={a.id} tags={a.tags ?? []} />
           </div>
         );
       })}
+      </div>
     </div>
   );
 }

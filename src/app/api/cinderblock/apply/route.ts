@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { SESSION_COOKIE, verifySession } from "@/lib/adminAuth";
 import { createApplication, galleryConfigured } from "@/lib/gallery";
 import { notifyOrganizers, sendSubmissionReceipt } from "@/lib/email";
 
@@ -7,11 +9,19 @@ export const dynamic = "force-dynamic";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const clip = (v: unknown, n: number) => String(v || "").trim().slice(0, n);
 
-// Cinderblock application (replaces form.kycombinator.com). Stores the
-// application for the admin dashboard and emails the organizers.
+// Cinderblock application (replaces form.kycombinator.com). Requires a signed-in
+// account (kills spam); stores the application for the admin dashboard and emails
+// the organizers.
 export async function POST(request: Request) {
   if (!galleryConfigured()) {
     return NextResponse.json({ error: "Applications not configured." }, { status: 501 });
+  }
+
+  // Must be signed in to apply.
+  const store = await cookies();
+  const session = verifySession(store.get(SESSION_COOKIE)?.value);
+  if (!session) {
+    return NextResponse.json({ error: "Please sign in to apply." }, { status: 401 });
   }
 
   let body: any;

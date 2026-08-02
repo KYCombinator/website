@@ -10,8 +10,20 @@ const fieldCls =
 const labelCls =
   "font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.1em] text-[#57503f]";
 
-export default function ApplyForm() {
-  const [form, setForm] = useState({ name: "", email: "", company: "", building: "", links: "" });
+export default function ApplyForm({
+  defaultName = "",
+  defaultEmail = "",
+}: {
+  defaultName?: string;
+  defaultEmail?: string;
+}) {
+  const [form, setForm] = useState({
+    name: defaultName,
+    email: defaultEmail,
+    company: "",
+    building: "",
+    links: "",
+  });
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
 

@@ -27,8 +27,9 @@ const NEWSLETTER_URL = "https://kycombinator.beehiiv.com/";
 const APPLY_URL = "/cinderblock/apply";
 
 // ⚠️ Partner-org URLs inferred — confirm/correct these.
-const PARTNERS: { name: string; href: string }[] = [
+const PARTNERS: { name: string; href: string; note?: string }[] = [
   { name: "Amplify", href: "https://www.amplifystartups.com" },
+  { name: "Liverpool Lane", href: "https://www.liverpoollane.com/", note: "healthcare" },
   { name: "Startup Week Louisville", href: "https://www.startupweeklouisville.com" },
 ];
 
@@ -41,7 +42,7 @@ type JoinStep = {
   term: string;
   desc: React.ReactNode;
   action?: { label: string; href: string };
-  partners?: { name: string; href: string }[];
+  partners?: { name: string; href: string; note?: string }[];
   complete?: CompleteKey;
 };
 
@@ -258,7 +259,8 @@ export default async function SlackPage() {
                   )}
                   {step.partners?.map((p) => (
                     <TextLink key={p.name} href={p.href}>
-                      {p.name} →
+                      {p.name}
+                      {p.note ? ` (${p.note})` : ""} →
                     </TextLink>
                   ))}
                 </div>

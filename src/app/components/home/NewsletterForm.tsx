@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 
-type Status = "idle" | "submitting" | "success" | "error";
+type Status = "idle" | "submitting" | "success" | "error" | "fallback";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Hosted beehiiv subscribe page — used as a fallback when the on-site API isn't
+// configured, so subscribing still works.
+const HOSTED_SUBSCRIBE = "https://kycombinator.beehiiv.com/subscribe";
 
 // Newsletter field for the dark community band. Transparent underline input +
 // mono SUBSCRIBE button, matching the design. Inline validation and inline
@@ -34,6 +37,9 @@ export default function NewsletterForm() {
       });
       if (res.ok) {
         setStatus("success");
+      } else if (res.status === 501) {
+        // On-site newsletter API isn't configured — hand off to the hosted page.
+        setStatus("fallback");
       } else {
         const data = await res.json().catch(() => ({}));
         setStatus("error");
@@ -54,6 +60,19 @@ export default function NewsletterForm() {
       >
         You&apos;re on the list.
       </p>
+    );
+  }
+
+  if (status === "fallback") {
+    return (
+      <a
+        href={`${HOSTED_SUBSCRIBE}?email=${encodeURIComponent(email.trim())}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex border-b border-[#565044] pb-1 pt-2.5 font-[family-name:var(--font-ibm-plex-mono)] text-[13px] text-[#f4f1ea] transition-opacity duration-150 hover:opacity-80"
+      >
+        Finish subscribing on our newsletter page →
+      </a>
     );
   }
 

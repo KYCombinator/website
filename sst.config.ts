@@ -71,6 +71,9 @@ export default $config({
         ADMIN_JWT_SECRET: process.env.ADMIN_JWT_SECRET ?? "",
         ORGANIZERS_EMAIL: process.env.ORGANIZERS_EMAIL ?? "organizers@kycombinator.com",
         EMAIL_FROM: process.env.EMAIL_FROM ?? "noreply@kycombinator.com",
+        // beehiiv newsletter — empty unless the repo secrets are set.
+        BEEHIIV_API_KEY: process.env.BEEHIIV_API_KEY ?? "",
+        BEEHIIV_PUBLICATION_ID: process.env.BEEHIIV_PUBLICATION_ID ?? "",
       },
     });
 

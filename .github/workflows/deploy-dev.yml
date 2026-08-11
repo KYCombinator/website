@@ -34,6 +34,9 @@ jobs:
       NEXT_PUBLIC_JWT_SECRET: ${{ secrets.JWT_SECRET }}
       # Admin portal session key (set this repo secret). Empty => admin login disabled.
       ADMIN_JWT_SECRET: ${{ secrets.ADMIN_JWT_SECRET }}
+      # beehiiv newsletter (set these repo secrets). Empty => subscribe returns "not configured".
+      BEEHIIV_API_KEY: ${{ secrets.BEEHIIV_API_KEY }}
+      BEEHIIV_PUBLICATION_ID: ${{ secrets.BEEHIIV_PUBLICATION_ID }}
       # Serve X-Robots-Tag: noindex, nofollow on the dev host (see next.config.js).
       DEPLOY_NOINDEX: '1'
     steps:

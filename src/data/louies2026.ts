@@ -95,7 +95,7 @@ export const awards2026: LouieAward[] = [
   },
   {
     id: "drip-loma",
-    name: "The Kelly Kapoor Business B*tch Award",
+    name: "The Kelly Kapoor Fashion Show at Lunch Award",
     description: "For the best-dressed founder or team member. Turning every startup event into a runway."
   }
 ];

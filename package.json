@@ -6,7 +6,8 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "test:louies": "node scripts/test-louies.cjs && node scripts/test-louies-draft.cjs"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.1096.0",
@@ -45,6 +46,7 @@
     "@types/react-dom": "^18.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.2.1",
+    "react-test-renderer": "18.3.1",
     "tailwindcss": "^4.0.9",
     "typescript": "^5"
   }

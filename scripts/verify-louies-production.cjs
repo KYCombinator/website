@@ -20,11 +20,12 @@ async function adminRecords() {
     const page = await fetch(`${base}/events/louies/2026`);
     assert.equal(page.status, 200);
     const html = await page.text();
-    for (const label of ['The LOUIES 2026.', 'Comeback Kid', 'Bench Builder', 'Early Adopter', 'The Middle-Out', 'The Dinesh &amp; Gilfoyle', 'Most School Spirit', 'Submit nominations', 'Popularity Contest', 'Class President', 'The Kelly Kapoor Business B*tch Award', 'Dan', 'Jack', 'Rachel']) assert(html.includes(label));
+    for (const label of ['The LOUIES 2026.', 'Comeback Kid', 'Bench Builder', 'Early Adopter', 'The Middle-Out', 'The Dinesh &amp; Gilfoyle', 'Most School Spirit', 'Submit nominations', 'Popularity Contest', 'Class President', 'The Kelly Kapoor Fashion Show at Lunch Award', 'Dan', 'Jack', 'Rachel']) assert(html.includes(label));
     for (const removed of ['The Drip-loma', 'Future Founders', 'Spouse of the Year', 'Exits in 2026', 'RIP Award', 'Best Community Operator']) assert(!html.includes(removed), 'Removed award is not offered');
     assert(html.includes('co-founder or early-stage employee'), 'Assistant award eligibility is clear');
     assert(html.includes('Bench Builder'), 'Bench Builder remains available');
     assert(html.includes('Why do they deserve this Louie? (optional)'), 'Reason is labeled optional');
+    assert(html.includes('Nominees can be anyone in the community'), 'Community eligibility guidance is clear');
     assert(html.includes('Add another nominee') && html.includes('Skip any you like'));
     const anonymous = await fetch(`${base}/api/admin/louies`);
     assert.equal(anonymous.status, 401);

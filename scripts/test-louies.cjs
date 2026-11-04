@@ -20,7 +20,7 @@ const { nominationSchema } = load('src/lib/louiesValidation.ts');
 assert.equal(nominationsOpen, true, 'Public collection is approved');
 assert.equal(awards2026.length, 19);
 assert.equal(new Set(awards2026.map(a => a.id)).size, 19);
-for (const name of ['Comeback Kid', 'Bench Builder', 'Early Adopter', 'Most School Spirit', 'The Middle-Out', 'The Dinesh & Gilfoyle', 'The Kelly Kapoor Business B*tch Award']) assert(awards2026.some(a => a.name === name));
+for (const name of ['Comeback Kid', 'Bench Builder', 'Early Adopter', 'Most School Spirit', 'The Middle-Out', 'The Dinesh & Gilfoyle', 'The Kelly Kapoor Fashion Show at Lunch Award']) assert(awards2026.some(a => a.name === name));
 assert(!awards2026.map(a => a.name).join('|').match(/2025|GRIT|First Yes|Drip-loma|Future Founders|Spouse of the Year|Exits in|RIP Award|Best Community Operator/i));
 for (const id of ['exits-2026', 'rip-2026', 'future-founders', 'spouse-of-year', 'community-operator']) assert(retiredLouieNames[id]);
 const assistantAward = awards2026.find(a => a.id === 'assistant-to-founder');
@@ -57,6 +57,7 @@ for (const award of awards2026) {
 }
 assert.equal((markup.match(/<fieldset/g) || []).length, 21);
 assert.equal((markup.match(/>Add another nominee</g) || []).length, 19);
+assert(markup.includes('Nominees can be anyone in the community'));
 assert(markup.includes('Skip any you like') && markup.includes('more than one person for each award'));
 assert(markup.includes('Popularity Contest') && markup.includes('Class President'));
 assert.equal((markup.match(/type="radio"/g) || []).length, 3);

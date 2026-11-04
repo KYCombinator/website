@@ -882,3 +882,29 @@ export async function verifyLoginCode(email: string, code: string): Promise<bool
   );
   return false;
 }
+
+// Louies nominations are private records; only the admin surface lists them.
+export type LouiesNominationRecord = import("./louiesValidation").NominationInput & {
+  id: string; year: number; createdAt: string;
+};
+export async function createLouiesNomination(input: import("./louiesValidation").NominationInput) {
+  const record: LouiesNominationRecord = { ...input, id: randomUUID(), year: 2026, createdAt: new Date().toISOString() };
+  await doc().send(new PutCommand({ TableName: TABLE, Item: { pk: "LOUIES#2026", sk: record.id, ...record } }));
+  return record;
+}
+export async function listLouiesNominations(): Promise<LouiesNominationRecord[]> {
+  const items: LouiesNominationRecord[] = [];
+  let cursor: Record<string, any> | undefined;
+  do {
+    const result = await doc().send(new QueryCommand({ TableName: TABLE,
+      KeyConditionExpression: "pk = :pk", ExpressionAttributeValues: { ":pk": "LOUIES#2026" },
+      ConsistentRead: true, ExclusiveStartKey: cursor }));
+    items.push(...(result.Items || []) as LouiesNominationRecord[]);
+    cursor = result.LastEvaluatedKey;
+  } while (cursor);
+  return items.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+export async function deleteLouiesNomination(id: string): Promise<void> {
+  await doc().send(new DeleteCommand({ TableName: TABLE, Key: { pk: "LOUIES#2026", sk: id } }));
+}

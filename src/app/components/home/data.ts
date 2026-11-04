@@ -54,7 +54,7 @@ export const featuredEvents: FeaturedEvent[] = [
     title: "The Louies",
     tagline: "The annual Louisville startup award show.",
     when: "First Thursday of December",
-    href: "/events/louies/2025",
+    href: "/events/louies/2026",
     photos: [
       { src: "/event-photos/louies/IMG_6972.jpg", alt: "The Louies — the room" },
       { src: "/event-photos/louies/IMG_6981.jpg", alt: "The Louies — the celebration" },
@@ -114,7 +114,7 @@ export const calendar: CalendarEvent[] = [
   { month: "SEP", name: "HackKentucky", tagline: "Sleep is low agency.", action: "Register", href: "https://luma.com/hy24ycd1" },
   { month: "OCT", name: "Block Party", tagline: "Netflix & chill is low agency.", action: "Register", href: "https://luma.com/3ggtx98x" },
   // ⚠️ The LOUIES Luma link is TBD — points at the LOUIES page for now.
-  { month: "DEC", name: "The LOUIES", tagline: "Hiding is low agency.", action: "Attend", href: "/events/louies/2025" },
+  { month: "DEC", name: "The LOUIES", tagline: "Hiding is low agency.", action: "Nominate", href: "/events/louies/2026" },
 ];
 
 // External destinations reused across sections.

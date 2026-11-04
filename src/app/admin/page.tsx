@@ -71,6 +71,7 @@ export default async function AdminPage() {
       <AdminHeader />
 
       <Container className="py-10">
+        <a href="/admin/louies" className="mb-6 inline-block underline">Louies 2026 nominations</a>
         <Eyebrow>Pending photos · {pending.length}</Eyebrow>
         <SerifHeading className="mb-6 mt-2 text-[32px] leading-none">Pending photos.</SerifHeading>
         <PhotoQueue photos={pending} eventNames={eventNames} />

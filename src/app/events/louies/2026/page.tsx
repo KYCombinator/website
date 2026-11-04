@@ -12,7 +12,7 @@ export default function Louies2026() {
     <PageHero eyebrow="Louisville Startup Awards · Nominations" title="The LOUIES 2026."
       intro="Who's doing the most for Louisville? Nominate the people and teams moving our startup community forward." />
     <Container className="py-12 max-w-[820px]">
-      {nominationsOpen ? <NominationForm /> : <p>The 2026 nomination slate is being finalized. Check back for nominations.</p>}
+      {nominationsOpen ? <NominationForm /> : <p>Nominations for The Louies 2026 are not open yet. Check back soon.</p>}
     </Container>
   </>;
 }

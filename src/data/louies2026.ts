@@ -1,4 +1,106 @@
-// Final slate is pending Rachel's confirmation. Do not open submissions until confirmed.
+// Slate confirmed by Rachel: carry forward 2025, replace GRIT, add Bench Builder and Early Adopter.
+// Public data collection remains disabled pending explicit deployment permission.
 export const nominationsOpen = false;
 export type LouieAward = { id: string; name: string; description: string };
-export const awards2026: LouieAward[] = [];
+export const awards2026: LouieAward[] = [
+  {
+    "id": "favorite-founder",
+    "name": "Louisville’s Favorite Founder",
+    "description": "Louisville’s very own favorite Founder! The Founder who does it all and represents Louisville."
+  },
+  {
+    "id": "assistant-to-founder",
+    "name": "Assistant to the Founder",
+    "description": "Not Assistant Founder or Co-Founder, let’s be clear—just the cofounder doing 80% of the work with 20% of the credit. The Dwight Schrute of the startup world."
+  },
+  {
+    "id": "hey-check-this-out",
+    "name": "Hey Check This Out Award",
+    "description": "Why stop at one company when you can start four? This award celebrates the founder who lives in permanent \"New Venture Mode,\" generating ideas faster than the rest of us can buy domains."
+  },
+  {
+    "id": "comeback-kid",
+    "name": "Comeback Kid",
+    "description": "For the founder who faced a setback and came back building. Recognizing resilience, a fresh start, and the determination to keep going."
+  },
+  {
+    "id": "up-all-night",
+    "name": "Up all Night Award",
+    "description": "For the founder who seems to operate on pure adrenaline, bad coffee, and zero hours of sleep. This award honors the unstoppable night owl who’s always online, always building, and somehow always responding to Slack at 3:14 AM."
+  },
+  {
+    "id": "gift-of-gab",
+    "name": "Gift of Gab Award",
+    "description": "For the founder who always has something to say—whether it's a pitch, a rant, a story, a tangent, or a motivational sidebar nobody asked for. This award honors the unstoppable conversationalist whose words fill every room… and occasionally the entire Slack channel."
+  },
+  {
+    "id": "founder-therapist",
+    "name": "Founder Therapist Award",
+    "description": "For the ecosystem hero who has heard every meltdown, panic spiral, and existential startup crisis in Louisville. They provide therapy disguised as \"founder office hours.\""
+  },
+  {
+    "id": "warm-intro",
+    "name": "Warm Intro Award",
+    "description": "For the person who knows everyone and makes intros faster than LinkedIn can suggest them. The connector who keeps Louisville's startup scene glued together."
+  },
+  {
+    "id": "community-operator",
+    "name": "Best Community Operator",
+    "description": "For the person who does the invisible work that keeps the ecosystem alive: events, logistics, onboarding, DMs, spreadsheets, chaos control, and founder cat-herding."
+  },
+  {
+    "id": "favorite-angel",
+    "name": "Louisville's Favorite Angel Investor",
+    "description": "For the investor who believes early, invests early, and relentlessly supports founders — with money, advice, memes, or all three."
+  },
+  {
+    "id": "show-me-the-money",
+    "name": "Show me the Money Award",
+    "description": "For the startup that did the impossible: raised meaningful money in Kentucky without selling a kidney, sacrificing a cofounder, or moving to SF."
+  },
+  {
+    "id": "highest-velocity",
+    "name": "Highest Velocity Startup",
+    "description": "For the team moving at Mach 10 — shipping fast, iterating faster, breaking things responsibly, and permanently living in \"just one more sprint\" mode."
+  },
+  {
+    "id": "mvp",
+    "name": "MVP Award",
+    "description": "For the early-stage team that emphasized the \"M\" (minimum) in MVP (minimum viable product). Celebrating the team that executed in an hour rather than building perfection over a year."
+  },
+  {
+    "id": "spam",
+    "name": "SPAM Award",
+    "description": "For the startup whose growth strategy is \"send it to everyone.\" Cold emails, DMs, outreach, guerrilla tactics — if there's a channel, they've hit it."
+  },
+  {
+    "id": "exits-2026",
+    "name": "Exits in 2026",
+    "description": "A salute to the startups that actually made it out. Whether IPO, acquisition, acqui-hire, or \"strategic liquidation,\" you still beat the odds."
+  },
+  {
+    "id": "rip-2026",
+    "name": "RIP Award - Startups that died in 2026",
+    "description": "Honoring the fallen. They tried. They built. They learned. Fail fast and try again."
+  },
+  {
+    "id": "future-founders",
+    "name": "Future Founders",
+    "description": "For those born in 2026, honoring the next generation! You're the future we're building for!"
+  },
+  {
+    "id": "spouse-of-year",
+    "name": "Spouse of the Year Award",
+    "description": "For the partners who tolerated the late nights, the stress rants, the pitch decks on the kitchen table, and the \"one more meeting\" that was actually three."
+  },
+  {
+    "id": "bench-builder",
+    "name": "Bench Builder",
+    "description": "For the person who helps others grow into the founders, operators, and leaders Louisville needs next."
+  },
+  {
+    "id": "early-adopter",
+    "name": "Early Adopter",
+    "description": "For the person or organization willing to be an early customer, try something new, and give a startup its first real chance."
+  }
+];

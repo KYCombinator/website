@@ -1,6 +1,6 @@
 // Slate confirmed by Rachel: carry forward 2025, replace GRIT, add Bench Builder and Early Adopter.
-// Public data collection remains disabled pending explicit deployment permission.
-export const nominationsOpen = false;
+// Rachel explicitly approved publication and public nominations on November 4, 2026.
+export const nominationsOpen = true;
 export type LouieAward = { id: string; name: string; description: string };
 export const awards2026: LouieAward[] = [
   {

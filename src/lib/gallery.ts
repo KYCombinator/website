@@ -904,3 +904,7 @@ export async function listLouiesNominations(): Promise<LouiesNominationRecord[]>
   } while (cursor);
   return items.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }
+
+export async function deleteLouiesNomination(id: string): Promise<void> {
+  await doc().send(new DeleteCommand({ TableName: TABLE, Key: { pk: "LOUIES#2026", sk: id } }));
+}

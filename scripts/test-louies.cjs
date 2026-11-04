@@ -17,7 +17,7 @@ function load(file) {
 }
 const { awards2026, nominationsOpen } = load('src/data/louies2026.ts');
 const { nominationSchema } = load('src/lib/louiesValidation.ts');
-assert.equal(nominationsOpen, false, 'Public collection must remain closed');
+assert.equal(nominationsOpen, true, 'Public collection is approved');
 assert.equal(awards2026.length, 20);
 assert.equal(new Set(awards2026.map(a => a.id)).size, 20);
 for (const name of ['Comeback Kid', 'Bench Builder', 'Early Adopter']) assert(awards2026.some(a => a.name === name));
@@ -45,4 +45,4 @@ for (const award of awards2026) {
   assert(markup.includes(`name="${award.id}-reason"`));
 }
 assert.equal((markup.match(/<fieldset/g) || []).length, 21);
-console.log('PASS: 20-award slate, year references, valid and invalid nominations, all form fields, collection closed');
+console.log('PASS: 20-award slate, year references, valid and invalid nominations, all form fields, collection enabled');

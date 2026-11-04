@@ -62,3 +62,7 @@ jobs:
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       run: |
         npx sst deploy --stage prod
+
+    - name: Verify Louies production submission and clean up test data
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: node scripts/verify-louies-production.cjs

@@ -78,7 +78,7 @@ export default function Louies2025Page() {
         </Container>
       </section>
 
-      <Nominations />
+      <Container className="py-6"><Button href="/events/louies/2026">Nominate for The Louies 2026</Button></Container>
 
       {/* Awards by Category */}
       <section className="border-b border-[#16130f]">

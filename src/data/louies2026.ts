@@ -104,13 +104,21 @@ export const awards2026: LouieAward[] = [
     "description": "For the person or organization willing to be an early customer, try something new, and give a startup its first real chance."
   },
   {
-    id: "drip-loma",
-    name: "The Drip-loma",
-    description: "For the best-dressed founder or team member. The fit deserves its own diploma."
-  },
-  {
     id: "most-school-spirit",
     name: "Most School Spirit",
     description: "For the founder or team member repping their company’s swag everywhere. Every day is spirit day when you believe in the team."
+  },
+  {
+    id: "middle-out",
+    name: "The Middle-Out",
+    description: "For the cleverest solution to a problem nobody else could crack."
+  },
+  {
+    id: "dinesh-gilfoyle",
+    name: "The Dinesh & Gilfoyle",
+    description: "For the most enduring bromance of 2026."
   }
 ];
+
+// Retired awards remain identifiable in historical submissions, but are not offered on the form.
+export const retiredLouieNames: Record<string, string> = { "drip-loma": "The Drip-loma (retired)" };

@@ -11,6 +11,6 @@ export const nominationSchema = z.object({
     nominee: z.string().trim().min(1).max(200),
     organization: z.string().trim().max(200),
     reason: z.string().trim().min(1).max(2000),
-  })).min(1).max(50).refine(items => new Set(items.map(n => n.awardId)).size === items.length, "One nomination per award"),
+  })).min(1).max(200),
 });
 export type NominationInput = z.infer<typeof nominationSchema>;

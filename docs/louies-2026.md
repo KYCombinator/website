@@ -17,3 +17,5 @@ The CI deployment and credential steps are now restricted to pushes to main: the
 The optional bottom question is “Popularity Contest,” for the “Class President” award, with exactly Dan, Jack, and Rachel. Its `favoriteKyxLead` value is stored alongside the existing nomination data and displayed in the protected admin view; older records remain valid without a vote. Production checks submit both a vote and an omitted vote and remove both test entries.
 
 Additional regular awards: “The Drip-loma” (best dressed) and “Most School Spirit” (founder/team member repping company swag). The slate now contains 22 regular awards; the optional Class President vote remains at the bottom. Existing stored nominations retain their IDs and award references.
+
+Latest revision: remove The Drip-loma from the active slate, add The Middle-Out and The Dinesh & Gilfoyle, and retain Most School Spirit and Class President. There are 23 active awards. Each award supports repeated nomination entries through “Add another nominee”; the API accepts repeated award IDs without changing the record shape. Existing nominations, including retired award entries, remain readable.

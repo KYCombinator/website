@@ -25,3 +25,9 @@ Latest cleanup: removed the original Recognition group (Exits, RIP, Future Found
 Per-nomination requirements: only nominee name is required. Company/organization and reason are optional and normalize to empty strings when omitted. Client/server validation and administrator rendering support name-only nominations; the production check exercises omitted reason and organization fields. Submitter contact details remain required.
 
 Fashion award restored as “The Kelly Kapoor Business B*tch Award,” using the original fashion award ID (`drip-loma`) so past fashion nominations remain associated. Active slate: 19 awards. The old public name The Drip-loma is no longer shown.
+
+General guidance now says nominees can be anyone in the community, subject to each award’s specific eligibility. The fashion award’s current name is “The Kelly Kapoor Fashion Show at Lunch Award.”
+
+Drafts: contact details, all nominee rows, optional reasons, and Class President selection save only to this browser’s localStorage under a year-specific key. Reload restores them without submission. Failed or unconfirmed submissions keep the draft; confirmed success removes it. Storage exceptions produce a notice and leave the form usable. Run `npm run test:louies` for slate/schema checks and component-level restoration, failure retention, success cleanup, and blocked-storage tests; CI runs these before building.
+
+Browser QA: an isolated localhost origin restored identity, company, reasons, two nominee rows, and the Class President choice after refresh. A local-only API proxy simulated a failed response (draft retained) and a confirmed successful response (draft cleared; next refresh blank). This browser test created no production records; real production persistence is checked separately by the deployment workflow.

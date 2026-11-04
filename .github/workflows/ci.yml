@@ -40,6 +40,7 @@ jobs:
     - name: Install deps & build OpenNext
       run: |
         npm ci
+        npm run test:louies
         npx open-next build
 
     - name: Configure AWS credentials

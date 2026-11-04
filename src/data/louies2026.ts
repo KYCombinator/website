@@ -44,11 +44,6 @@ export const awards2026: LouieAward[] = [
     "description": "For the person who knows everyone and makes intros faster than LinkedIn can suggest them. The connector who keeps Louisville's startup scene glued together."
   },
   {
-    "id": "community-operator",
-    "name": "Best Community Operator",
-    "description": "For the person who does the invisible work that keeps the ecosystem alive: events, logistics, onboarding, DMs, spreadsheets, chaos control, and founder cat-herding."
-  },
-  {
     "id": "favorite-angel",
     "name": "Louisville's Favorite Angel Investor",
     "description": "For the investor who believes early, invests early, and relentlessly supports founders — with money, advice, memes, or all three."
@@ -74,29 +69,9 @@ export const awards2026: LouieAward[] = [
     "description": "For the startup whose growth strategy is \"send it to everyone.\" Cold emails, DMs, outreach, guerrilla tactics — if there's a channel, they've hit it."
   },
   {
-    "id": "exits-2026",
-    "name": "Exits in 2026",
-    "description": "A salute to the startups that actually made it out. Whether IPO, acquisition, acqui-hire, or \"strategic liquidation,\" you still beat the odds."
-  },
-  {
-    "id": "rip-2026",
-    "name": "RIP Award - Startups that died in 2026",
-    "description": "Honoring the fallen. They tried. They built. They learned. Fail fast and try again."
-  },
-  {
-    "id": "future-founders",
-    "name": "Future Founders",
-    "description": "For those born in 2026, honoring the next generation! You're the future we're building for!"
-  },
-  {
-    "id": "spouse-of-year",
-    "name": "Spouse of the Year Award",
-    "description": "For the partners who tolerated the late nights, the stress rants, the pitch decks on the kitchen table, and the \"one more meeting\" that was actually three."
-  },
-  {
     "id": "bench-builder",
     "name": "Bench Builder",
-    "description": "For the person who helps others grow into the founders, operators, and leaders Louisville needs next."
+    "description": "For the person building Louisville’s bench and doing the invisible work that keeps the ecosystem alive: events, logistics, onboarding, introductions, and helping founders and operators grow."
   },
   {
     "id": "early-adopter",
@@ -121,4 +96,11 @@ export const awards2026: LouieAward[] = [
 ];
 
 // Retired awards remain identifiable in historical submissions, but are not offered on the form.
-export const retiredLouieNames: Record<string, string> = { "drip-loma": "The Drip-loma (retired)" };
+export const retiredLouieNames: Record<string, string> = {
+  "drip-loma": "The Drip-loma (retired)",
+  "exits-2026": "Exits in 2026 (retired)",
+  "rip-2026": "RIP Award - Startups that died in 2026 (retired)",
+  "future-founders": "Future Founders (retired)",
+  "spouse-of-year": "Spouse of the Year Award (retired)",
+  "community-operator": "Best Community Operator (retired)"
+};

@@ -21,7 +21,9 @@ async function adminRecords() {
     assert.equal(page.status, 200);
     const html = await page.text();
     for (const label of ['The LOUIES 2026.', 'Comeback Kid', 'Bench Builder', 'Early Adopter', 'The Middle-Out', 'The Dinesh &amp; Gilfoyle', 'Most School Spirit', 'Submit nominations', 'Popularity Contest', 'Class President', 'Dan', 'Jack', 'Rachel']) assert(html.includes(label));
-    assert(!html.includes('The Drip-loma'), 'Removed award is not offered');
+    for (const removed of ['The Drip-loma', 'Future Founders', 'Spouse of the Year', 'Exits in 2026', 'RIP Award', 'Best Community Operator']) assert(!html.includes(removed), 'Removed award is not offered');
+    assert(html.includes('co-founder or early-stage employee'), 'Assistant award eligibility is clear');
+    assert(html.includes('Bench Builder'), 'Bench Builder remains available');
     assert(html.includes('Add another nominee') && html.includes('Skip any you like'));
     const anonymous = await fetch(`${base}/api/admin/louies`);
     assert.equal(anonymous.status, 401);

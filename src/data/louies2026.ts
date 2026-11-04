@@ -11,7 +11,7 @@ export const awards2026: LouieAward[] = [
   {
     "id": "assistant-to-founder",
     "name": "Assistant to the Founder",
-    "description": "Not Assistant Founder or Co-Founder, let’s be clear—just the cofounder doing 80% of the work with 20% of the credit. The Dwight Schrute of the startup world."
+    "description": "For the co-founder or early-stage employee doing 80% of the work with 20% of the credit. Either can be nominated—it’s about the work, not the title. The Dwight Schrute of the startup world."
   },
   {
     "id": "hey-check-this-out",

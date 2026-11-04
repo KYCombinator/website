@@ -15,8 +15,8 @@ export default function NominationForm() {
       organization: String(data.get(`${a.id}-${index}-organization`) || "").trim(),
       reason: String(data.get(`${a.id}-${index}-reason`) || "").trim(),
     }))).filter(n => n.nominee || n.organization || n.reason);
-    if (!nominations.length || nominations.some(n => !n.nominee || !n.reason)) {
-      setError("For at least one award, add a nominee and why they deserve it. You can skip the other awards."); return;
+    if (!nominations.length || nominations.some(n => !n.nominee)) {
+      setError("Add a nominee name for each nomination you started. You can skip any award; company and reason are optional."); return;
     }
     setBusy(true); setError("");
     try {
@@ -32,7 +32,7 @@ export default function NominationForm() {
     <p className="mt-4">Thank you for celebrating Louisville. Your nominations have been saved for the Louies organizers.</p>
     <p className="mt-4 text-sm">Confirmation: {receipt}</p></div>;
   return <form onSubmit={submit} className="space-y-10">
-    <p>You don’t have to nominate for every award. Skip any you like, and nominate more than one person for each award. Use “Add another nominee” for each additional person. For every nominee, tell us who and why.</p>
+    <p>You don’t have to nominate for every award. Skip any you like, and nominate more than one person for each award. Use “Add another nominee” for each additional person. Only the nominee’s name is required for each nomination; company and reason are optional.</p>
     <fieldset className="grid gap-5 sm:grid-cols-2"><legend className="mb-4 font-medium">Your details</legend>
       <label>Your name<input className={field} name="name" autoComplete="name" required maxLength={160} /></label>
       <label>Your email<input className={field} name="email" type="email" autoComplete="email" required maxLength={200} /></label>
@@ -44,7 +44,7 @@ export default function NominationForm() {
         <p className="text-sm font-medium">Nominee {index + 1}</p>
         <label className="block">Nominee name<input name={`${a.id}-${index}-nominee`} className={field} maxLength={200} /></label>
         <label className="block">Company or organization (optional)<input name={`${a.id}-${index}-organization`} className={field} maxLength={200} /></label>
-        <label className="block">Why do they deserve this Louie?<textarea name={`${a.id}-${index}-reason`} className={field} rows={4} maxLength={2000} /></label>
+        <label className="block">Why do they deserve this Louie? (optional)<textarea name={`${a.id}-${index}-reason`} className={field} rows={4} maxLength={2000} /></label>
       </div>)}
       <div className="flex flex-wrap gap-4">
         <button type="button" onClick={() => setNomineeCounts(counts => ({ ...counts, [a.id]: (counts[a.id] || 1) + 1 }))}

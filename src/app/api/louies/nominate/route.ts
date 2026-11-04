@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   let body: unknown;
   try { body = JSON.parse(text); } catch { return NextResponse.json({ error: "Invalid submission." }, { status: 400 }); }
   const parsed = nominationSchema.safeParse(body);
-  if (!parsed.success) return NextResponse.json({ error: "Check your contact information and include a nominee and reason for at least one award." }, { status: 400 });
+  if (!parsed.success) return NextResponse.json({ error: "Check your contact information and add a nominee name for each nomination. Company and reason are optional." }, { status: 400 });
   try {
     const record = await createLouiesNomination(parsed.data);
     return NextResponse.json({ ok: true, id: record.id });

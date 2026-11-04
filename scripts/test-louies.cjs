@@ -28,6 +28,10 @@ assert(assistantAward.description.includes('co-founder or early-stage employee')
 const nomination = { awardId: awards2026[0].id, nominee: 'Test Nominee', organization: '', reason: 'A concrete contribution.' };
 const input = { name: 'Local Test', email: 'local@example.com', nominations: [nomination] };
 assert(nominationSchema.safeParse(input).success);
+const nameOnly = nominationSchema.parse({ ...input, nominations: [{ awardId: nomination.awardId, nominee: 'Name only' }] });
+assert.equal(nameOnly.nominations[0].reason, '');
+assert.equal(nameOnly.nominations[0].organization, '');
+assert(nominationSchema.safeParse({ ...input, nominations: [{ ...nomination, reason: ' ' }] }).success);
 assert(nominationSchema.safeParse({ ...input, nominations: [nomination, { ...nomination, nominee: "Second person" }] }).success);
 for (const lead of ['Dan', 'Jack', 'Rachel']) assert.equal(nominationSchema.parse({ ...input, favoriteKyxLead: lead }).favoriteKyxLead, lead);
 assert.equal(nominationSchema.parse(input).favoriteKyxLead, undefined);
@@ -39,7 +43,7 @@ for (const invalid of [
 
   { ...input, nominations: [{ ...nomination, awardId: 'unknown' }] },
   { ...input, nominations: [{ ...nomination, nominee: ' ' }] },
-  { ...input, nominations: [{ ...nomination, reason: ' ' }] },
+
   { ...input, nominations: [{ ...nomination, reason: 'x'.repeat(2001) }] },
   { ...input, website: 'spam' },
 ]) assert(!nominationSchema.safeParse(invalid).success);
@@ -58,4 +62,4 @@ assert(markup.includes('Popularity Contest') && markup.includes('Class President
 assert.equal((markup.match(/type="radio"/g) || []).length, 3);
 for (const lead of ['Dan', 'Jack', 'Rachel']) assert(markup.includes(`value="${lead}"`));
 assert(!/name="favoriteKyxLead"[^>]*required/.test(markup));
-console.log('PASS: 18-award slate, year references, valid and invalid nominations, all form fields, collection enabled, optional lead vote, multiple nominees');
+console.log('PASS: 18-award slate, year references, valid and invalid nominations, all form fields, collection enabled, optional lead vote, multiple nominees, optional reasons');

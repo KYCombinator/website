@@ -57,6 +57,7 @@ for (const award of awards2026) {
 }
 assert.equal((markup.match(/<fieldset/g) || []).length, 21);
 assert.equal((markup.match(/>Add another nominee</g) || []).length, 19);
+assert(markup.includes('Nominees can be anyone in the community'));
 assert(markup.includes('Skip any you like') && markup.includes('more than one person for each award'));
 assert(markup.includes('Popularity Contest') && markup.includes('Class President'));
 assert.equal((markup.match(/type="radio"/g) || []).length, 3);

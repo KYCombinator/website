@@ -32,7 +32,7 @@ export default function NominationForm() {
     <p className="mt-4">Thank you for celebrating Louisville. Your nominations have been saved for the Louies organizers.</p>
     <p className="mt-4 text-sm">Confirmation: {receipt}</p></div>;
   return <form onSubmit={submit} className="space-y-10">
-    <p>You don’t have to nominate for every award. Skip any you like, and nominate more than one person for each award. Use “Add another nominee” for each additional person. Only the nominee’s name is required for each nomination; company and reason are optional.</p>
+    <p>Nominees can be anyone in the community. Check each award’s description for any specific eligibility. You don’t have to nominate for every award. Skip any you like, and nominate more than one person for each award. Use “Add another nominee” for each additional person. Only the nominee’s name is required for each nomination; company and reason are optional.</p>
     <fieldset className="grid gap-5 sm:grid-cols-2"><legend className="mb-4 font-medium">Your details</legend>
       <label>Your name<input className={field} name="name" autoComplete="name" required maxLength={160} /></label>
       <label>Your email<input className={field} name="email" type="email" autoComplete="email" required maxLength={200} /></label>

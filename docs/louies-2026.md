@@ -23,3 +23,5 @@ Latest revision: remove The Drip-loma from the active slate, add The Middle-Out 
 Latest cleanup: removed the original Recognition group (Exits, RIP, Future Founders, Spouse of the Year) and Best Community Operator from the active nomination slate. Bench Builder now covers the community-support role. There are 18 active awards. All retired IDs retain admin display labels, and no stored nominations are migrated or deleted. Assistant to the Founder explicitly permits a co-founder or early-stage employee.
 
 Per-nomination requirements: only nominee name is required. Company/organization and reason are optional and normalize to empty strings when omitted. Client/server validation and administrator rendering support name-only nominations; the production check exercises omitted reason and organization fields. Submitter contact details remain required.
+
+Fashion award restored as “The Kelly Kapoor Business B*tch Award,” using the original fashion award ID (`drip-loma`) so past fashion nominations remain associated. Active slate: 19 awards. The old public name The Drip-loma is no longer shown.

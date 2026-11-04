@@ -20,7 +20,7 @@ async function adminRecords() {
     const page = await fetch(`${base}/events/louies/2026`);
     assert.equal(page.status, 200);
     const html = await page.text();
-    for (const label of ['The LOUIES 2026.', 'Comeback Kid', 'Bench Builder', 'Early Adopter', 'The Middle-Out', 'The Dinesh &amp; Gilfoyle', 'Most School Spirit', 'Submit nominations', 'Popularity Contest', 'Class President', 'Dan', 'Jack', 'Rachel']) assert(html.includes(label));
+    for (const label of ['The LOUIES 2026.', 'Comeback Kid', 'Bench Builder', 'Early Adopter', 'The Middle-Out', 'The Dinesh &amp; Gilfoyle', 'Most School Spirit', 'Submit nominations', 'Popularity Contest', 'Class President', 'The Kelly Kapoor Business B*tch Award', 'Dan', 'Jack', 'Rachel']) assert(html.includes(label));
     for (const removed of ['The Drip-loma', 'Future Founders', 'Spouse of the Year', 'Exits in 2026', 'RIP Award', 'Best Community Operator']) assert(!html.includes(removed), 'Removed award is not offered');
     assert(html.includes('co-founder or early-stage employee'), 'Assistant award eligibility is clear');
     assert(html.includes('Bench Builder'), 'Bench Builder remains available');
@@ -44,7 +44,7 @@ async function adminRecords() {
     for (const favoriteKyxLead of ['Rachel', undefined]) {
     const submit = await fetch(`${base}/api/louies/nominate`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
       name: marker, favoriteKyxLead, email: 'louies-test@example.invalid', website: '',
-      nominations: ['middle-out', 'middle-out', 'dinesh-gilfoyle', 'most-school-spirit'].map((awardId, index) => ({ awardId, nominee: `${marker}_${index}`, ...(favoriteKyxLead ? { organization: 'Automated deployment verification — remove', reason: 'Temporary test to verify persistence and administrator retrieval. Not a real nomination.' } : {}) })),
+      nominations: ['middle-out', 'middle-out', 'dinesh-gilfoyle', 'most-school-spirit', 'drip-loma'].map((awardId, index) => ({ awardId, nominee: `${marker}_${index}`, ...(favoriteKyxLead ? { organization: 'Automated deployment verification — remove', reason: 'Temporary test to verify persistence and administrator retrieval. Not a real nomination.' } : {}) })),
     }) });
     assert.equal(submit.status, 200);
     const receipt = await submit.json();
@@ -57,12 +57,12 @@ async function adminRecords() {
       assert.equal(saved.nominations[0].reason, '', 'Name-only nomination persists without reason');
       assert.equal(saved.nominations[0].organization, '', 'Name-only nomination persists without organization');
     }
-    assert.deepEqual(saved.nominations.map(n => n.awardId), ['middle-out', 'middle-out', 'dinesh-gilfoyle', 'most-school-spirit']);
+    assert.deepEqual(saved.nominations.map(n => n.awardId), ['middle-out', 'middle-out', 'dinesh-gilfoyle', 'most-school-spirit', 'drip-loma']);
     assert.equal(saved.favoriteKyxLead, favoriteKyxLead, 'Optional lead vote persists correctly');
     const dashboard = await fetch(`${base}/admin/louies`, { headers: adminHeaders, cache: 'no-store' });
     assert.equal(dashboard.status, 200);
     const dashboardHtml = (await dashboard.text()).replace(/<!--[\s\S]*?-->/g, "");
-    for (let index = 0; index < 4; index++) assert(dashboardHtml.includes(`${marker}_${index}`), 'Administrator dashboard displays every nominee');
+    for (let index = 0; index < 5; index++) assert(dashboardHtml.includes(`${marker}_${index}`), 'Administrator dashboard displays every nominee');
     if (!favoriteKyxLead) assert(dashboardHtml.includes('No reason provided'), 'Admin supports name-only nominations');
     assert(dashboardHtml.includes(`Class President · Popularity Contest: ${favoriteKyxLead || 'No vote'}`), 'Administrator dashboard displays the vote');
     }

@@ -92,12 +92,16 @@ export const awards2026: LouieAward[] = [
     id: "dinesh-gilfoyle",
     name: "The Dinesh & Gilfoyle",
     description: "For the most enduring bromance of 2026."
+  },
+  {
+    id: "drip-loma",
+    name: "The Kelly Kapoor Business B*tch Award",
+    description: "For the best-dressed founder or team member. Turning every startup event into a runway."
   }
 ];
 
 // Retired awards remain identifiable in historical submissions, but are not offered on the form.
 export const retiredLouieNames: Record<string, string> = {
-  "drip-loma": "The Drip-loma (retired)",
   "exits-2026": "Exits in 2026 (retired)",
   "rip-2026": "RIP Award - Startups that died in 2026 (retired)",
   "future-founders": "Future Founders (retired)",

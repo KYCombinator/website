@@ -9,8 +9,8 @@ export const nominationSchema = z.object({
   nominations: z.array(z.object({
     awardId: z.string().refine(id => awards2026.some(a => a.id === id), "Unknown award"),
     nominee: z.string().trim().min(1).max(200),
-    organization: z.string().trim().max(200),
-    reason: z.string().trim().min(1).max(2000),
+    organization: z.string().trim().max(200).default(""),
+    reason: z.string().trim().max(2000).default(""),
   })).min(1).max(200),
 });
 export type NominationInput = z.infer<typeof nominationSchema>;

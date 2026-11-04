@@ -18,7 +18,7 @@ export default async function LouiesAdmin() {
         <p className="mt-4">Class President · Popularity Contest: {r.favoriteKyxLead || "No vote"}</p>
         {r.nominations.map((n, index) => <div key={`${n.awardId}-${index}`} className="mt-5">
           <h3 className="font-medium">{awards2026.find(a => a.id === n.awardId)?.name || retiredLouieNames[n.awardId] || n.awardId}</h3>
-          <p>{n.nominee}{n.organization && ` · ${n.organization}`}</p><p className="whitespace-pre-wrap mt-2">{n.reason}</p>
+          <p>{n.nominee}{n.organization && ` · ${n.organization}`}</p><p className="whitespace-pre-wrap mt-2">{n.reason || "No reason provided"}</p>
         </div>)}
       </article>)}
     </Container></>;

@@ -20,7 +20,7 @@ export default function NominationForm() {
     setBusy(true); setError("");
     try {
       const response = await fetch("/api/louies/nominate", { method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: data.get("name"), email: data.get("email"), website: data.get("website"), nominations }) });
+        body: JSON.stringify({ name: data.get("name"), email: data.get("email"), website: data.get("website"), favoriteKyxLead: data.get("favoriteKyxLead") || undefined, nominations }) });
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || "We couldn't save your nominations.");
       setReceipt(result.id);
@@ -43,6 +43,16 @@ export default function NominationForm() {
       <label className="block">Company or organization (optional)<input name={`${a.id}-organization`} className={field} maxLength={200} /></label>
       <label className="block">Why do they deserve this Louie?<textarea name={`${a.id}-reason`} className={field} rows={4} maxLength={2000} /></label>
     </fieldset>)}
+    <fieldset className="border-t border-[#cec7b8] pt-7 space-y-4">
+      <legend className="pr-4 text-xl font-medium">Popularity Contest</legend>
+      <p className="text-lg font-medium">Class President</p>
+      <p className="text-[#4a443a]">Who’s your favorite KYX lead? Optional. We definitely won’t let this go to our heads.</p>
+      <div className="flex flex-wrap gap-6">
+        {["Dan", "Jack", "Rachel"].map(lead => <label key={lead} className="inline-flex items-center gap-2">
+          <input type="radio" name="favoriteKyxLead" value={lead} className="accent-[var(--kyx-purple)]" />{lead}
+        </label>)}
+      </div>
+    </fieldset>
     <p className="text-sm text-[#4a443a]">Your contact details and nominations are available to authorized KYX administrators. <a className="underline" href="/privacy">Privacy policy</a></p>
     {error && <p role="alert" className="text-red-800">{error}</p>}
     <button disabled={busy} className="bg-[var(--kyx-purple)] text-white px-6 py-4 disabled:opacity-60">{busy ? "Saving nominations…" : "Submit nominations"}</button>

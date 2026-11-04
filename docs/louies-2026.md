@@ -13,3 +13,5 @@ Administrator review: `/admin/louies`; authenticated JSON retrieval and deletion
 Storage uses the existing SST Gallery DynamoDB table, partition `LOUIES#2026`, with one UUID-keyed record per submission. Records include submitter contact details and an array of category nominations. Listing paginates and uses consistent reads. The admin route requires the existing admin session in middleware and verifies it again server-side. No new infrastructure or email messages are introduced.
 
 The CI deployment and credential steps are now restricted to pushes to main: the existing workflow otherwise deploys production even for pull requests. This prevents draft PR previews from publishing an unconfirmed slate.
+
+The optional bottom question is “Popularity Contest,” for the “Class President” award, with exactly Dan, Jack, and Rachel. Its `favoriteKyxLead` value is stored alongside the existing nomination data and displayed in the protected admin view; older records remain valid without a vote. Production checks submit both a vote and an omitted vote and remove both test entries.

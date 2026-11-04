@@ -25,6 +25,9 @@ assert(!JSON.stringify(awards2026).match(/2025|GRIT|First Yes/));
 const nomination = { awardId: awards2026[0].id, nominee: 'Test Nominee', organization: '', reason: 'A concrete contribution.' };
 const input = { name: 'Local Test', email: 'local@example.com', nominations: [nomination] };
 assert(nominationSchema.safeParse(input).success);
+for (const lead of ['Dan', 'Jack', 'Rachel']) assert.equal(nominationSchema.parse({ ...input, favoriteKyxLead: lead }).favoriteKyxLead, lead);
+assert.equal(nominationSchema.parse(input).favoriteKyxLead, undefined);
+assert(!nominationSchema.safeParse({ ...input, favoriteKyxLead: 'Someone else' }).success);
 assert(nominationSchema.safeParse({ ...input, nominations: awards2026.map(a => ({ ...nomination, awardId: a.id })) }).success);
 for (const invalid of [
   { ...input, email: 'invalid' },
@@ -44,5 +47,9 @@ for (const award of awards2026) {
   assert(markup.includes(`name="${award.id}-nominee"`));
   assert(markup.includes(`name="${award.id}-reason"`));
 }
-assert.equal((markup.match(/<fieldset/g) || []).length, 21);
-console.log('PASS: 20-award slate, year references, valid and invalid nominations, all form fields, collection enabled');
+assert.equal((markup.match(/<fieldset/g) || []).length, 22);
+assert(markup.includes('Popularity Contest') && markup.includes('Class President'));
+assert.equal((markup.match(/type="radio"/g) || []).length, 3);
+for (const lead of ['Dan', 'Jack', 'Rachel']) assert(markup.includes(`value="${lead}"`));
+assert(!/name="favoriteKyxLead"[^>]*required/.test(markup));
+console.log('PASS: 20-award slate, year references, valid and invalid nominations, all form fields, collection enabled, optional lead vote');

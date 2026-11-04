@@ -20,7 +20,7 @@ async function adminRecords() {
     const page = await fetch(`${base}/events/louies/2026`);
     assert.equal(page.status, 200);
     const html = await page.text();
-    for (const label of ['The LOUIES 2026.', 'Comeback Kid', 'Bench Builder', 'Early Adopter', 'Submit nominations', 'Popularity Contest', 'Class President', 'Dan', 'Jack', 'Rachel']) assert(html.includes(label));
+    for (const label of ['The LOUIES 2026.', 'Comeback Kid', 'Bench Builder', 'Early Adopter', 'The Drip-loma', 'Most School Spirit', 'Submit nominations', 'Popularity Contest', 'Class President', 'Dan', 'Jack', 'Rachel']) assert(html.includes(label));
     const anonymous = await fetch(`${base}/api/admin/louies`);
     assert.equal(anonymous.status, 401);
     const member = await fetch(`${base}/api/admin/louies`, { headers: { Cookie: `kyx_session=${token('member')}` } });
@@ -39,7 +39,7 @@ async function adminRecords() {
     for (const favoriteKyxLead of ['Rachel', undefined]) {
     const submit = await fetch(`${base}/api/louies/nominate`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
       name: marker, favoriteKyxLead, email: 'louies-test@example.invalid', website: '',
-      nominations: [{ awardId: 'comeback-kid', nominee: marker, organization: 'Automated deployment verification — remove', reason: 'Temporary test to verify persistence and administrator retrieval. Not a real nomination.' }],
+      nominations: ['comeback-kid', 'drip-loma', 'most-school-spirit'].map(awardId => ({ awardId, nominee: marker, organization: 'Automated deployment verification — remove', reason: 'Temporary test to verify persistence and administrator retrieval. Not a real nomination.' })),
     }) });
     assert.equal(submit.status, 200);
     const receipt = await submit.json();
@@ -47,6 +47,7 @@ async function adminRecords() {
     const saved = (await adminRecords()).find(r => r.id === receipt.id && r.name === marker);
     assert(saved, 'Submission persists and is retrievable by administrator');
     assert.equal(saved.nominations[0].nominee, marker);
+    assert.deepEqual(saved.nominations.map(n => n.awardId), ['comeback-kid', 'drip-loma', 'most-school-spirit']);
     assert.equal(saved.favoriteKyxLead, favoriteKyxLead, 'Optional lead vote persists correctly');
     const dashboard = await fetch(`${base}/admin/louies`, { headers: adminHeaders, cache: 'no-store' });
     assert.equal(dashboard.status, 200);

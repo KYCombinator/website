@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { awards2026 } from "@/data/louies2026";
+import { awards2026, awardSections2026 } from "@/data/louies2026";
 import { LOUIES_DRAFT_KEY, blankDraft, blankNominee, parseLouiesDraft, type LouiesDraft, type DraftNominee } from "@/lib/louiesDraft";
 const field = "mt-2 block w-full border border-[#cec7b8] bg-[#f9f7f2] p-3 focus:outline-2 focus:outline-[var(--kyx-purple)]";
 export default function NominationForm() {
@@ -53,17 +53,25 @@ export default function NominationForm() {
     finally { setBusy(false); }
   }
   if (receipt) return <div role="status"><h2 className="font-[family-name:var(--font-instrument-serif)] text-4xl">Nominations received.</h2>
-    <p className="mt-4">Thank you for celebrating Louisville. Your nominations have been saved for the Louies organizers.</p>
+    <p className="mt-4">Thank you for celebrating Kentucky. Your nominations have been saved for the Louies organizers.</p>
     <p className="mt-4 text-sm">Confirmation: {receipt}</p>{draftNotice && <p className="mt-4 text-sm">{draftNotice}</p>}</div>;
   return <form onSubmit={submit} className="space-y-10">
-    <p>Nominees can be anyone in the community. Check each award’s description for any specific eligibility. You don’t have to nominate for every award. Skip any you like, and nominate more than one person for each award. Use “Add another nominee” for each additional person. Only the nominee’s name is required for each nomination; company and reason are optional.</p>
+    <p>Nominees can be anyone in Kentucky’s startup community. Check each award’s description for any specific eligibility. You don’t have to nominate for every award. Skip any you like, and nominate more than one person or company for each award. Use “Add another nominee” for each additional nominee. Only the nominee’s name is required for each nomination; company and reason are optional.</p>
     <p className="text-sm text-[#4a443a]" role="status">{draftNotice}</p>
     <fieldset className="grid gap-5 sm:grid-cols-2"><legend className="mb-4 font-medium">Your details</legend>
       <label>Your name<input className={field} name="name" value={draft.name} onChange={event => updateDraft(current => ({ ...current, name: event.target.value }))} autoComplete="name" required maxLength={160} /></label>
       <label>Your email<input className={field} name="email" type="email" value={draft.email} onChange={event => updateDraft(current => ({ ...current, email: event.target.value }))} autoComplete="email" required maxLength={200} /></label>
     </fieldset>
     <div hidden aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
-    {awards2026.map(a => <fieldset key={a.id} className="border-t border-[#cec7b8] pt-7 space-y-4">
+    <nav aria-label="Award sections" className="flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium">
+      {awardSections2026.map(section => <a key={section.id} href={`#${section.id}-awards`} className="underline underline-offset-4">{section.name}</a>)}
+    </nav>
+    {awardSections2026.map(section => <section key={section.id} id={`${section.id}-awards`} aria-labelledby={`${section.id}-heading`} className="scroll-mt-28 border-t-2 border-[var(--kyx-purple)] pt-8 space-y-8">
+      <div className="space-y-3">
+        <h2 id={`${section.id}-heading`} className="font-[family-name:var(--font-instrument-serif)] text-4xl">{section.name}</h2>
+        <p className="text-[#4a443a]">{section.description}</p>
+      </div>
+      {awards2026.filter(a => a.section === section.id).map(a => <fieldset key={a.id} className="border-t border-[#cec7b8] pt-7 space-y-4">
       <legend className="pr-4 text-xl font-medium">{a.name}</legend><p className="text-[#4a443a]">{a.description}</p>
       {(draft.nominees[a.id] || [blankNominee()]).map((row, index) => <div key={index} className="space-y-4 border-l-2 border-[#cec7b8] pl-4">
         <p className="text-sm font-medium">Nominee {index + 1}</p>
@@ -78,7 +86,7 @@ export default function NominationForm() {
           className="underline text-sm">Remove last nominee<span className="sr-only"> for {a.name}</span></button>}
       </div>
     </fieldset>)}
-    <fieldset className="border-t border-[#cec7b8] pt-7 space-y-4">
+    {section.id === "unserious" && <fieldset className="border-t border-[#cec7b8] pt-7 space-y-4">
       <legend className="pr-4 text-xl font-medium">Popularity Contest</legend>
       <p className="text-lg font-medium">Class President</p>
       <p className="text-[#4a443a]">Who’s your favorite KYX lead? Optional. We definitely won’t let this go to our heads.</p>
@@ -87,7 +95,8 @@ export default function NominationForm() {
           <input type="radio" name="favoriteKyxLead" value={lead} checked={draft.favoriteKyxLead === lead} onChange={() => updateDraft(current => ({ ...current, favoriteKyxLead: lead as LouiesDraft["favoriteKyxLead"] }))} className="accent-[var(--kyx-purple)]" />{lead}
         </label>)}
       </div>
-    </fieldset>
+    </fieldset>}
+    </section>)}
     <p className="text-sm text-[#4a443a]">Your contact details and nominations are available to authorized KYX administrators. <a className="underline" href="/privacy">Privacy policy</a></p>
     {error && <p role="alert" className="text-red-800">{error}</p>}
     <button disabled={busy} className="bg-[var(--kyx-purple)] text-white px-6 py-4 disabled:opacity-60">{busy ? "Saving nominations…" : "Submit nominations"}</button>

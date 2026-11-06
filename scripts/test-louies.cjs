@@ -15,7 +15,7 @@ function load(file) {
   cache.set(filename, module.exports);
   return module.exports;
 }
-const { awards2026, nominationsOpen, retiredLouieNames } = load('src/data/louies2026.ts');
+const { awards2026, awardSections2026, nominationsOpen, retiredLouieNames } = load('src/data/louies2026.ts');
 const { nominationSchema } = load('src/lib/louiesValidation.ts');
 assert.equal(nominationsOpen, true, 'Public collection is approved');
 assert.equal(awards2026.length, 19);
@@ -57,8 +57,17 @@ for (const award of awards2026) {
 }
 assert.equal((markup.match(/<fieldset/g) || []).length, 21);
 assert.equal((markup.match(/>Add another nominee</g) || []).length, 19);
-assert(markup.includes('Nominees can be anyone in the community'));
-assert(markup.includes('Skip any you like') && markup.includes('more than one person for each award'));
+assert(markup.includes('Nominees can be anyone in Kentucky’s startup community'));
+assert(markup.includes('Skip any you like') && markup.includes('more than one person or company for each award'));
+const sections = [...markup.matchAll(/<section[^>]*id="([^"]+)"[^>]*>([\s\S]*?)<\/section>/g)];
+assert.deepEqual(sections.map(section => section[1]), ['people-awards', 'company-awards', 'unserious-awards']);
+for (const [index, section] of awardSections2026.entries()) {
+  assert(sections[index][2].includes(section.name));
+  for (const award of awards2026) assert.equal(sections[index][2].includes(`name="${award.id}-0-nominee"`), award.section === section.id);
+}
+assert(sections[2][2].includes('Class President'), 'Class President belongs in the final unserious section');
+assert(assistantAward.description.includes('Open to both co-founders and early-stage employees'));
+assert(!awards2026.some(award => /Louisville/i.test(award.description)), 'Descriptions cover Kentucky without changing award names');
 assert(markup.includes('Popularity Contest') && markup.includes('Class President'));
 assert.equal((markup.match(/type="radio"/g) || []).length, 3);
 for (const lead of ['Dan', 'Jack', 'Rachel']) assert(markup.includes(`value="${lead}"`));

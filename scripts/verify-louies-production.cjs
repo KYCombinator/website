@@ -25,7 +25,8 @@ async function adminRecords() {
     assert(html.includes('co-founder or early-stage employee'), 'Assistant award eligibility is clear');
     assert(html.includes('Bench Builder'), 'Bench Builder remains available');
     assert(html.includes('Why do they deserve this Louie? (optional)'), 'Reason is labeled optional');
-    assert(html.includes('Nominees can be anyone in the community'), 'Community eligibility guidance is clear');
+    assert(html.includes('Nominees can be anyone in Kentucky’s startup community'), 'Community eligibility guidance is clear');
+    assert(html.includes('A popularity contest for Louisville’s current favorite founder. Nominate the founder in Louisville who’s your favorite right now.'), 'Favorite Founder is a Louisville-specific popularity contest');
     assert(html.includes('Add another nominee') && html.includes('Skip any you like'));
     const anonymous = await fetch(`${base}/api/admin/louies`);
     assert.equal(anonymous.status, 401);

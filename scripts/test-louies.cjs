@@ -67,7 +67,12 @@ for (const [index, section] of awardSections2026.entries()) {
 }
 assert(sections[2][2].includes('Class President'), 'Class President belongs in the final unserious section');
 assert(assistantAward.description.includes('Open to both co-founders and early-stage employees'));
-assert(!awards2026.some(award => /Louisville/i.test(award.description)), 'Descriptions cover Kentucky without changing award names');
+const favoriteFounderAward = awards2026.find(award => award.id === 'favorite-founder');
+assert.equal(favoriteFounderAward.name, 'Louisville’s Favorite Founder');
+assert.equal(favoriteFounderAward.description, 'A popularity contest for Louisville’s current favorite founder. Nominate the founder in Louisville who’s your favorite right now.');
+assert(markup.includes(favoriteFounderAward.description), 'The form shows the Louisville-specific popularity contest description');
+assert(!/Kentucky|represent|embod/i.test(favoriteFounderAward.description), 'Favorite Founder is about popularity in Louisville');
+assert(!awards2026.some(award => award.id !== 'favorite-founder' && /Louisville/i.test(award.description)), 'Other award descriptions retain their Kentucky-wide scope');
 assert(markup.includes('Popularity Contest') && markup.includes('Class President'));
 assert.equal((markup.match(/type="radio"/g) || []).length, 3);
 for (const lead of ['Dan', 'Jack', 'Rachel']) assert(markup.includes(`value="${lead}"`));

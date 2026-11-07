@@ -12,7 +12,7 @@ export const awards2026: LouieAward[] = [
     "id": "favorite-founder",
     section: "people",
     "name": "Louisville’s Favorite Founder",
-    "description": "Kentucky’s very own favorite Founder! The Founder who does it all and represents Kentucky."
+    "description": "A popularity contest for Louisville’s current favorite founder. Nominate the founder in Louisville who’s your favorite right now."
   },
   {
     "id": "assistant-to-founder",

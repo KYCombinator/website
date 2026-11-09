@@ -89,7 +89,7 @@ export default function NominationForm() {
     {section.id === "unserious" && <fieldset className="border-t border-[#cec7b8] pt-7 space-y-4">
       <legend className="pr-4 text-xl font-medium">Popularity Contest</legend>
       <p className="text-lg font-medium">Class President</p>
-      <p className="text-[#4a443a]">Who’s your favorite KYX lead? Optional. We definitely won’t let this go to our heads.</p>
+      <p className="text-[#4a443a]">Who’s your favorite lead? Required. We definitely won’t let this go to our heads.</p>
       <div className="flex flex-wrap gap-6">
         {["Dan", "Jack", "Rachel"].map(lead => <label key={lead} className="inline-flex items-center gap-2">
           <input type="radio" name="favoriteKyxLead" value={lead} checked={draft.favoriteKyxLead === lead} onChange={() => updateDraft(current => ({ ...current, favoriteKyxLead: lead as LouiesDraft["favoriteKyxLead"] }))} className="accent-[var(--kyx-purple)]" />{lead}

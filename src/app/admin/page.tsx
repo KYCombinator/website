@@ -6,6 +6,7 @@ import {
   listApplications,
   listIdeas,
   listHkIntakes,
+  listVelocityInterest,
   listUsers,
   galleryConfigured,
   type PhotoRecord,
@@ -13,6 +14,7 @@ import {
   type ApplicationRecord,
   type IdeaRecord,
   type HkIntakeRecord,
+  type VelocityRecord,
   type UserRecord,
 } from "@/lib/gallery";
 import { Container, Eyebrow, SerifHeading } from "../components/fm";
@@ -22,6 +24,7 @@ import EventsManager from "./EventsManager";
 import Applications from "./Applications";
 import IdeasManager from "./IdeasManager";
 import HkIntakeManager from "./HkIntakeManager";
+import VelocityManager from "./VelocityManager";
 import UsersManager from "./UsersManager";
 
 export default async function AdminPage() {
@@ -41,12 +44,13 @@ export default async function AdminPage() {
     );
   }
 
-  const [allPhotos, events, applications, ideas, hkintakes, users]: [
+  const [allPhotos, events, applications, ideas, hkintakes, velocity, users]: [
     PhotoRecord[],
     EventRecord[],
     ApplicationRecord[],
     IdeaRecord[],
     HkIntakeRecord[],
+    VelocityRecord[],
     UserRecord[],
   ] = await Promise.all([
     listAllPhotos(),
@@ -54,6 +58,7 @@ export default async function AdminPage() {
     listApplications(),
     listIdeas(),
     listHkIntakes(),
+    listVelocityInterest(),
     listUsers(),
   ]);
 
@@ -99,6 +104,12 @@ export default async function AdminPage() {
         <Eyebrow>HackKentucky get-involved · {hkintakes.length}</Eyebrow>
         <SerifHeading className="mb-6 mt-2 text-[32px] leading-none">HackKentucky intake.</SerifHeading>
         <HkIntakeManager items={hkintakes} />
+      </Container>
+
+      <Container className="py-10">
+        <Eyebrow>Velocity 2.0 interest · {velocity.length}</Eyebrow>
+        <SerifHeading className="mb-6 mt-2 text-[32px] leading-none">Velocity 2.0.</SerifHeading>
+        <VelocityManager items={velocity} />
       </Container>
 
       <Container className="py-10">

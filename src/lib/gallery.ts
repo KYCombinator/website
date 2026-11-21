@@ -469,9 +469,82 @@ export async function setHkIntakeStatus(id: string, status: HkStatus): Promise<v
   );
 }
 
+// ── Velocity 2.0 interest (gauge-interest intake) ────────────────────────────
+export type VelocityStatus = "new" | "approved" | "rejected";
+export type VelocityRecord = {
+  id: string;
+  company: string;
+  founderName: string;
+  email: string;
+  revenue: string; // current revenue
+  customers: string; // current customers
+  metrics: string; // other current metrics / context
+  quarter: string; // when they could start the cohort
+  canTriple: boolean; // can 3x revenue & customers in 12 weeks
+  canCommit: boolean; // 12-week in-person commitment at Cinderblock
+  hasBacker: boolean; // can secure a backer / mentor
+  status: VelocityStatus;
+  createdAt: string;
+  tags?: string[];
+};
+
+export async function createVelocityInterest(input: {
+  company: string;
+  founderName: string;
+  email: string;
+  revenue: string;
+  customers: string;
+  metrics: string;
+  quarter: string;
+  canTriple: boolean;
+  canCommit: boolean;
+  hasBacker: boolean;
+}): Promise<VelocityRecord> {
+  const id = randomUUID();
+  const createdAt = new Date().toISOString();
+  const record: VelocityRecord = { id, status: "new", createdAt, ...input };
+  await doc().send(
+    new PutCommand({
+      TableName: TABLE,
+      Item: { pk: "VELO", sk: id, gsi1pk: "VELO#new", gsi1sk: createdAt, ...record },
+    })
+  );
+  return record;
+}
+
+export async function listVelocityInterest(): Promise<VelocityRecord[]> {
+  const r = await doc().send(
+    new QueryCommand({
+      TableName: TABLE,
+      KeyConditionExpression: "pk = :pk",
+      ExpressionAttributeValues: { ":pk": "VELO" },
+    })
+  );
+  return ((r.Items || []) as VelocityRecord[]).sort((a, b) =>
+    b.createdAt.localeCompare(a.createdAt)
+  );
+}
+
+export async function getVelocityInterest(id: string): Promise<VelocityRecord | null> {
+  const r = await doc().send(new GetCommand({ TableName: TABLE, Key: { pk: "VELO", sk: id } }));
+  return (r.Item as VelocityRecord) || null;
+}
+
+export async function setVelocityStatus(id: string, status: VelocityStatus): Promise<void> {
+  await doc().send(
+    new UpdateCommand({
+      TableName: TABLE,
+      Key: { pk: "VELO", sk: id },
+      UpdateExpression: "SET #s = :s, gsi1pk = :g",
+      ExpressionAttributeNames: { "#s": "status" },
+      ExpressionAttributeValues: { ":s": status, ":g": `VELO#${status}` },
+    })
+  );
+}
+
 // ── Submission tags (admin labels + filtering across intake types) ───────────
-const TAG_PK: Record<string, string> = { application: "APP", idea: "IDEA", hkintake: "HK" };
-export type TaggableKind = "application" | "idea" | "hkintake";
+const TAG_PK: Record<string, string> = { application: "APP", idea: "IDEA", hkintake: "HK", velocity: "VELO" };
+export type TaggableKind = "application" | "idea" | "hkintake" | "velocity";
 
 export async function setSubmissionTags(
   kind: TaggableKind,

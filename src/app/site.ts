@@ -9,6 +9,7 @@ export const SLACK_INVITE =
 export const HEADER_NAV: { label: string; href: string }[] = [
   { label: "Vision", href: "/vision" },
   { label: "Cinderblock", href: "/cinderblock" },
+  { label: "Velocity", href: "/velocity" },
   { label: "Events", href: "/events" },
   { label: "Community", href: "/slack" },
   { label: "FAQs", href: "/faqs" },
@@ -18,6 +19,7 @@ export type FooterLink = { label: string; href: string; external?: boolean };
 
 export const FOOTER_NAV: FooterLink[] = [
   { label: "Vision", href: "/vision" },
+  { label: "Velocity", href: "/velocity" },
   { label: "Events", href: "/events" },
   { label: "Report", href: "/report" },
   { label: "Lougistics", href: "/lougistics" },

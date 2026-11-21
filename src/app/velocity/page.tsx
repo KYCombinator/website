@@ -17,7 +17,7 @@ const WHAT: [string, string][] = [
 const REQUIREMENTS: [string, string][] = [
   ["3× in 12 weeks", "Triple both your revenue and your customers within the twelve-week sprint."],
   ["12 weeks, in person", "At least one full-time founder commits to working in person at Cinderblock for the whole sprint."],
-  ["Bring a backer", "Each company lines up a backer / mentor to go the distance with them."],
+  ["Bring a backer", "Each company lines up a qualified backer / mentor to go the distance with them. We can make introductions, but we won't assign one for you."],
 ];
 
 export default function VelocityPage() {

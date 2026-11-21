@@ -28,20 +28,23 @@ export async function POST(request: Request) {
   const revenue = clip(body?.revenue, 200);
   const customers = clip(body?.customers, 200);
   const metrics = clip(body?.metrics, 2000);
-  const quarter = clip(body?.quarter, 60);
-  const canTriple = !!body?.canTriple;
-  const canCommit = !!body?.canCommit;
-  const hasBacker = !!body?.hasBacker;
+  // Multiple start windows now; store as a comma-joined string.
+  const quarter = (Array.isArray(body?.quarters) ? body.quarters : [])
+    .map((q: unknown) => clip(q, 60))
+    .filter(Boolean)
+    .slice(0, 6)
+    .join(", ");
+  const acknowledged = !!body?.acknowledged;
 
   if (!company) return NextResponse.json({ error: "Company name is required." }, { status: 400 });
   if (!founderName) return NextResponse.json({ error: "Founder name is required." }, { status: 400 });
   if (!EMAIL_RE.test(email)) return NextResponse.json({ error: "A valid email is required." }, { status: 400 });
   if (!revenue) return NextResponse.json({ error: "Add your current revenue." }, { status: 400 });
   if (!customers) return NextResponse.json({ error: "Add your current customer count." }, { status: 400 });
-  if (!quarter) return NextResponse.json({ error: "Pick when you could start." }, { status: 400 });
-  if (!canTriple || !canCommit || !hasBacker) {
+  if (!quarter) return NextResponse.json({ error: "Pick at least one time you could start." }, { status: 400 });
+  if (!acknowledged) {
     return NextResponse.json(
-      { error: "Please confirm you can meet all three requirements to qualify." },
+      { error: "Please acknowledge the criteria to qualify." },
       { status: 400 }
     );
   }
@@ -54,9 +57,10 @@ export async function POST(request: Request) {
     customers,
     metrics,
     quarter,
-    canTriple,
-    canCommit,
-    hasBacker,
+    // A single acknowledgement now covers all three criteria.
+    canTriple: acknowledged,
+    canCommit: acknowledged,
+    hasBacker: acknowledged,
   });
 
   await notifyOrganizers(
@@ -65,7 +69,7 @@ export async function POST(request: Request) {
       `Current revenue: ${revenue}\nCurrent customers: ${customers}\n` +
       `Could start: ${quarter}\n\n` +
       `Other metrics/context:\n${metrics || "—"}\n\n` +
-      `Confirmed: 3x revenue+customers ✓ · 12wk in-person ✓ · backer/mentor ✓\n\n` +
+      `Acknowledged the criteria ✓\n\n` +
       `Review in the admin dashboard: https://kycombinator.com/admin\n\nInterest id: ${rec.id}`
   );
   await sendSubmissionReceipt(email, founderName, "Velocity 2.0 interest");

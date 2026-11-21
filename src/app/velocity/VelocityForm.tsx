@@ -7,16 +7,16 @@ type Status = "idle" | "submitting" | "success" | "error";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const QUARTERS = ["Q1 2027", "Q2 2027", "Q3 2027", "Q4 2027", "Flexible — whenever it runs"];
 
+const CRITERIA = [
+  "3× our revenue and customers within the 12-week sprint.",
+  "At least one founder working in-person at Cinderblock for all 12 weeks.",
+  "A qualified backer / mentor secured — we can introduce you, but won't assign one.",
+];
+
 const fieldCls =
   "w-full border border-[#cec7b8] bg-transparent px-4 py-3 text-[15px] text-[#16130f] outline-none placeholder:text-[#a39c8d] focus:border-[#16130f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kyx-purple)]";
 const labelCls =
   "font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.1em] text-[#57503f]";
-
-const REQUIREMENTS: { key: "canTriple" | "canCommit" | "hasBacker"; label: string }[] = [
-  { key: "canTriple", label: "We can 3× our revenue and customers within 12 weeks." },
-  { key: "canCommit", label: "At least one founder can commit to 12 weeks in-person at Cinderblock." },
-  { key: "hasBacker", label: "We can secure a backer / mentor for the program." },
-];
 
 export default function VelocityForm() {
   const [form, setForm] = useState({
@@ -26,16 +26,19 @@ export default function VelocityForm() {
     revenue: "",
     customers: "",
     metrics: "",
-    quarter: "",
   });
-  const [reqs, setReqs] = useState({ canTriple: false, canCommit: false, hasBacker: false });
+  const [quarters, setQuarters] = useState<string[]>([]);
+  const [acknowledged, setAcknowledged] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
 
   const set =
     (k: keyof typeof form) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
       setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  const toggleQuarter = (q: string) =>
+    setQuarters((s) => (s.includes(q) ? s.filter((x) => x !== q) : [...s, q]));
 
   function fail(m: string) {
     setStatus("error");
@@ -50,9 +53,8 @@ export default function VelocityForm() {
     if (!EMAIL_RE.test(form.email.trim())) return fail("A valid email is required.");
     if (!form.revenue.trim()) return fail("Add your current revenue.");
     if (!form.customers.trim()) return fail("Add your current customer count.");
-    if (!form.quarter) return fail("Pick when you could start.");
-    if (!reqs.canTriple || !reqs.canCommit || !reqs.hasBacker)
-      return fail("Please confirm all three requirements to qualify.");
+    if (quarters.length === 0) return fail("Pick at least one time you could start.");
+    if (!acknowledged) return fail("Please acknowledge the criteria to qualify.");
 
     setStatus("submitting");
     setMessage("");
@@ -60,7 +62,7 @@ export default function VelocityForm() {
       const res = await fetch("/api/velocity/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, ...reqs }),
+        body: JSON.stringify({ ...form, quarters, acknowledged }),
       });
       if (res.ok) {
         setStatus("success");
@@ -119,31 +121,42 @@ export default function VelocityForm() {
         <span className={labelCls}>Other current metrics / context</span>
         <textarea className={`${fieldCls} min-h-[100px] resize-y`} value={form.metrics} onChange={set("metrics")} placeholder="Growth rate, what you're building, anything else worth knowing." />
       </label>
-      <label className="flex flex-col gap-1.5">
-        <span className={labelCls}>When could you start the cohort? *</span>
-        <select className={fieldCls} value={form.quarter} onChange={set("quarter")}>
-          <option value="">Select…</option>
-          {QUARTERS.map((q) => (
-            <option key={q} value={q}>
-              {q}
-            </option>
-          ))}
-        </select>
-      </label>
 
       <fieldset className="flex flex-col gap-3 border border-[#d8d2c5] p-5">
-        <legend className={`${labelCls} px-1`}>Can you meet the requirements? *</legend>
-        {REQUIREMENTS.map((r) => (
-          <label key={r.key} className="flex items-start gap-3 text-[15px] leading-[1.5] text-[#16130f]">
+        <legend className={`${labelCls} px-1`}>When could you start? Pick all that work *</legend>
+        {QUARTERS.map((q) => (
+          <label key={q} className="flex items-center gap-3 text-[15px] leading-[1.5] text-[#16130f]">
             <input
               type="checkbox"
-              checked={reqs[r.key]}
-              onChange={(e) => setReqs((s) => ({ ...s, [r.key]: e.target.checked }))}
-              className="mt-1 h-4 w-4 shrink-0 accent-[var(--kyx-purple)]"
+              checked={quarters.includes(q)}
+              onChange={() => toggleQuarter(q)}
+              className="h-4 w-4 shrink-0 accent-[var(--kyx-purple)]"
             />
-            <span>{r.label}</span>
+            <span>{q}</span>
           </label>
         ))}
+      </fieldset>
+
+      <fieldset className="flex flex-col gap-3 border border-[#d8d2c5] p-5">
+        <legend className={`${labelCls} px-1`}>Acknowledge the criteria *</legend>
+        <p className="text-[14px] leading-[1.5] text-[#57503f]">To qualify, your company must reach:</p>
+        <ul className="flex flex-col gap-1.5 pl-1">
+          {CRITERIA.map((c) => (
+            <li key={c} className="flex gap-2 text-[15px] leading-[1.5] text-[#16130f]">
+              <span className="text-[var(--kyx-purple)]">—</span>
+              <span>{c}</span>
+            </li>
+          ))}
+        </ul>
+        <label className="mt-1 flex items-start gap-3 border-t border-[#e2ddd1] pt-3 text-[15px] leading-[1.5] text-[#16130f]">
+          <input
+            type="checkbox"
+            checked={acknowledged}
+            onChange={(e) => setAcknowledged(e.target.checked)}
+            className="mt-1 h-4 w-4 shrink-0 accent-[var(--kyx-purple)]"
+          />
+          <span>I understand these criteria and acknowledge my company is prepared to meet them.</span>
+        </label>
       </fieldset>
 
       {status === "error" && (

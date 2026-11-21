@@ -3,9 +3,19 @@ import { Container, PageHero, Eyebrow, SerifHeading, Button } from "@/app/compon
 import VelocityForm from "./VelocityForm";
 
 export const metadata: Metadata = {
-  title: "Velocity 2.0 | KYX",
+  title: "Velocity Competition",
   description:
     "Velocity 2.0 — a 12-week, in-person sprint at Cinderblock to 3× your revenue and customers. We're gauging interest.",
+  openGraph: {
+    title: "Velocity Competition",
+    description:
+      "A 12-week, in-person sprint at Cinderblock to 3× your revenue and customers. We're gauging interest in Velocity 2.0.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Velocity Competition",
+  },
 };
 
 const WHAT: [string, string][] = [

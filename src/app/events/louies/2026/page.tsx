@@ -3,7 +3,7 @@ import { Container, PageHero } from "@/app/components/fm";
 import { nominationsOpen } from "@/data/louies2026";
 import NominationForm from "./NominationForm";
 export const metadata: Metadata = {
-  title: "The Louies 2026 | Nominations | KY Combinator",
+  title: "The Louies 2026 | Nominations | KYX",
   description: "Nominate the people and teams moving Kentucky's startup community forward.",
   robots: nominationsOpen ? { index: true, follow: true } : { index: false, follow: false },
 };

@@ -18,7 +18,16 @@ import {
 } from "./components/home/data";
 import { listEvents, listApprovedPhotos, galleryConfigured } from "@/lib/gallery";
 
+const siteUrl = "https://kycombinator.com/";
+const siteNameStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "KYX",
+  url: siteUrl,
+};
+
 export const metadata: Metadata = {
+  alternates: { canonical: siteUrl },
   title: "KYX — Kentucky's startup engine",
   description:
     "Ten Series A companies out of Kentucky by 2030. Everything KYX does serves that number. Apply to Cinderblock.",
@@ -81,6 +90,12 @@ export default async function Home() {
   const { showcase, calendar } = await getHomeEvents();
   return (
     <main className="mx-auto max-w-[1120px]">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(siteNameStructuredData).replace(/</g, "\\u003c"),
+          }}
+        />
         {/* ── Hero ─────────────────────────────────────────────── */}
         <section className="flex flex-col gap-7 px-5 pb-11 pt-14 md:px-7 md:pt-16 lg:gap-[30px] lg:px-10 lg:pt-[76px]">
           <p className="font-[family-name:var(--font-ibm-plex-mono)] text-[11px] uppercase tracking-[0.14em] text-[var(--kyx-purple)]">

@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     "Attract, retain, and grow Louisville's top builders—tilting the odds for the ambitious few willing to out‑work and out‑execute—to forge a critical mass of Series A ready companies in Louisville.",
   authors: [{ name: "KYX Team", url: "https://kycombinator.com/about" }],
   openGraph: {
+    siteName: "KYX",
     images: [`${process.env.NEXT_PUBLIC_CDN_URL}/assets/logo.png`],
   },
   icons: {
